@@ -1,0 +1,29 @@
+$brand-color: #019690;
+$primary-color: #000000;
+$backup-color: #ffffff;
+
+$brand-bg-color: #019690;
+$primary-bg-color: #ffffff;
+$backup-bg-color: #e5e5e5;
+$nav-bg-color: #101c2a;
+$deny-bg-color: #c4c4c4;
+
+$primary: $brand-bg-color;
+$secondary: $nav-bg-color;
+$info: #45b8f1;
+$warning: #ea3900;
+$danger: #ff9c41;
+
+$theme-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+);
+
+$border-radius: 5px;
+
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
