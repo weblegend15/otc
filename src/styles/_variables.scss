@@ -13,6 +13,7 @@ $secondary: $nav-bg-color;
 $info: #45b8f1;
 $warning: #ea3900;
 $danger: #ff9c41;
+$muted: #c4c4c4;
 
 $theme-colors: (
     "primary":    $primary,
@@ -20,6 +21,7 @@ $theme-colors: (
     "info":       $info,
     "warning":    $warning,
     "danger":     $danger,
+    "muted":      $muted,
 );
 
 $border-radius: 6px;

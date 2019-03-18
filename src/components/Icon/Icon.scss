@@ -1,0 +1,16 @@
+@import '../../styles/_variables';
+
+.icon {
+  &-primary {
+    color: $white;
+  }
+  &-muted {
+    color: $white;
+  }
+  &-outline-primary {
+    background-color: transparent;
+  }
+  &-muted {
+    color: $white;
+  }
+}
