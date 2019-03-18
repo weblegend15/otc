@@ -2,6 +2,15 @@
 
 .icon {
   &-primary {
-    color: $primary;
+    color: $white;
+  }
+  &-muted {
+    color: $white;
+  }
+  &-outline-primary {
+    background-color: transparent;
+  }
+  &-muted {
+    color: $white;
   }
 }

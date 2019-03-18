@@ -1,0 +1,7 @@
+@import '../../../styles/_variables';
+
+.button {
+  &-muted {
+    color: $white !important;
+  }
+}
