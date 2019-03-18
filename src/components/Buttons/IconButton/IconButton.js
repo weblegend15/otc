@@ -3,10 +3,10 @@ import Icon from '../../Icon';
 import Button from '../Button';
 
 export default (props) => {
-  const { icon, iconSize, content, variant, size, iconPosition } = props;
+  const { icon, iconSize, content, variant, iconPosition } = props;
 
   return (
-    <Button variant={variant} size={size}>
+    <Button {...props}>
       { icon && iconPosition === 'left' 
         ? (
           <React.Fragment>

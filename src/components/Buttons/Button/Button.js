@@ -2,9 +2,9 @@ import React from 'react';
 import BootstrapButton from 'react-bootstrap/Button';
 
 export default (props) => {
-  const { variant, size, children } = props;
+  const { variant, children } = props;
   return (
-    <BootstrapButton className={`button-${variant}`} variant={variant} size={size} >
+    <BootstrapButton className={`button-${variant}`} {...props}>
       {children}
     </BootstrapButton>
   );
