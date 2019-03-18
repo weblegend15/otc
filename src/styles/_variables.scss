@@ -24,8 +24,11 @@ $theme-colors: (
     "muted":      $muted,
 );
 
-$border-radius: 5px;
+$border-radius: 6px;
+$border-radius-lg: 10px;
 
+$btn-border-radius: $border-radius;
+$card-border-radius: $border-radius-lg;
 
 @import "node_modules/bootstrap/scss/bootstrap";
 
