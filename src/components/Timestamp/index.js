@@ -1,8 +1,8 @@
 import React from 'react';
-import FontAwesome from 'react-fontawesome';
+import moment from 'moment';
 
 export default () => (
-  <div>
-    <FontAwesome name="rocket" />
+  <div className="timestamp">
+    {moment().format('D MMM YYYY h:mm a')}
   </div>
 );
