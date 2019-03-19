@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
-import store, { history } from './configureStore';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import store, { history, persistor } from './configureStore';
 import * as serviceWorker from './serviceWorker';
 import Routes from './routes';
 
@@ -10,9 +12,11 @@ import './styles/_global.scss';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
-      <Routes />
-    </Router>
+    <PersistGate loading={null} persistor={persistor}>
+      <Router history={history}>
+        <Routes />
+      </Router>
+    </PersistGate>
   </Provider>,
   document.getElementById('root'),
 );
