@@ -1,7 +1,11 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Card from '../../components/Card';
 
 export default () => (
-  <div>
-    Home Page
-  </div>
+  <Container>
+    <Card className="m-5 p-5">
+      Home Page
+    </Card>
+  </Container>
 );

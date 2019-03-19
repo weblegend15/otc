@@ -1,5 +1,13 @@
-import Homepage from './Home';
+import Home from './Home';
+import Signin from './Signin';
+import Signup from './Signup';
+import FAQ from './FAQ';
+import ContactUs from './ContactUs';
 
 export {
-  Homepage,
+  Home,
+  Signin,
+  Signup,
+  FAQ,
+  ContactUs,
 };
