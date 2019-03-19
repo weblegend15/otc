@@ -4,6 +4,7 @@ import Button from './Buttons/Button';
 import IconButton from './Buttons/IconButton';
 import Card from './Card';
 import Rating from './Rating';
+import Pagination from './Pagination';
 
 export {
   Timestamp,
@@ -12,4 +13,5 @@ export {
   IconButton,
   Card,
   Rating,
+  Pagination,
 };
