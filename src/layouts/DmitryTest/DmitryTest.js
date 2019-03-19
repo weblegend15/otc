@@ -1,7 +1,5 @@
 import React from 'react';
-import Icon from '../../components/Icon';
-import IconButton from '../../components/Buttons/IconButton';
-import CustomButton from '../../components/Buttons/Button';
+import { InputBox, Icon, IconButton, Button }  from '../../components/index';
 
 export default () => (
   <div>
@@ -32,12 +30,17 @@ export default () => (
     <br />
     <br />
 
-    <CustomButton size='lg' variant='primary'>Message</CustomButton>
+    <Button size='lg' variant='primary'>Message</Button>
     <br/>
     <br/>
-    <CustomButton size='lg' variant='outline-primary'>Message</CustomButton>
+    <Button size='lg' variant='outline-primary'>Message</Button>
     <br/>
     <br/>
-    <CustomButton size='lg' variant='muted'>Message</CustomButton>
+    <Button size='lg' variant='muted'>Message</Button>
+    <br/>
+    <InputBox placeholder="serach" icon="search" iconPosition="left" />
+    <InputBox placeholder="serach" icon="search" iconPosition="right" />
+    <InputBox />
+
   </div>
 );

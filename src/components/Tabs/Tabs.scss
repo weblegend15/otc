@@ -1,0 +1,24 @@
+@import '../../styles/_variables';
+
+.tab-header-lg {
+  a {
+    color: $primary-color;
+    font-size: 18px;
+    opacity: 0.5;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  .active {
+    opacity: 1;
+    overflow: hidden;
+    p {
+      border-bottom: 3px solid $brand-color;
+    }
+  }
+}
+
+.tab-header-md {
+  font-size: 16px;
+  color: $primary-color;
+}

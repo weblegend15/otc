@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+
+.inner-addon { 
+  position: relative;
+  .input-icon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+  }
+}
+
+.left-addon {
+  .input-icon {
+    left:  0px
+  }
+  input {
+    padding-left: 30px;
+  }
+}
+
+.right-addon {
+  .input-icon {
+    right: 0px;
+  }
+  input {
+    padding-right: 30px;
+  }
+}
