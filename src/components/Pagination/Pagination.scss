@@ -1,0 +1,11 @@
+@import "../../styles/variables";
+
+.pagination {
+  button.btn-light {
+    color: $primary;
+
+    &:disabled {
+      color: $muted-100;
+    }
+  }
+}
