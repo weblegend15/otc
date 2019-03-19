@@ -5,7 +5,7 @@ import Card from '../../components/Card';
 export default () => (
   <Container>
     <Card className="m-5 p-5">
-      Home Page
+      Contact Us page
     </Card>
   </Container>
 );

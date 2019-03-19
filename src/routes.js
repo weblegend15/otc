@@ -1,16 +1,57 @@
-import React from 'react';
-import { Route, withRouter, Switch } from 'react-router-dom';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { Topbar, App, Dashboard, DmitryTest } from './layouts';
 
-const MainRoutes = () => (
-  <div>
-    <Topbar />
-    <Switch>
-      <Route path="/home" component={App} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/dmitrytest" component={DmitryTest} />
-    </Switch>
-  </div>
-);
+import { Home, Signin, Signup, FAQ, ContactUs } from './screens';
 
-export default withRouter(MainRoutes);
+class MainRoutes extends Component {
+  renderAuthRoutes = () => {
+    return (
+      <Switch>
+        <Route exact path="/home" component={App} />
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/dmitrytest" component={DmitryTest} />
+        <Redirect to="/home" />
+      </Switch>
+    );
+  }
+
+  renderNoAuthRoutes = () => {
+    return (
+      <Switch>
+        <Route exact path="/signin" component={Signin} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/faq" component={FAQ} />
+        <Route exact path="/contactus" component={ContactUs} />
+        <Redirect to="/signin" />
+      </Switch>
+    );
+  }
+
+  render() {
+    const { currentUser } = this.props;
+
+    return (
+      <div>
+        <Topbar currentUser={currentUser} />
+        {!currentUser.isAuthenticated ? this.renderNoAuthRoutes() : this.renderAuthRoutes()}
+      </div>
+    );
+  }
+}
+
+MainRoutes.propTypes = {
+  currentUser: PropTypes.objectOf(PropTypes.bool),
+};
+
+MainRoutes.defaultProps = {
+  currentUser: null,
+};
+
+const mapStateToProps = (state) => ({
+  currentUser: state.signin.userData,
+});
+
+export default withRouter(connect(mapStateToProps)(MainRoutes));

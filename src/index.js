@@ -6,7 +6,7 @@ import store, { history } from './configureStore';
 import * as serviceWorker from './serviceWorker';
 import Routes from './routes';
 
-import './styles/_variables.scss';
+import './styles/_global.scss';
 
 ReactDOM.render(
   <Provider store={store}>
