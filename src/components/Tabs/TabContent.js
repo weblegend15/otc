@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 export default (props) => {
   const { children } = props;
   return (
-    <React.Fragment>
+    <Fragment>
       {children}
-    </React.Fragment>
+    </Fragment>
   );
 };

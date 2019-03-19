@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Icon from '../../Icon';
 import Button from '../Button';
 
@@ -9,13 +9,13 @@ export default (props) => {
     <Button {...props}>
       { icon && iconPosition === 'left' 
         ? (
-          <React.Fragment>
+          <Fragment>
             <Icon name={icon} size={iconSize} color={variant} /> &nbsp; {content}
-          </React.Fragment>
+          </Fragment>
         ) : (
-          <React.Fragment>
+          <Fragment>
             { content } &nbsp; <Icon name={icon} size={iconSize} color={variant} />
-          </React.Fragment>
+          </Fragment>
         )
       }
     </Button>

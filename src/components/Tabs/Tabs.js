@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Nav } from 'react-bootstrap';
 import TabContent from './TabContent';
 
@@ -24,9 +24,9 @@ class TabHeaders extends Component {
     const { tabKey } = this.state;
 
     return (
-      <React.Fragment>
+      <Fragment>
         {everyKey === tabKey && <TabContent>{children}</TabContent>}
-      </React.Fragment>
+      </Fragment>
     );    
   }
 
@@ -34,17 +34,17 @@ class TabHeaders extends Component {
     const { headers, children, size } = this.props;
     const { tabKey } = this.state;
     return (
-      <React.Fragment>
+      <Fragment>
         <Nav
           defaultActiveKey={tabKey}
           as="ul"
           activeKey={tabKey}
-          onSelect={selectedKey => this.setState({ tabKey: selectedKey }) }
+          onSelect={selectedKey => this.setState({ tabKey: selectedKey })}
         >
-          { headers.map(header => this.renderTabHeader(header, size))}
+          {headers.map(header => this.renderTabHeader(header, size))}
         </Nav>
-        { children.map(child => (this.activeTabContent(child))) }
-      </React.Fragment>
+        {children.map(child => this.activeTabContent(child))}
+      </Fragment>
     );
   }
 }

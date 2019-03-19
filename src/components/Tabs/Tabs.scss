@@ -19,6 +19,19 @@
 }
 
 .tab-header-md {
-  font-size: 16px;
-  color: $primary-color;
+  a {
+    color: $primary-color;
+    font-size: 16px;
+    opacity: 0.5;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  .active {
+    opacity: 1;
+    overflow: hidden;
+    p {
+      border-bottom: 3px solid $brand-color;
+    }
+  }
 }

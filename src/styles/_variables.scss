@@ -8,26 +8,14 @@ $backup-bg-color: #e5e5e5;
 $nav-bg-color: #101c2a;
 $deny-bg-color: #c4c4c4;
 
-$primary: $brand-bg-color;
-$secondary: $nav-bg-color;
 $info: #45b8f1;
 $warning: #ff9c41;
 $danger: #ea3900;
 $muted: #c4c4c4;
+$muted-100: #A6A6A6;
 
-$theme-colors: (
-    "primary":    $primary,
-    "secondary":  $secondary,
-    "info":       $info,
-    "warning":    $warning,
-    "danger":     $danger,
-    "muted":      $muted,
-);
+$white: $backup-color;
+$primary: $brand-color;
 
 $border-radius: 6px;
 $border-radius-lg: 10px;
-
-$btn-border-radius: $border-radius;
-$card-border-radius: $border-radius-lg;
-
-@import "node_modules/bootstrap/scss/bootstrap";

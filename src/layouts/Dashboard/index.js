@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-
-import { Timestamp, Card, Rating } from '../../components';
+import { Timestamp, Card, Rating, Pagination } from '../../components';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rating: 0,
+      currentPage: 0,
     };
   }
 
@@ -14,21 +14,31 @@ class Dashboard extends Component {
     this.setState({ rating: value });
   }
 
+  handlePageChange = (value) => {
+    this.setState({ currentPage: value });
+  }
+
   render() {
-    const { rating } = this.state;
+    const { rating, currentPage } = this.state;
     return (
-      <div>
-        <Card className="m-4 p-4">
-          dashboard
-          <br />
-          <Timestamp />
-          <Rating
-            initialRating={rating}
-            onChange={this.handleRating}
-          />
-          <p>Current rating: {rating}</p>
-        </Card>
-      </div>
+      <Card className="m-4 p-4 text-center">
+        <Timestamp />
+        <hr />
+        <Rating
+          initialRating={rating}
+          onChange={this.handleRating}
+        />
+        <p>Current rating: {rating}</p>
+        <hr />
+        <Pagination
+          total={105}
+          perPage={10}
+          currentPage={currentPage}
+          onChange={this.handlePageChange}
+        />
+        <p>Current Page: {currentPage + 1}</p>
+        <hr />
+      </Card>
     );
   }
 };

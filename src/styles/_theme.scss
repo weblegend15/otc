@@ -1,0 +1,18 @@
+@import "./variables";
+
+$primary: $brand-bg-color;
+$secondary: $nav-bg-color;
+
+$theme-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "muted":      $muted,
+);
+
+$btn-border-radius: $border-radius;
+$card-border-radius: $border-radius-lg;
+
+@import "node_modules/bootstrap/scss/bootstrap";
