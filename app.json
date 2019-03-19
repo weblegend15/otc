@@ -1,0 +1,16 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ],
+  "env": {
+  },
+  "formation": {
+  },
+  "name": "otctrade-Frontend",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
