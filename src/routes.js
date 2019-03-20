@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
-import { Topbar, App, Dashboard, DmitryTest } from './layouts';
+import { Topbar, App, Dashboard, Footer } from './layouts';
 
 import { Home, Signin, Signup, FAQ, ContactUs } from './screens';
 
@@ -12,7 +12,6 @@ class MainRoutes extends Component {
       <Switch>
         <Route exact path="/home" component={App} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/dmitrytest" component={DmitryTest} />
         <Redirect to="/home" />
       </Switch>
     );
@@ -34,10 +33,13 @@ class MainRoutes extends Component {
     const { currentUser } = this.props;
 
     return (
-      <div>
-        <Topbar currentUser={currentUser} />
-        {!currentUser.isAuthenticated ? this.renderNoAuthRoutes() : this.renderAuthRoutes()}
-      </div>
+      <Fragment>
+        <div className="content">
+          <Topbar currentUser={currentUser} />
+          {!currentUser.isAuthenticated ? this.renderNoAuthRoutes() : this.renderAuthRoutes()}
+        </div>
+        <Footer />
+      </Fragment>
     );
   }
 }
