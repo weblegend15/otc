@@ -1,1 +1,1 @@
-export const baseUrl = 'https://otctrade-backend.herokuapp.com';
+export const baseUrl = 'https://api.otctrade.com';
