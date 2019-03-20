@@ -1,7 +1,10 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 
-export default ({ input, label, type, placeholder, meta: { touched, error } }) => {
+export default ({
+  input, label, type, placeholder,
+  meta: { touched, error },
+}) => {
   return (
     <Form.Group controlId={`form${label}`}>
       <Form.Label>
