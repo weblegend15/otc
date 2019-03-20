@@ -34,13 +34,12 @@ async function request(endpoint, method = 'GET', data = {}, isToken = false) {
       options.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     }
 
-    window.fetch(requestUrl, options)  // eslint-disable-line
+    fetch(requestUrl, options)
       .then((result) => {
-        if (result.status === 200) {
+        if (result.status >= 200 && result.status < 300) {
           resolve(result.json());
-        } else {
-          result.json().then(res => reject(res));
         }
+        return result.then(reject);
       })
       .catch(err => reject(err));
   });
