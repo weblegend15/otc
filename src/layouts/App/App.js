@@ -15,8 +15,9 @@ class App extends Component {
     getData();
   }
 
-  showTooltip = () => {
-    this.setState({ on: true });
+  showTooltip = (status) => {
+    const tooltipStatus = status === 'on';
+    this.setState({ on: tooltipStatus });
   };
 
   render() {
@@ -34,8 +35,8 @@ class App extends Component {
         <div>
           dashboard
           <br />
-          <Icon onClick={() => {this.showTooltip();}} name="envelope-o" size="lg" color="primary" />
-          { on && <Tooltip on={on}>End Listning</Tooltip>}
+          <Icon onClick={() => {this.showTooltip('on');}} name="envelope-o" size="lg" color="primary" />
+          { on && <Tooltip on={on} position="left" showTooltip={this.showTooltip} >End Listning</Tooltip>}
           <br />
           <br />
           <IconButton

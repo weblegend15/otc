@@ -10,6 +10,7 @@ Tooltip.PropTypes = {
   ]),
   on: PropTypes.bool,
   icon: PropTypes.string,
+  position: PropTypes.string,
 };
 
 Tooltip.defaultProps = {
