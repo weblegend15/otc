@@ -1,15 +1,13 @@
 @import "./variables";
 
-$primary: $brand-bg-color;
-$secondary: $nav-bg-color;
-
 $theme-colors: (
     "primary":    $primary,
     "secondary":  $secondary,
     "info":       $info,
     "warning":    $warning,
     "danger":     $danger,
-    "muted":      $muted,
+    "dark":       $dark,
+    "light":      $light,
 );
 
 $btn-border-radius: $border-radius;

@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 
-import Button from './Button';
-import './Button.scss';
+import Tabs from './Tabs';
+import './Tabs.scss';
 
-Button.propTypes = {
+Tabs.PropTypes = {
+  headers: PropTypes.array,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
 };
 
-export default Button;
+export default Tabs;

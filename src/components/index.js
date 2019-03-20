@@ -4,6 +4,8 @@ import Button from './Buttons/Button';
 import IconButton from './Buttons/IconButton';
 import Card from './Card';
 import Rating from './Rating';
+import InputBox from './Input';
+import Tabs from './Tabs';
 import Pagination from './Pagination';
 
 export {
@@ -13,5 +15,7 @@ export {
   IconButton,
   Card,
   Rating,
+  InputBox,
+  Tabs,
   Pagination,
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Icon from '../../Icon';
 import Button from '../Button';
 
@@ -7,17 +7,25 @@ export default (props) => {
 
   return (
     <Button {...props}>
-      { icon && iconPosition === 'left' 
-        ? (
-          <React.Fragment>
-            <Icon name={icon} size={iconSize} color={variant} /> &nbsp; {content}
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            { content } &nbsp; <Icon name={icon} size={iconSize} color={variant} />
-          </React.Fragment>
-        )
-      }
+      {content ? (
+        <Fragment>
+          {icon && iconPosition === 'left' && (
+            <Fragment>
+              <Icon name={icon} size={iconSize} color={variant} />
+              &nbsp;
+            </Fragment>
+          )}
+          {content}
+          {icon && iconPosition === 'right' && (
+            <Fragment>
+              &nbsp;
+              <Icon name={icon} size={iconSize} color={variant} />
+            </Fragment>
+          )}
+        </Fragment>
+      ) : (
+        <Icon name={icon} size={iconSize} color={variant} />
+      )}
     </Button>
   );
 };

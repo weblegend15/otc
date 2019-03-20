@@ -68,7 +68,7 @@ class Topbar extends Component {
     const { currentUser } = this.props;
 
     return (
-      <Navbar sticky="top" bg="dark" variant="dark" expand="md">
+      <Navbar sticky="top" bg="secondary" variant="secondary" expand="md">
         <Navbar.Brand href="#">
           <img className="d-inline-block align-top" src={logoIcon} alt="logo" /> {'  T  R  A  D  E'}
         </Navbar.Brand>
