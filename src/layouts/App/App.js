@@ -4,22 +4,12 @@ import { Tabs, InputBox, Icon, IconButton, Button }  from '../../components/inde
 
 class App extends Component {
   componentDidMount() {
-    const { getData } = this.props;
-    getData();
+
   }
 
   render() {
-    const { data } = this.props;
-
-    if (!data) {
-      return <Container>Loading...</Container>;
-    }
-
     return (
       <Container className="App">
-        User name: {data.username}
-        <br />
-        Password: {data.password}
         <div>
           dashboard
           <br />
