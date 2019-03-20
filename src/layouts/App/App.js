@@ -11,8 +11,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { getData } = this.props;
-    getData();
+
   }
 
   showTooltip = (status) => {
@@ -21,17 +20,10 @@ class App extends Component {
   };
 
   render() {
-    const { data } = this.props;
     const { on } = this.state;
-    if (!data) {
-      return <Container>Loading...</Container>;
-    }
 
     return (
       <Container className="App">
-        User name: {data.username}
-        <br />
-        Password: {data.password}
         <div>
           dashboard
           <br />

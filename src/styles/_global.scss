@@ -1,5 +1,14 @@
 @import "./variables";
 @import "./theme";
+
+#root {
+  background: $deny-bg-color;
+}
+
+button {
+  outline: none !important;
+}
+
 html {
   height: 100%;
   #root {

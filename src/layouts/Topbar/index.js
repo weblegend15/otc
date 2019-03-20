@@ -15,9 +15,9 @@ Topbar.propTypes = {
   signout: PropTypes.func,
 };
 
-Topbar.defaultTypes = {
+Topbar.defaultProps = {
   currentUser: {},
-  signout: null,
+  signout: () => {},
 };
 
 const mapStateToProps = (state) => ({

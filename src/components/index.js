@@ -7,6 +7,7 @@ import Rating from './Rating';
 import InputBox from './Input';
 import Tabs from './Tabs';
 import Pagination from './Pagination';
+import ValidateInput from './ValidateInput';
 import Tooltip from './Tooltip';
 import Badge from './Badge';
 
@@ -20,6 +21,7 @@ export {
   InputBox,
   Tabs,
   Pagination,
+  ValidateInput,
   Tooltip,
   Badge,
 };

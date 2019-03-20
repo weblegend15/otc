@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import queryString from 'query-string';
 import { baseUrl } from '../config';
 
@@ -33,13 +34,12 @@ async function request(endpoint, method = 'GET', data = {}, isToken = false) {
       options.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     }
 
-    fetch(requestUrl, options)  // eslint-disable-line
-      .then(result => {
-        if (result.status === 200) {
+    fetch(requestUrl, options)
+      .then((result) => {
+        if (result.status >= 200 && result.status < 300) {
           resolve(result.json());
-        } else {
-          reject(result.statusText);
         }
+        return result.then(reject);
       })
       .catch(err => reject(err));
   });

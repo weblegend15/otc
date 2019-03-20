@@ -4,7 +4,7 @@ import Button from '../Buttons/Button';
 
 const PaginationButton = ({ onClick, disabled, iconName }) => (
   <Button variant="link" onClick={onClick} disabled={disabled}>
-    <Icon name={`angle-${iconName}`} size="2x" />
+    <Icon name={`angle-${iconName}`} size="2x" color="light" />
   </Button>
 );
 
