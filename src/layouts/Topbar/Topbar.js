@@ -1,27 +1,16 @@
 import React, { Component } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { NavLink } from 'react-router-dom';
 import { history } from '../../configureStore';
 import logoIcon from '../../assets/icons/logo.svg';
 
 import Button from '../../components/Buttons/Button';
 
 class Topbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-  }
-
   handleLogout = () => {
     const { signout } = this.props;
     signout();
-    history.push('/signin');
-  }
-
-  handleSingin = () => {
     history.push('/signin');
   }
 
@@ -58,7 +47,7 @@ class Topbar extends Component {
           </NavLink>
         </Nav>
         <Nav>
-          <Button variant="outline-primary" onClick={this.handleSingin}>SIGN IN</Button>
+          <Link to="/signin" className="btn btn-outline-primary">SIGN IN</Link>
         </Nav>
       </Navbar.Collapse>
     );
@@ -73,7 +62,7 @@ class Topbar extends Component {
           <img className="d-inline-block align-top" src={logoIcon} alt="logo" /> {'  T  R  A  D  E'}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        {!currentUser.isAuthenticated ? this.renderNoAuthNav() : this.renderAuthNav()}
+        {!currentUser.value ? this.renderNoAuthNav() : this.renderAuthNav()}
       </Navbar>
     );
   }
