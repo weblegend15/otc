@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.logo-chars {
+  letter-spacing: 15px;
+  color: $white;
+  margin-left: 10px;
+}
+
+.nav-items {
+  a {
+    color: $white;
+  }
+}

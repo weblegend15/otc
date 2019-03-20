@@ -2,19 +2,24 @@
 
 .inner-addon { 
   position: relative;
+  border: 1px solid $light;
+  background-color: #f9f9f9;
+  border-radius: $border-radius-lg;
   .input-icon {
     position: absolute;
-    padding: 10px;
+    padding: 12px;
     pointer-events: none;
+    color: $dark;
   }
 }
 
 .left-addon {
   .input-icon {
-    left:  0px
+    left: 0px;
   }
   input {
-    padding-left: 30px;
+    padding-left: 50px;
+    padding-right: 17px;
   }
 }
 
@@ -23,6 +28,7 @@
     right: 0px;
   }
   input {
-    padding-right: 30px;
+    padding-right: 50px;
+    padding-left: 17px;
   }
 }
