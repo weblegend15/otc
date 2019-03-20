@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'; 
 import { Topbar, App, Dashboard, DmitryTest } from './layouts';
 
 import { Home, Signin, Signup, FAQ, ContactUs } from './screens';
@@ -36,7 +38,8 @@ class MainRoutes extends Component {
     return (
       <div>
         <Topbar currentUser={currentUser} />
-        {!currentUser.isAuthenticated ? this.renderNoAuthRoutes() : this.renderAuthRoutes()}
+        <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
+        {!currentUser.value ? this.renderNoAuthRoutes() : this.renderAuthRoutes()}
       </div>
     );
   }
@@ -47,11 +50,11 @@ MainRoutes.propTypes = {
 };
 
 MainRoutes.defaultProps = {
-  currentUser: null,
+  currentUser: {},
 };
 
 const mapStateToProps = (state) => ({
-  currentUser: state.signin.userData,
+  currentUser: state.signin.currentUser,
 });
 
 export default withRouter(connect(mapStateToProps)(MainRoutes));
