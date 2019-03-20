@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
-import { Badge, Tabs, InputBox, Icon, IconButton, Button, Tooltip }  from '../../components/index';
+import { Badge, Tabs, InputBox, Icon, IconButton, Button, Tooltip }  from '../../components';
 
 class App extends Component {
   constructor(props) {
