@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
-import { Tabs, InputBox, Icon, IconButton, Button }  from '../../components/index';
+import { Badge, Tabs, InputBox, Icon, IconButton, Button, Tooltip }  from '../../components/index';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      on: false,
+    };
+  }
+
   componentDidMount() {
     const { getData } = this.props;
     getData();
   }
 
+  showTooltip = () => {
+    this.setState({ on: true });
+  };
+
   render() {
     const { data } = this.props;
-
+    const { on } = this.state;
     if (!data) {
       return <Container>Loading...</Container>;
     }
@@ -23,7 +34,8 @@ class App extends Component {
         <div>
           dashboard
           <br />
-          <Icon name="envelope-o" size="lg" color="primary" />
+          <Icon onClick={() => {this.showTooltip();}} name="envelope-o" size="lg" color="primary" />
+          { on && <Tooltip on={on}>End Listning</Tooltip>}
           <br />
           <br />
           <IconButton
@@ -37,7 +49,6 @@ class App extends Component {
           <IconButton
             icon="envelope-o"
             size='lg'
-            
             variant='link'
             disabled
           />
@@ -55,7 +66,6 @@ class App extends Component {
             iconPosition="right"
             icon="envelope-o" 
             content="Message"
-            iconSize="lg"
             size='lg'
             variant='outline-primary'
           />
@@ -86,6 +96,9 @@ class App extends Component {
               <h1> Hello Keith</h1>
             </div>
           </Tabs>
+          <Badge variant="primary" number={100} />
+          <Badge variant="primary" number={3} />
+          <Badge variant="primary" />
         </div>
         
       </Container>
