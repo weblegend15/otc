@@ -15,7 +15,7 @@ Topbar.propTypes = {
   signout: PropTypes.func,
 };
 
-Topbar.defaultTypes = {
+Topbar.defaultProps = {
   currentUser: {},
   signout: () => {},
 };

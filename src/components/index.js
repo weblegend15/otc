@@ -7,6 +7,7 @@ import Rating from './Rating';
 import InputBox from './Input';
 import Tabs from './Tabs';
 import Pagination from './Pagination';
+import ValidateInput from './ValidateInput';
 
 export {
   Timestamp,
@@ -18,4 +19,5 @@ export {
   InputBox,
   Tabs,
   Pagination,
+  ValidateInput,
 };
