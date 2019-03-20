@@ -7,17 +7,25 @@ export default (props) => {
 
   return (
     <Button {...props}>
-      { icon && iconPosition === 'left' 
-        ? (
-          <Fragment>
-            <Icon name={icon} size={iconSize} color={variant} /> &nbsp; {content}
-          </Fragment>
-        ) : (
-          <Fragment>
-            { content } &nbsp; <Icon name={icon} size={iconSize} color={variant} />
-          </Fragment>
-        )
-      }
+      {content ? (
+        <Fragment>
+          {icon && iconPosition === 'left' && (
+            <Fragment>
+              <Icon name={icon} size={iconSize} color={variant} />
+              &nbsp;
+            </Fragment>
+          )}
+          {content}
+          {icon && iconPosition === 'right' && (
+            <Fragment>
+              &nbsp;
+              <Icon name={icon} size={iconSize} color={variant} />
+            </Fragment>
+          )}
+        </Fragment>
+      ) : (
+        <Icon name={icon} size={iconSize} color={variant} />
+      )}
     </Button>
   );
 };

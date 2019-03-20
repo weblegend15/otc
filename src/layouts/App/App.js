@@ -28,17 +28,31 @@ class App extends Component {
           <br />
           <IconButton
             icon="envelope-o"
-            content="Message"
-            iconSize="lg"
+            content="Left Icon Button"
             size='lg'
-            color='primary'
+            iconPosition="left"
             variant='primary'
+          />
+
+          <IconButton
+            icon="envelope-o"
+            size='lg'
+            
+            variant='link'
+            disabled
+          />
+
+
+          <IconButton
+            icon="envelope-o"
+            size='lg'
+            variant='outline-primary'
           />
 
           <br />
           <br />
           <IconButton
-            iconPosition="left"
+            iconPosition="right"
             icon="envelope-o" 
             content="Message"
             iconSize="lg"
