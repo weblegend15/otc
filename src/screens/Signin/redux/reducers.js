@@ -1,8 +1,8 @@
 import {
-  SIGNIN_ERROR,
-  SIGNIN_SUCCESS,
-  SIGNOUT,
   SIGNIN_REQUEST,
+  SIGNIN_SUCCESS,
+  SIGNIN_ERROR,
+  SIGNOUT,
 } from './constants';
 
 const initialState = {
@@ -47,7 +47,10 @@ export default (state = initialState, action) => {
       localStorage.removeItem('token');
       return {
         ...state,
-        currentUser: {},
+        currentUser: {
+          value: null,
+          loading: false,
+        },
       };
 
     default:

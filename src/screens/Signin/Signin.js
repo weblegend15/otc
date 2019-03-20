@@ -7,7 +7,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from '../../components/Buttons/Button';
 
-import CustomInput from './CustomInput';
+import { ValidateInput } from '../../components';
+import { required, minLength, isEmail } from '../../utils/validate';
 
 class Signin extends Component {
   handleSubmit = (e) => {
@@ -32,8 +33,20 @@ class Signin extends Component {
           <Col md={{ span: 4 }}>
             <h3 color="white">Login into your account</h3>
             <Form validated={!signinFormState.syncErrors} onSubmit={this.handleSubmit}>
-              <Field component={CustomInput} type="email" name="email" label="EMAIL" />
-              <Field component={CustomInput} type="password" name="password" label="PASSWORD" />
+              <Field
+                component={ValidateInput}
+                type="email"
+                name="email"
+                label="EMAIL"
+                validate={[required, isEmail]}
+              />
+              <Field
+                component={ValidateInput}
+                type="password"
+                name="password"
+                label="PASSWORD"
+                validate={[required, minLength]}
+              />
               <Button
                 variant="primary"
                 disabled={!!signinFormState.syncErrors || currentUser.loading}

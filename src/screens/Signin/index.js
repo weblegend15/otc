@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import validate from './validate';
 import Signin from './Signin';
 import { signinRequest } from './redux/actions';
 
@@ -31,8 +30,6 @@ const mapDispatchToProps = {
 
 const withReduxform = reduxForm({
   form: 'signinForm',
-  validate,
-  asyncBlurFields: ['email'],
 })(Signin);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withReduxform);
