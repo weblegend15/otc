@@ -10,6 +10,7 @@ import Pagination from './Pagination';
 import ValidateInput from './ValidateInput';
 import Tooltip from './Tooltip';
 import Badge from './Badge';
+import ValidateCheck from './ValidateCheck';
 
 export {
   Timestamp,
@@ -24,4 +25,5 @@ export {
   ValidateInput,
   Tooltip,
   Badge,
+  ValidateCheck,
 };
