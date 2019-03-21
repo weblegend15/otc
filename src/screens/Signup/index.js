@@ -1,23 +1,9 @@
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
 
 import Signup from './Signup';
-// import { signupRequest } from './redux/actions';
 
-Signup.propTypes = {
-  // signupRequest: PropTypes.func,
-};
+const withReduxform = reduxForm({
+  form: 'signupForm',
+})(Signup);
 
-Signup.defaultProps = {
-  // signupRequest: null,
-};
-
-const mapStateToProps = (state) => ({
-
-});
-
-const mapDispatchToProps = {
-  // signupRequest,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default withReduxform;
