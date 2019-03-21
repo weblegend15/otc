@@ -5,13 +5,14 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from '../../components/Buttons/Button';
 
+import Button from '../../components/Buttons/Button';
 import { ValidateInput } from '../../components';
-import { required, minLength, isEmail } from '../../utils/validate';
+
+import { required, isEmail } from '../../utils/validate';
 
 class Signin extends Component {
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
 
     const {
@@ -22,7 +23,7 @@ class Signin extends Component {
     } = this.props;
 
     signinRequest(email, password);
-  }
+  };
 
   render() {
     const { signinFormState, currentUser } = this.props;
@@ -32,7 +33,10 @@ class Signin extends Component {
         <Row>
           <Col md={{ span: 4 }}>
             <h3 color="white">Login into your account</h3>
-            <Form validated={!signinFormState.syncErrors} onSubmit={this.handleSubmit}>
+            <Form
+              validated={!signinFormState.syncErrors}
+              onSubmit={this.handleSubmit}
+            >
               <Field
                 component={ValidateInput}
                 type="email"
@@ -45,7 +49,7 @@ class Signin extends Component {
                 type="password"
                 name="password"
                 label="PASSWORD"
-                validate={[required, minLength]}
+                validate={[required]}
               />
               <Button
                 variant="primary"
