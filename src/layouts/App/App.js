@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import Container from 'react-bootstrap/Container';
-import { Badge, Tabs, InputBox, Icon, IconButton, Button, Tooltip }  from '../../components/index';
+import {
+  Tabs,
+  InputBox,
+  Icon,
+  IconButton,
+  Button,
+  Tooltip,
+} from '../../components/index';
 
 class App extends Component {
   constructor(props) {
@@ -10,11 +17,9 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount() {}
 
-  }
-
-  showTooltip = (status) => {
+  showTooltip = status => {
     const tooltipStatus = status === 'on';
     this.setState({ on: tooltipStatus });
   };
@@ -27,73 +32,75 @@ class App extends Component {
         <div>
           dashboard
           <br />
-          <Icon onClick={() => {this.showTooltip('on');}} name="envelope-o" size="lg" color="primary" />
-          { on && <Tooltip on={on} position="left" showTooltip={this.showTooltip} >End Listning</Tooltip>}
+          <Icon
+            onClick={() => {
+              this.showTooltip('on');
+            }}
+            name="envelope-o"
+            size="lg"
+            color="primary"
+          />
+          {on && (
+            <Tooltip on={on} position="left" showTooltip={this.showTooltip}>
+              End Listning
+            </Tooltip>
+          )}
           <br />
           <br />
           <IconButton
             icon="envelope-o"
             content="Left Icon Button"
-            size='lg'
+            size="lg"
             iconPosition="left"
-            variant='primary'
+            variant="primary"
           />
-
-          <IconButton
-            icon="envelope-o"
-            size='lg'
-            variant='link'
-            disabled
-          />
-
-
-          <IconButton
-            icon="envelope-o"
-            size='lg'
-            variant='outline-primary'
-          />
-
+          <IconButton icon="envelope-o" size="lg" variant="link" disabled />
+          <IconButton icon="envelope-o" size="lg" variant="outline-primary" />
           <br />
           <br />
           <IconButton
             iconPosition="right"
-            icon="envelope-o" 
+            icon="envelope-o"
             content="Message"
-            size='lg'
-            variant='outline-primary'
+            size="lg"
+            variant="outline-primary"
           />
           <br />
           <br />
-
-          <Button size='lg' variant='primary'>Message</Button>
-          <br/>
-          <br/>
-          <Button size='lg' variant='outline-primary'>Message</Button>
-          <br/>
-          <br/>
-          <Button size='lg' variant='muted'>Message</Button>
-          <br/>
+          <Button size="lg" variant="primary">
+            Message
+          </Button>
+          <br />
+          <br />
+          <Button size="lg" variant="outline-primary">
+            Message
+          </Button>
+          <br />
+          <br />
+          <Button size="lg" variant="muted">
+            Message
+          </Button>
+          <br />
           <InputBox placeholder="serach" icon="search" iconPosition="left" />
           <InputBox placeholder="serach" icon="search" iconPosition="right" />
           <InputBox />
           <br />
-
-          <Tabs headers={['tab1', 'tab2', 'tab3']} size='lg' defaultActiveTab='tab1'>
-            <div everyKey='tab1' >
+          <Tabs
+            headers={['tab1', 'tab2', 'tab3']}
+            size="lg"
+            defaultActiveTab="tab1"
+          >
+            <div everyKey="tab1">
               <h1> Hello Allan</h1>
             </div>
-            <div everyKey='tab2' >
+            <div everyKey="tab2">
               <h1> Hello Emil</h1>
             </div>
-            <div everyKey='tab3' >
+            <div everyKey="tab3">
               <h1> Hello Keith</h1>
             </div>
           </Tabs>
-          <Badge variant="primary" number={100} />
-          <Badge variant="primary" number={3} />
-          <Badge variant="primary" />
         </div>
-        
       </Container>
     );
   }
