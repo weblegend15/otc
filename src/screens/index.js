@@ -7,11 +7,10 @@ import ShareScreens from './share';
 
 const Routes = ({ currentUser }) => (
   <Switch>
-    <Route path="/" component={ShareScreens}>
-      {!currentUser.value && <Route path="/auth" component={AuthScreens} />}
-      {currentUser.value && <Route path="/app" component={AppScreens} />}
-    </Route>
-    <Redirect to="/not-found" render={() => <div>404 page</div>} />
+    {!currentUser.value && <Route path="/auth" component={AuthScreens} />}
+    {currentUser.value && <Route path="/app" component={AppScreens} />}
+    <Route path="/" component={ShareScreens} />
+    <Redirect to="/home" />
   </Switch>
 );
 
