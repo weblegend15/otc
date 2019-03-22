@@ -3,32 +3,43 @@ import { RegionDropdown } from 'react-country-region-selector';
 import cx from 'classnames';
 
 class StateDropdown extends Component {
-  handleChange = value => {
+  componentDidMount() {
     const { selectState } = this.props;
-    selectState(value);
-  };
+    selectState(null);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { country, selectState } = this.props;
+    if (prevProps.country !== country) {
+      selectState(null);
+    }
+  }
 
   render() {
     const {
-      stepTwoValues: { country, state },
+      input: { value },
       meta: { error },
+      country,
+      label,
+      selectState,
     } = this.props;
 
     return (
       <div className="form-group state-dropdown">
         {/* eslint-disable */}
         <label className="form-label" id="state-dropdown-label">
-          STATE
+          {label}
         </label>
         {/* eslint-enable */}
         <RegionDropdown
-          className={cx('form-control', { 'is-invalid': !state })}
+          className={cx('form-control', { 'is-invalid': !value })}
           disableWhenEmpty
           country={country}
-          value={state}
-          onChange={this.handleChange}
+          value={value}
+          onChange={e => selectState(e)}
           labelType="short"
           valueType="short"
+          defaultOptionLabel="Select State"
         />
         {country && error && (
           <div className="d-flex invalid-feedback">{error}</div>
