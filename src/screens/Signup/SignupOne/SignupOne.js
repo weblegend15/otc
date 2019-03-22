@@ -6,9 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from '../../../components/Buttons/Button';
-import Card from '../../../components/Card';
 
-import { ValidateInput } from '../../../components';
+import { ValidateInput, Card } from '../../../components';
 import {
   required,
   minLength,
@@ -36,7 +35,7 @@ class SignupOne extends Component {
         </Row>
         <Row className="m-0">
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
-            <Card className="mt-4">
+            <Card className="mt-4 mb-5">
               <Form
                 validated={!formSyncErrors.stepOne}
                 onSubmit={this.handleSubmit}

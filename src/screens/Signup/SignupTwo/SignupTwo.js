@@ -9,14 +9,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import Button from '../../../components/Buttons/Button';
-import Card from '../../../components/Card';
-import { ValidateInput, ValidateCheck } from '../../../components';
+import {
+  ValidateInput,
+  ValidateCheck,
+  Card,
+  CountryDropdown,
+  StateDropdown,
+  PhoneInput,
+} from '../../../components';
 
-import PhoneInput from './PhoneInput';
-import CountryDropdown from './CountryDropdown';
-import StateDropdown from './StateDropdown';
-
-import { required } from '../../../utils/validate';
+import { required, phoneRequire } from '../../../utils/validate';
 import { RECAPTCHA_KEY } from '../../../config';
 
 class SignupTwo extends Component {
@@ -65,7 +67,14 @@ class SignupTwo extends Component {
   );
 
   render() {
-    const { formSyncErrors, loading } = this.props;
+    const {
+      formSyncErrors,
+      loading,
+      selectCountry,
+      selectState,
+      setPhone,
+      signupFormValues: { stepTwo },
+    } = this.props;
     const { recaptchaValue } = this.state;
 
     return (
@@ -77,34 +86,37 @@ class SignupTwo extends Component {
         </Row>
         <Row className="m-0">
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
-            <Card className="mt-4">
-              <Form
-                validated={!formSyncErrors.stepTwo}
-                onSubmit={this.handleSubmit}
-              >
+            <Card className="mt-4 mb-5">
+              <Form onSubmit={this.handleSubmit}>
                 <Container className="p-5">
                   <Field
                     component={PhoneInput}
                     type="phone"
                     name="phone"
                     label="PHONE NUMBER"
-                    validate={[required]}
+                    validate={[phoneRequire]}
+                    {...{ setPhone }}
                   />
                   <Field
-                    component={CountryDropdown}
                     type="select"
                     name="country"
                     label="COUNTRY"
                     validate={[required]}
+                    component={CountryDropdown}
+                    {...{ selectCountry }}
                   />
                   <Row>
                     <Col xs={{ span: 4 }}>
                       <Field
-                        component={StateDropdown}
                         type="select"
                         name="state"
                         label="STATE"
                         validate={[required]}
+                        component={StateDropdown}
+                        {...{
+                          selectState,
+                          country: stepTwo ? stepTwo.country : '',
+                        }}
                       />
                     </Col>
                     <Col xs={{ span: 8 }}>
