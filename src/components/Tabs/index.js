@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Tabs from './Tabs';
 import './Tabs.scss';
 
-Tabs.PropTypes = {
+Tabs.propTypes = {
   headers: PropTypes.array,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

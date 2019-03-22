@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Timestamp, Card, Rating, Pagination } from '../../components';
+import { Timestamp, Card, Rating, Pagination, Badge } from '../../components';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -10,13 +10,13 @@ class Dashboard extends Component {
     };
   }
 
-  handleRating = (value) => {
+  handleRating = value => {
     this.setState({ rating: value });
-  }
+  };
 
-  handlePageChange = (value) => {
+  handlePageChange = value => {
     this.setState({ currentPage: value });
-  }
+  };
 
   render() {
     const { rating, currentPage } = this.state;
@@ -24,10 +24,7 @@ class Dashboard extends Component {
       <Card className="m-4 p-4 text-center">
         <Timestamp />
         <hr />
-        <Rating
-          initialRating={rating}
-          onChange={this.handleRating}
-        />
+        <Rating initialRating={rating} onChange={this.handleRating} />
         <p>Current rating: {rating}</p>
         <hr />
         <Pagination
@@ -41,6 +38,6 @@ class Dashboard extends Component {
       </Card>
     );
   }
-};
+}
 
 export default Dashboard;

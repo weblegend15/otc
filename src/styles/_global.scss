@@ -1,14 +1,51 @@
-@import "./variables";
-@import "./theme";
-html, body {
+@import './variables';
+@import './theme';
+
+#root {
+  background: $deny-bg-color;
+}
+
+html {
   height: 100%;
   background: $deny-bg-color;
   #root {
     display: flex;
     flex-direction: column;
     height: 100%;
-    .content {
-      flex: 1 0 auto;
-    }
+    flex: 1 0 auto;
   }
+}
+
+button {
+  outline: none !important;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 2px;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: none;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-size: 76%;
+}
+
+.was-validated .form-control:valid,
+.form-control.is-valid {
+  background-image: none !important;
+}
+
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+  background-image: none !important;
+}
+
+.was-validated .custom-control-input:valid ~ .custom-control-label {
+  color: black;
 }

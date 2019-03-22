@@ -4,28 +4,25 @@ import Topbar from './Topbar';
 
 import './styles.scss';
 
-import { signout } from '../../screens/Signin/redux/actions';
+import { signout } from '../../screens/auth/Signin/redux/actions';
 
 Topbar.propTypes = {
-  currentUser: PropTypes.objectOf(PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object,
-  ])).isRequired,
+  currentUser: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  ).isRequired,
   signout: PropTypes.func,
 };
 
-Topbar.defaultTypes = {
+Topbar.defaultProps = {
   currentUser: {},
-  signout: null,
+  signout: () => {},
 };
-
-const mapStateToProps = (state) => ({
-
-});
 
 const mapDispatchToProps = {
   signout,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Topbar);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Topbar);
