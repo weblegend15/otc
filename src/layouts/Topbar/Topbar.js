@@ -64,7 +64,6 @@ class Topbar extends Component {
 
     return (
       <Navbar
-        sticky="top"
         variant="secondary"
         expand="md"
         className="topbar border-bottom border-dark p-0">

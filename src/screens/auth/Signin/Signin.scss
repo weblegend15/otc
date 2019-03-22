@@ -1,8 +1,7 @@
 @import '../../../styles/variables';
 .home-page-container {
   min-width: 100%;
-  position: absolute;
-  top: 0;
+  margin-top: -100px;
   .home-container-section {
     background-image: url('../../../assets/imgs/home-page-login-account-background.svg');
     background-position: center;
