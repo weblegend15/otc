@@ -12,6 +12,13 @@
     .login-view {
       color: $white;
       margin-top: 181px;
+      margin-left: 80px;
+      @media screen and (max-width: 768px) {
+        margin-left: 10px;
+        .signup-button {
+          display: block !important;
+        }
+      }
     }
   }
   .platform-features {
@@ -22,7 +29,10 @@
     & > div {
       max-width: 400px;
       & > .card {
-        max-width: 300px;
+        max-width: 200px;
+        min-width: 150px;
+        background-image: url('../../assets/imgs/home-page-platform-card-background.svg');
+        background-position: left;
       }
     }
 }

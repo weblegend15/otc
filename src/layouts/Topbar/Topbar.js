@@ -32,7 +32,6 @@ class Topbar extends Component {
             src={logoIcon}
             alt="logo"
           />
-          <span className="logo-chars"> TRADE</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -58,36 +57,32 @@ class Topbar extends Component {
         expand="md"
         className="topbar border-bottom border-dark p-0">
         <Navbar.Brand href="/">
-          <img
-            className="d-inline-block align-top ml-5"
-            src={logoIcon}
-            alt="logo"
-          />{' '}
-          <span className="logo-chars"> TRADE</span>
+          <img className="ml-5" src={logoIcon} alt="logo" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse
-          className="h-100 d-flex justify-content-between"
-          id="basic-navbar-nav">
-          <Nav className="flex-1 d-flex justify-content-between h-100">
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse className="h-100" id="responsive-navbar-nav">
+          <Nav className="mx-auto p-0 h-100">
             <NavLink
-              className=" mx-auto p-3 topbar-item-active h-100 text-center d-flex align-items-center"
+              className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
               to="/home">
               Home
             </NavLink>
             <NavLink
-              className=" mx-auto p-3 topbar-item-active h-100 text-center d-flex align-items-center"
+              className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
               to="/faq">
               FAQ
             </NavLink>
             <NavLink
-              className=" mx-auto p-3 topbar-item-active h-100 text-center d-flex align-items-center"
+              className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
               to="/contactus">
               Contact Us
             </NavLink>
           </Nav>
-          <Nav>
-            <Button variant="outline-primary" onClick={this.handleSingin}>
+          <Nav className="pr-5">
+            <Button
+              className="w-100 pl-4 pr-4"
+              variant="outline-info"
+              onClick={this.handleSingin}>
               SIGN IN
             </Button>
           </Nav>

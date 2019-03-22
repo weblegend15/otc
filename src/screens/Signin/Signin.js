@@ -36,7 +36,7 @@ class Signin extends Component {
   renderHomeLoginSection = () => {
     return (
       <Row className="home-container-section">
-        <Col lg={4} md={6} sm={6} className="login-view p-4">
+        <Col lg={4} md={6} sm={6} className="login-view">
           <h3 className="h3-title">Login into Your Account</h3>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail">
@@ -58,14 +58,21 @@ class Signin extends Component {
                 required
               />
             </Form.Group>
-
-            <Button
-              className="login-button w-50"
-              variant="primary"
-              size="lg"
-              type="submit">
-              Login
-            </Button>
+            <div className="d-flex justify-content-between">
+              <Button
+                className="login-button w-50 mr-3"
+                variant="primary"
+                size="lg"
+                type="submit">
+                Login
+              </Button>
+              <Button
+                className="w-50 text-white signup-button d-none ml-3"
+                variant="outline-light"
+                size="lg">
+                Sign up
+              </Button>
+            </div>
           </Form>
         </Col>
       </Row>
