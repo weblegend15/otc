@@ -28,7 +28,7 @@ class Signin extends Component {
     return (
       <Row className="home-container-section">
         <Col lg={4} md={6} sm={6} className="login-view">
-          <h3 color="white">Login into your account</h3>
+          <h3 color="white">Login Into Your Account</h3>
           <Form validated={!signinFormState.syncErrors} onSubmit={this.handleSubmit}>
             <Field
               component={ValidateInput}
@@ -127,7 +127,7 @@ class Signin extends Component {
           Some expanation on why to create an account on the platform
         </p>
         <Col className="text-center mb-5">
-          <Link to="/auth/signup" className="mt-5 mx-auto btn btn-primary">
+          <Link to="/auth/signup" className="mt-5 pr-5 pl-5 mx-auto btn btn-primary">
             CREATE ACCOUNT
           </Link>
         </Col>
