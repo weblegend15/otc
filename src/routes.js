@@ -15,19 +15,20 @@ class MainRoutes extends Component {
         <Redirect to="/home" />
       </Switch>
     );
-  }
+  };
 
   renderNoAuthRoutes = () => {
     return (
       <Switch>
+        <Route exact path="/" component={Home} />
         <Route exact path="/signin" component={Signin} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/faq" component={FAQ} />
         <Route exact path="/contactus" component={ContactUs} />
-        <Redirect to="/signin" />
+        <Redirect to="/" />
       </Switch>
     );
-  }
+  };
 
   render() {
     const { currentUser } = this.props;
@@ -36,9 +37,11 @@ class MainRoutes extends Component {
       <Fragment>
         <div className="content">
           <Topbar currentUser={currentUser} />
-          {!currentUser.isAuthenticated ? this.renderNoAuthRoutes() : this.renderAuthRoutes()}
+          {!currentUser.isAuthenticated
+            ? this.renderNoAuthRoutes()
+            : this.renderAuthRoutes()}
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </Fragment>
     );
   }
@@ -52,7 +55,7 @@ MainRoutes.defaultProps = {
   currentUser: null,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   currentUser: state.signin.userData,
 });
 

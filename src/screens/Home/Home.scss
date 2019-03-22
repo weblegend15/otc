@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.home-container-section {
+  position: absolute;
+  top: 0;
+  background: linear-gradient(270deg, #04294B 8.61%, #01101D 92.5%);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  .home-login-view {
+    margin-top: 100px;
+    color: white;
+    img {
+      width: 400px;
+      height: 400px;
+      margin-top: -100px;
+    }
+  }
+}
