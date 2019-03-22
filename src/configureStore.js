@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 import rootReducer from './redux/reducers';
-import sagas from './redux/sagas';
+import sagas from './redux/saga';
 
 const persistConfig = {
   key: 'root',
@@ -22,10 +22,7 @@ const composeEnhancers = composeWithDevTools(devToolsOptions);
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middleware = [
-  routerMiddleware(history),
-  sagaMiddleware,
-];
+const middleware = [routerMiddleware(history), sagaMiddleware];
 
 const store = createStore(
   persistedReducer,
