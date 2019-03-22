@@ -11,7 +11,7 @@ class Topbar extends Component {
   handleLogout = () => {
     const { signout } = this.props;
     signout();
-    history.push('/signin');
+    history.push('/auth/signin');
   };
 
   renderAuthNav = () => {
@@ -45,7 +45,7 @@ class Topbar extends Component {
           </NavLink>
         </Nav>
         <Nav>
-          <Link to="/signin" className="btn btn-outline-primary">
+          <Link to="/auth/signin" className="btn btn-outline-primary">
             SIGN IN
           </Link>
         </Nav>
