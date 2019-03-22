@@ -7,13 +7,12 @@
 
 html {
   height: 100%;
+  background: $deny-bg-color;
   #root {
-    background: $deny-bg-color;
     display: flex;
     flex-direction: column;
-    .content {
-      flex: 1 0 auto;
-    }
+    height: 100%;
+    flex: 1 0 auto;
   }
 }
 

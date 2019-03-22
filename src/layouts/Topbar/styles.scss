@@ -1,13 +1,15 @@
 @import '../../styles/variables';
 
-.logo-chars {
-  letter-spacing: 15px;
-  color: $white;
-  margin-left: 10px;
+.topbar {
+  height: 100px;
 }
 
-.nav-items {
-  a {
-    color: $white;
+.topbar-item-active {
+  color: white;
+  text-decoration: none !important;
+  border-bottom: 3px solid transparent;
+  &:active, &:hover {
+    color: white;
+    border-bottom: 3px solid $primary;
   }
 }

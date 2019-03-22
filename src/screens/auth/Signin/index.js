@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import Signin from './Signin';
 import { signinRequest } from './redux/actions';
+import Signin from './Signin';
+import './Signin.scss';
 
 Signin.propTypes = {
   signinRequest: PropTypes.func,

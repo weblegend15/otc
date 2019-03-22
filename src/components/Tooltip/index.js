@@ -5,7 +5,6 @@ import './Tooltip.scss';
 
 Tooltip.PropTypes = {
   children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
   on: PropTypes.bool,
@@ -15,5 +14,7 @@ Tooltip.PropTypes = {
 
 Tooltip.defaultProps = {
   icon: 'remove',
+  on: false,
+  position: 'left',
 };
 export default Tooltip;

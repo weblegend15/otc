@@ -32,20 +32,26 @@ class Topbar extends Component {
 
   renderNoAuthNav = () => {
     return (
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mx-auto mb-3 mt-3 nav-items">
-          <NavLink className="mr-5 ml-5" to="/home">
+      <Navbar.Collapse className="h-100" id="responsive-navbar-nav">
+        <Nav className="mx-auto p-0 h-100">
+          <NavLink
+            className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
+            to="/home">
             Home
           </NavLink>
-          <NavLink className="mr-5 ml-5" to="/faq">
+          <NavLink
+            className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
+            to="/faq">
             FAQ
           </NavLink>
-          <NavLink className="mr-5 ml-5" to="/contactus">
+          <NavLink
+            className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
+            to="/contactus">
             Contact Us
           </NavLink>
         </Nav>
-        <Nav>
-          <Link to="/auth/signin" className="btn btn-outline-primary">
+        <Nav className="pr-5">
+          <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
             SIGN IN
           </Link>
         </Nav>
@@ -57,16 +63,15 @@ class Topbar extends Component {
     const { currentUser } = this.props;
 
     return (
-      <Navbar sticky="top" bg="secondary" variant="secondary" expand="md">
+      <Navbar
+        sticky="top"
+        variant="secondary"
+        expand="md"
+        className="topbar border-bottom border-dark p-0">
         <Navbar.Brand href="/">
-          <img
-            className="d-inline-block align-top ml-5"
-            src={logoIcon}
-            alt="logo"
-          />{' '}
-          <span className="logo-chars"> TRADE</span>
+          <img className="ml-5" src={logoIcon} alt="logo" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         {!currentUser.value ? this.renderNoAuthNav() : this.renderAuthNav()}
       </Navbar>
     );
