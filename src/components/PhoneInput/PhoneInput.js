@@ -3,11 +3,9 @@ import ReactPhoneInput from 'react-phone-input-2';
 
 export default ({ input: { value }, setPhone, label, meta: { error } }) => (
   <div className="form-group">
-    {/* eslint-disable */}
     <label className="form-label" id="phone-input-label">
       {label}
     </label>
-    {/* eslint-enable */}
     <ReactPhoneInput
       containerClass="react-tel-input"
       defaultCountry="us"

@@ -9,11 +9,9 @@ export default ({
   selectCountry,
 }) => (
   <div className="form-group country-dropdown">
-    {/* eslint-disable */}
     <label className="form-label" id="country-dropdown-label">
       {label}
     </label>
-    {/* eslint-enable */}
     <CountryDropdown
       className={cx('form-control', { 'is-invalid': error })}
       value={value}
