@@ -11,3 +11,21 @@
     color: $white;
   }
 }
+
+.topbar {
+  height: 100px;
+}
+
+.topbar-item-active {
+  color: white;
+  text-decoration: none !important;
+  border-bottom: 3px solid transparent;
+  &:active, &:hover {
+    color: white;
+    border-bottom: 3px solid $primary;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}

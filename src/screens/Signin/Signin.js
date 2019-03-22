@@ -36,7 +36,7 @@ class Signin extends Component {
   renderHomeLoginSection = () => {
     return (
       <Row className="home-container-section">
-        <Col md={{ span: 3 }} className="login-view">
+        <Col lg={4} md={6} sm={6} className="login-view p-4">
           <h3 className="h3-title">Login into Your Account</h3>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group controlId="formBasicEmail">
@@ -60,7 +60,7 @@ class Signin extends Component {
             </Form.Group>
 
             <Button
-              className="login-button"
+              className="login-button w-50"
               variant="primary"
               size="lg"
               type="submit">
@@ -74,46 +74,46 @@ class Signin extends Component {
 
   renderPlatformFeatures = () => {
     return (
-      <Row className="platform-features" align="center">
-        <h2 className="h2-title w-100">Platform Features</h2>
-        <Col sm={3} align="center">
-          <Card>
+      <Row className="pb-5 platform-features text-center d-flex justify-content-center ">
+        <h2 className="my-5 h2-title w-100">Platform Features</h2>
+        <Col lg={3} md={6} xs={12}>
+          <Card className="p-5 mb-5 mx-auto">
             <img src={Salary} alt="salary" />
           </Card>
-          <h3>Need Content Here</h3>
+          <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
             Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
             eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
             diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
-        <Col sm={3} align="center">
-          <Card>
+        <Col lg={3} md={6} xs={12}>
+          <Card className="p-5 mb-5 mx-auto">
             <img src={Security} alt="security" />
           </Card>
-          <h3>Need Content Here</h3>
+          <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
             Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
             eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
             diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
-        <Col sm={3} align="center">
-          <Card>
+        <Col lg={3} md={6} xs={12}>
+          <Card className="p-5 mb-5 mx-auto">
             <img src={Presentation} alt="presentation" />
           </Card>
-          <h3>Need Content Here</h3>
+          <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
             Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
             eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
             diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
-        <Col sm={3} align="center">
-          <Card>
+        <Col lg={3} md={6} xs={12}>
+          <Card className="p-5 mb-5 mx-auto">
             <img src={Bubble} alt="bubble" />
           </Card>
-          <h3>Need Content Here</h3>
+          <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
             Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
             eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
@@ -131,8 +131,8 @@ class Signin extends Component {
         <p className="p-lg w-100 opacity-5">
           Some expanation on why to create an account on the platform
         </p>
-        <Col sm={{ span: 4, offset: 4 }}>
-          <Button className="create-account-button" variant="primary" size="lg">
+        <Col className="text-center mb-5">
+          <Button className="px-5" variant="primary" size="lg">
             Create account
           </Button>
         </Col>

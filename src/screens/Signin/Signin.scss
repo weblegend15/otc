@@ -12,10 +12,6 @@
     .login-view {
       color: $white;
       margin-top: 181px;
-      margin-left: 80px;
-      .login-button {
-        width: 200px;
-      }
     }
   }
   .platform-features {
@@ -23,22 +19,11 @@
     background-position: right;
     background-repeat: no-repeat;
     background-size: contain;
-    padding: 56px 54px 100px 54px;
-    .h2-title {
-      margin-bottom: 56px;
-    }
-    .card {
-      width: 246px;
-      margin-bottom: 54px;
-      background-image: url('../../assets/imgs/home-page-platform-card-background.svg');
-    }
-    .p-md {
-      width: 282px;
-      margin-top: 17px;
-    }
-    img {
-      padding-top: 55px;
-      padding-bottom: 55px;
+    & > div {
+      max-width: 400px;
+      & > .card {
+        max-width: 300px;
+      }
     }
 }
   .create-account-section {
@@ -47,12 +32,5 @@
     background-image: url('../../assets/imgs/home-page-create-account-background.svg');
     background-repeat: no-repeat;
     background-size: cover;
-    .h3-title {
-      margin-bottom: 17px;
-    }
-    .create-account-button {
-      margin-bottom: 78px;
-      width: 285px;
-    }
   }
 }
