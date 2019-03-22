@@ -2,14 +2,15 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 
 export default ({
-  input, label, type, placeholder,
+  input,
+  label,
+  type,
+  placeholder,
   meta: { touched, error },
 }) => {
   return (
     <Form.Group controlId={`form${label}`}>
-      <Form.Label>
-        {label}
-      </Form.Label>
+      {label && <Form.Label>{label}</Form.Label>}
       <Form.Control
         {...input}
         type={type}

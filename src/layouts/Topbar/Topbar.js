@@ -11,26 +11,24 @@ class Topbar extends Component {
   handleLogout = () => {
     const { signout } = this.props;
     signout();
-    history.push('/signin');
-  }
+    history.push('/auth/signin');
+  };
 
   renderAuthNav = () => {
     return (
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <NavLink to="/home">
-            Home
-          </NavLink>
-          <NavLink to="/dashboard">
-            Dashboard
-          </NavLink>
+          <NavLink to="/home">Home</NavLink>
+          <NavLink to="/dashboard">Dashboard</NavLink>
         </Nav>
         <Nav>
-          <Button variant="primary" onClick={this.handleLogout}>Log out</Button>
+          <Button variant="primary" onClick={this.handleLogout}>
+            Log out
+          </Button>
         </Nav>
       </Navbar.Collapse>
     );
-  }
+  };
 
   renderNoAuthNav = () => {
     return (
@@ -47,11 +45,13 @@ class Topbar extends Component {
           </NavLink>
         </Nav>
         <Nav>
-          <Link to="/signin" className="btn btn-outline-primary">SIGN IN</Link>
+          <Link to="/auth/signin" className="btn btn-outline-primary">
+            SIGN IN
+          </Link>
         </Nav>
       </Navbar.Collapse>
     );
-  }
+  };
 
   render() {
     const { currentUser } = this.props;
@@ -59,7 +59,12 @@ class Topbar extends Component {
     return (
       <Navbar sticky="top" bg="secondary" variant="secondary" expand="md">
         <Navbar.Brand href="/">
-          <img className="d-inline-block align-top ml-5" src={logoIcon} alt="logo" /> <span className='logo-chars'>  TRADE</span>
+          <img
+            className="d-inline-block align-top ml-5"
+            src={logoIcon}
+            alt="logo"
+          />{' '}
+          <span className="logo-chars"> TRADE</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {!currentUser.value ? this.renderNoAuthNav() : this.renderAuthNav()}
