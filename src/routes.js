@@ -17,15 +17,15 @@ const MainRoutes = ({ currentUser }) => (
 );
 
 MainRoutes.propTypes = {
-  currentUser: PropTypes.objectOf(PropTypes.bool),
+  currentUser: PropTypes.object,
 };
 
 MainRoutes.defaultProps = {
-  currentUser: {},
+  currentUser: null,
 };
 
 const mapStateToProps = state => ({
-  currentUser: state.auth.signin.currentUser,
+  currentUser: state.auth.currentUser,
 });
 
 export default connect(mapStateToProps)(MainRoutes);
