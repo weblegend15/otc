@@ -2,6 +2,12 @@
 
 .footer {
   flex-shrink: 0;
+
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
   a {
     color: $white;
     font-size: 14px;
@@ -13,6 +19,6 @@
   }
 
   .navbar-nav {
-    max-width: 500px;
+    max-width: 650px;
   }
 }

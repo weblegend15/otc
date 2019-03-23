@@ -4,7 +4,7 @@ import { getFormSyncErrors, getFormValues, change } from 'redux-form';
 
 import SignupTwo from './SignupTwo';
 
-import { signupRequest } from '../redux/actions';
+import { signupRequest } from '../../redux/actions';
 
 SignupTwo.propTypes = {
   signupFormValues: PropTypes.object,
@@ -23,7 +23,7 @@ SignupTwo.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  loading: state.auth.signup.loading,
+  loading: state.auth.loading,
   signupFormValues: getFormValues('signupForm')(state),
   formSyncErrors: getFormSyncErrors('signupForm')(state),
 });
