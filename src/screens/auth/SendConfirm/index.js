@@ -11,7 +11,7 @@ SendConfirm.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  email: state.auth.confirm.email,
+  email: state.auth.email,
 });
 
 export default connect(mapStateToProps)(SendConfirm);

@@ -1,25 +1,23 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { signinRequest } from './redux/actions';
+import { signinRequest } from '../redux/actions';
 import Signin from './Signin';
-import './Signin.scss';
 
 Signin.propTypes = {
   signinRequest: PropTypes.func,
   signinFormState: PropTypes.objectOf(PropTypes.object),
-  currentUser: PropTypes.objectOf([PropTypes.object, PropTypes.bool]),
+  currentUserLoading: PropTypes.bool.isRequired,
 };
 
 Signin.defaultProps = {
   signinRequest: () => {},
   signinFormState: {},
-  currentUser: {},
 };
 
 const mapStateToProps = state => ({
   signinFormState: state.form.signinForm,
-  currentUser: state.auth.signin.currentUser,
+  currentUserLoading: state.auth.currentUserLoading,
 });
 
 const mapDispatchToProps = {

@@ -15,7 +15,7 @@ export default ({ email }) => (
       <hr className="m-0" />
       <p className="m-4">
         Check your email and click on the activation link in the email which we
-        have sent to <div className="text-primary">asdf{email}</div>
+        have sent to <div className="text-primary">{email}</div>
       </p>
     </Card>
   </Container>
