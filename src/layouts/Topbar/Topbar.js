@@ -32,22 +32,22 @@ class Topbar extends Component {
 
   renderNoAuthNav = () => {
     return (
-      <Navbar.Collapse id="basic-navbar-nav">
+      <Navbar.Collapse id="basic-navbar-nav" className="h-100">
         <Nav className="mx-auto p-0 h-100">
           <NavLink
-            className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
+            className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
             to="/home"
           >
             Home
           </NavLink>
           <NavLink
-            className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
+            className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
             to="/faq"
           >
             FAQ
           </NavLink>
           <NavLink
-            className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
+            className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
             to="/contactus"
           >
             Contact Us
@@ -66,11 +66,7 @@ class Topbar extends Component {
     const { currentUser } = this.props;
 
     return (
-      <Navbar
-        variant="secondary"
-        expand="md"
-        className="topbar border-bottom border-dark p-0"
-      >
+      <Navbar variant="dark" expand="md" className="topbar pt-0 pb-0 pl-xs-3 pr-xs-3">
         <Navbar.Brand href="/">
           <img className="ml-md-5" src={logoIcon} alt="logo" />
         </Navbar.Brand>
