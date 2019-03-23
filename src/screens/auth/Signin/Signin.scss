@@ -11,13 +11,6 @@
     .login-view {
       color: $white;
       margin-top: 181px;
-      margin-left: 80px;
-      @media screen and (max-width: 768px) {
-        margin-left: 10px;
-        .signup-button {
-          display: block !important;
-        }
-      }
     }
   }
   .platform-features {

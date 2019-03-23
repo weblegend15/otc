@@ -27,7 +27,7 @@ class Signin extends Component {
     const { signinFormState, currentUser } = this.props;
     return (
       <Row className="home-container-section">
-        <Col lg={4} md={6} sm={6} className="login-view">
+        <Col lg={4} md={6} sm={6} className="login-view ml-md-5">
           <h3 color="white">Login Into Your Account</h3>
           <Form validated={!signinFormState.syncErrors} onSubmit={this.handleSubmit}>
             <Field
@@ -55,7 +55,7 @@ class Signin extends Component {
                 LOGIN
               </Button>
               <Button
-                className="w-50 text-white signup-button d-none ml-3"
+                className="w-50 text-white d-md-none ml-3"
                 variant="outline-light"
                 size="lg">
                 Sign up
@@ -127,7 +127,7 @@ class Signin extends Component {
           Some expanation on why to create an account on the platform
         </p>
         <Col className="text-center mb-5">
-          <Link to="/auth/signup" className="mt-5 pr-5 pl-5 mx-auto btn btn-primary">
+          <Link to="/auth/signup" className="mt-2 pr-5 pl-5 mx-auto btn btn-primary">
             CREATE ACCOUNT
           </Link>
         </Col>
