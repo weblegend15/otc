@@ -4,7 +4,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { history } from '../../configureStore';
 import logoIcon from '../../assets/icons/logo.svg';
-
 import Button from '../../components/Buttons/Button';
 
 class Topbar extends Component {
@@ -67,7 +66,7 @@ class Topbar extends Component {
 
     return (
       <Navbar variant="dark" expand="md" className="topbar pt-0 pb-0 pl-xs-3 pr-xs-3">
-        <Navbar.Brand href="/">
+        <Navbar.Brand href="/" className="h-100 d-flex align-items-center">
           <img className="ml-md-5" src={logoIcon} alt="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
