@@ -11,7 +11,9 @@ const MainRoutes = ({ currentUser }) => (
   <Fragment>
     <Topbar currentUser={currentUser} />
     <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
-    <Routes />
+    <div className="app-content">
+      <Routes />
+    </div>
     <Footer />
   </Fragment>
 );

@@ -5,12 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 export default () => {
   return (
-    <Navbar
-      className="d-flex footer flex-column"
-      sticky="bottom"
-      bg="secondary"
-      variant="secondary"
-      expand="md">
+    <Navbar className="footer d-flex flex-column" bg="secondary">
       <Nav className="mx-auto">
         <NavLink className="mr-5 ml-5 mt-3 mb-3" to="/home">
           Home
