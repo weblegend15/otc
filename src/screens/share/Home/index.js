@@ -1,9 +1,36 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Card from '../../../components/Card';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
+import { signinRequest } from '../../auth/redux/actions';
+import Home from './Home';
+import './Home.scss';
 
-export default () => (
-  <Container>
-    <Card className="m-5 p-5">Home Page</Card>
-  </Container>
-);
+Home.propTypes = {
+  signinRequest: PropTypes.func,
+  signinFormState: PropTypes.objectOf(PropTypes.object),
+  currentUserLoading: PropTypes.bool.isRequired,
+};
+
+Home.defaultProps = {
+  signinRequest: () => {},
+  signinFormState: {},
+};
+
+const mapStateToProps = state => ({
+  signinFormState: state.form.signinForm,
+  currentUser: state.auth.currentUser,
+  currentUserLoading: state.auth.currentUserLoading,
+});
+
+const mapDispatchToProps = {
+  signinRequest,
+};
+
+const withReduxform = reduxForm({
+  form: 'signinForm',
+})(Home);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withReduxform);

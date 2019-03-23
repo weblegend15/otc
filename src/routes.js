@@ -11,21 +11,23 @@ const MainRoutes = ({ currentUser }) => (
   <Fragment>
     <Topbar currentUser={currentUser} />
     <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
-    <Routes />
+    <div className="app-content">
+      <Routes />
+    </div>
     <Footer />
   </Fragment>
 );
 
 MainRoutes.propTypes = {
-  currentUser: PropTypes.objectOf(PropTypes.bool),
+  currentUser: PropTypes.object,
 };
 
 MainRoutes.defaultProps = {
-  currentUser: {},
+  currentUser: null,
 };
 
 const mapStateToProps = state => ({
-  currentUser: state.auth.signin.currentUser,
+  currentUser: state.auth.currentUser,
 });
 
 export default connect(mapStateToProps)(MainRoutes);

@@ -36,22 +36,28 @@ class Topbar extends Component {
         <Nav className="mx-auto p-0 h-100">
           <NavLink
             className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
-            to="/home">
+            to="/home"
+          >
             Home
           </NavLink>
           <NavLink
             className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
-            to="/faq">
+            to="/faq"
+          >
             FAQ
           </NavLink>
           <NavLink
             className="p-3 mr-5 ml-5 topbar-item-active h-100 d-flex align-items-center"
-            to="/contactus">
+            to="/contactus"
+          >
             Contact Us
           </NavLink>
         </Nav>
         <Nav className="pr-5">
-          <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
+          <Link
+            to="/auth/signin"
+            className="w-100 pl-4 pr-4 btn btn-outline-info"
+          >
             SIGN IN
           </Link>
         </Nav>
@@ -66,12 +72,13 @@ class Topbar extends Component {
       <Navbar
         variant="secondary"
         expand="md"
-        className="topbar border-bottom border-dark p-0">
+        className="topbar border-bottom border-dark p-0"
+      >
         <Navbar.Brand href="/">
           <img className="ml-5" src={logoIcon} alt="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        {!currentUser.value ? this.renderNoAuthNav() : this.renderAuthNav()}
+        {!currentUser ? this.renderNoAuthNav() : this.renderAuthNav()}
       </Navbar>
     );
   }
