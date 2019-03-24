@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import Routes from './routes';
 
 import './styles/_global.scss';
+import './assets/fonts/fonts.css';
 
 ReactDOM.render(
   <Provider store={store}>
