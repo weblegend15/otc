@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Card, Button } from 'react-bootstrap';
-import { ValidateInput } from '../../../components';
+import { ValidateInput } from '../../../reduxForms/fields';
 import Salary from '../../../assets/icons/salary.svg';
 import Security from '../../../assets/icons/security.svg';
 import Presentation from '../../../assets/icons/presentation.svg';
@@ -29,7 +29,10 @@ class Home extends Component {
       <Row className="home-container-section">
         <Col lg={4} md={6} sm={6} className="login-view ml-md-5">
           <h3 color="white">Login Into Your Account</h3>
-          <Form validated={!signinFormState.syncErrors} onSubmit={this.handleSubmit}>
+          <Form
+            validated={!signinFormState.syncErrors}
+            onSubmit={this.handleSubmit}
+          >
             <Field
               component={ValidateInput}
               type="email"
@@ -79,9 +82,9 @@ class Home extends Component {
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
-            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget
-            gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam
-            elementum pulvinar etiam non.{' '}
+            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
+            eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
+            diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
         <Col lg={3} md={6} xs={12}>
@@ -90,9 +93,9 @@ class Home extends Component {
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
-            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget
-            gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam
-            elementum pulvinar etiam non.{' '}
+            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
+            eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
+            diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
         <Col lg={3} md={6} xs={12}>
@@ -101,9 +104,9 @@ class Home extends Component {
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
-            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget
-            gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam
-            elementum pulvinar etiam non.{' '}
+            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
+            eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
+            diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
         <Col lg={3} md={6} xs={12}>
@@ -112,9 +115,9 @@ class Home extends Component {
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
-            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget
-            gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam
-            elementum pulvinar etiam non.{' '}
+            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
+            eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
+            diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
       </Row>
@@ -129,7 +132,10 @@ class Home extends Component {
           Some expanation on why to create an account on the platform
         </p>
         <Col className="text-center mb-5">
-          <Link to="/auth/signup" className="mt-5 pr-5 pl-5 mx-auto btn btn-primary">
+          <Link
+            to="/auth/signup"
+            className="mt-5 pr-5 pl-5 mx-auto btn btn-primary"
+          >
             CREATE ACCOUNT
           </Link>
         </Col>

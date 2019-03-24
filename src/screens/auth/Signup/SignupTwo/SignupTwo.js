@@ -9,14 +9,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import Button from '../../../../components/Buttons/Button';
+import { Card } from '../../../../components';
+
 import {
-  ValidateInput,
-  ValidateCheck,
-  Card,
   CountryDropdown,
   StateDropdown,
   PhoneInput,
-} from '../../../../components';
+  ValidateInput,
+  ValidateCheck,
+} from '../../../../reduxForms/fields';
 
 import { required, phoneRequire } from '../../../../utils/validate';
 import { RECAPTCHA_KEY } from '../../../../config';

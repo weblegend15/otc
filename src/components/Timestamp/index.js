@@ -1,8 +1,15 @@
-import React from 'react';
-import moment from 'moment';
+import PropTypes from 'prop-types';
 
-export default () => (
-  <div className="timestamp">
-    {moment().format('D MMM YYYY h:mm a')}
-  </div>
-);
+import Timestamp from './Timestamp';
+
+Timestamp.propTypes = {
+  timestamp: PropTypes.instanceOf(Date),
+  format: PropTypes.string,
+};
+
+Timestamp.defaultProps = {
+  timestamp: new Date(),
+  format: 'D MMM YYYY h:mm a',
+};
+
+export default Timestamp;

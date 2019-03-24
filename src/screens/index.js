@@ -4,7 +4,7 @@ import { Route, withRouter, Redirect, Switch } from 'react-router-dom';
 import AuthScreens from './auth';
 import AppScreens from './app';
 
-import { ContactUs, FAQ, Terms, Home } from './share';
+import { ContactUs, FAQ, Terms, Home, PrivacyPolicy } from './share';
 
 const Routes = ({ currentUser }) => (
   <Switch>
@@ -15,6 +15,7 @@ const Routes = ({ currentUser }) => (
     <Route exact path="/faq" component={FAQ} />
     <Route exact path="/terms" component={Terms} />
     <Route exact path="/contact-us" component={ContactUs} />
+    <Route exact path="/privacy-policy" component={PrivacyPolicy} />
     <Redirect to="/home" />
   </Switch>
 );

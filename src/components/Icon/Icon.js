@@ -1,10 +1,7 @@
 import React from 'react';
+import cx from 'classnames';
 import FontAwesome from 'react-fontawesome';
 
-export default (props) => {
-  const { color } = props;
-
-  return (
-    <FontAwesome className={`icon-${color}`} {...props} />
-  );
-};
+export default ({ color, ...rest }) => (
+  <FontAwesome className={cx({ [`icon-${color}`]: color })} {...rest} />
+);
