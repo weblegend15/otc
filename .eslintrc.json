@@ -47,7 +47,8 @@
         "checkContextTypes": true,
         "checkChildContextTypes": true
       }
-    ]
+    ],
+    "react/no-array-index-key": [0]
   },
   "globals": {
     "window": true,

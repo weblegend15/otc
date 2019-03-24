@@ -48,7 +48,7 @@ class FAQ extends Component {
           {data.map((item, idx) => {
             return (
               <Collapse
-                key={idx}
+                key={`faq_collapse_${idx}`}
                 isOpen={triggeredItem[idx]}
                 onChange={() => this.handleChange(idx)}
                 title={item.title}

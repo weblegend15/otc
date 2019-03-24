@@ -8,8 +8,13 @@ import Col from 'react-bootstrap/Col';
 import Button from '../../../../components/Button';
 
 import { Card } from '../../../../components';
-import { ValidateInput } from '../../../../reduxForms/fields';
-import { required, minLength, isEmail, confirmation } from '../../../../utils/validate';
+import { Input } from '../../../../reduxForms/fields';
+import {
+  required,
+  minLength,
+  isEmail,
+  confirmation,
+} from '../../../../utils/validate';
 
 class SignupOne extends Component {
   handleSubmit = e => {
@@ -32,38 +37,41 @@ class SignupOne extends Component {
         <Row className="m-0">
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
             <Card className="mt-4 mb-5">
-              <Form validated={!formSyncErrors.stepOne} onSubmit={this.handleSubmit}>
+              <Form
+                validated={!formSyncErrors.stepOne}
+                onSubmit={this.handleSubmit}
+              >
                 <Container className="p-5">
                   <Field
-                    component={ValidateInput}
+                    component={Input}
                     type="text"
                     name="firstName"
                     label="FIRST NAME"
                     validate={[required]}
                   />
                   <Field
-                    component={ValidateInput}
+                    component={Input}
                     type="text"
                     name="lastName"
                     label="LAST NAME"
                     validate={[required]}
                   />
                   <Field
-                    component={ValidateInput}
+                    component={Input}
                     type="email"
                     name="email"
                     label="EMAIL"
                     validate={[required, isEmail]}
                   />
                   <Field
-                    component={ValidateInput}
+                    component={Input}
                     type="password"
                     name="password"
                     label="PASSWORD"
                     validate={[required, minLength]}
                   />
                   <Field
-                    component={ValidateInput}
+                    component={Input}
                     type="password"
                     name="repeatPassword"
                     label="REPEAT PASSWORD"

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Card, Button } from 'react-bootstrap';
-import { ValidateInput } from '../../../reduxForms/fields';
+import { Input } from '../../../reduxForms/fields';
 import Salary from '../../../assets/icons/salary.svg';
 import Security from '../../../assets/icons/security.svg';
 import Presentation from '../../../assets/icons/presentation.svg';
@@ -34,14 +34,14 @@ class Home extends Component {
             onSubmit={this.handleSubmit}
           >
             <Field
-              component={ValidateInput}
+              component={Input}
               type="email"
               name="email"
               label="EMAIL"
               validate={[required, isEmail]}
             />
             <Field
-              component={ValidateInput}
+              component={Input}
               type="password"
               name="password"
               label="PASSWORD"

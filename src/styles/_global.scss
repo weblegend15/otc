@@ -1,11 +1,12 @@
 @import './variables';
 @import './theme';
 
-@import '/src/assets/fonts/fonts.css';
-
 #root {
   background: $deny-bg-color;
-  font-family: 'Proxima Nova Alt Condensed';
+}
+
+body {
+  font-family: 'proxima_nova_reg';
 }
 
 html {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Timestamp, Card, Rating, Pagination, Badge } from '../../components';
+import { Timestamp, Card, Rating, Pagination } from '../../components';
 
 class Dashboard extends Component {
   constructor(props) {

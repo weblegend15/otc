@@ -1,23 +1,21 @@
 import React from 'react';
 import { CountryDropdown } from 'react-country-region-selector';
 import cx from 'classnames';
+import FieldWrapper from '../FieldWrapper';
 
 export default ({
-  input: { value },
-  meta: { touched, error },
+  input: { value, onChange },
+  meta: { error, touched },
   label,
   selectCountry,
+  ...rest
 }) => (
-  <div className="form-group country-dropdown">
-    <label className="form-label" id="country-dropdown-label">
-      {label}
-    </label>
+  <FieldWrapper error={error} touched={touched} label={label} {...rest}>
     <CountryDropdown
       className={cx('form-control', { 'is-invalid': error })}
       value={value}
       priorityOptions={['US']}
-      onChange={e => selectCountry(e)}
+      onChange={onChange}
     />
-    {error && touched && <div className="d-flex invalid-feedback">{error}</div>}
-  </div>
+  </FieldWrapper>
 );
