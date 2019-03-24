@@ -1,0 +1,48 @@
+@import '../../styles/_variables';
+
+.custom-collapse {
+  span.fa {
+    background-color: $light;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 14px;
+  }
+
+  &-trigger {
+    text-decoration: none !important;
+  }
+
+  &-text {
+    background-color: rgba(235, 235, 235, 0.5);
+    border-radius: 10px;
+    position: relative;
+    border: 1px solid #ebebeb;
+  }
+
+  &-arrow {
+    &::before,
+    &:after {
+      display: block;
+      position: absolute;
+      content: '';
+      left: 40px;
+      width: 0;
+      height: 0;
+      border-top-width: 0;
+      border-style: solid;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 20px solid rgb(235, 235, 235);
+    }
+
+    &::before {
+      top: -20px;
+      border-top-color: #ebebeb;
+    }
+    &::after {
+      top: -19px;
+      border-bottom-color: #f5f5f5;
+    }
+  }
+}

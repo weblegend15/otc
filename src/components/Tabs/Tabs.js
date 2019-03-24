@@ -18,7 +18,7 @@ class TabHeaders extends Component {
     </Nav.Item>
   );
 
-  activeTabContent = (child) => {
+  activeTabContent = child => {
     const { props } = child;
     const { everyKey, children } = props;
     const { tabKey } = this.state;
@@ -27,8 +27,8 @@ class TabHeaders extends Component {
       <Fragment>
         {everyKey === tabKey && <TabContent>{children}</TabContent>}
       </Fragment>
-    );    
-  }
+    );
+  };
 
   render() {
     const { headers, children, size } = this.props;
