@@ -1,14 +1,9 @@
 @import './variables';
 @import './theme';
 
-// @import '/src/assets/fonts/fonts.css';
-
 #root {
   background: $deny-bg-color;
-}
-
-body {
-  font-family: 'proxima_nova_reg-webfont';
+  font-family: 'proxima_regular';
 }
 
 html {
