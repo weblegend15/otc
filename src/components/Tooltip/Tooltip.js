@@ -1,19 +1,18 @@
 import React from 'react';
-import IconButton from '../Buttons/IconButton';
+import { IconButton } from '../Button';
 
-export default (props) =>{
-  const { children, icon, position, showTooltip } = props;
-
+export default ({ children, icon, position, showTooltip, ...rest }) => {
   return (
     <div className={`tooltip-${position}`}>
       <IconButton
         onClick={() => showTooltip('off')}
         icon={icon}
-        size='lg'
-        variant='link'  
+        size="lg"
+        variant="link"
+        {...rest}
       />
       {children}
-      <div className='triangle' />
+      <div className="triangle" />
     </div>
   );
 };

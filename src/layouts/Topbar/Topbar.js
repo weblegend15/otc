@@ -47,13 +47,16 @@ class Topbar extends Component {
           </NavLink>
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
-            to="/contactus"
+            to="/contact-us"
           >
             Contact Us
           </NavLink>
         </Nav>
         <Nav className="pr-5">
-          <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
+          <Link
+            to="/auth/signin"
+            className="w-100 pl-4 pr-4 btn btn-outline-info"
+          >
             SIGN IN
           </Link>
         </Nav>
@@ -65,7 +68,11 @@ class Topbar extends Component {
     const { currentUser } = this.props;
 
     return (
-      <Navbar variant="dark" expand="md" className="topbar pt-0 pb-0 pl-xs-3 pr-xs-3">
+      <Navbar
+        variant="dark"
+        expand="md"
+        className="topbar pt-0 pb-0 pl-xs-3 pr-xs-3"
+      >
         <Navbar.Brand href="/" className="h-100 d-flex align-items-center">
           <img className="ml-md-5" src={logoIcon} alt="logo" />
         </Navbar.Brand>
