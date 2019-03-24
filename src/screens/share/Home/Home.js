@@ -56,7 +56,7 @@ class Home extends Component {
                 LOGIN
               </Button>
               <Button
-                className="w-50 text-white signup-button d-none ml-3"
+                className="w-50 text-white signup-button d-md-none ml-3"
                 variant="outline-light"
                 size="lg"
               >
