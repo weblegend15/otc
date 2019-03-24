@@ -5,16 +5,11 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from '../../../../components/Buttons/Button';
+import Button from '../../../../components/Button';
 
 import { Card } from '../../../../components';
 import { ValidateInput } from '../../../../reduxForms/fields';
-import {
-  required,
-  minLength,
-  isEmail,
-  confirmation,
-} from '../../../../utils/validate';
+import { required, minLength, isEmail, confirmation } from '../../../../utils/validate';
 
 class SignupOne extends Component {
   handleSubmit = e => {
@@ -37,10 +32,7 @@ class SignupOne extends Component {
         <Row className="m-0">
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
             <Card className="mt-4 mb-5">
-              <Form
-                validated={!formSyncErrors.stepOne}
-                onSubmit={this.handleSubmit}
-              >
+              <Form validated={!formSyncErrors.stepOne} onSubmit={this.handleSubmit}>
                 <Container className="p-5">
                   <Field
                     component={ValidateInput}

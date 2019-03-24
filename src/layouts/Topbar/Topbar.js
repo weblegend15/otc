@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { history } from '../../configureStore';
 import logoIcon from '../../assets/icons/logo.svg';
-import Button from '../../components/Buttons/Button';
+import Button from '../../components/Button';
 
 class Topbar extends Component {
   handleLogout = () => {
@@ -53,10 +53,7 @@ class Topbar extends Component {
           </NavLink>
         </Nav>
         <Nav className="pr-5">
-          <Link
-            to="/auth/signin"
-            className="w-100 pl-4 pr-4 btn btn-outline-info"
-          >
+          <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
             SIGN IN
           </Link>
         </Nav>
@@ -68,11 +65,7 @@ class Topbar extends Component {
     const { currentUser } = this.props;
 
     return (
-      <Navbar
-        variant="dark"
-        expand="md"
-        className="topbar pt-0 pb-0 pl-xs-3 pr-xs-3"
-      >
+      <Navbar variant="dark" expand="md" className="topbar pt-0 pb-0 pl-xs-3 pr-xs-3">
         <Navbar.Brand href="/" className="h-100 d-flex align-items-center">
           <img className="ml-md-5" src={logoIcon} alt="logo" />
         </Navbar.Brand>

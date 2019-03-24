@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Button from '../../../../components/Buttons/Button';
+import Button from '../../../../components/Button';
 import { Card } from '../../../../components';
 
 import {
@@ -137,11 +137,7 @@ class SignupTwo extends Component {
                       name="address1"
                       label="ADDRESS"
                     />
-                    <Field
-                      component={ValidateInput}
-                      type="text"
-                      name="address2"
-                    />
+                    <Field component={ValidateInput} type="text" name="address2" />
                   </div>
                   <Field
                     name="agreeTerms"
@@ -164,9 +160,7 @@ class SignupTwo extends Component {
                     block
                     className="mb-5"
                     variant="primary"
-                    disabled={
-                      !!formSyncErrors.stepTwo || !recaptchaValue || loading
-                    }
+                    disabled={!!formSyncErrors.stepTwo || !recaptchaValue || loading}
                     type="submit"
                   >
                     SUBMIT

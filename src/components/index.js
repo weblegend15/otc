@@ -1,7 +1,6 @@
 import Timestamp from './Timestamp';
 import Icon from './Icon';
-import Button from './Buttons/Button';
-import IconButton from './Buttons/IconButton';
+import Button, { IconButton } from './Button';
 import Card from './Card';
 import Rating from './Rating';
 import InputBox from './Input';
