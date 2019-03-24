@@ -7,7 +7,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from '../../../../components/Buttons/Button';
 
-import { ValidateInput, Card } from '../../../../components';
+import { Card } from '../../../../components';
+import { ValidateInput } from '../../../../reduxForms/fields';
 import {
   required,
   minLength,
