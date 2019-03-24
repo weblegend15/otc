@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactPhoneInput from 'react-phone-input-2';
+import FieldWrapper from '../FieldWrapper';
 
-export default ({ input: { value }, setPhone, label, meta: { error } }) => (
-  <div className="form-group">
-    <label className="form-label" id="phone-input-label">
-      {label}
-    </label>
+export default ({
+  input: { value, onChange },
+  label,
+  meta: { error, touched },
+  ...rest
+}) => (
+  <FieldWrapper error={error} touched={touched} label={label} {...rest}>
     <ReactPhoneInput
       containerClass="react-tel-input"
       defaultCountry="us"
       value={value}
-      onChange={e => setPhone(e)}
+      onChange={onChange}
       enableSearchField
       inputClass={error && 'is-invalid'}
     />
-    {error && <div className="d-flex invalid-feedback">{error}</div>}
-  </div>
+  </FieldWrapper>
 );

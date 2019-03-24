@@ -1,14 +1,8 @@
 import CountryDropdown from './CountryDropdown';
 import StateDropdown from './StateDropdown';
 import PhoneInput from './PhoneInput';
-import ValidateCheck from './ValidateCheck';
+import Checkbox from './Checkbox';
 
-import ValidateInput from './ValidateInput';
+import Input from './Input';
 
-export {
-  CountryDropdown,
-  StateDropdown,
-  PhoneInput,
-  ValidateCheck,
-  ValidateInput,
-};
+export { CountryDropdown, StateDropdown, PhoneInput, Checkbox, Input };

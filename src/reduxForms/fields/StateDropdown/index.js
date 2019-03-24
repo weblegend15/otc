@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import StateDropdown from './StateDropdown';
 
-import './StateDropdown.scss';
-
 StateDropdown.propTypes = {
   value: PropTypes.string,
   error: PropTypes.bool,

@@ -15,8 +15,8 @@ import {
   CountryDropdown,
   StateDropdown,
   PhoneInput,
-  ValidateInput,
-  ValidateCheck,
+  Input,
+  Checkbox,
 } from '../../../../reduxForms/fields';
 
 import { required, phoneRequire } from '../../../../utils/validate';
@@ -29,6 +29,11 @@ class SignupTwo extends Component {
       recaptchaValue: null,
     };
   }
+
+  handleCountryChange = () => {
+    const { selectState } = this.props;
+    selectState(null);
+  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -71,9 +76,6 @@ class SignupTwo extends Component {
     const {
       formSyncErrors,
       loading,
-      selectCountry,
-      selectState,
-      setPhone,
       signupFormValues: { stepTwo },
     } = this.props;
     const { recaptchaValue } = this.state;
@@ -96,15 +98,14 @@ class SignupTwo extends Component {
                     name="phone"
                     label="PHONE NUMBER"
                     validate={[phoneRequire]}
-                    {...{ setPhone }}
                   />
                   <Field
                     type="select"
                     name="country"
                     label="COUNTRY"
                     validate={[required]}
+                    onChange={this.handleCountryChange}
                     component={CountryDropdown}
-                    {...{ selectCountry }}
                   />
                   <Row>
                     <Col xs={{ span: 4 }}>
@@ -114,15 +115,12 @@ class SignupTwo extends Component {
                         label="STATE"
                         validate={[required]}
                         component={StateDropdown}
-                        {...{
-                          selectState,
-                          country: stepTwo ? stepTwo.country : '',
-                        }}
+                        {...{ country: stepTwo ? stepTwo.country : '' }}
                       />
                     </Col>
                     <Col xs={{ span: 8 }}>
                       <Field
-                        component={ValidateInput}
+                        component={Input}
                         type="text"
                         name="city"
                         label="CITY"
@@ -132,18 +130,18 @@ class SignupTwo extends Component {
                   </Row>
                   <div className="mb-4">
                     <Field
-                      component={ValidateInput}
+                      component={Input}
                       type="text"
                       name="address1"
                       label="ADDRESS"
                     />
-                    <Field component={ValidateInput} type="text" name="address2" />
+                    <Field component={Input} type="text" name="address2" />
                   </div>
                   <Field
                     name="agreeTerms"
                     type="checkbox"
                     label={this.renderTermsLabel()}
-                    component={ValidateCheck}
+                    component={Checkbox}
                     validate={[required]}
                   />
 
@@ -160,7 +158,9 @@ class SignupTwo extends Component {
                     block
                     className="mb-5"
                     variant="primary"
-                    disabled={!!formSyncErrors.stepTwo || !recaptchaValue || loading}
+                    disabled={
+                      !!formSyncErrors.stepTwo || !recaptchaValue || loading
+                    }
                     type="submit"
                   >
                     SUBMIT

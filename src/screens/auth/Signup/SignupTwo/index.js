@@ -11,9 +11,7 @@ SignupTwo.propTypes = {
   formSyncErrors: PropTypes.object,
   loading: PropTypes.bool,
   signupRequest: PropTypes.func.isRequired,
-  selectCountry: PropTypes.func.isRequired,
   selectState: PropTypes.func.isRequired,
-  setPhone: PropTypes.func.isRequired,
 };
 
 SignupTwo.defaultProps = {
@@ -30,9 +28,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   signupRequest,
-  selectCountry: value => change('signupForm', 'stepTwo.country', value),
   selectState: value => change('signupForm', 'stepTwo.state', value),
-  setPhone: value => change('signupForm', 'stepTwo.phone', value),
 };
 
 export default connect(
