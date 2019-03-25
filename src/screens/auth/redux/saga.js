@@ -87,7 +87,6 @@ function* verifyEmail(action) {
 
     yield put(verifyEmailSuccess(data));
     toast.success('You account is fully verified and ready to use!');
-    history.push('/dashboard');
   } catch (err) {
     toast.error(err.message);
     yield put(verifyEmailError());
