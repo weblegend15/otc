@@ -4,7 +4,7 @@ import cx from 'classnames';
 import FieldWrapper from '../FieldWrapper';
 
 export default ({
-  input: { value, onChange, onBlur, ...input },
+  input,
   meta: { error, touched },
   country,
   label,
@@ -16,12 +16,9 @@ export default ({
       className={cx('form-control', { 'is-invalid': touched && error })}
       disableWhenEmpty
       country={country}
-      value={value}
-      onChange={onChange}
       labelType="short"
       valueType="short"
       defaultOptionLabel="-"
-      onBlur={onBlur}
       {...input}
     />
   </FieldWrapper>

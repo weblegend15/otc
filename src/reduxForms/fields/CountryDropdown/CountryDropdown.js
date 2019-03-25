@@ -4,7 +4,7 @@ import cx from 'classnames';
 import FieldWrapper from '../FieldWrapper';
 
 export default ({
-  input: { value, onChange, ...input },
+  input,
   meta: { error, touched },
   label,
   selectCountry,
@@ -13,9 +13,7 @@ export default ({
   <FieldWrapper {...rest} error={error} touched={touched} label={label}>
     <CountryDropdown
       className={cx('form-control', { 'is-invalid': error && touched })}
-      value={value}
       priorityOptions={['US']}
-      onChange={onChange}
       autoFocus={false}
       defaultOptionLabel="-"
       {...input}
