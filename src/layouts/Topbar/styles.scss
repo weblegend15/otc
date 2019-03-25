@@ -10,10 +10,16 @@
   color: white;
   text-decoration: none !important;
   border-bottom: 3px solid transparent;
+  opacity: 0.5;
   &:active, &:hover {
     color: white;
     border-bottom: 3px solid $primary;
   }
+}
+
+.topbar-item-active.active {
+  opacity: 1;
+  border-bottom: 3px solid $primary;
 }
 
 .mobile-navbar {
@@ -23,6 +29,7 @@
     width: 260px;
     border-radius: 0;
     height: 100vh;
+    border: none;
     .navbar-buttons {
       background-color: #ebebeb;
     }
