@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ContentContainer from '../ContentContainer';
 
@@ -22,51 +22,25 @@ const data = [
   },
 ];
 
-class FAQ extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      triggeredItem: {},
-    };
-  }
-
-  handleChange = id => {
-    const { triggeredItem } = this.state;
-    this.setState({
-      triggeredItem: {
-        ...triggeredItem,
-        [id]: !triggeredItem[id],
-      },
-    });
-  };
-
-  render() {
-    const { triggeredItem } = this.state;
-    return (
-      <ContentContainer title="Frequently Asked Questions">
-        <div className="m-4">
-          {data.map((item, idx) => {
-            return (
-              <Collapse
-                key={`faq_collapse_${idx}`}
-                isOpen={triggeredItem[idx]}
-                onChange={() => this.handleChange(idx)}
-                title={item.title}
-                text={item.text}
-              />
-            );
-          })}
-        </div>
-        <hr />
-        <div className="m-4">
-          <h4 className="mb-4">Still Have Questions?</h4>
-          <Link className="mb-5 btn btn-primary" to="/contact-us">
-            CONTACT US
-          </Link>
-        </div>
-      </ContentContainer>
-    );
-  }
-}
-
-export default FAQ;
+export default () => (
+  <ContentContainer title="Frequently Asked Questions">
+    <div className="m-4">
+      {data.map((item, idx) => {
+        return (
+          <Collapse
+            key={`faq_collapse_${idx}`}
+            title={item.title}
+            text={item.text}
+          />
+        );
+      })}
+    </div>
+    <hr />
+    <div className="m-4">
+      <h4 className="mb-4">Still Have Questions?</h4>
+      <Link className="mb-5 btn btn-primary" to="/contact-us">
+        CONTACT US
+      </Link>
+    </div>
+  </ContentContainer>
+);
