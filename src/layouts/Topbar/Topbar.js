@@ -62,6 +62,24 @@ class Topbar extends Component {
     );
   };
 
+  renderAuthNavRight = () => (
+    <Fragment>
+      <Link className="pl-4 pr-4 btn btn-outline-info" to="/app/profile">
+        Profile
+      </Link>
+      <Link className="pl-4 pr-4 btn btn-outline-info" to="/app/setting">
+        Settings
+      </Link>
+      <Button onClick={this.handleLogout}>SIGN OUT</Button>
+    </Fragment>
+  );
+
+  renderNoAuthnavRight = () => (
+    <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
+      SIGN IN
+    </Link>
+  );
+
   renderNoAuthMobileNav = showNavbar => {
     return (
       <Modal
@@ -75,12 +93,18 @@ class Topbar extends Component {
         <Modal.Body className="p-0">
           <div className="w-100 d-flex p-2 border-bottom border-dark navbar-buttons">
             <Nav className="pr-1 w-50">
-              <Link to="/auth/signin" className="w-100 pl-2 pr-2 btn btn-primary">
+              <Link
+                to="/auth/signin"
+                className="w-100 pl-2 pr-2 btn btn-primary"
+              >
                 LOGIN
               </Link>
             </Nav>
             <Nav className="pl-1 w-50">
-              <Link to="/auth/signup" className="w-100 pl-2 pr-2 btn btn-outline-primary">
+              <Link
+                to="/auth/signup"
+                className="w-100 pl-2 pr-2 btn btn-outline-primary"
+              >
                 SIGN UP
               </Link>
             </Nav>
@@ -138,7 +162,10 @@ class Topbar extends Component {
         </Button>
         {!currentUser && showNavbar && this.renderNoAuthMobileNav(showNavbar)}
 
-        <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
+        <Navbar.Collapse
+          id="basic-navbar-nav"
+          className="h-100 d-none d-md-block"
+        >
           <Nav className="mx-auto p-0 h-100">
             <NavLink
               className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
@@ -149,13 +176,9 @@ class Topbar extends Component {
             {!currentUser ? this.renderNoAuthNav() : this.renderAuthNav()}
           </Nav>
           <Nav className="pr-5">
-            {!currentUser ? (
-              <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
-                SIGN IN
-              </Link>
-            ) : (
-              <Button onClick={this.handleLogout}>SIGN OUT</Button>
-            )}
+            {!currentUser
+              ? this.renderNoAuthnavRight()
+              : this.renderAuthNavRight()}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
