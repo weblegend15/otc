@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ContentContainer from '../ContentContainer';
 
-import Collapse from '../../../components/Collapse';
+import { Collapse } from '../../../components';
 
 const data = [
   {

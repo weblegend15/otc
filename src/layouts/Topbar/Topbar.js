@@ -2,10 +2,11 @@ import React, { Component, Fragment } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Modal from '../../components/Modal';
+
+import { Modal, Button } from '../../components';
+
 import { history } from '../../configureStore';
 import logoIcon from '../../assets/icons/logo.svg';
-import Button from '../../components/Button';
 import toggleButton from '../../assets/icons/toggleButtonIcon.svg';
 
 class Topbar extends Component {

@@ -7,7 +7,7 @@ import {
   IconButton,
   Button,
   Tooltip,
-} from '../../components/index';
+} from '../../components';
 
 class App extends Component {
   constructor(props) {

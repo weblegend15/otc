@@ -9,6 +9,7 @@ import Tabs from './Tabs';
 import Pagination from './Pagination';
 import Tooltip from './Tooltip';
 import Badge from './Badge';
+import Collapse from './Collapse';
 
 export {
   Timestamp,
@@ -23,4 +24,5 @@ export {
   Pagination,
   Tooltip,
   Badge,
+  Collapse,
 };
