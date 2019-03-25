@@ -9,16 +9,14 @@ export default ({
   placeholder,
   meta: { touched, error },
   ...rest
-}) => {
-  return (
-    <FieldWrapper error={error} touched={touched} label={label} {...rest}>
-      <Form.Control
-        {...input}
-        type={type}
-        placeholder={placeholder}
-        isInvalid={touched && error}
-        autoComplete="new-input"
-      />
-    </FieldWrapper>
-  );
-};
+}) => (
+  <FieldWrapper {...rest} error={error} touched={touched} label={label}>
+    <Form.Control
+      {...input}
+      type={type}
+      placeholder={placeholder}
+      isInvalid={touched && error}
+      autoComplete="new-password"
+    />
+  </FieldWrapper>
+);

@@ -5,6 +5,10 @@
   }
 }
 
+.react-tel-input input[type='tel'] {
+  background: #f9f9f9;
+}
+
 .react-tel-input input[type='tel'].is-invalid {
   border-color: #ea3900;
 }

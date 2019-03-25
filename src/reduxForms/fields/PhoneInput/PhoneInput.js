@@ -3,7 +3,7 @@ import ReactPhoneInput from 'react-phone-input-2';
 import FieldWrapper from '../FieldWrapper';
 
 export default ({
-  input: { value, onChange },
+  input: { value, onChange, ...input },
   label,
   meta: { error, touched },
   ...rest
@@ -15,7 +15,8 @@ export default ({
       value={value}
       onChange={onChange}
       enableSearchField
-      inputClass={error && 'is-invalid'}
+      inputClass={error && touched && 'is-invalid'}
+      {...input}
     />
   </FieldWrapper>
 );
