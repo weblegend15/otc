@@ -7,6 +7,9 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    @media (max-width: 767px) {
+      background-position-x: 60%;
+    }
     height: 650px;
     .login-view {
       color: $white;
@@ -15,9 +18,12 @@
   }
   .platform-features {
     background-image: url('../../../assets/imgs/home-page-platform-features-background.svg');
-    background-position: right;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+    @media (max-width: 767px) {
+      background-position-x: -10%;
+    }
     & > div {
       max-width: 400px;
       & > .card {
