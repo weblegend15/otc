@@ -54,8 +54,7 @@ class Signin extends Component {
                 <hr className="m-0" />
                 <Container className="text-center p-5">
                   <Button
-                    className="mr-5 px-5"
-                    variant="primary"
+                    className="mr-5 px-5 mb-5 btn-block"
                     disabled={
                       !!signinFormState.syncErrors || currentUserLoading
                     }
@@ -63,12 +62,8 @@ class Signin extends Component {
                   >
                     LOGIN
                   </Button>
-                  <Link
-                    className="btn btn-outline-light px-5"
-                    to="/auth/signup"
-                  >
-                    Sign up
-                  </Link>
+                  <h4 className="pb-1">Create your account</h4>
+                  <Link to="/auth/signup">SIGN UP</Link>
                 </Container>
               </Form>
             </Card>

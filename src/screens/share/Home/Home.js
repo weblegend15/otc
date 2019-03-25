@@ -23,48 +23,57 @@ class Home extends Component {
     signinRequest(email, password);
   };
 
-  renderHomeLoginSection = () => {
+  renderSigninForm = () => {
     const { signinFormState, currentUserLoading } = this.props;
     return (
-      <Row className="home-container-section">
-        <Col lg={4} md={6} sm={6} className="login-view ml-md-5">
-          <h3 color="white">Login Into Your Account</h3>
-          <Form validated={!signinFormState.syncErrors} onSubmit={this.handleSubmit}>
-            <Field
-              component={Input}
-              type="email"
-              name="email"
-              label="EMAIL"
-              validate={[required, isEmail]}
-            />
-            <Field
-              component={Input}
-              type="password"
-              name="password"
-              label="PASSWORD"
-              validate={[required]}
-            />
+      <Form validated={!signinFormState.syncErrors} onSubmit={this.handleSubmit}>
+        <Field
+          component={Input}
+          type="email"
+          name="email"
+          label="EMAIL"
+          validate={[required, isEmail]}
+        />
+        <Field
+          component={Input}
+          type="password"
+          name="password"
+          label="PASSWORD"
+          validate={[required]}
+        />
 
-            <div className="d-flex justify-content-between">
-              <Button
-                className="login-button w-50 mr-3"
-                size="lg"
-                variant="primary"
-                disabled={!!signinFormState.syncErrors || currentUserLoading}
-                type="submit"
-              >
-                LOGIN
-              </Button>
-              <Button
-                className="w-50 text-white signup-button d-md-none ml-3"
-                variant="outline-light"
-                size="lg"
-              >
-                Sign up
-              </Button>
-            </div>
-          </Form>
-        </Col>
+        <div className="d-flex justify-content-between">
+          <Button
+            className="login-button w-50 mr-3"
+            size="lg"
+            variant="primary"
+            disabled={!!signinFormState.syncErrors || currentUserLoading}
+            type="submit"
+          >
+            LOGIN
+          </Button>
+          <Button
+            className="w-50 text-white signup-button d-md-none ml-3"
+            variant="outline-light"
+            size="lg"
+          >
+            Sign up
+          </Button>
+        </div>
+      </Form>
+    );
+  };
+
+  renderHomeLoginSection = () => {
+    const { currentUser } = this.props;
+    return (
+      <Row className="home-container-section">
+        {!currentUser && (
+          <Col lg={4} md={6} sm={6} className="login-view ml-md-5">
+            <h3 color="white">Login Into Your Account</h3>
+            {this.renderSigninForm()}
+          </Col>
+        )}
       </Row>
     );
   };
@@ -138,10 +147,9 @@ class Home extends Component {
   };
 
   render() {
-    const { currentUser } = this.props;
     return (
       <Container className="home-page-container">
-        {!currentUser && this.renderHomeLoginSection()}
+        {this.renderHomeLoginSection()}
         {this.renderPlatformFeatures()}
         {this.renderCreateAccountSection()}
       </Container>
