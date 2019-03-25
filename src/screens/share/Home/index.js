@@ -17,7 +17,7 @@ Home.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  signinFormState: state.form.signinForm,
+  signinFormState: state.form.homeSigninForm,
   currentUser: state.auth.currentUser,
   currentUserLoading: state.auth.currentUserLoading,
 });
@@ -27,7 +27,7 @@ const mapDispatchToProps = {
 };
 
 const withReduxform = reduxForm({
-  form: 'signinForm',
+  form: 'homeSigninForm',
 })(Home);
 
 export default connect(
