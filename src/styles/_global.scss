@@ -26,6 +26,11 @@ button {
   outline: none !important;
 }
 
+input.form-control,
+select.form-control {
+  background: #f9f9f9;
+}
+
 .form-control:focus {
   box-shadow: none !important;
 }
