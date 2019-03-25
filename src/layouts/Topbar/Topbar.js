@@ -2,10 +2,11 @@ import React, { Component, Fragment } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Modal from '../../components/Modal';
+
+import { Modal, Button } from '../../components';
+
 import { history } from '../../configureStore';
 import logoIcon from '../../assets/icons/logo.svg';
-import Button from '../../components/Button';
 import toggleButton from '../../assets/icons/toggleButtonIcon.svg';
 
 class Topbar extends Component {
@@ -61,6 +62,24 @@ class Topbar extends Component {
       </Fragment>
     );
   };
+
+  renderAuthNavRight = () => (
+    <Fragment>
+      <Link className="pl-4 pr-4 btn btn-outline-info" to="/app/profile">
+        Profile
+      </Link>
+      <Link className="pl-4 pr-4 btn btn-outline-info" to="/app/setting">
+        Settings
+      </Link>
+      <Button onClick={this.handleLogout}>SIGN OUT</Button>
+    </Fragment>
+  );
+
+  renderNoAuthnavRight = () => (
+    <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
+      SIGN IN
+    </Link>
+  );
 
   renderNoAuthMobileNav = showNavbar => {
     return (
@@ -160,13 +179,7 @@ class Topbar extends Component {
             {!currentUser ? this.renderNoAuthNav() : this.renderAuthNav()}
           </Nav>
           <Nav className="pr-5">
-            {!currentUser ? (
-              <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
-                SIGN IN
-              </Link>
-            ) : (
-              <Button onClick={this.handleLogout}>SIGN OUT</Button>
-            )}
+            {!currentUser ? this.renderNoAuthnavRight() : this.renderAuthNavRight()}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
