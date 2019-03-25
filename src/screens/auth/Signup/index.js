@@ -1,7 +1,16 @@
-import { reduxForm } from 'redux-form';
-
+import { reduxForm, destroy } from 'redux-form';
+import { connect } from 'react-redux';
 import Signup from './Signup';
 
-export default reduxForm({
-  form: 'signupForm',
-})(Signup);
+const mapDispatchToProps = {
+  destroy,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(
+  reduxForm({
+    form: 'signupForm',
+  })(Signup),
+);

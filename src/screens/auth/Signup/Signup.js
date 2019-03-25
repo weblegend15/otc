@@ -11,6 +11,11 @@ class Signup extends Component {
     };
   }
 
+  componentDidMount() {
+    const { destroy } = this.props;
+    destroy('signupForm');
+  }
+
   handleNext = () => {
     this.setState({ currentStep: 2 });
   };
