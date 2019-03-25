@@ -2,11 +2,11 @@ import React, { Component, Fragment } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Modal from 'react-bootstrap/Modal';
+import Modal from '../../components/Modal';
 import { history } from '../../configureStore';
 import logoIcon from '../../assets/icons/logo.svg';
 import Button from '../../components/Button';
-import toggleButton from '../../assets/icons/toggleButton.svg';
+import toggleButton from '../../assets/icons/toggleButtonIcon.svg';
 
 class Topbar extends Component {
   constructor(props) {
@@ -120,10 +120,6 @@ class Topbar extends Component {
     );
   };
 
-  renderAuthMobileNav = () => {
-    console.log(123);
-  };
-
   render() {
     const { currentUser } = this.props;
     const { showNavbar } = this.state;
@@ -140,9 +136,7 @@ class Topbar extends Component {
         >
           <img src={toggleButton} alt="toggle-button" />
         </Button>
-        {!currentUser && showNavbar
-          ? this.renderNoAuthMobileNav(showNavbar)
-          : this.renderAuthMobileNav()}
+        {!currentUser && showNavbar && this.renderNoAuthMobileNav(showNavbar)}
 
         <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
           <Nav className="mx-auto p-0 h-100">

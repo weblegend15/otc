@@ -3,10 +3,10 @@ import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Card, Button } from 'react-bootstrap';
 import { Input } from '../../../reduxForms/fields';
-import Salary from '../../../assets/icons/salary.svg';
-import Security from '../../../assets/icons/security.svg';
-import Presentation from '../../../assets/icons/presentation.svg';
-import Bubble from '../../../assets/icons/bubbleChat.svg';
+import salary from '../../../assets/icons/salary.svg';
+import security from '../../../assets/icons/security.svg';
+import presentation from '../../../assets/icons/presentation.svg';
+import bubbleIcon from '../../../assets/icons/bubbleIcon.svg';
 import { required, isEmail } from '../../../utils/validate';
 
 class Home extends Component {
@@ -84,7 +84,7 @@ class Home extends Component {
         <h2 className="my-5 h2-title w-100">Platform Features</h2>
         <Col lg={3} md={6} xs={12}>
           <Card className="p-5 mb-5 mx-auto">
-            <img src={Salary} alt="salary" />
+            <img src={salary} alt="salary" />
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
@@ -95,7 +95,7 @@ class Home extends Component {
         </Col>
         <Col lg={3} md={6} xs={12}>
           <Card className="p-5 mb-5 mx-auto">
-            <img src={Security} alt="security" />
+            <img src={security} alt="security" />
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
@@ -106,7 +106,7 @@ class Home extends Component {
         </Col>
         <Col lg={3} md={6} xs={12}>
           <Card className="p-5 mb-5 mx-auto">
-            <img src={Presentation} alt="presentation" />
+            <img src={presentation} alt="presentation" />
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
@@ -117,7 +117,7 @@ class Home extends Component {
         </Col>
         <Col lg={3} md={6} xs={12}>
           <Card className="p-5 mb-5 mx-auto">
-            <img src={Bubble} alt="bubble" />
+            <img src={bubbleIcon} alt="bubble" />
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
