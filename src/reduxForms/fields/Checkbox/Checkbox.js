@@ -1,9 +1,21 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 
-export default ({ input, label, meta: { touched, error }, ...rest }) => {
+export default ({
+  input: { onChange },
+  label,
+  meta: { touched, error },
+  ...rest
+}) => {
   return (
-    <Form.Check type="checkbox" id={`form${label}`} custom {...rest}>
+    <Form.Check
+      type="checkbox"
+      label={label}
+      id={`form${label}`}
+      onChange={onChange}
+      custom
+      {...rest}
+    >
       {touched && error && (
         <Form.Control.Feedback className="d-flex" type="invalid">
           {error}

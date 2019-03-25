@@ -17,6 +17,7 @@ export default ({
         type={type}
         placeholder={placeholder}
         isInvalid={touched && error}
+        autoComplete="new-input"
       />
     </FieldWrapper>
   );
