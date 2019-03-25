@@ -75,41 +75,52 @@ class Topbar extends Component {
         <Modal.Body className="p-0">
           <div className="w-100 d-flex p-2 border-bottom border-dark navbar-buttons">
             <Nav className="pr-1 w-50">
-              <Link to="/auth/signin" className="w-100 pl-2 pr-2 btn btn-primary">
+              <Link
+                to="/auth/signin"
+                className="w-100 pl-2 pr-2 btn btn-primary"
+                onClick={this.hideMobileNavbar}
+              >
                 LOGIN
               </Link>
             </Nav>
             <Nav className="pl-1 w-50">
-              <Link to="/auth/signup" className="w-100 pl-2 pr-2 btn btn-outline-primary">
+              <Link
+                to="/auth/signup"
+                className="w-100 pl-2 pr-2 btn btn-outline-primary"
+                onClick={this.hideMobileNavbar}
+              >
                 SIGN UP
               </Link>
             </Nav>
           </div>
           <div className="w-100 d-flex p-2 border-bottom border-light">
-            <Nav className="p-0 h-100">
+            <Nav className="p-0 h-100 w-100">
               <NavLink
                 className="py-3 ml-3 mobile-navbar-item-active h-100 d-flex align-items-center"
                 to="/home"
+                onClick={this.hideMobileNavbar}
               >
                 Home
               </NavLink>
             </Nav>
           </div>
           <div className="w-100 d-flex p-2 border-bottom border-light">
-            <Nav className="p-0 h-100">
+            <Nav className="p-0 h-100 w-100">
               <NavLink
                 className="py-3 ml-3 mobile-navbar-item-active h-100 d-flex align-items-center"
                 to="/faq"
+                onClick={this.hideMobileNavbar}
               >
                 FAQ
               </NavLink>
             </Nav>
           </div>
           <div className="w-100 d-flex p-2 border-bottom border-light">
-            <Nav className="p-0 h-100">
+            <Nav className="p-0 h-100 w-100">
               <NavLink
                 className="py-3 ml-3 mobile-navbar-item-active h-100 d-flex align-items-center"
                 to="/contact-us"
+                onClick={this.hideMobileNavbar}
               >
                 Contact Us
               </NavLink>
