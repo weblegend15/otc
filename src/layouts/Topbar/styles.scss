@@ -3,7 +3,6 @@
 .topbar {
   height: 100px;
   z-index: 99;
-
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -14,5 +13,24 @@
   &:active, &:hover {
     color: white;
     border-bottom: 3px solid $primary;
+  }
+}
+
+.mobile-navbar {
+  .modal-content {
+    position: absolute;
+    right: 0;
+    width: 260px;
+    border-radius: 0;
+    height: 100vh;
+    .navbar-buttons {
+      background-color: #ebebeb;
+    }
+    .mobile-navbar-item-active {
+      color: #00000080;
+      &:active {
+        color: black;
+      }
+    }
   }
 }
