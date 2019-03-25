@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Form, Card, Button } from 'react-bootstrap';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+
+import { Card, Button } from '../../../components';
+
 import { Input } from '../../../reduxForms/fields';
 import { required, isEmail } from '../../../utils/validate';
 

@@ -5,9 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from '../../../../components/Button';
 
-import { Card } from '../../../../components';
+import { Card, Button } from '../../../../components';
 import { Input } from '../../../../reduxForms/fields';
 import {
   required,
