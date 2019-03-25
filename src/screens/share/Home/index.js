@@ -7,7 +7,7 @@ import './Home.scss';
 
 Home.propTypes = {
   signinRequest: PropTypes.func,
-  signinFormState: PropTypes.objectOf(PropTypes.object),
+  signinFormState: PropTypes.object,
   currentUserLoading: PropTypes.bool.isRequired,
 };
 

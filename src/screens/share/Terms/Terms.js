@@ -1,4 +1,8 @@
 import React from 'react';
-import { Card } from '../../../components';
+import ContentContainer from '../ContentContainer';
 
-export default () => <Card className="m-5 p-5">terms of service</Card>;
+export default () => (
+  <ContentContainer className="p-5" title="Terms of Service">
+    terms of service
+  </ContentContainer>
+);

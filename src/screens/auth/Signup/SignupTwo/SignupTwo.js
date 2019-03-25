@@ -130,6 +130,7 @@ class SignupTwo extends Component {
                   </Row>
                   <div className="mb-4">
                     <Field
+                      className="mb-3"
                       component={Input}
                       type="text"
                       name="address1"

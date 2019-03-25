@@ -6,7 +6,7 @@ import Signin from './Signin';
 
 Signin.propTypes = {
   signinRequest: PropTypes.func,
-  signinFormState: PropTypes.objectOf(PropTypes.object),
+  signinFormState: PropTypes.object,
   currentUserLoading: PropTypes.bool.isRequired,
 };
 
