@@ -71,3 +71,10 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: proxima_nova;
+  src: url('./Proxima-Nova-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
