@@ -21,6 +21,7 @@ const initialState = {
   verifyState: '',
   sendConfirmState: '',
   email: '',
+  token: '',
 };
 
 export default (state = initialState, action) => {
@@ -53,6 +54,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         currentUser: action.payload.user,
+        token: action.payload.token,
         currentUserLoading: false,
       };
 
