@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { ListGroup, ListGroupItem, Row } from 'react-bootstrap';
-import { Card, Rating, Icon, Avatar } from '../../../components';
+import { Card, Rating, Icon, Avatar } from '../../components';
 
 class Sidebar extends Component {
   renderSidebarLink = (url, iconName, text) => {

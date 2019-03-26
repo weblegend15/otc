@@ -9,7 +9,7 @@ import UserProfile from './UserProfile';
 import UserSetting from './UserSetting';
 import Users from './Users';
 import MyGroups from './MyGroups';
-import Sidebar from './Sidebar';
+import { Sidebar } from '../../layouts';
 import Home from './Home';
 
 class AppModule extends Component {
