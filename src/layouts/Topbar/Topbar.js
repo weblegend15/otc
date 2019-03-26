@@ -36,6 +36,35 @@ class Topbar extends Component {
     this.setState({ showNavbar: false });
   };
 
+  renderProfilePopover = () => (
+    <Popover id="popover-profile" className="p-0">
+      <ListGroup className="list-group-flush" variant="flush">
+        <ListGroup.Item className="pl-4 rounded-top">
+          <Link to="/auth/signin" className="w-100 text-secondary">
+            <Icon name="user-o" size="lg" className="text-black mr-3" />
+            Profile
+          </Link>
+        </ListGroup.Item>
+        <ListGroup.Item className="pl-4">
+          <Link to="/app/setting" className="w-100 text-secondary">
+            <Icon name="cog" size="lg" className="text-black mr-3" />
+            Settings
+          </Link>
+        </ListGroup.Item>
+        <ListGroup.Item className="pl-4 rounded-bottom">
+          <Link
+            to="/auth/signin"
+            onClick={() => this.handleLogout()}
+            className="w-100 text-secondary"
+          >
+            <Icon name="sign-out" size="lg" className="text-black mr-3" />
+            Logout
+          </Link>
+        </ListGroup.Item>
+      </ListGroup>
+    </Popover>
+  );
+
   renderAuthNav = () => {
     return (
       <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
@@ -54,48 +83,20 @@ class Topbar extends Component {
           </NavLink>
         </Nav>
         <Nav className="pr-5">
-          <Button variant="btn-outline-link" className="navbar-icon-buttons">
-            <Icon name="bell-o" size="lg" className="text-white" />
-          </Button>
-
-          <Button variant="btn-outline-link" className="mx-2 navbar-icon-buttons">
-            <Icon name="envelope-o" size="lg" className="text-white" />
-          </Button>
-
           <ButtonToolbar>
+            <Button variant="btn-outline-link" className="navbar-icon-buttons">
+              <Icon name="bell-o" size="lg" className="text-white" />
+            </Button>
+
+            <Button variant="btn-outline-link" className="mx-2 navbar-icon-buttons">
+              <Icon name="envelope-o" size="lg" className="text-white" />
+            </Button>
             <OverlayTrigger
               trigger="click"
               delay={2}
               placement="bottom"
               className="bs-popover-bottom"
-              overlay={
-                <Popover id="popover-profile" className="p-0">
-                  <ListGroup className="list-group-flush" variant="flush">
-                    <ListGroup.Item className="pl-4 rounded-top">
-                      <Link to="/auth/signin" className="w-100 text-secondary">
-                        <Icon name="user-o" size="lg" className="text-black mr-3" />
-                        Profile
-                      </Link>
-                    </ListGroup.Item>
-                    <ListGroup.Item className="pl-4">
-                      <Link to="/app/setting" className="w-100 text-secondary">
-                        <Icon name="cog" size="lg" className="text-black mr-3" />
-                        Settings
-                      </Link>
-                    </ListGroup.Item>
-                    <ListGroup.Item className="pl-4 rounded-bottom">
-                      <Link
-                        to="/auth/signin"
-                        onClick={() => this.handleLogout()}
-                        className="w-100 text-secondary"
-                      >
-                        <Icon name="sign-out" size="lg" className="text-black mr-3" />
-                        Logout
-                      </Link>
-                    </ListGroup.Item>
-                  </ListGroup>
-                </Popover>
-              }
+              overlay={this.renderProfilePopover()}
             >
               <Button variant="btn-outline-link" className="ml-2 navbar-icon-buttons">
                 <Icon name="user-circle-o" size="3x" className="text-primary" />
