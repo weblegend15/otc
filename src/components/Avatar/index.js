@@ -8,13 +8,15 @@ Avatar.propTypes = {
   avatarImage: PropTypes.object,
   editable: PropTypes.bool,
   location: PropTypes.string,
+  iconOnly: PropTypes.bool,
 };
 
 Avatar.defaultProps = {
   avatarImage: null,
   className: '',
   editable: false,
-  location: null,
+  location: '',
+  iconOnly: false,
 };
 
 export default Avatar;
