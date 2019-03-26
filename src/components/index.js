@@ -10,6 +10,7 @@ import Pagination from './Pagination';
 import Tooltip from './Tooltip';
 import Badge from './Badge';
 import Collapse from './Collapse';
+import Avatar from './Avatar';
 
 export {
   Timestamp,
@@ -25,4 +26,5 @@ export {
   Tooltip,
   Badge,
   Collapse,
+  Avatar,
 };
