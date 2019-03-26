@@ -46,7 +46,7 @@ class SignupTwo extends Component {
       email: stepOne.email,
       password: stepOne.password,
       firstName: stepOne.firstName,
-      lastName: stepOne.firstName,
+      lastName: stepOne.lastName,
       phone: stepTwo.phone,
       country: stepTwo.country,
       state: stepTwo.state,

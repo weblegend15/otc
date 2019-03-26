@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import queryString from 'query-string';
 import { baseUrl } from '../config';
+import store from '../configureStore';
 
 /**
  * API request module
@@ -31,11 +32,11 @@ async function request(endpoint, method = 'GET', data = {}, isToken = false) {
     };
 
     if (isToken) {
-      options.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+      options.headers.Authorization = `Bearer ${store.getState().auth.token}`;
     }
 
     fetch(requestUrl, options)
-      .then((result) => {
+      .then(result => {
         if (result.status >= 200 && result.status < 300) {
           return resolve(result.json());
         }
@@ -43,6 +44,6 @@ async function request(endpoint, method = 'GET', data = {}, isToken = false) {
       })
       .catch(err => reject(err));
   });
-};
+}
 
 export default request;

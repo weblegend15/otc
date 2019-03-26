@@ -36,6 +36,10 @@ class CustomPagination extends Component {
     const to =
       currentPage === pageCount - 1 ? total : (currentPage + 1) * perPage;
 
+    if (total === 1) {
+      return <p className="my-0 mx-3">1 of 1</p>;
+    }
+
     return <p className="my-0 mx-3">{`${from} .. ${to}  of  ${total}`}</p>;
   };
 
