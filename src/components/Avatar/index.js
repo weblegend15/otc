@@ -5,14 +5,16 @@ import './Avatar.scss';
 Avatar.propTypes = {
   data: PropTypes.object.isRequired,
   className: PropTypes.string,
-  avatarImage: PropTypes.object.isRequired,
+  avatarImage: PropTypes.object,
   editable: PropTypes.bool,
-  location: PropTypes.object.isRequired,
+  location: PropTypes.string,
 };
 
 Avatar.defaultProps = {
+  avatarImage: null,
   className: '',
   editable: false,
+  location: null,
 };
 
 export default Avatar;
