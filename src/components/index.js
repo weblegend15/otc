@@ -11,6 +11,10 @@ import Tooltip from './Tooltip';
 import Badge from './Badge';
 import Collapse from './Collapse';
 import Avatar from './Avatar';
+import OverlayTrigger from './OverlayTrigger';
+import Overlay from './Overlay';
+import ButtonToolbar from './ButtonToolbar';
+import Popover from './Popover';
 
 export {
   Timestamp,
@@ -27,4 +31,8 @@ export {
   Badge,
   Collapse,
   Avatar,
+  OverlayTrigger,
+  Overlay,
+  Popover,
+  ButtonToolbar,
 };
