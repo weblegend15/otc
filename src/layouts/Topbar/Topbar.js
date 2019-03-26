@@ -132,7 +132,7 @@ class Topbar extends Component {
         <Nav className="mr-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
-            to="/home"
+            to="/app/home"
           >
             Home
           </NavLink>

@@ -51,7 +51,7 @@ function* signin(action) {
     const data = yield call(request, '/auth/login', 'POST', requestData, false);
 
     yield put(signinSuccess(data));
-    history.push('/dashboard');
+    history.push('/app/home');
   } catch (err) {
     toast.error(err.message);
     yield put(signinError());

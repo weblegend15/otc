@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
-import InputBox from './Input';
+import Input from './Input';
 import './Input.scss';
 
-InputBox.propTypes = {
+Input.propTypes = {
   icon: PropTypes.string,
   iconPosition: PropTypes.string,
 };
 
-InputBox.defaultProps = {
+Input.defaultProps = {
   icon: null,
   iconPosition: null,
 };
 
-export default InputBox;
+export default Input;

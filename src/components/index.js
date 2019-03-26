@@ -4,12 +4,13 @@ import Button, { IconButton } from './Button';
 import Card from './Card';
 import Modal from './Modal';
 import Rating from './Rating';
-import InputBox from './Input';
+import Input from './Input';
 import Tabs from './Tabs';
 import Pagination from './Pagination';
 import Tooltip from './Tooltip';
 import Badge from './Badge';
 import Collapse from './Collapse';
+import Avatar from './Avatar';
 import OverlayTrigger from './OverlayTrigger';
 import Overlay from './Overlay';
 import ButtonToolbar from './ButtonToolbar';
@@ -23,12 +24,13 @@ export {
   Card,
   Modal,
   Rating,
-  InputBox,
+  Input,
   Tabs,
   Pagination,
   Tooltip,
   Badge,
   Collapse,
+  Avatar,
   OverlayTrigger,
   Overlay,
   Popover,
