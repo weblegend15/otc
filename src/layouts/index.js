@@ -1,11 +1,5 @@
 import Topbar from './Topbar';
-import App from './App';
-import Dashboard from './Dashboard';
 import Footer from './Footer';
+import Sidebar from './Sidebar';
 
-export {
-  Topbar,
-  App,
-  Dashboard,
-  Footer,
-};
+export { Topbar, Footer, Sidebar };

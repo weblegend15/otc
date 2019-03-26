@@ -1,0 +1,23 @@
+.app-sidebar {
+  a {
+    text-decoration: none !important;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:hover {
+      p {
+        color: #019690 !important;
+      }
+    }
+  }
+
+  &-review,
+  &-status {
+    background: #f5f5f5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

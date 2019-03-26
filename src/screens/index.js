@@ -11,12 +11,13 @@ const Routes = ({ currentUser }) => (
     {!currentUser && <Route path="/auth" component={AuthScreens} />}
     {currentUser && <Route path="/app" component={AppScreens} />}
 
-    <Route exact path="/home" component={Home} />
     <Route exact path="/faq" component={FAQ} />
     <Route exact path="/terms" component={Terms} />
     <Route exact path="/contact-us" component={ContactUs} />
     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
-    <Redirect to="/home" />
+    {!currentUser && <Route exact path="/home" component={Home} />}
+    {currentUser && <Redirect to="/app" />}
+    {!currentUser && <Redirect to="/auth" />}
   </Switch>
 );
 

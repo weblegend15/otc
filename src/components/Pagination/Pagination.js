@@ -4,7 +4,7 @@ import Button from '../Button';
 
 const PaginationButton = ({ onClick, disabled, iconName }) => (
   <Button variant="link" onClick={onClick} disabled={disabled}>
-    <Icon name={`angle-${iconName}`} size="2x" color="light" />
+    <Icon name={`angle-${iconName}`} className="h4 m-0" color="light" />
   </Button>
 );
 
@@ -40,11 +40,13 @@ class CustomPagination extends Component {
   };
 
   render() {
-    const { currentPage, onChange } = this.props;
+    const { currentPage, onChange, className } = this.props;
     const { pageCount } = this;
 
     return (
-      <div className="pagination d-flex flex-row justify-content-center align-items-center">
+      <div
+        className={`pagination d-flex flex-row justify-content-center align-items-center ${className}`}
+      >
         <PaginationButton
           onClick={() => onChange(0)}
           disabled={currentPage === 0}

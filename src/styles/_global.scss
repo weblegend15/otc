@@ -3,7 +3,7 @@
 
 #root {
   background: $deny-bg-color;
-  font-family: 'proxima_regular';
+  font-family: proxima_nova;
 }
 
 html {
@@ -35,16 +35,8 @@ select.form-control {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-control:focus {
-  box-shadow: none !important;
-}
-
 .custom-checkbox .custom-control-label::before {
   border-radius: 2px;
-}
-
-.custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: none;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
@@ -52,13 +44,24 @@ select.form-control {
 }
 
 .was-validated .form-control:valid,
-.form-control.is-valid {
-  background-image: none !important;
-}
-
+.form-control.is-valid,
 .was-validated .form-control:invalid,
 .form-control.is-invalid {
   background-image: none !important;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus,
+.btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-primary.dropdown-toggle:focus,
+.btn-outline-primary:focus,
+.btn-outline-primary.focus,
+.custom-control-input:focus ~ .custom-control-label::before,
+.form-control:focus,
+.was-validated .form-control:valid:focus,
+.form-control.is-valid:focus,
+.was-validated .form-control:invalid:focus,
+.form-control.is-invalid:focus {
+  box-shadow: none;
 }
 
 .was-validated .custom-control-input:valid ~ .custom-control-label {

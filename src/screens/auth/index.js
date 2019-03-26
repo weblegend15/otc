@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 
 import Signin from './Signin';
 import Signup from './Signup';
@@ -12,6 +12,7 @@ const Auth = ({ match }) => (
     <Route path={`${match.url}/signup`} component={Signup} />
     <Route path={`${match.url}/send-confirm`} component={SendConfirm} />
     <Route path={`${match.url}/verify-email`} component={VerifyEmail} />
+    <Redirect to={`${match.url}/signin`} />
   </Switch>
 );
 
