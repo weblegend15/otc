@@ -10,6 +10,10 @@ import Pagination from './Pagination';
 import Tooltip from './Tooltip';
 import Badge from './Badge';
 import Collapse from './Collapse';
+import OverlayTrigger from './OverlayTrigger';
+import Overlay from './Overlay';
+import ButtonToolbar from './ButtonToolbar';
+import Popover from './Popover';
 
 export {
   Timestamp,
@@ -25,4 +29,8 @@ export {
   Tooltip,
   Badge,
   Collapse,
+  OverlayTrigger,
+  Overlay,
+  Popover,
+  ButtonToolbar,
 };

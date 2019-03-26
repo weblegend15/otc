@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import ListGroup from 'react-bootstrap/ListGroup';
 import cx from 'classnames';
-import { Modal, Button } from '../../components';
-import { history } from '../../configureStore';
+import {
+  Modal,
+  Button,
+  Icon,
+  OverlayTrigger,
+  Popover,
+  ButtonToolbar,
+} from '../../components';
 import logoIcon from '../../assets/icons/logo.svg';
 import toggleButton from '../../assets/icons/toggleButtonIcon.svg';
 
@@ -19,7 +26,6 @@ class Topbar extends Component {
   handleLogout = () => {
     const { signout } = this.props;
     signout();
-    history.push('/auth/signin');
   };
 
   displayMobileNavbar = () => {
@@ -48,16 +54,58 @@ class Topbar extends Component {
           </NavLink>
         </Nav>
         <Nav className="pr-5">
-          <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
-            SIGN IN
-          </Link>
-          <Link className="pl-4 pr-4 btn btn-outline-info" to="/app/profile">
-            Profile
-          </Link>
-          <Link className="pl-4 pr-4 btn btn-outline-info" to="/app/setting">
-            Settings
-          </Link>
-          <Button onClick={this.handleLogout}>SIGN OUT</Button>
+          <Button variant="btn-outline-link" className="navbar-icon-buttons">
+            <Icon name="bell-o" size="lg" className="text-white" />
+          </Button>
+
+          <Button variant="btn-outline-link" className="mx-2 navbar-icon-buttons">
+            <Icon name="envelope-o" size="lg" className="text-white" />
+          </Button>
+
+          <ButtonToolbar>
+            <OverlayTrigger
+              trigger="click"
+              delay={2}
+              placement="bottom"
+              className="bs-popover-bottom"
+              overlay={
+                <Popover id="popover-profile" className="p-0">
+                  <ListGroup className="list-group-flush" variant="flush">
+                    <ListGroup.Item className="pl-4 rounded-top">
+                      <Link to="/auth/signin" className="w-100 text-secondary">
+                        <Icon name="user-o" size="lg" className="text-black mr-3" />
+                        Profile
+                      </Link>
+                    </ListGroup.Item>
+                    <ListGroup.Item className="pl-4">
+                      <Link to="/app/setting" className="w-100 text-secondary">
+                        <Icon name="cog" size="lg" className="text-black mr-3" />
+                        Settings
+                      </Link>
+                    </ListGroup.Item>
+                    <ListGroup.Item className="pl-4 rounded-bottom">
+                      <Link
+                        to="/auth/signin"
+                        onClick={() => this.handleLogout()}
+                        className="w-100 text-secondary"
+                      >
+                        <Icon name="sign-out" size="lg" className="text-black mr-3" />
+                        Logout
+                      </Link>
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Popover>
+              }
+            >
+              <Button variant="btn-outline-link" className="ml-2 navbar-icon-buttons">
+                <Icon name="user-circle-o" size="3x" className="text-primary" />
+              </Button>
+            </OverlayTrigger>
+          </ButtonToolbar>
+          <Icon
+            name="angle-down"
+            className="d-flex align-items-center text-white custom-arrow-down"
+          />
         </Nav>
       </Navbar.Collapse>
     );
