@@ -40,7 +40,7 @@ class Topbar extends Component {
     <Popover id="popover-profile" className="p-0">
       <ListGroup className="list-group-flush" variant="flush">
         <ListGroup.Item className="pl-4 rounded-top">
-          <Link to="/auth/signin" className="w-100 text-secondary">
+          <Link to="/app/profile" className="w-100 text-secondary">
             <Icon name="user-o" size="lg" className="text-black mr-3" />
             Profile
           </Link>
