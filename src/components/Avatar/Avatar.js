@@ -22,7 +22,7 @@ export default ({
       )}
     </div>
     <div className="d-flex flex-column justify-content-center">
-      <h5>{data.firstName}</h5>
+      <h5 className="m-0">{data.firstName}</h5>
       <h3>{data.lastName}</h3>
       <h6 className="mb-0 text-light">{location}</h6>
     </div>

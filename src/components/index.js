@@ -4,7 +4,7 @@ import Button, { IconButton } from './Button';
 import Card from './Card';
 import Modal from './Modal';
 import Rating from './Rating';
-import InputBox from './Input';
+import Input from './Input';
 import Tabs from './Tabs';
 import Pagination from './Pagination';
 import Tooltip from './Tooltip';
@@ -20,7 +20,7 @@ export {
   Card,
   Modal,
   Rating,
-  InputBox,
+  Input,
   Tabs,
   Pagination,
   Tooltip,
