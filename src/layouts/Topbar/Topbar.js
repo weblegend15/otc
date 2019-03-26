@@ -32,11 +32,14 @@ class Topbar extends Component {
 
   renderAuthNav = () => {
     return (
-      <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
+      <Navbar.Collapse
+        id="basic-navbar-nav"
+        className="h-100 d-none d-md-block"
+      >
         <Nav className="mr-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
-            to="/home"
+            to="/app/home"
           >
             Home
           </NavLink>
@@ -48,7 +51,10 @@ class Topbar extends Component {
           </NavLink>
         </Nav>
         <Nav className="pr-5">
-          <Link to="/auth/signin" className="w-100 pl-4 pr-4 btn btn-outline-info">
+          <Link
+            to="/auth/signin"
+            className="w-100 pl-4 pr-4 btn btn-outline-info"
+          >
             SIGN IN
           </Link>
           <Link className="pl-4 pr-4 btn btn-outline-info" to="/app/profile">
@@ -65,7 +71,10 @@ class Topbar extends Component {
 
   renderNoAuthNav = pathname => {
     return (
-      <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
+      <Navbar.Collapse
+        id="basic-navbar-nav"
+        className="h-100 d-none d-md-block"
+      >
         <Nav className="mx-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
