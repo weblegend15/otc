@@ -19,10 +19,7 @@ export default ({ name, status, description, memberCount, groupId }) => {
       </Card.Body>
       <Card.Footer className="border-0 d-flex flex-row justify-content-between align-items-center">
         <div className="text-dark">{formatNumber(memberCount)} members</div>
-        <Link
-          to={`/app/my-groups/${groupId}`}
-          className="btn btn-outline-primary"
-        >
+        <Link to={`/app/groups/${groupId}`} className="btn btn-outline-primary">
           REQUEST ACCESS
         </Link>
       </Card.Footer>

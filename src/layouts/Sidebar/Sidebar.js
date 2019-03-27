@@ -47,7 +47,7 @@ class Sidebar extends Component {
               <Rating readonly initialRating={3.5} />
               <Link
                 className="mt-3 text-secondary justify-content-center"
-                to="/app/my-groups"
+                to="/app/groups"
               >
                 <p className="mb-0">All Feedback</p>
                 <Icon
@@ -57,25 +57,17 @@ class Sidebar extends Component {
               </Link>
             </Row>
             <Row className="d-flex justify-content-start px-5 pt-4 pb-3 m-0">
-              {this.renderSidebarLink(
-                '/app/my-groups',
-                'star',
-                'Current Offers',
-              )}
+              {this.renderSidebarLink('/app/groups', 'star', 'Current Offers')}
             </Row>
             <Row className="d-flex justify-content-start px-5 pt-3 pb-4 m-0">
-              {this.renderSidebarLink(
-                '/app/my-groups',
-                'history',
-                'Past Offers',
-              )}
+              {this.renderSidebarLink('/app/groups', 'history', 'Past Offers')}
             </Row>
           </ListGroupItem>
           <ListGroupItem className="px-5 py-4">
-            {this.renderSidebarLink('/app/my-groups', 'users', 'My Groups')}
+            {this.renderSidebarLink('/app/groups', 'users', 'My Groups')}
           </ListGroupItem>
           <ListGroupItem className="px-5 py-4">
-            {this.renderSidebarLink('/app/my-groups', 'cog', 'Settings')}
+            {this.renderSidebarLink('/app/groups', 'cog', 'Settings')}
           </ListGroupItem>
         </ListGroup>
         <Card.Body className="p-5 d-flex flex-row justify-content-around align-items-center">

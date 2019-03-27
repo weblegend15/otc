@@ -28,18 +28,9 @@ class Home extends Component {
     getGroupsRequest({ skip: value * PAGE_LIMIT, limit: PAGE_LIMIT });
   };
 
-  handleShowNewGroupModal = () => {
+  handleToggleNewGroupModal = () => {
     const { showNewGroupModal } = this.state;
     this.setState({ showNewGroupModal: !showNewGroupModal });
-  };
-
-  handleSubmitNewGroup = values => {
-    const { createGroupRequest } = this.props;
-    createGroupRequest({
-      name: values.groupName,
-      description: values.groupDescription,
-    });
-    this.handleShowNewGroupModal();
   };
 
   renderGroupsList = () => {
@@ -53,17 +44,15 @@ class Home extends Component {
             <GroupCard {...rest} memberCount={1231} groupId={_id} />
           </Col>
         ))}
-        {groupsList.total > PAGE_LIMIT && (
-          <Col md={12} className="d-flex">
-            <Pagination
-              className="ml-auto mr-3"
-              total={groupsList.total}
-              perPage={PAGE_LIMIT}
-              currentPage={currentPage}
-              onChange={this.handlePageChange}
-            />
-          </Col>
-        )}
+        <Col md={12} className="d-flex">
+          <Pagination
+            className="ml-auto mr-3"
+            total={groupsList.total}
+            perPage={PAGE_LIMIT}
+            currentPage={currentPage}
+            onChange={this.handlePageChange}
+          />
+        </Col>
       </Fragment>
     );
   };
@@ -90,7 +79,7 @@ class Home extends Component {
             <Button
               className="ml-auto"
               variant="outline-primary"
-              onClick={this.handleShowNewGroupModal}
+              onClick={this.handleToggleNewGroupModal}
             >
               + NEW GROUP
             </Button>
@@ -105,8 +94,7 @@ class Home extends Component {
         </Card>
         <NewGroupModal
           show={showNewGroupModal}
-          onHide={this.handleShowNewGroupModal}
-          onSubmit={this.handleSubmitNewGroup}
+          onHide={this.handleToggleNewGroupModal}
         />
       </Fragment>
     );

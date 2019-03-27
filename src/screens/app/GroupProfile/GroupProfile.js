@@ -3,11 +3,6 @@ import { Card, Button, Icon, Timestamp, Avatar } from '../../../components';
 import { formatNumber } from '../../../utils/common';
 
 class GroupProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   componentDidMount() {
     const {
       match: {
@@ -52,7 +47,7 @@ class GroupProfile extends Component {
           </div>
           <div className="p-4">
             <h4 className="font-weight-light">ADMIN</h4>
-            <p>
+            <div>
               <Avatar
                 className="sm"
                 data={{
@@ -61,7 +56,7 @@ class GroupProfile extends Component {
                   location: 'London, UK',
                 }}
               />
-            </p>
+            </div>
           </div>
         </Card.Body>
         <Card.Footer className="row text-muted mx-0 border-none p-4">

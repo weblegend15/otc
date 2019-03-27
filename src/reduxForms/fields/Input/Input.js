@@ -5,20 +5,19 @@ import FieldWrapper from '../FieldWrapper';
 export default ({
   input,
   label,
-  type,
-  placeholder,
+  className,
   meta: { touched, error },
-  as,
-  rows,
   ...rest
 }) => (
-  <FieldWrapper {...rest} error={error} touched={touched} label={label}>
+  <FieldWrapper
+    className={className}
+    error={error}
+    touched={touched}
+    label={label}
+  >
     <Form.Control
       {...input}
-      type={type}
-      as={as}
-      rows={rows}
-      placeholder={placeholder}
+      {...rest}
       isInvalid={touched && error}
       autoComplete="new-password"
     />
