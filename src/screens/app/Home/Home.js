@@ -1,19 +1,18 @@
 import React, { Component, Fragment } from 'react';
-import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import { Card, Button, Pagination, Icon, Input } from '../../../components';
+import { Card, Button, Pagination } from '../../../components';
+import { NewGroupModal } from '../../../modals';
+import { PAGE_LIMIT } from '../../../config';
 
-import { formatNumber } from '../../../utils/common';
-
-const PAGE_LIMIT = 4;
+import GroupCard from './GroupCard';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPage: 0,
+      showNewGroupModal: false,
     };
   }
 
@@ -29,52 +28,49 @@ class Home extends Component {
     getGroupsRequest({ skip: value * PAGE_LIMIT, limit: PAGE_LIMIT });
   };
 
-  handleCreateNewGroup = () => {
-    // HERE event for new group button
+  handleShowNewGroupModal = () => {
+    const { showNewGroupModal } = this.state;
+    this.setState({ showNewGroupModal: !showNewGroupModal });
+  };
+
+  handleSubmitNewGroup = values => {
+    const { createGroupRequest } = this.props;
+    createGroupRequest({
+      name: values.groupName,
+      description: values.groupDescription,
+    });
+    this.handleShowNewGroupModal();
   };
 
   renderGroupsList = () => {
-    const { groupsList } = this.props;
     const { currentPage } = this.state;
-    return groupsList.map(
-      ({ name, groupStatus, description, membersCount }, idx) => (
-        <Fragment>
-          <Col md={6} key={`group_card_${idx}`}>
-            <Card className="m-3">
-              <Card.Body>
-                <Card.Title className="d-flex flex-row justify-content-between align-items-center">
-                  <h4>{name}</h4>
-                  <div className="text-dark d-flex flex-row">
-                    <Icon name="lock" className="mr-3" />
-                    <p className="m-0 p-md d-flex align-items-center">
-                      {groupStatus}
-                    </p>
-                  </div>
-                </Card.Title>
-                <Card.Text className="text-dark mb-4">{description}</Card.Text>
-              </Card.Body>
-              <Card.Footer className="border-0 d-flex flex-row justify-content-between align-items-center">
-                <div className="text-dark">
-                  {formatNumber(membersCount)} members
-                </div>
-                <Button variant="outline-primary">REQUEST ACCESS</Button>
-              </Card.Footer>
-            </Card>
+    const { groupsList } = this.props;
+
+    return (
+      <Fragment>
+        {groupsList.data.map(({ _id, ...rest }, idx) => (
+          <Col md={6} key={`group_${idx}`}>
+            <GroupCard {...rest} memberCount={1231} groupId={_id} />
           </Col>
-          <Pagination
-            className="ml-auto mr-3"
-            total={groupsList.data.length}
-            perPage={PAGE_LIMIT}
-            currentPage={currentPage}
-            onChange={this.handlePageChange}
-          />
-        </Fragment>
-      ),
-    )();
+        ))}
+        {groupsList.total > PAGE_LIMIT && (
+          <Col md={12} className="d-flex">
+            <Pagination
+              className="ml-auto mr-3"
+              total={groupsList.total}
+              perPage={PAGE_LIMIT}
+              currentPage={currentPage}
+              onChange={this.handlePageChange}
+            />
+          </Col>
+        )}
+      </Fragment>
+    );
   };
 
   render() {
     const { groupsList, groupsListLoading } = this.props;
+    const { showNewGroupModal } = this.state;
 
     if (groupsListLoading) {
       return <div>Loading...</div>;
@@ -85,50 +81,19 @@ class Home extends Component {
     }
 
     return (
-      <div>
+      <Fragment>
         <Row className="mx-2 mb-2">
           <h3 className="mr-auto">Home</h3>
-          <Row>
-            <Col>
-              <Form.Control as="select">
-                <option>All countries</option>
-                <option>Independently owned</option>
-                <option>Hedge funds</option>
-                <option>Exchanges</option>
-                <option>Escrows</option>
-              </Form.Control>
-            </Col>
-            <Col>
-              <Input placeholder="Keyword" icon="search" iconPosition="left" />
-            </Col>
-          </Row>
         </Row>
         <Card>
-          <Card.Header>
-            <Nav variant="tabs" defaultActiveKey="#first">
-              <Nav.Item>
-                <Nav.Link href="#first">All</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="#link">Independently owned</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="#hedge">Hedge funds</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="#escrows">Escrows</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="#trading">OTC Trading</Nav.Link>
-              </Nav.Item>
-              <Button
-                className="ml-auto"
-                variant="outline-primary"
-                onClick={this.handleCreateNewGroup}
-              >
-                + NEW GROUP
-              </Button>
-            </Nav>
+          <Card.Header className="p-4 text-right">
+            <Button
+              className="ml-auto"
+              variant="outline-primary"
+              onClick={this.handleShowNewGroupModal}
+            >
+              + NEW GROUP
+            </Button>
           </Card.Header>
           <Card.Body>
             {!groupsList.data.length ? (
@@ -138,7 +103,12 @@ class Home extends Component {
             )}
           </Card.Body>
         </Card>
-      </div>
+        <NewGroupModal
+          show={showNewGroupModal}
+          onHide={this.handleShowNewGroupModal}
+          onSubmit={this.handleSubmitNewGroup}
+        />
+      </Fragment>
     );
   }
 }
