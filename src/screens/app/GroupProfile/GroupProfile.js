@@ -3,11 +3,6 @@ import { Card, Button, Icon, Timestamp, Avatar } from '../../../components';
 import { formatNumber } from '../../../utils/common';
 
 class GroupProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   componentDidMount() {
     const {
       match: {
