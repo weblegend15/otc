@@ -29,3 +29,18 @@ export const createGroupSuccess = data => ({
 export const createGroupError = () => ({
   type: CONSTANTS.CREATE_GROUP_ERROR,
 });
+
+// read group action
+export const readGroupRequest = data => ({
+  type: CONSTANTS.READ_GROUP_REQUEST,
+  payload: data,
+});
+
+export const readGroupSuccess = data => ({
+  type: CONSTANTS.READ_GROUP_SUCCESS,
+  payload: data,
+});
+
+export const readGroupError = () => ({
+  type: CONSTANTS.READ_GROUP_ERROR,
+});

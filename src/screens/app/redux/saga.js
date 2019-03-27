@@ -8,6 +8,8 @@ import {
   createGroupSuccess,
   createGroupError,
   getGroupsRequest,
+  readGroupSuccess,
+  readGroupError,
 } from './actions';
 
 import request from '../../../utils/apiRequest';
@@ -46,7 +48,25 @@ function* createGroup(action) {
   }
 }
 
+function* readGroup(action) {
+  try {
+    const data = yield call(
+      request,
+      `/groups/${action.payload}`,
+      'GET',
+      null,
+      true,
+    );
+
+    yield put(readGroupSuccess(data));
+  } catch (err) {
+    toast.error(err.message);
+    yield put(readGroupError());
+  }
+}
+
 export default function* appSaga() {
   yield takeLatest(CONSTANTS.GET_GROUPS_REQUEST, getGroups);
   yield takeLatest(CONSTANTS.CREATE_GROUP_REQUEST, createGroup);
+  yield takeLatest(CONSTANTS.READ_GROUP_REQUEST, readGroup);
 }
