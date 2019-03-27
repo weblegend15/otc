@@ -26,8 +26,13 @@ button {
   outline: none !important;
 }
 
+p {
+  margin: 0;
+}
+
 input.form-control,
-select.form-control {
+select.form-control,
+textarea.form-control {
   background: #f9f9f9;
 }
 
