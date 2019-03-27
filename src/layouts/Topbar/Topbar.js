@@ -138,7 +138,7 @@ class Topbar extends Component {
           </NavLink>
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
-            to="/app/my-groups"
+            to="/app/groups"
           >
             My Groups
           </NavLink>

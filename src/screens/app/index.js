@@ -9,6 +9,7 @@ import UserProfile from './UserProfile';
 import UserSetting from './UserSetting';
 import Users from './Users';
 import MyGroups from './MyGroups';
+import GroupProfile from './GroupProfile';
 import { Sidebar } from '../../layouts';
 import Home from './Home';
 
@@ -21,7 +22,8 @@ class AppModule extends Component {
         <Route path={`${match.url}/profile`} component={UserProfile} />
         <Route path={`${match.url}/setting`} component={UserSetting} />
         <Route path={`${match.url}/users`} component={Users} />
-        <Route path={`${match.url}/my-groups`} component={MyGroups} />
+        <Route path={`${match.url}/groups/:groupId`} component={GroupProfile} />
+        <Route path={`${match.url}/groups`} component={MyGroups} />
         <Redirect to={`${match.url}/home`} />
       </Switch>
     );
