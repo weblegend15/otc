@@ -3,7 +3,7 @@ import Modal from '../Modal';
 import loadingIcon from '../../assets/icons/loading.gif';
 
 const loadingImg = () => (
-  <img className="mx-auto my-auto" src={loadingIcon} alt="loading" />
+  <img className="m-auto" src={loadingIcon} alt="loading" />
 );
 
 export default ({ loading, children, ...rest }) => (
