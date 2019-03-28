@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Icon } from '../../../../components';
+import { Card, Icon } from '../../../../../components';
 
-import { formatNumber } from '../../../../utils/common';
+import { formatNumber } from '../../../../../utils/common';
 
 export default ({ name, status, description, memberCount, groupId }) => {
   return (

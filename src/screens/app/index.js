@@ -5,25 +5,20 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import UserProfile from './UserProfile';
-import UserSetting from './UserSetting';
-import Users from './Users';
-import MyGroups from './MyGroups';
-import GroupProfile from './GroupProfile';
+import { GroupsList, GroupProfile } from './Groups';
+import { UserProfile } from './Users';
+
 import { Sidebar } from '../../layouts';
-import Home from './Home';
 
 class AppModule extends Component {
   renderAppRoutes = () => {
     const { match } = this.props;
     return (
       <Switch>
-        <Route path={`${match.url}/home`} component={Home} />
+        <Route path={`${match.url}/home`} component={GroupsList} />
         <Route path={`${match.url}/profile`} component={UserProfile} />
-        <Route path={`${match.url}/setting`} component={UserSetting} />
-        <Route path={`${match.url}/users`} component={Users} />
         <Route path={`${match.url}/groups/:groupId`} component={GroupProfile} />
-        <Route path={`${match.url}/groups`} component={MyGroups} />
+        <Route path={`${match.url}/groups`} component={GroupsList} />
         <Redirect to={`${match.url}/home`} />
       </Switch>
     );

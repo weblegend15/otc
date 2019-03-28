@@ -1,22 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Card, Pagination, Timestamp } from '../../../components';
-import { formatNumber } from '../../../utils/common';
+import { Card, Pagination, Timestamp } from '../../../../components';
+import { formatNumber } from '../../../../utils/common';
+
+import { PAGE_LIMIT } from '../../../../config';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPage: 0,
-      pageSize: 4,
     };
   }
 
   componentDidMount() {
     const { getProfileRequest } = this.props;
-    const { pageSize } = this.state;
-    getProfileRequest({ skip: 0, limit: pageSize });
+    getProfileRequest({ skip: 0, limit: PAGE_LIMIT });
   }
 
   handlePageChange = value => {
@@ -44,8 +44,12 @@ class Profile extends Component {
   };
 
   renderGroups = () => {
-    const { currentPage, pageSize } = this.state;
-    const { groups } = this.props;
+    const { currentPage } = this.state;
+    const {
+      profile: {
+        data: { groups },
+      },
+    } = this.props;
     return (
       <Fragment>
         <Card.Body className="py-3">
@@ -54,20 +58,18 @@ class Profile extends Component {
           </Card.Title>
           <Row>
             {groups
-              .slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+              .slice(currentPage * PAGE_LIMIT, (currentPage + 1) * PAGE_LIMIT)
               .map((group, index) => this.renderGroup(group, index))}
           </Row>
         </Card.Body>
         <Card.Footer className="border-0 justify-content-end d-flex">
-          {groups.length > pageSize && (
-            <Pagination
-              className="ml-auto mr-3"
-              total={groups.length}
-              perPage={pageSize}
-              currentPage={currentPage}
-              onChange={this.handlePageChange}
-            />
-          )}
+          <Pagination
+            className="ml-auto mr-3"
+            total={groups.length}
+            perPage={PAGE_LIMIT}
+            currentPage={currentPage}
+            onChange={this.handlePageChange}
+          />
         </Card.Footer>
       </Fragment>
     );
@@ -84,10 +86,12 @@ class Profile extends Component {
   };
 
   render() {
-    const { profile, profileLoading } = this.props;
-    const { groups } = profile;
+    const {
+      profile: { data, loading },
+    } = this.props;
+    const { groups } = data;
 
-    if (profileLoading) {
+    if (loading) {
       return <div>Loading ...</div>;
     }
 
@@ -114,15 +118,15 @@ class Profile extends Component {
                 Joined{' '}
                 <Timestamp
                   className="d-inline"
-                  timestamp={profile.createdAt}
+                  timestamp={data.createdAt}
                   format="D MMM YYYY"
                 />
               </span>
               <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
               </span>
             </Row>
           </Card.Header>
