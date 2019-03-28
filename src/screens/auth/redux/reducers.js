@@ -8,6 +8,12 @@ const initialState = {
   sendConfirmState: '',
   email: '',
   token: '',
+  forgotPassword: {
+    step: 1,
+    email: '',
+    state: false,
+  },
+  error: '',
 };
 
 export default (state = initialState, action) => {
@@ -94,7 +100,50 @@ export default (state = initialState, action) => {
         ...state,
         verifyState: 'error',
       };
-
+    case CONSTANTS.FORGOT_PASSWORD_REQUEST:
+      return {
+        ...state,
+        forgotPassword: {
+          ...state.forgotPassword,
+          step: 1,
+          email: '',
+          state: false,
+        },
+      };
+    case CONSTANTS.FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        forgotPassword: {
+          ...state.forgotPassword,
+          step: 2,
+          email: action.payload,
+          state: true,
+        },
+      };
+    case CONSTANTS.FORGOT_PASSWORD_ERROR:
+      return {
+        ...state,
+        error: action.error,
+      };
+    case CONSTANTS.RESET_FORGOT_PASSWORD_STEP:
+      return {
+        ...state,
+        forgotPassword: {
+          ...state.forgotPassword,
+          step: action.step,
+          state: false,
+        },
+      };
+    case CONSTANTS.CONFIRM_PASSWORD_REQUEST:
+      return {
+        ...state,
+        error: '',
+      };
+    case CONSTANTS.CONFIRM_PASSWORD_ERROR:
+      return {
+        ...state,
+        error: action.error,
+      };
     default:
       return state;
   }

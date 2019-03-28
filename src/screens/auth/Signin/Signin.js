@@ -38,10 +38,7 @@ class Signin extends Component {
         <Row className="m-0">
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
             <Card className="mt-4 mb-5">
-              <Form
-                validated={!signinFormState.syncErrors}
-                onSubmit={this.handleSubmit}
-              >
+              <Form validated={!signinFormState.syncErrors} onSubmit={this.handleSubmit}>
                 <Container className="p-5">
                   <Field
                     component={Input}
@@ -62,15 +59,18 @@ class Signin extends Component {
                 <Container className="text-center p-5">
                   <Button
                     className="mr-5 px-5 mb-5 btn-block"
-                    disabled={
-                      !!signinFormState.syncErrors || currentUserLoading
-                    }
+                    disabled={!!signinFormState.syncErrors || currentUserLoading}
                     type="submit"
                   >
                     LOGIN
                   </Button>
                   <h4 className="pb-1">Create your account</h4>
-                  <Link to="/auth/signup">SIGN UP</Link>
+                  <Link className="pb-3 d-block w-100 text-center" to="/auth/signup">
+                    SIGN UP
+                  </Link>
+                  <Link className="w-100 text-center" to="/auth/reset-password">
+                    FORGOT PASSWORD?
+                  </Link>
                 </Container>
               </Form>
             </Card>

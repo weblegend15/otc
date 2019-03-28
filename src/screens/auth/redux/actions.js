@@ -64,3 +64,37 @@ export const verifyEmailSuccess = data => ({
 export const verifyEmailError = () => ({
   type: CONSTANTS.VERIFY_EMAIL_ERROR,
 });
+
+// reset password actions
+export const forgotPasswordRequest = email => ({
+  type: CONSTANTS.FORGOT_PASSWORD_REQUEST,
+  email,
+});
+
+export const forgotPasswordSuccess = data => ({
+  type: CONSTANTS.FORGOT_PASSWORD_SUCCESS,
+  payload: data,
+});
+
+export const forgotPasswordError = error => ({
+  type: CONSTANTS.FORGOT_PASSWORD_ERROR,
+  error,
+});
+
+export const resetForgotPasswordStep = step => ({
+  type: CONSTANTS.RESET_FORGOT_PASSWORD_STEP,
+  step,
+});
+
+// confirm password actions
+export const confirmPasswordRequest = (email, password, token) => ({
+  type: CONSTANTS.CONFIRM_PASSWORD_REQUEST,
+  email,
+  password,
+  token,
+});
+
+export const confirmPasswordError = error => ({
+  type: CONSTANTS.CONFIRM_PASSWORD_ERROR,
+  error,
+});

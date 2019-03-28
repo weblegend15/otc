@@ -3,27 +3,23 @@ import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Card, Pagination, Timestamp } from '../../../components';
 import { formatNumber } from '../../../utils/common';
+import { PAGE_LIMIT } from '../../../config';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPage: 0,
-      pageSize: 4,
     };
   }
 
   componentDidMount() {
     const { getProfileRequest } = this.props;
-    const { pageSize } = this.state;
-    getProfileRequest({ skip: 0, limit: pageSize });
+    getProfileRequest();
   }
 
   handlePageChange = value => {
-    const { getProfileRequest } = this.props;
-
     this.setState({ currentPage: value });
-    getProfileRequest();
   };
 
   renderGroup = (group, index) => {
@@ -44,7 +40,7 @@ class Profile extends Component {
   };
 
   renderGroups = () => {
-    const { currentPage, pageSize } = this.state;
+    const { currentPage } = this.state;
     const { groups } = this.props;
     return (
       <Fragment>
@@ -54,16 +50,16 @@ class Profile extends Component {
           </Card.Title>
           <Row>
             {groups
-              .slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+              .slice(currentPage * PAGE_LIMIT, (currentPage + 1) * PAGE_LIMIT)
               .map((group, index) => this.renderGroup(group, index))}
           </Row>
         </Card.Body>
         <Card.Footer className="border-0 justify-content-end d-flex">
-          {groups.length > pageSize && (
+          {groups.length > PAGE_LIMIT && (
             <Pagination
               className="ml-auto mr-3"
               total={groups.length}
-              perPage={pageSize}
+              perPage={PAGE_LIMIT}
               currentPage={currentPage}
               onChange={this.handlePageChange}
             />
