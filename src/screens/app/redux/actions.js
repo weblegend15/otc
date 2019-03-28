@@ -44,3 +44,18 @@ export const readGroupSuccess = data => ({
 export const readGroupError = () => ({
   type: CONSTANTS.READ_GROUP_ERROR,
 });
+
+// get profile actions
+
+export const getProfileRequest = () => ({
+  type: CONSTANTS.GET_PROFILE_REQUEST,
+});
+
+export const getProfileSuccess = profile => ({
+  type: CONSTANTS.GET_PROFILE_SUCCESS,
+  payload: profile,
+});
+
+export const getProfileError = () => ({
+  type: CONSTANTS.GET_PROFILE_ERROR,
+});

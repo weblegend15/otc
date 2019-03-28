@@ -5,6 +5,8 @@ import * as CONSTANTS from './constants';
 import {
   getGroupsSuccess,
   getGroupsError,
+  getProfileSuccess,
+  getProfileError,
   createGroupSuccess,
   createGroupError,
   getGroupsRequest,
@@ -31,6 +33,17 @@ function* getGroups(action) {
   }
 }
 
+function* getProfile() {
+  try {
+    const profile = yield call(request, '/profile', 'GET', null, true);
+
+    yield put(getProfileSuccess(profile));
+  } catch (err) {
+    toast.error(err.message);
+    yield put(getProfileError());
+  }
+}
+
 function* createGroup(action) {
   try {
     const requestData = {
@@ -50,13 +63,7 @@ function* createGroup(action) {
 
 function* readGroup(action) {
   try {
-    const data = yield call(
-      request,
-      `/groups/${action.payload}`,
-      'GET',
-      null,
-      true,
-    );
+    const data = yield call(request, `/groups/${action.payload}`, 'GET', null, true);
 
     yield put(readGroupSuccess(data));
   } catch (err) {
@@ -67,6 +74,7 @@ function* readGroup(action) {
 
 export default function* appSaga() {
   yield takeLatest(CONSTANTS.GET_GROUPS_REQUEST, getGroups);
+  yield takeLatest(CONSTANTS.GET_PROFILE_REQUEST, getProfile);
   yield takeLatest(CONSTANTS.CREATE_GROUP_REQUEST, createGroup);
   yield takeLatest(CONSTANTS.READ_GROUP_REQUEST, readGroup);
 }

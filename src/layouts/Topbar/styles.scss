@@ -28,6 +28,10 @@
   }
 }
 
+.alert-notification {
+  font-size: 10px;
+}
+
 .mobile-navbar {
   .modal-content {
     position: absolute;
@@ -48,7 +52,7 @@
   }
 }
 
-#popover-profile {
+#popover-profile, #popover-alert {
   .popover-body {
     padding: 0;
   }

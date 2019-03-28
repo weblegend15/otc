@@ -3,6 +3,8 @@ import * as CONSTANTS from './constants';
 const initialState = {
   groupsList: {},
   groupsListLoading: false,
+  profile: {},
+  profileLoading: false,
   groupData: {},
 };
 
@@ -24,6 +26,23 @@ export default (state = initialState, action) => {
         ...state,
         groupsList: {},
         groupsListLoading: false,
+      };
+    case CONSTANTS.GET_PROFILE_REQUEST:
+      return {
+        ...state,
+        profileLoading: true,
+      };
+    case CONSTANTS.GET_PROFILE_SUCCESS:
+      return {
+        ...state,
+        profile: action.payload,
+        profileLoading: false,
+      };
+    case CONSTANTS.GET_PROFILE_ERROR:
+      return {
+        ...state,
+        profile: {},
+        profileLoading: false,
       };
 
     case CONSTANTS.CREATE_GROUP_REQUEST:

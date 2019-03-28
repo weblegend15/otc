@@ -40,7 +40,7 @@ class Topbar extends Component {
     <Popover id="popover-profile" className="p-0">
       <ListGroup className="list-group-flush" variant="flush">
         <ListGroup.Item className="pl-4 rounded-top">
-          <Link to="/auth/signin" className="w-100 text-secondary">
+          <Link to="/app/profile" className="w-100 text-secondary">
             <Icon name="user-o" size="lg" className="text-black mr-3" />
             Profile
           </Link>
@@ -65,12 +65,70 @@ class Topbar extends Component {
     </Popover>
   );
 
+  renderMessagePopover = () => (
+    <Popover id="popover-message">
+      No <b className="text-danger">unread</b> messages
+    </Popover>
+  );
+
+  renderAlertPopover = () => (
+    <Popover id="popover-alert" className="p-0">
+      <ListGroup className="list-group-flush" variant="flush">
+        <ListGroup.Item className="p-2 rounded-top">
+          <Link
+            to="/auth/signin"
+            className="w-100 text-secondary alert-notification d-flex p-2"
+          >
+            <Icon
+              name="check"
+              size="2x"
+              className="text-primary mx-2 d-flex align-items-center"
+            />
+            <p className="m-0 pl-2 pr-4">
+              Your vouch in <b>Crypto OTC Group</b> has been{' '}
+              <span className="text-primary">accepted.</span>
+            </p>
+          </Link>
+        </ListGroup.Item>
+        <ListGroup.Item className="p-2">
+          <Link
+            to="/app/setting"
+            className="w-100 text-secondary alert-notification d-flex p-2"
+          >
+            <Icon
+              name="check"
+              size="2x"
+              className="text-primary mx-2 d-flex align-items-center"
+            />
+            <p className="m-0 pl-2 pr-4">
+              Your vouch in <b>Crypto OTC Group</b> has been{' '}
+              <span className="text-primary">accepted.</span>
+            </p>
+          </Link>
+        </ListGroup.Item>
+        <ListGroup.Item className="p-2 rounded-bottom">
+          <Link
+            to="/auth/signin"
+            className="w-100 text-secondary alert-notification d-flex p-2"
+          >
+            <Icon
+              name="check"
+              size="2x"
+              className="text-primary mx-2 d-flex align-items-center"
+            />
+            <p className="m-0 pl-2 pr-4">
+              Your request to join to Crypto OTC Group has been{' '}
+              <span className="text-danger">denied.</span>
+            </p>
+          </Link>
+        </ListGroup.Item>
+      </ListGroup>
+    </Popover>
+  );
+
   renderAuthNav = () => {
     return (
-      <Navbar.Collapse
-        id="basic-navbar-nav"
-        className="h-100 d-none d-md-block"
-      >
+      <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
         <Nav className="mr-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
@@ -87,27 +145,35 @@ class Topbar extends Component {
         </Nav>
         <Nav className="pr-5">
           <ButtonToolbar>
-            <Button variant="btn-outline-link" className="navbar-icon-buttons">
-              <Icon name="bell-o" size="lg" className="text-white" />
-            </Button>
-
-            <Button
-              variant="btn-outline-link"
-              className="mx-2 navbar-icon-buttons"
-            >
-              <Icon name="envelope-o" size="lg" className="text-white" />
-            </Button>
             <OverlayTrigger
               trigger="click"
               delay={2}
               placement="bottom"
-              className="bs-popover-bottom"
+              overlay={this.renderAlertPopover()}
+            >
+              <Button variant="btn-outline-link" className="navbar-icon-buttons">
+                <Icon name="bell-o" size="lg" className="text-white" />
+              </Button>
+            </OverlayTrigger>
+
+            <OverlayTrigger
+              trigger="click"
+              delay={2}
+              placement="bottom"
+              overlay={this.renderMessagePopover()}
+            >
+              <Button variant="btn-outline-link" className="mx-2 navbar-icon-buttons">
+                <Icon name="envelope-o" size="lg" className="text-white" />
+              </Button>
+            </OverlayTrigger>
+
+            <OverlayTrigger
+              trigger="click"
+              delay={2}
+              placement="bottom"
               overlay={this.renderProfilePopover()}
             >
-              <Button
-                variant="btn-outline-link"
-                className="ml-2 navbar-icon-buttons"
-              >
+              <Button variant="btn-outline-link" className="ml-2 navbar-icon-buttons">
                 <Icon name="user-circle-o" size="3x" className="text-primary" />
               </Button>
             </OverlayTrigger>
@@ -123,10 +189,7 @@ class Topbar extends Component {
 
   renderNoAuthNav = pathname => {
     return (
-      <Navbar.Collapse
-        id="basic-navbar-nav"
-        className="h-100 d-none d-md-block"
-      >
+      <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
         <Nav className="mx-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"

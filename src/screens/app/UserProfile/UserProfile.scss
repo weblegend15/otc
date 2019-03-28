@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+.profile {
+  h5, h3 {
+    font-weight: 600;
+  }
+  span {
+    font-size: 14px;
+    opacity: 0.5;
+  }
+  .join-date {
+    font-size: 12px;
+  }
+  .bio-title {
+    background-color: $white;
+  }
+}

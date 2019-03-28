@@ -1,11 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
-import {
-  SIGNUP_REQUEST,
-  SIGNIN_REQUEST,
-  SEND_CONFIRM_REQUEST,
-  VERIFY_EMAIL_REQUEST,
-} from './constants';
+import * as CONSTANTS from './constants';
 
 import {
   signupError,
@@ -24,13 +19,7 @@ import request from '../../../utils/apiRequest';
 
 function* signup(action) {
   try {
-    const data = yield call(
-      request,
-      '/auth/signup',
-      'POST',
-      action.data,
-      false,
-    );
+    const data = yield call(request, '/auth/signup', 'POST', action.data, false);
 
     yield put(signupSuccess(data));
     yield put(sendConfirmRequest(action.data.email));
@@ -94,8 +83,8 @@ function* verifyEmail(action) {
 }
 
 export default function* authSaga() {
-  yield takeLatest(SIGNUP_REQUEST, signup);
-  yield takeLatest(SIGNIN_REQUEST, signin);
-  yield takeLatest(SEND_CONFIRM_REQUEST, sendConfirm);
-  yield takeLatest(VERIFY_EMAIL_REQUEST, verifyEmail);
+  yield takeLatest(CONSTANTS.SIGNUP_REQUEST, signup);
+  yield takeLatest(CONSTANTS.SIGNIN_REQUEST, signin);
+  yield takeLatest(CONSTANTS.SEND_CONFIRM_REQUEST, sendConfirm);
+  yield takeLatest(CONSTANTS.VERIFY_EMAIL_REQUEST, verifyEmail);
 }
