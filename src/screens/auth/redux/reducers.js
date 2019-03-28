@@ -105,10 +105,8 @@ export default (state = initialState, action) => {
         ...state,
         forgotPassword: {
           ...state.forgotPassword,
-          step: 1,
-          email: '',
-          state: false,
         },
+        error: '',
       };
     case CONSTANTS.FORGOT_PASSWORD_SUCCESS:
       return {

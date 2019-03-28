@@ -9,7 +9,7 @@ import { required, isEmail } from '../../utils/validate';
 export default ({ handleSubmit, submitting, onSubmit }) => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <div className="modal-body px-4">
+      <div className="px-4">
         <Field
           component={Input}
           type="email"
@@ -18,7 +18,7 @@ export default ({ handleSubmit, submitting, onSubmit }) => {
           validate={[required, isEmail]}
         />
       </div>
-      <div className="modal-footer px-4">
+      <div className="px-4">
         <Button className="btn-block my-3 p-2" disabled={submitting} type="submit">
           CONTINUE
         </Button>

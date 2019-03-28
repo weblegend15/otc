@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Card, Pagination, Timestamp } from '../../../components';
-import { formatNumber } from '../../../utils/common';
-import { PAGE_LIMIT } from '../../../config';
+import { Card, Pagination, Timestamp } from '../../../../components';
+import { formatNumber } from '../../../../utils/common';
+
+import { PAGE_LIMIT } from '../../../../config';
 
 class Profile extends Component {
   constructor(props) {
@@ -41,7 +42,11 @@ class Profile extends Component {
 
   renderGroups = () => {
     const { currentPage } = this.state;
-    const { groups } = this.props;
+    const {
+      profile: {
+        data: { groups },
+      },
+    } = this.props;
     return (
       <Fragment>
         <Card.Body className="py-3">
@@ -55,15 +60,13 @@ class Profile extends Component {
           </Row>
         </Card.Body>
         <Card.Footer className="border-0 justify-content-end d-flex">
-          {groups.length > PAGE_LIMIT && (
-            <Pagination
-              className="ml-auto mr-3"
-              total={groups.length}
-              perPage={PAGE_LIMIT}
-              currentPage={currentPage}
-              onChange={this.handlePageChange}
-            />
-          )}
+          <Pagination
+            className="ml-auto mr-3"
+            total={groups.length}
+            perPage={PAGE_LIMIT}
+            currentPage={currentPage}
+            onChange={this.handlePageChange}
+          />
         </Card.Footer>
       </Fragment>
     );
@@ -80,10 +83,12 @@ class Profile extends Component {
   };
 
   render() {
-    const { profile, profileLoading } = this.props;
-    const { groups } = profile;
+    const {
+      profile: { data, loading },
+    } = this.props;
+    const { groups } = data;
 
-    if (profileLoading) {
+    if (loading) {
       return <div>Loading ...</div>;
     }
 
@@ -110,11 +115,13 @@ class Profile extends Component {
                 Joined{' '}
                 <Timestamp
                   className="d-inline"
-                  timestamp={profile.createdAt}
+                  timestamp={data.createdAt}
                   format="D MMM YYYY"
                 />
               </span>
-              <span>
+            </Row>
+            <Row className="px-4">
+              <span className="w-75">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                 veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea

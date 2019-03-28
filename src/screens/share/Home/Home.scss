@@ -3,7 +3,7 @@
   min-width: 100%;
   margin-top: -100px;
   .home-container-section {
-    background-image: url('../../../assets/imgs/home-page-login-account-background.svg');
+    background-image: url('../../../assets/images/home-page-login-account-background.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -17,7 +17,7 @@
     }
   }
   .platform-features {
-    background-image: url('../../../assets/imgs/home-page-platform-features-background.svg');
+    background-image: url('../../../assets/images/home-page-platform-features-background.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -29,7 +29,7 @@
       & > .card {
         max-width: 200px;
         min-width: 150px;
-        background-image: url('../../../assets/imgs/home-page-platform-card-background.svg');
+        background-image: url('../../../assets/images/home-page-platform-card-background.svg');
         background-position: left;
       }
     }
@@ -37,7 +37,7 @@
   .create-account-section {
     padding-top: 66px;
     background-color: $white;
-    background-image: url('../../../assets/imgs/home-page-create-account-background.svg');
+    background-image: url('../../../assets/images/home-page-create-account-background.svg');
     background-repeat: no-repeat;
     background-size: cover;
   }

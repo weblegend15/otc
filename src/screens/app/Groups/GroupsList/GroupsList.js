@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Card, Button, Pagination } from '../../../components';
-import { NewGroupModal } from '../../../modals';
-import { PAGE_LIMIT } from '../../../config';
+import { Card, Button, Pagination } from '../../../../components';
+import { NewGroupModal } from '../../../../modals';
+import { PAGE_LIMIT } from '../../../../config';
 
 import GroupCard from './GroupCard';
 
-class Home extends Component {
+class GroupsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,11 +35,11 @@ class Home extends Component {
 
   renderGroupsList = () => {
     const { currentPage } = this.state;
-    const { groupsList } = this.props;
+    const { groups } = this.props;
 
     return (
       <Fragment>
-        {groupsList.data.map(({ _id, ...rest }, idx) => (
+        {groups.list.map(({ _id, ...rest }, idx) => (
           <Col md={6} key={`group_${idx}`}>
             <GroupCard {...rest} memberCount={1231} groupId={_id} />
           </Col>
@@ -47,7 +47,7 @@ class Home extends Component {
         <Col md={12} className="d-flex">
           <Pagination
             className="ml-auto mr-3"
-            total={groupsList.total}
+            total={groups.total}
             perPage={PAGE_LIMIT}
             currentPage={currentPage}
             onChange={this.handlePageChange}
@@ -58,14 +58,14 @@ class Home extends Component {
   };
 
   render() {
-    const { groupsList, groupsListLoading } = this.props;
+    const { groups } = this.props;
     const { showNewGroupModal } = this.state;
 
-    if (groupsListLoading) {
+    if (groups.loading) {
       return <div>Loading...</div>;
     }
 
-    if (!groupsList.data) {
+    if (!groups.list) {
       return null;
     }
 
@@ -85,7 +85,7 @@ class Home extends Component {
             </Button>
           </Card.Header>
           <Card.Body>
-            {!groupsList.data.length ? (
+            {!groups.list.length ? (
               <Card.Title className="text-center m-5">No Group</Card.Title>
             ) : (
               <Row>{this.renderGroupsList()}</Row>
@@ -101,4 +101,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default GroupsList;
