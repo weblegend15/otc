@@ -1,5 +1,4 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
 import * as CONSTANTS from './constants';
 
 import {
@@ -16,16 +15,23 @@ import {
 
 import { history } from '../../../configureStore';
 import request from '../../../utils/apiRequest';
+import notify from '../../../utils/notify';
 
 function* signup(action) {
   try {
-    const data = yield call(request, '/auth/signup', 'POST', action.data, false);
+    const data = yield call(
+      request,
+      '/auth/signup',
+      'POST',
+      action.data,
+      false,
+    );
 
     yield put(signupSuccess(data));
     yield put(sendConfirmRequest(action.data.email));
     history.push('/auth/send-confirm');
   } catch (err) {
-    toast.error(err.message);
+    notify('error', err.message);
     yield put(signupError());
   }
 }
@@ -42,7 +48,7 @@ function* signin(action) {
     yield put(signinSuccess(data));
     history.push('/app/home');
   } catch (err) {
-    toast.error(err.message);
+    notify('error', err.message);
     yield put(signinError());
   }
 }
@@ -59,7 +65,7 @@ function* sendConfirm(action) {
 
     yield put(sendConfirmSuccess(data));
   } catch (err) {
-    toast.error(err.message);
+    notify('error', err.message);
     yield put(sendConfirmError());
   }
 }
@@ -75,9 +81,9 @@ function* verifyEmail(action) {
     );
 
     yield put(verifyEmailSuccess(data));
-    toast.success('You account is fully verified and ready to use!');
+    notify('success', 'You account is fully verified and ready to use!');
   } catch (err) {
-    toast.error(err.message);
+    notify('error', err.message);
     yield put(verifyEmailError());
   }
 }

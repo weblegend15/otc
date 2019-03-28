@@ -10,7 +10,7 @@ import Routes from './screens';
 const MainRoutes = ({ currentUser }) => (
   <Fragment>
     <Topbar currentUser={currentUser} />
-    <ToastContainer pauseOnFocusLoss={false} autoClose={3000} />
+    <ToastContainer />
     <div className="app-content">
       <Routes />
     </div>
