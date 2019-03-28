@@ -1,7 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Card, Button, Pagination } from '../../../../components';
+import {
+  Card,
+  Button,
+  Pagination,
+  LoadingContainer,
+} from '../../../../components';
 import { NewGroupModal } from '../../../../modals';
 import { PAGE_LIMIT } from '../../../../config';
 
@@ -61,16 +66,8 @@ class GroupsList extends Component {
     const { groups } = this.props;
     const { showNewGroupModal } = this.state;
 
-    if (groups.loading) {
-      return <div>Loading...</div>;
-    }
-
-    if (!groups.list) {
-      return null;
-    }
-
     return (
-      <Fragment>
+      <LoadingContainer loading={groups.loading}>
         <Row className="mx-2 mb-2">
           <h3 className="mr-auto">Home</h3>
         </Row>
@@ -96,7 +93,7 @@ class GroupsList extends Component {
           show={showNewGroupModal}
           onHide={this.handleToggleNewGroupModal}
         />
-      </Fragment>
+      </LoadingContainer>
     );
   }
 }
