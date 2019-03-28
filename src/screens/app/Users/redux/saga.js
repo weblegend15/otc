@@ -1,10 +1,10 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
 import * as CONSTANTS from './constants';
 
 import { getProfileSuccess, getProfileError } from './actions';
 
 import request from '../../../../utils/apiRequest';
+import notify from '../../../../utils/notify';
 
 function* getProfile() {
   try {
@@ -12,7 +12,7 @@ function* getProfile() {
 
     yield put(getProfileSuccess(profile));
   } catch (err) {
-    toast.error(err.message);
+    notify('error', err.message);
     yield put(getProfileError());
   }
 }
