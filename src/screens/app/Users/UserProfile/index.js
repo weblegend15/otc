@@ -8,12 +8,10 @@ import './UserProfile.scss';
 UserProfile.propTypes = {
   getProfileRequest: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  profileLoading: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  profile: state.app.profile,
-  profileLoading: state.app.profileLoading,
+  profile: state.app.user.profile,
 });
 const mapDispatchToProps = {
   getProfileRequest,

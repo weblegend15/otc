@@ -1,6 +1,6 @@
 import * as CONSTANTS from './constants';
 
-// get groups list actions
+// GET groups list
 export const getGroupsRequest = data => ({
   type: CONSTANTS.GET_GROUPS_REQUEST,
   payload: data,
@@ -15,7 +15,7 @@ export const getGroupsError = () => ({
   type: CONSTANTS.GET_GROUPS_ERROR,
 });
 
-// create group action
+// CREATE group
 export const createGroupRequest = data => ({
   type: CONSTANTS.CREATE_GROUP_REQUEST,
   payload: data,
@@ -30,7 +30,7 @@ export const createGroupError = () => ({
   type: CONSTANTS.CREATE_GROUP_ERROR,
 });
 
-// read group action
+// READ group
 export const readGroupRequest = data => ({
   type: CONSTANTS.READ_GROUP_REQUEST,
   payload: data,
@@ -43,19 +43,4 @@ export const readGroupSuccess = data => ({
 
 export const readGroupError = () => ({
   type: CONSTANTS.READ_GROUP_ERROR,
-});
-
-// get profile actions
-
-export const getProfileRequest = () => ({
-  type: CONSTANTS.GET_PROFILE_REQUEST,
-});
-
-export const getProfileSuccess = profile => ({
-  type: CONSTANTS.GET_PROFILE_SUCCESS,
-  payload: profile,
-});
-
-export const getProfileError = () => ({
-  type: CONSTANTS.GET_PROFILE_ERROR,
 });

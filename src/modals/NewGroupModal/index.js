@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NewGroupModal from './NewGroupModal';
 
-import { createGroupRequest } from '../../screens/app/redux/actions';
+import { createGroupRequest } from '../../screens/app/Groups/redux/actions';
 
 NewGroupModal.propTypes = {
   createGroupRequest: PropTypes.func.isRequired,

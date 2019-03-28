@@ -5,13 +5,12 @@ import GroupProfile from './GroupProfile';
 import { readGroupRequest } from '../redux/actions';
 
 GroupProfile.propTypes = {
-  groupData: PropTypes.object.isRequired,
-  groupsListLoading: PropTypes.bool.isRequired,
+  group: PropTypes.object.isRequired,
+  readGroupRequest: PropTypes.func.isRequired,
 };
 
 const matStateToProps = state => ({
-  groupData: state.app.groupData,
-  groupsListLoading: state.app.groupsListLoading,
+  group: state.app.group.group,
 });
 
 const mapDispatchToProps = {
