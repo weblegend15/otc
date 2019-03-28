@@ -1,7 +1,7 @@
 import * as CONSTANTS from './constants';
 
 const initialState = {
-  user: {
+  profile: {
     data: {},
     loading: false,
   },
@@ -12,16 +12,16 @@ export default (state = initialState, action) => {
     case CONSTANTS.GET_PROFILE_REQUEST:
       return {
         ...state,
-        user: {
-          ...state.user,
+        profile: {
+          ...state.profile,
           loading: true,
         },
       };
     case CONSTANTS.GET_PROFILE_SUCCESS:
       return {
         ...state,
-        user: {
-          ...state.user,
+        profile: {
+          ...state.profile,
           data: action.payload,
           loading: false,
         },
@@ -29,8 +29,8 @@ export default (state = initialState, action) => {
     case CONSTANTS.GET_PROFILE_ERROR:
       return {
         ...state,
-        user: {
-          ...state.user,
+        profile: {
+          ...state.profile,
           data: {},
           loading: false,
         },

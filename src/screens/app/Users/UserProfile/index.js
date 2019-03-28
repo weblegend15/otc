@@ -11,7 +11,7 @@ UserProfile.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  profile: state.app.user.user,
+  profile: state.app.user.profile,
 });
 const mapDispatchToProps = {
   getProfileRequest,
