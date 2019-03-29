@@ -1,15 +1,17 @@
 @import './variables';
 @import './theme';
 
-#root {
+#root,
+html,
+body {
   background: $deny-bg-color;
   font-family: proxima_nova;
+  color: black;
 }
 
 html {
   min-height: 100%;
   position: relative;
-  background: $deny-bg-color;
   #root {
     display: flex;
     flex-direction: column;
@@ -38,6 +40,10 @@ textarea.form-control {
 
 .card {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-dialog {
+  max-width: 420px;
 }
 
 .custom-checkbox .custom-control-label::before {
