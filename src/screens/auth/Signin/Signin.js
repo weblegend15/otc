@@ -31,7 +31,7 @@ class Signin extends Component {
     return (
       <Container className="mt-5">
         <Row>
-          <Col className="mt-5 text-center">
+          <Col className="p-0 p-sm-3 text-center">
             <h3 className="auth-form-header">Login Into Your Account</h3>
           </Col>
         </Row>
@@ -42,7 +42,7 @@ class Signin extends Component {
               validated={!signinFormState.syncErrors}
               onSubmit={this.handleSubmit}
             >
-              <div className="p-5 card-body">
+              <div className="px-5 pb-5 card-body">
                 <Field
                   component={Input}
                   type="email"

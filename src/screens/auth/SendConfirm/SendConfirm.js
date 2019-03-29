@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import { Card } from '../../../components';
 
 export default ({ email }) => (
-  <Container className="text-center">
+  <Container className="text-center mb-5">
     <h3 className="mt-5 auth-form-header">Thank you for your registration</h3>
     <p className="mt-4 mb-3 font-weight-light sub-title">
       Just a few more steps required

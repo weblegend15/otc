@@ -80,16 +80,20 @@ class SignupTwo extends Component {
     const { recaptchaValue } = this.state;
 
     return (
-      <Container className="mt-5">
+      <Container className="p-0 p-sm-3">
         <Row>
-          <Col className="mt-5 text-center">
-            <h3 className="auth-form-header">Create Account - Step 2 of 2</h3>
+          <Col className="px-5 mt-5 text-center">
+            <h3 className="auth-form-header d-flex justify-content-center">
+              Create Account <span className="d-none d-sm-block">&nbsp; - &nbsp; </span>{' '}
+              <br className="d-sm-none" />
+              Step 2 of 2
+            </h3>
           </Col>
         </Row>
         <Row className="m-0 mt-4 mb-5">
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
             <Form className="sign-up-form card m-auto" onSubmit={this.handleSubmit}>
-              <div className="p-5 card-body">
+              <div className="px-sm-5 pb-sm-5 card-body">
                 <Field
                   component={PhoneInput}
                   type="phone"

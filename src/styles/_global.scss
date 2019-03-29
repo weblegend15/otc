@@ -122,6 +122,9 @@ button.btn-lg {
   font-size: 36px;
   font-weight: 600;
   font-family: 'proxima_nova';
+  @media screen and (max-width: 768px) {
+    font-size: 30px;
+  }
 }
 
 .card-footer-bg-color {

@@ -22,10 +22,14 @@ class SignupOne extends Component {
     const { formSyncErrors } = this.props;
 
     return (
-      <Container className="mt-5">
+      <Container className="p-0 p-sm-3">
         <Row>
-          <Col className="mt-5 text-center">
-            <h3 className="auth-form-header">Create Account - Step 1 of 2</h3>
+          <Col className="px-5 mt-5 text-center">
+            <h3 className="auth-form-header d-flex justify-content-center">
+              Create Account <span className="d-none d-sm-block">&nbsp; - &nbsp; </span>{' '}
+              <br className="d-sm-none" />
+              Step 1 of 2
+            </h3>
           </Col>
         </Row>
         <Row className="m-0 mt-4 mb-5">
@@ -35,7 +39,7 @@ class SignupOne extends Component {
               validated={!formSyncErrors.stepOne}
               onSubmit={this.handleSubmit}
             >
-              <div className="p-5 card-body">
+              <div className="px-sm-5 pb-sm-5 card-body">
                 <Field
                   component={Input}
                   type="text"
@@ -72,7 +76,7 @@ class SignupOne extends Component {
                   validate={[required, confirmation]}
                 />
               </div>
-              <div className="text-center p-5 card-footer card-footer-bg-color">
+              <div className="text-center px-sm-5 pt-sm-5 pb-sm-3 card-footer card-footer-bg-color">
                 <Button
                   block
                   className="mb-5"

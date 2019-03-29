@@ -47,7 +47,7 @@ class ForgotPassword extends Component {
         <p className="text-center pt-5">
           Please follow the steps below to complete the process:
         </p>
-        <Row className="p-5 mx-5">
+        <Row className="py-5 mx-0 mx-sm-5">
           <Col sm={12} className="d-flex align-items-center">
             <h4 className="m-0 mr-3">
               <Badge pill variant="primary" as="h4">
@@ -97,10 +97,15 @@ class ForgotPassword extends Component {
       <Container className="password-recovery-steps">
         <Row className="mb-3">
           <Col className="mt-5 text-center">
-            <h3 className="auth-form-header">Password Recovery - Step {step} of 3</h3>
+            <h3 className="auth-form-header d-flex justify-content-center">
+              Password Recovery{' '}
+              <span className="d-none d-sm-block">&nbsp; - &nbsp; </span>{' '}
+              <br className="d-sm-none" />
+              Step {step} of 3
+            </h3>
           </Col>
         </Row>
-        <Row>
+        <Row className="mb-5">
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
             {step === 1 && this.renderStep1()}
             {resetRequestState && step === 2 && this.renderStep2()}
