@@ -45,7 +45,7 @@ class GroupsList extends Component {
     return (
       <Fragment>
         {groups.list.map(({ _id, ...rest }, idx) => (
-          <Col md={6} key={`group_${idx}`}>
+          <Col className="p-0 px-md-2" lg={6} key={`group_${idx}`}>
             <GroupCard {...rest} memberCount={1231} groupId={_id} />
           </Col>
         ))}
@@ -68,11 +68,11 @@ class GroupsList extends Component {
 
     return (
       <LoadingContainer loading={groups.loading}>
-        <Row className="mx-2 mb-2">
+        <Row className="groups-list-title mx-2 d-none d-md-block">
           <h3 className="mr-auto">Home</h3>
         </Row>
-        <Card>
-          <Card.Header className="p-4 text-right">
+        <Card className="groups-list-container">
+          <Card.Header className="p-4 bg-none text-right">
             <Button
               className="ml-auto"
               variant="outline-primary"

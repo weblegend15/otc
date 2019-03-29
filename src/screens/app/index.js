@@ -26,12 +26,10 @@ class AppModule extends Component {
 
   render() {
     return (
-      <Container className="mw-100">
-        <Row>
-          <Col className="my-4 ml-4 mr-lg-0" xl={3}>
-            <Sidebar />
-          </Col>
-          <Col className="m-4">{this.renderAppRoutes()}</Col>
+      <Container className="mw-100 p-1 p-md-3">
+        <Row className="m-1 m-md-4">
+          <Sidebar />
+          <Col className="p-0 pl-md-4">{this.renderAppRoutes()}</Col>
         </Row>
       </Container>
     );
