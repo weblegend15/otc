@@ -15,6 +15,7 @@ import OverlayTrigger from './OverlayTrigger';
 import Overlay from './Overlay';
 import ButtonToolbar from './ButtonToolbar';
 import Popover from './Popover';
+import LoadingContainer from './LoadingContainer';
 
 export {
   Timestamp,
@@ -35,4 +36,5 @@ export {
   Overlay,
   Popover,
   ButtonToolbar,
+  LoadingContainer,
 };

@@ -32,12 +32,7 @@
 
 @font-face {
   font-family: proxima_nova;
-  src: url('./Proxima-Alt-Bold-webfont.eot');
-  src: url('./Proxima-Alt-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-    url('./Proxima-Alt-Bold-webfont.woff2') format('woff2'),
-    url('./Proxima-Alt-Bold-webfont.woff') format('woff'),
-    url('./Proxima-Alt-Bold-webfont.ttf') format('truetype'),
-    url('./Proxima-Alt-Bold-webfont.svg#proxima_nova_altbold') format('svg');
+  src: url('./Proxima-Nova-Bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
 }

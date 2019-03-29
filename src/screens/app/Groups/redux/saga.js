@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
+import notify from '../../../../utils/notify';
 import * as CONSTANTS from './constants';
 
 import {
@@ -26,7 +26,7 @@ function* getGroups(action) {
 
     yield put(getGroupsSuccess(data));
   } catch (err) {
-    toast.error(err.message);
+    notify('error', err.message);
     yield put(getGroupsError());
   }
 }
@@ -43,7 +43,7 @@ function* createGroup(action) {
     yield put(createGroupSuccess(data));
     yield put(getGroupsRequest({ limit: PAGE_LIMIT, skip: 0 }));
   } catch (err) {
-    toast.error(err.message);
+    notify('error', err.message);
     yield put(createGroupError());
   }
 }
@@ -60,7 +60,7 @@ function* readGroup(action) {
 
     yield put(readGroupSuccess(data));
   } catch (err) {
-    toast.error(err.message);
+    notify('error', err.message);
     yield put(readGroupError());
   }
 }
