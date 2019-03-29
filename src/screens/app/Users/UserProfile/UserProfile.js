@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Card, Pagination, Timestamp } from '../../../../components';
-import { formatNumber } from '../../../../utils/common';
+import { Card, Pagination, Timestamp, LoadingContainer } from '../../../../components';
+import GroupCard from '../../Groups/GroupsList/GroupCard';
 
 import { PAGE_LIMIT } from '../../../../config';
 
@@ -15,8 +15,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    const { getProfileRequest, getGroupsRequest } = this.props;
-    getProfileRequest();
+    const { getGroupsRequest } = this.props;
     getGroupsRequest({ skip: 0, limit: PAGE_LIMIT });
   }
 
@@ -26,27 +25,10 @@ class Profile extends Component {
     getGroupsRequest({ skip: value * PAGE_LIMIT, limit: PAGE_LIMIT });
   };
 
-  renderGroup = (group, index) => {
-    const { name, description } = group;
-    return (
-      <Col md={6} className="my-2">
-        <Card key={`group_${index}`}>
-          <Card.Body>
-            <h5>{name}</h5>
-            <span>{description}</span>
-          </Card.Body>
-          <Card.Footer>
-            <span>{formatNumber(1234)} members</span>
-          </Card.Footer>
-        </Card>
-      </Col>
-    );
-  };
-
   renderGroups = () => {
     const { currentPage } = this.state;
     const { groups } = this.props;
-    console.log(groups);
+
     return (
       <Fragment>
         <Card.Body className="p-4">
@@ -54,15 +36,17 @@ class Profile extends Component {
             Member Of
           </Card.Title>
           <Row>
-            {groups.list
-              .slice(currentPage * PAGE_LIMIT, (currentPage + 1) * PAGE_LIMIT)
-              .map((group, index) => this.renderGroup(group, index))}
+            {groups.list.map(({ _id, ...rest }, idx) => (
+              <Col md={6} key={`group_${idx}`}>
+                <GroupCard {...rest} memberCount={1231} groupId={_id} />
+              </Col>
+            ))}
           </Row>
         </Card.Body>
-        <Card.Footer className="border-0 justify-content-end d-flex card-footer-bg-color">
+        <Card.Footer className="pt-0 border-0 justify-content-end d-flex card-footer-bg-color">
           <Pagination
             className="ml-auto mr-3"
-            total={groups.length}
+            total={groups.total}
             perPage={PAGE_LIMIT}
             currentPage={currentPage}
             onChange={this.handlePageChange}
@@ -83,21 +67,9 @@ class Profile extends Component {
   };
 
   render() {
-    const {
-      profile: { data, loading },
-    } = this.props;
-    const { groups } = data;
-
-    if (loading) {
-      return <div>Loading ...</div>;
-    }
-
-    if (!groups) {
-      return null;
-    }
-
+    const { groups, currentUser } = this.props;
     return (
-      <div className="profile">
+      <LoadingContainer loading={groups.loading} className="profile">
         <Row className="mb-3 mx-2">
           <h3 className="mr-auto">User Profile</h3>
           <Link
@@ -124,16 +96,16 @@ class Profile extends Component {
                   Joined{' '}
                   <Timestamp
                     className="d-inline"
-                    timestamp={data.createdAt}
+                    timestamp={currentUser.createdAt}
                     format="D MMM YYYY"
                   />
                 </span>
               </Col>
             </Row>
           </Card.Header>
-          {groups.length ? this.renderGroups() : this.renderNoGroups()}
+          {groups.total ? this.renderGroups() : this.renderNoGroups()}
         </Card>
-      </div>
+      </LoadingContainer>
     );
   }
 }
