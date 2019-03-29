@@ -1,21 +1,8 @@
-import React, { Fragment } from 'react';
-import Modal from '../Modal';
-import loadingIcon from '../../assets/icons/loading.gif';
-
-const loadingImg = () => (
-  <img className="m-auto" src={loadingIcon} alt="loading" />
-);
+import React from 'react';
+import LoadingOverlay from 'react-loading-overlay';
 
 export default ({ loading, children, ...rest }) => (
-  <Fragment>
-    <Modal
-      className="loading-overlay"
-      centered
-      dialogAs={loadingImg}
-      show={loading}
-      backdrop="static"
-      {...rest}
-    />
+  <LoadingOverlay active={loading} spinner text="Loading..." {...rest}>
     {children}
-  </Fragment>
+  </LoadingOverlay>
 );

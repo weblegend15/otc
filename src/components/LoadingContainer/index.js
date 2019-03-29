@@ -1,4 +1,3 @@
-import LoadingCotainer from './LoadingContainer';
-import './LoadingContainer.scss';
+import LoadingContainer from './LoadingContainer';
 
-export default LoadingCotainer;
+export default LoadingContainer;
