@@ -4,19 +4,22 @@ import { Card } from '../../../components';
 
 export default ({ email }) => (
   <Container className="text-center">
-    <h3 className="mt-5">Thank you for your registration</h3>
-    <h6 className="mt-5 mb-0 font-weight-light">
+    <h3 className="mt-5 auth-form-header">Thank you for your registration</h3>
+    <p className="mt-4 mb-3 font-weight-light sub-title">
       Just a few more steps required
-    </h6>
-    <Card className="mx-5 my-4">
-      <h4 className="m-5 text-primary">
-        Please confirm and activate your account
-      </h4>
-      <hr className="m-0" />
-      <div className="m-md-5">
-        Check your email and click on the activation link in the email which we
-        have sent to <p className="m-0 text-primary">{email}</p>
-      </div>
+    </p>
+    <Card className="m-auto send-confirm">
+      <Card.Body>
+        <p className="m-4 h3-title text-primary">
+          Please confirm and activate your account
+        </p>
+      </Card.Body>
+      <Card.Footer className="card-footer-bg-color">
+        <div className="m-md-2 py-4 p-lg">
+          Check your email and click on the activation link in the email which we have
+          sent to <p className="p-lg m-0 pt-2 text-primary">{email}</p>
+        </div>
+      </Card.Footer>
     </Card>
   </Container>
 );

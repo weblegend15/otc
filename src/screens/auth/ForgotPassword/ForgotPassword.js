@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { Card, Badge } from '../../../components';
+import { Badge } from '../../../components';
 
 import ForgotPasswordForm from '../../../reduxForms/ForgotPasswordForm';
 import ConfirmPasswordForm from '../../../reduxForms/ConfirmPasswordForm';
@@ -38,20 +38,12 @@ class ForgotPassword extends Component {
   };
 
   renderStep1 = () => {
-    return (
-      <div>
-        <p className="text-center pt-5">Please enter your email address below</p>
-        <p className="text-center">
-          and we`ll send you instructions on how to reset your password:
-        </p>
-        <ForgotPasswordForm onSubmit={this.handleResetPasswordSubmit} />
-      </div>
-    );
+    return <ForgotPasswordForm onSubmit={this.handleResetPasswordSubmit} />;
   };
 
   renderStep2 = () => {
     return (
-      <Container>
+      <Container className="card">
         <p className="text-center pt-5">
           Please follow the steps below to complete the process:
         </p>
@@ -94,12 +86,7 @@ class ForgotPassword extends Component {
   };
 
   renderStep3 = () => {
-    return (
-      <div>
-        <p className="text-center pt-5">Please enter your new password below:</p>
-        <ConfirmPasswordForm onSubmit={this.handleConfirmPasswordSubmit} />
-      </div>
-    );
+    return <ConfirmPasswordForm onSubmit={this.handleConfirmPasswordSubmit} />;
   };
 
   render() {
@@ -110,16 +97,14 @@ class ForgotPassword extends Component {
       <Container className="password-recovery-steps">
         <Row className="mb-3">
           <Col className="mt-5 text-center">
-            <h3>Password Recovery - Step {step} of 3</h3>
+            <h3 className="auth-form-header">Password Recovery - Step {step} of 3</h3>
           </Col>
         </Row>
         <Row>
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
-            <Card>
-              {step === 1 && this.renderStep1()}
-              {resetRequestState && step === 2 && this.renderStep2()}
-              {token && step === 3 && this.renderStep3()}
-            </Card>
+            {step === 1 && this.renderStep1()}
+            {resetRequestState && step === 2 && this.renderStep2()}
+            {token && step === 3 && this.renderStep3()}
           </Col>
         </Row>
       </Container>

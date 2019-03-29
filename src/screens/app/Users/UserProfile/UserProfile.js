@@ -24,7 +24,7 @@ class Profile extends Component {
   };
 
   renderGroup = (group, index) => {
-    const { name, description, membersCount } = group;
+    const { name, description } = group;
     return (
       <Col md={6} className="my-2">
         <Card key={`group_${index}`}>
@@ -33,7 +33,7 @@ class Profile extends Component {
             <span>{description}</span>
           </Card.Body>
           <Card.Footer>
-            <span>{formatNumber(membersCount)} members</span>
+            <span>{formatNumber(1234)} members</span>
           </Card.Footer>
         </Card>
       </Col>

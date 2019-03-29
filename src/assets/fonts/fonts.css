@@ -41,12 +41,27 @@
   font-weight: bold;
   font-style: normal;
 }
+
 @font-face {
   font-family: proxima_nova;
   src: url('./Proxima-Alt-Black-webfont.woff2') format('woff2'),
     url('./Proxima-Alt-Black-webfont.woff') format('woff'),
     url('./Proxima-Alt-Black-webfont.ttf') format('truetype'),
     url('./Proxima-Alt-Black-webfont.svg#proxima_nova_altblack') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: proxima_nova;
+  src: url('./Proxima-Nova-Sbold.otf') format('otf');
+  font-weight: 600;
+  font-style: normal
+}
+
+@font-face {
+  font-family: proxima_nova;
+  src: url('./Proxima-Nova-Bold.otf') format('otf');
   font-weight: 900;
   font-style: normal;
 }
