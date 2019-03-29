@@ -2,11 +2,11 @@
 
 .tab-header-lg {
   a {
-    color: $primary-color;
+    color: $black;
     font-size: 18px;
     opacity: 0.5;
     &:hover {
-      color: $primary-color;
+      color: $black;
     }
   }
   .active {
@@ -20,11 +20,11 @@
 
 .tab-header-md {
   a {
-    color: $primary-color;
+    color: $black;
     font-size: 16px;
     opacity: 0.5;
     &:hover {
-      color: $primary-color;
+      color: $black;
     }
   }
   .active {

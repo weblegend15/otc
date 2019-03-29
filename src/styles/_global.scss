@@ -4,9 +4,10 @@
 #root,
 html,
 body {
-  background: $deny-bg-color;
+  background: $main-background-color;
   font-family: proxima_nova;
-  color: black;
+  font-size: 14px;
+  color: $black;
 }
 
 html {
@@ -76,7 +77,7 @@ textarea.form-control {
 }
 
 .was-validated .custom-control-input:valid ~ .custom-control-label {
-  color: black;
+  color: $black;
 }
 
 .form-group {
