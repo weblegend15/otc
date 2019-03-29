@@ -1,3 +1,4 @@
 import NewGroupModal from './NewGroupModal';
+import JoinGroupModal from './JoinGroupModal';
 
-export { NewGroupModal };
+export { NewGroupModal, JoinGroupModal };
