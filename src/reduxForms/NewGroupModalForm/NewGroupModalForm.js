@@ -18,7 +18,6 @@ export default ({ handleSubmit, submitting, onSubmit }) => {
           validate={[required]}
         />
         <Field
-          className="mb-5"
           component={Input}
           as="textarea"
           rows="4"
@@ -27,9 +26,9 @@ export default ({ handleSubmit, submitting, onSubmit }) => {
           validate={[required]}
         />
       </div>
-      <div className="modal-footer px-4">
+      <div className="modal-footer border-0 px-4">
         <Button
-          className="btn-block my-3 p-2"
+          className="btn-block my-2 p-2"
           disabled={submitting}
           type="submit"
         >

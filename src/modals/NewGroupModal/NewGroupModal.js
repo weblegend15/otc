@@ -18,11 +18,11 @@ class NewGroupModal extends Component {
   render() {
     const { show, onHide, ...rest } = this.props;
     return (
-      <Modal show={show} onHide={onHide}>
+      <Modal className="new-group-modal" show={show} onHide={onHide}>
         <Modal.Header closeButton className="p-4">
           <Modal.Title>
             <p>Request to Create a Group</p>
-            <h6 className="text-light font-weight-light">
+            <h6>
               Please fill out the application form to send a new group request
             </h6>
           </Modal.Title>

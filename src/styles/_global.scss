@@ -41,6 +41,7 @@ textarea.form-control {
 
 .card {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
 .modal-dialog {
@@ -90,6 +91,7 @@ textarea.form-control {
     text-transform: uppercase;
   }
   input {
+    min-height: 40px;
     border: 1px solid #d4d4d4;
     border-radius: 10px;
   }
@@ -124,4 +126,22 @@ button.btn-lg {
 
 .opacity-5 {
   opacity: 0.5;
+}
+
+@include media-breakpoint-only(xs) {
+  .btn-block-xs-only {
+    display: block;
+    width: 100%;
+  }
+
+  .groups-list-container {
+    background: none;
+    border: none;
+    box-shadow: none;
+    & > .card-header {
+      background: none;
+      border: none;
+      padding: 0 !important;
+    }
+  }
 }
