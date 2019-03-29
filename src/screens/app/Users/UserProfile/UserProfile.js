@@ -15,12 +15,15 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    const { getProfileRequest } = this.props;
+    const { getProfileRequest, getGroupsRequest } = this.props;
     getProfileRequest();
+    getGroupsRequest({ skip: 0, limit: PAGE_LIMIT });
   }
 
   handlePageChange = value => {
+    const { getGroupsRequest } = this.props;
     this.setState({ currentPage: value });
+    getGroupsRequest({ skip: value * PAGE_LIMIT, limit: PAGE_LIMIT });
   };
 
   renderGroup = (group, index) => {
@@ -42,24 +45,21 @@ class Profile extends Component {
 
   renderGroups = () => {
     const { currentPage } = this.state;
-    const {
-      profile: {
-        data: { groups },
-      },
-    } = this.props;
+    const { groups } = this.props;
+    console.log(groups);
     return (
       <Fragment>
-        <Card.Body className="py-3">
+        <Card.Body className="p-4">
           <Card.Title className="px-1" as="h5">
             Member Of
           </Card.Title>
           <Row>
-            {groups
+            {groups.list
               .slice(currentPage * PAGE_LIMIT, (currentPage + 1) * PAGE_LIMIT)
               .map((group, index) => this.renderGroup(group, index))}
           </Row>
         </Card.Body>
-        <Card.Footer className="border-0 justify-content-end d-flex">
+        <Card.Footer className="border-0 justify-content-end d-flex card-footer-bg-color">
           <Pagination
             className="ml-auto mr-3"
             total={groups.length}
@@ -74,7 +74,7 @@ class Profile extends Component {
 
   renderNoGroups = () => {
     return (
-      <Card.Body className="py-3">
+      <Card.Body className="p-4">
         <Card.Title className="px-1" as="h5">
           No Groups
         </Card.Title>
@@ -108,25 +108,27 @@ class Profile extends Component {
           </Link>
         </Row>
         <Card>
-          <Card.Header className="p-3 border-bottom border-light bio-title">
-            <Row className="px-4 py-3">
-              <h5 className="mr-auto">Bio</h5>
-              <span className="join-date">
-                Joined{' '}
-                <Timestamp
-                  className="d-inline"
-                  timestamp={data.createdAt}
-                  format="D MMM YYYY"
-                />
-              </span>
-            </Row>
-            <Row className="px-4">
-              <span className="w-75">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat.
-              </span>
+          <Card.Header className="border-bottom border-light bio-title p-4">
+            <Row>
+              <Col md={10}>
+                <h5 className="mr-auto">Bio</h5>
+                <span>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                  commodo consequat.
+                </span>
+              </Col>
+              <Col md={2}>
+                <span className="join-date">
+                  Joined{' '}
+                  <Timestamp
+                    className="d-inline"
+                    timestamp={data.createdAt}
+                    format="D MMM YYYY"
+                  />
+                </span>
+              </Col>
             </Row>
           </Card.Header>
           {groups.length ? this.renderGroups() : this.renderNoGroups()}
