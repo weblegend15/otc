@@ -7,7 +7,6 @@ import {
   Pagination,
   LoadingContainer,
 } from '../../../../components';
-import { NewGroupModal } from '../../../../modals';
 import { PAGE_LIMIT } from '../../../../config';
 
 import GroupCard from './GroupCard';
@@ -17,7 +16,6 @@ class GroupsList extends Component {
     super(props);
     this.state = {
       currentPage: 0,
-      showNewGroupModal: false,
     };
   }
 
@@ -33,11 +31,6 @@ class GroupsList extends Component {
     getGroupsRequest({ skip: value * PAGE_LIMIT, limit: PAGE_LIMIT });
   };
 
-  handleToggleNewGroupModal = () => {
-    const { showNewGroupModal } = this.state;
-    this.setState({ showNewGroupModal: !showNewGroupModal });
-  };
-
   renderGroupsList = () => {
     const { currentPage } = this.state;
     const { groups } = this.props;
@@ -45,13 +38,13 @@ class GroupsList extends Component {
     return (
       <Fragment>
         {groups.list.map(({ _id, ...rest }, idx) => (
-          <Col className="p-0 px-md-2" lg={6} key={`group_${idx}`}>
+          <Col lg={6} key={`group_${idx}`} className="px-lg-4 mb-4 mb-lg-5">
             <GroupCard {...rest} memberCount={1231} groupId={_id} />
           </Col>
         ))}
-        <Col md={12} className="d-flex">
+        <Col md={12} className="d-flex mb-2">
           <Pagination
-            className="ml-auto mr-3"
+            className="ml-auto"
             total={groups.total}
             perPage={PAGE_LIMIT}
             currentPage={currentPage}
@@ -63,36 +56,31 @@ class GroupsList extends Component {
   };
 
   render() {
-    const { groups } = this.props;
-    const { showNewGroupModal } = this.state;
+    const { groups, toggleModal } = this.props;
 
     return (
       <LoadingContainer loading={groups.loading}>
         <Row className="groups-list-title mx-2 d-none d-md-block">
           <h3 className="mr-auto">Home</h3>
         </Row>
-        <Card className="groups-list-container">
-          <Card.Header className="p-4 bg-none text-right">
+        <Card className="groups-list-container pt-3 pt-md-0">
+          <Card.Header className="p-3 p-lg-4 bg-none text-right">
             <Button
-              className="ml-auto"
+              className="ml-auto d-flex px-3 mr-3 mr-md-0 mr-lg-4"
               variant="outline-primary"
-              onClick={this.handleToggleNewGroupModal}
+              onClick={() => toggleModal('newGroupModal')}
             >
-              + NEW GROUP
+              + <p className="ml-2 d-none d-md-block"> NEW GROUP</p>
             </Button>
           </Card.Header>
-          <Card.Body>
+          <Card.Body className="pt-3 px-0 px-lg-4 pt-lg-5">
             {!groups.list.length ? (
               <Card.Title className="text-center m-5">No Group</Card.Title>
             ) : (
-              <Row>{this.renderGroupsList()}</Row>
+              <Row className="m-0">{this.renderGroupsList()}</Row>
             )}
           </Card.Body>
         </Card>
-        <NewGroupModal
-          show={showNewGroupModal}
-          onHide={this.handleToggleNewGroupModal}
-        />
       </LoadingContainer>
     );
   }

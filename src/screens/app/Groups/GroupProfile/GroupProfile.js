@@ -7,18 +7,10 @@ import {
   Avatar,
   LoadingContainer,
 } from '../../../../components';
-import JoinGroupModal from '../../../../modals/JoinGroupModal';
 
 import { formatNumber } from '../../../../utils/common';
 
 class GroupProfile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false,
-    };
-  }
-
   componentDidMount() {
     const {
       match: {
@@ -29,25 +21,17 @@ class GroupProfile extends Component {
     readGroupRequest(groupId);
   }
 
-  handleToggleModal = () => {
-    const { showModal } = this.state;
-    this.setState({ showModal: !showModal });
-  };
-
   render() {
     const {
       group: { data, loading },
-      match: {
-        params: { groupId },
-      },
+      toggleModal,
     } = this.props;
-    const { showModal } = this.state;
 
     return (
-      <LoadingContainer loading={loading}>
-        <Card className="group-profile">
+      <LoadingContainer className="h-100" loading={loading}>
+        <Card className="group-profile m-3 m-md-0 h-100">
           <Card.Header className="border-0">
-            <h3 className="row mx-0">{data.name}</h3>
+            <h3 className="row mx-0 font-weight-semibold">{data.name}</h3>
             <div className="row mx-0">
               <h6 className="mr-auto">{formatNumber(1234)} members</h6>
               <h6>
@@ -83,12 +67,12 @@ class GroupProfile extends Component {
               </div>
             </div>
           </Card.Body>
-          <Card.Footer className="border-0">
+          <Card.Footer className="border-0 py-3 py-md-4">
             <Button
-              className="btn-block-xs-only"
-              onClick={this.handleToggleModal}
+              className="btn-block-xs-only text-uppercase font-wegith-bold"
+              onClick={() => toggleModal('joinGroupModal', data)}
             >
-              JOIN THIS GROUP
+              Join this group
             </Button>
             <div className="ml-auto d-none d-sm-block">
               <Icon name="facebook" className="my-auto" />
@@ -97,12 +81,6 @@ class GroupProfile extends Component {
             </div>
           </Card.Footer>
         </Card>
-        <JoinGroupModal
-          show={showModal}
-          onHide={this.handleToggleModal}
-          groupId={groupId}
-          groupData={data}
-        />
       </LoadingContainer>
     );
   }

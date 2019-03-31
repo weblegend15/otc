@@ -11,6 +11,7 @@ import {
   readGroupSuccess,
   readGroupError,
 } from './actions';
+import toggleModal from '../../../../modals/redux/actions';
 
 import request from '../../../../utils/apiRequest';
 import { PAGE_LIMIT } from '../../../../config';
@@ -41,9 +42,11 @@ function* createGroup(action) {
     const data = yield call(request, '/groups', 'POST', requestData, true);
 
     yield put(createGroupSuccess(data));
+    yield put(toggleModal('newGroupModal'));
     yield put(getGroupsRequest({ limit: PAGE_LIMIT, skip: 0 }));
   } catch (err) {
     notify('error', err.message);
+    yield put(toggleModal('newGroupModal'));
     yield put(createGroupError());
   }
 }

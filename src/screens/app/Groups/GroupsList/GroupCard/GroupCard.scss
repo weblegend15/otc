@@ -1,27 +1,22 @@
 .group-card {
-  max-width: 500px;
-  &.card {
-    border: 1px solid #e5e5e5;
-  }
   .card-body {
     h4 {
       font-size: 18px;
-      font-weight: bold;
+    }
+    &-status {
+      span {
+        font-size: 18px;
+      }
+    }
+    &-status,
+    .card-footer {
+      font-size: 12px;
     }
   }
-  &-status {
-    span {
-      font-size: 18px;
-    }
-  }
-  &-status,
-  .card-footer {
-    font-size: 12px;
-    font-weight: 600;
-  }
+
   a.btn {
-    font-weight: bold;
     text-transform: uppercase;
-    padding: 10px 20px;
+    height: 35px;
+    line-height: 26px;
   }
 }

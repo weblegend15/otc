@@ -8,6 +8,8 @@ import {
   joinGroupError,
 } from './actions';
 
+import toggleModal from '../../../../modals/redux/actions';
+
 import request from '../../../../utils/apiRequest';
 import notify from '../../../../utils/notify';
 
@@ -42,8 +44,10 @@ function* joinGroup(action) {
     );
 
     yield put(joinGroupSuccess(data));
+    yield put(toggleModal('newGroupModal'));
   } catch (err) {
     notify('error', err.message);
+    yield put(toggleModal('newGroupModal'));
     yield put(joinGroupError());
   }
 }
