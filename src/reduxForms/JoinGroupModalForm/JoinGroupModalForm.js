@@ -20,7 +20,7 @@ class JoinGroupModalForm extends Component {
     const { onSubmit, handleSubmit, proceeding } = this.props;
     return (
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <div className="modal-body px-4">
+        <div className="modal-body">
           <p>Question Example 1</p>
           <Field
             className="mb-4"
@@ -55,12 +55,8 @@ class JoinGroupModalForm extends Component {
             validate={[required]}
           />
         </div>
-        <div className="modal-footer px-4 border-0">
-          <Button
-            className="btn-block my-1 p-2"
-            disabled={proceeding}
-            type="submit"
-          >
+        <div className="modal-footer">
+          <Button className="btn-block" disabled={proceeding} type="submit">
             {proceeding ? 'Submitting...' : 'Submit'}
           </Button>
         </div>
