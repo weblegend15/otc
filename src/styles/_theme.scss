@@ -11,6 +11,8 @@ $theme-colors: (
 
 $card-cap-bg: #ebebeb;
 $btn-border-radius: $border-radius;
+
 $card-border-radius: $border-radius-lg;
+$card-border-color: #e5e5e5;
 
 @import '~bootstrap/scss/bootstrap';

@@ -41,19 +41,24 @@ textarea.form-control {
 
 .card {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: none;
-}
-
-.modal-dialog {
-  max-width: 420px;
-}
-
-.custom-checkbox .custom-control-label::before {
-  border-radius: 2px;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
   background-size: 76%;
+}
+
+.custom-control-label[type='checkbox'] {
+  font-size: 14px;
+  &::before,
+  &::after {
+    border-radius: 2px;
+    width: 16px;
+    height: 16px;
+    top: 3px;
+  }
+  & > div {
+    margin-left: 12px;
+  }
 }
 
 .was-validated .form-control:valid,
@@ -87,12 +92,14 @@ textarea.form-control {
     font-size: 12px;
     opacity: 0.5;
     margin-bottom: 6px;
-    margin-top: 24px;
     text-transform: uppercase;
   }
   input {
     min-height: 40px;
     border: 1px solid #d4d4d4;
+    border-radius: 10px;
+  }
+  textarea {
     border-radius: 10px;
   }
 }
@@ -128,12 +135,11 @@ button.btn-lg {
   opacity: 0.5;
 }
 
-@include media-breakpoint-only(xs) {
-  .btn-block-xs-only {
-    display: block;
-    width: 100%;
-  }
+.font-weight-semibold {
+  font-weight: 600;
+}
 
+@include media-breakpoint-between(xs, sm) {
   .groups-list-container {
     background: none;
     border: none;
@@ -143,5 +149,12 @@ button.btn-lg {
       border: none;
       padding: 0 !important;
     }
+  }
+}
+
+@include media-breakpoint-only(xs) {
+  .btn-block-xs-only {
+    display: block;
+    width: 100%;
   }
 }
