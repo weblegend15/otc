@@ -128,7 +128,10 @@ class Topbar extends Component {
 
   renderAuthNav = () => {
     return (
-      <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
+      <Navbar.Collapse
+        id="basic-navbar-nav"
+        className="h-100 d-none d-md-block"
+      >
         <Nav className="mr-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
@@ -151,7 +154,10 @@ class Topbar extends Component {
               placement="bottom"
               overlay={this.renderAlertPopover()}
             >
-              <Button variant="btn-outline-link" className="navbar-icon-buttons">
+              <Button
+                variant="btn-outline-link"
+                className="navbar-icon-buttons"
+              >
                 <Icon name="bell-o" size="lg" className="text-white" />
               </Button>
             </OverlayTrigger>
@@ -162,7 +168,10 @@ class Topbar extends Component {
               placement="bottom"
               overlay={this.renderMessagePopover()}
             >
-              <Button variant="btn-outline-link" className="mx-2 navbar-icon-buttons">
+              <Button
+                variant="btn-outline-link"
+                className="mx-2 navbar-icon-buttons"
+              >
                 <Icon name="envelope-o" size="lg" className="text-white" />
               </Button>
             </OverlayTrigger>
@@ -173,7 +182,10 @@ class Topbar extends Component {
               placement="bottom"
               overlay={this.renderProfilePopover()}
             >
-              <Button variant="btn-outline-link" className="ml-2 navbar-icon-buttons">
+              <Button
+                variant="btn-outline-link"
+                className="ml-2 navbar-icon-buttons"
+              >
                 <Icon name="user-circle-o" size="3x" className="text-primary" />
               </Button>
             </OverlayTrigger>
@@ -189,7 +201,10 @@ class Topbar extends Component {
 
   renderNoAuthNav = pathname => {
     return (
-      <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
+      <Navbar.Collapse
+        id="basic-navbar-nav"
+        className="h-100 d-none d-md-block"
+      >
         <Nav className="mx-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
@@ -213,7 +228,7 @@ class Topbar extends Component {
         <Nav className="pr-5">
           <Link
             to="/auth/signin"
-            className={cx('w-100 pl-4 pr-4 btn', {
+            className={cx('w-100 pl-4 pr-4 btn font-weight-bold p-lg', {
               'btn-primary': pathname !== '/home',
               'btn-outline-info': pathname === '/home',
             })}
@@ -304,7 +319,9 @@ class Topbar extends Component {
         variant="dark"
         expand="md"
         bg={pathname !== '/home' && 'secondary'}
-        className="topbar py-0 px-2"
+        className={cx('topbar py-0 px-2', {
+          'border-bottom': pathname === '/home',
+        })}
       >
         <Navbar.Brand href="/" className="h-100 d-flex align-items-center">
           <img className="ml-md-5" src={logoIcon} alt="logo" />

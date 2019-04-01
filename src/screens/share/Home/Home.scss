@@ -40,5 +40,14 @@
     background-image: url('../../../assets/images/home-page-create-account-background.svg');
     background-repeat: no-repeat;
     background-size: cover;
+    .btn {
+      height: 40px;
+      padding-top: 7px;
+    }
+  }
+  .login-button,
+  .signup-button {
+    height: 40px;
+    padding-top: 7px;
   }
 }

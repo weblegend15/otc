@@ -31,6 +31,7 @@ class Home extends Component {
         onSubmit={this.handleSubmit}
       >
         <Field
+          className="mb-4"
           component={Input}
           type="email"
           name="email"
@@ -47,7 +48,7 @@ class Home extends Component {
 
         <div className="d-flex justify-content-between">
           <Button
-            className="login-button w-50 mr-3"
+            className="login-button w-50 mr-3 font-weight-bold"
             size="lg"
             variant="primary"
             disabled={!!signinFormState.syncErrors || currentUserLoading}
@@ -56,7 +57,7 @@ class Home extends Component {
             LOGIN
           </Button>
           <Button
-            className="w-50 text-white signup-button d-md-none ml-3"
+            className="w-50 text-white signup-button d-md-none ml-3 font-weight-bold"
             variant="outline-light"
             size="lg"
           >
@@ -73,7 +74,9 @@ class Home extends Component {
       <Row className="home-container-section">
         {!currentUser && (
           <Col lg={4} md={6} sm={6} className="login-view ml-md-5">
-            <h3 color="white">Login Into Your Account</h3>
+            <h3 className="mb-4" color="white">
+              Login Into Your Account
+            </h3>
             {this.renderSigninForm()}
           </Col>
         )}
@@ -143,7 +146,7 @@ class Home extends Component {
         <Col className="text-center mb-5">
           <Link
             to="/auth/signup"
-            className="mt-5 pr-5 pl-5 mx-auto btn btn-primary"
+            className="mt-5 pr-5 pl-5 mx-auto btn btn-primary h4-title font-weight-bold"
           >
             CREATE ACCOUNT
           </Link>
