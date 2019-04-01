@@ -63,7 +63,7 @@ class GroupsList extends Component {
         <Row className="groups-list-title mx-2 d-none d-md-block">
           <h3 className="mr-auto">Home</h3>
         </Row>
-        <Card className="groups-list-container pt-3 pt-md-0">
+        <Card className="groups-list-container pt-3 pt-md-0 border-0">
           <Card.Header className="p-3 p-lg-4 bg-none text-right">
             <Button
               className="ml-auto d-flex px-3 mr-3 mr-md-0 mr-lg-4"

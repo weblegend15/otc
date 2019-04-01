@@ -29,7 +29,7 @@ class GroupProfile extends Component {
 
     return (
       <LoadingContainer className="h-100" loading={loading}>
-        <Card className="group-profile m-3 m-md-0 h-100">
+        <Card className="group-profile m-3 m-md-0 h-100 border-0">
           <Card.Header className="border-0">
             <h3 className="row mx-0 font-weight-semibold">{data.name}</h3>
             <div className="row mx-0">
