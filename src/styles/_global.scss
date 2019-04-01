@@ -116,27 +116,35 @@ button.btn-lg {
 }
 
 .h1-title {
-  font-size: 48px;
+  font-size: 36px;
 }
 
 .h2-title {
-  font-size: 36px;
+  font-size: 32px;
 }
 
 .h3-title {
   font-size: 24px;
 }
 
-.p-md {
-  font-size: 14px;
-}
-
 .p-lg {
   font-size: 16px;
 }
 
+.p-md {
+  font-size: 14px;
+}
+
+.p-sm {
+  font-size: 12px;
+}
+
 .opacity-5 {
   opacity: 0.5;
+}
+
+.border-default-color {
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 .font-weight-semibold {

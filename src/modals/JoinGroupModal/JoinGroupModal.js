@@ -10,7 +10,7 @@ export default class JoinGroupModal extends Component {
   };
 
   render() {
-    const { data, ...rest } = this.props;
+    const { data, joinGroupRequest, ...rest } = this.props;
 
     return (
       <Modal {...rest}>

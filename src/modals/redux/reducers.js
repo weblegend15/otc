@@ -12,8 +12,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         show: !state.show,
-        modalType: action.payload,
-        modalData: action.modalData,
+        modalType: action.payload.modalType,
+        modalData: action.payload.modalData,
       };
 
     default:

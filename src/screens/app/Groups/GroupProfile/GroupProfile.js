@@ -29,35 +29,35 @@ class GroupProfile extends Component {
 
     return (
       <LoadingContainer className="h-100" loading={loading}>
-        <Card className="group-profile m-3 m-md-0 h-100 border-0">
-          <Card.Header className="border-0">
-            <h3 className="row mx-0 font-weight-semibold">{data.name}</h3>
-            <div className="row mx-0">
-              <h6 className="mr-auto">{formatNumber(1234)} members</h6>
-              <h6>
+        <Card className="border-0 m-3 m-md-0">
+          <Card.Header className="border-0 p-4">
+            <p className="h2-title font-weight-semibold">{data.name}</p>
+            <div className="d-flex flex-row">
+              <p className="p-sm">{formatNumber(1234)} members</p>
+              <div className="ml-auto p-sm opacity-5 d-flex flex-row">
                 Created on{' '}
                 <Timestamp
-                  className="d-inline"
+                  className=""
                   timestamp={data.createdAt}
                   format="D MMM YYYY"
                 />
-              </h6>
+              </div>
             </div>
           </Card.Header>
           <Card.Body className="p-0">
-            <div className="border-bottom">
-              <span>GROUP DESCRIPTION</span>
+            <div className="border-bottom p-4 border-default-color">
+              <p className="opacity-5 text-uppercase mb-3">Group description</p>
               <p>{data.description}</p>
             </div>
-            <div className="border-bottom">
-              <span>RULES</span>
+            <div className="border-bottom p-4 border-default-color">
+              <p className="opacity-5 text-uppercase mb-3">Rules</p>
               <p>{data.rules}</p>
             </div>
-            <div>
-              <span>ADMIN</span>
+            <div className="p-4">
+              <p className="opacity-5 text-uppercase mb-3">Admin</p>
               <div>
                 <Avatar
-                  className="sm"
+                  className=""
                   data={{
                     firstName: 'John',
                     lastName: 'Smith',
@@ -67,17 +67,26 @@ class GroupProfile extends Component {
               </div>
             </div>
           </Card.Body>
-          <Card.Footer className="border-0 py-3 py-md-4">
+          <Card.Footer className="d-flex flex-row border-0 py-3 py-md-4 align-items-center">
             <Button
-              className="btn-block-xs-only text-uppercase font-wegith-bold"
+              className="btn-block-xs-only font-weight-bold p-lg text-uppercase px-4 ml-md-3"
               onClick={() => toggleModal('joinGroupModal', data)}
             >
               Join this group
             </Button>
-            <div className="ml-auto d-none d-sm-block">
-              <Icon name="facebook" className="my-auto" />
-              <Icon name="twitter" className="my-auto" />
-              <Icon name="paper-plane" className="my-auto" />
+            <div className="ml-auto d-none d-md-block opacity-5">
+              <Icon
+                name="facebook"
+                className="my-auto mx-2 mx-lg-4 h3-title h-100"
+              />
+              <Icon
+                name="twitter"
+                className="my-auto mx-2 mx-lg-4 h3-title h-100"
+              />
+              <Icon
+                name="paper-plane"
+                className="my-auto mx-2 mx-lg-4 h3-title h-100"
+              />
             </div>
           </Card.Footer>
         </Card>

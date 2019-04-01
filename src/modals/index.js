@@ -6,13 +6,20 @@ import JoinGroupModal from './JoinGroupModal';
 
 import toggleModal from './redux/actions';
 
-const ModalContainer = ({ type, ...rest }) => {
-  const modalObj = {
-    newGroupModal: <NewGroupModal {...rest} />,
-    joinGroupModal: <JoinGroupModal {...rest} />,
-  };
+const Modals = {
+  newGroupModal: NewGroupModal,
+  joinGroupModal: JoinGroupModal,
+};
 
-  return !type ? null : modalObj[type];
+const ModalContainer = ({ type, ...rest }) => {
+  const ModalToRender = Modals[type];
+
+  if (!ModalToRender) {
+    // handle no modal found
+    return null;
+  }
+
+  return <ModalToRender {...rest} />;
 };
 
 const mapStateToProps = state => ({

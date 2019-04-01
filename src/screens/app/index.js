@@ -25,9 +25,9 @@ class AppModule extends Component {
     return (
       <Container className="mw-100 p-md-4">
         <ModalContainer />
-        <Row className="m-md-4">
+        <Row className="mx-md-4 mt-0 mb-4">
           <Sidebar />
-          <Col className="p-0 ml-md-5">{this.renderAppRoutes()}</Col>
+          <Col className="p-0 ml-md-4">{this.renderAppRoutes()}</Col>
         </Row>
       </Container>
     );

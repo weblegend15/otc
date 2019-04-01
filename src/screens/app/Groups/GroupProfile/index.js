@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GroupProfile from './GroupProfile';
-import './GroupProfile.scss';
 import { readGroupRequest } from '../redux/actions';
 import toggleModal from '../../../../modals/redux/actions';
 
