@@ -11,12 +11,17 @@ export default ({
   ...rest
 }) => (
   <FieldWrapper {...rest} error={error} touched={touched} label={label}>
-    <CountryDropdown
-      className={cx('form-control', { 'is-invalid': error && touched })}
-      priorityOptions={['US']}
-      autoFocus={false}
-      defaultOptionLabel="-"
-      {...input}
-    />
+    <div
+      className={cx('country-dropdown', {
+        'is-invalid': error && touched,
+      })}
+    >
+      <CountryDropdown
+        priorityOptions={['US']}
+        autoFocus={false}
+        defaultOptionLabel="-"
+        {...input}
+      />
+    </div>
   </FieldWrapper>
 );

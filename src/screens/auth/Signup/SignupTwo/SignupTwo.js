@@ -81,10 +81,11 @@ class SignupTwo extends Component {
 
     return (
       <Container className="p-0 p-sm-3">
-        <Row>
+        <Row className="m-0">
           <Col className="px-5 mt-5 text-center">
             <h3 className="auth-form-header d-flex justify-content-center">
-              Create Account <span className="d-none d-sm-block">&nbsp; - &nbsp; </span>{' '}
+              Create Account{' '}
+              <span className="d-none d-sm-block">&nbsp; - &nbsp; </span>{' '}
               <br className="d-sm-none" />
               Step 2 of 2
             </h3>
@@ -92,9 +93,13 @@ class SignupTwo extends Component {
         </Row>
         <Row className="m-0 mt-4 mb-5">
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
-            <Form className="sign-up-form card m-auto" onSubmit={this.handleSubmit}>
+            <Form
+              className="sign-up-form card m-auto"
+              onSubmit={this.handleSubmit}
+            >
               <div className="px-sm-5 pb-sm-5 card-body">
                 <Field
+                  className="my-4"
                   component={PhoneInput}
                   type="phone"
                   name="phone"
@@ -102,6 +107,7 @@ class SignupTwo extends Component {
                   validate={[phoneRequire]}
                 />
                 <Field
+                  className="mb-4"
                   type="select"
                   name="country"
                   label="COUNTRY"
@@ -109,7 +115,7 @@ class SignupTwo extends Component {
                   onChange={this.handleCountryChange}
                   component={CountryDropdown}
                 />
-                <Row>
+                <Row className="mb-4">
                   <Col xs={{ span: 4 }}>
                     <Field
                       type="select"
@@ -141,6 +147,7 @@ class SignupTwo extends Component {
                   <Field component={Input} type="text" name="address2" />
                 </div>
                 <Field
+                  className="my-4"
                   name="agreeTerms"
                   type="checkbox"
                   label={this.renderTermsLabel()}
@@ -155,13 +162,14 @@ class SignupTwo extends Component {
                   onChange={this.handleRecaptcha}
                 />
               </div>
-              <hr className="m-0" />
-              <div className="text-center px-5 pt-5 pb-3 card-footer card-footer-bg-color">
+              <div className="text-center pt-4 px-md-5 pt-md-5 pb-md-4 card-footer card-footer-bg-color">
                 <Button
                   block
-                  className="mb-5"
+                  className="mb-4 h4-title font-weight-bold"
                   variant="primary"
-                  disabled={!!formSyncErrors.stepTwo || !recaptchaValue || loading}
+                  disabled={
+                    !!formSyncErrors.stepTwo || !recaptchaValue || loading
+                  }
                   type="submit"
                 >
                   SUBMIT

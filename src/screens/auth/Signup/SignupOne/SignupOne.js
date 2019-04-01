@@ -8,7 +8,12 @@ import Col from 'react-bootstrap/Col';
 
 import { Button } from '../../../../components';
 import { Input } from '../../../../reduxForms/fields';
-import { required, minLength, isEmail, confirmation } from '../../../../utils/validate';
+import {
+  required,
+  minLength,
+  isEmail,
+  confirmation,
+} from '../../../../utils/validate';
 
 class SignupOne extends Component {
   handleSubmit = e => {
@@ -23,10 +28,11 @@ class SignupOne extends Component {
 
     return (
       <Container className="p-0 p-sm-3">
-        <Row>
+        <Row className="m-0">
           <Col className="px-5 mt-5 text-center">
             <h3 className="auth-form-header d-flex justify-content-center">
-              Create Account <span className="d-none d-sm-block">&nbsp; - &nbsp; </span>{' '}
+              Create Account{' '}
+              <span className="d-none d-sm-block">&nbsp; - &nbsp; </span>{' '}
               <br className="d-sm-none" />
               Step 1 of 2
             </h3>
@@ -41,6 +47,7 @@ class SignupOne extends Component {
             >
               <div className="px-sm-5 pb-sm-5 card-body">
                 <Field
+                  className="my-4"
                   component={Input}
                   type="text"
                   name="firstName"
@@ -48,6 +55,7 @@ class SignupOne extends Component {
                   validate={[required]}
                 />
                 <Field
+                  className="mb-4"
                   component={Input}
                   type="text"
                   name="lastName"
@@ -55,6 +63,7 @@ class SignupOne extends Component {
                   validate={[required]}
                 />
                 <Field
+                  className="mb-4"
                   component={Input}
                   type="email"
                   name="email"
@@ -62,6 +71,7 @@ class SignupOne extends Component {
                   validate={[required, isEmail]}
                 />
                 <Field
+                  className="mb-4"
                   component={Input}
                   type="password"
                   name="password"
@@ -76,10 +86,10 @@ class SignupOne extends Component {
                   validate={[required, confirmation]}
                 />
               </div>
-              <div className="text-center px-sm-5 pt-sm-5 pb-sm-3 card-footer card-footer-bg-color">
+              <div className="text-center pt-4 px-sm-5 pt-sm-5 pb-sm-4 card-footer card-footer-bg-color">
                 <Button
                   block
-                  className="mb-5"
+                  className="mb-4 h4-title font-weight-bold"
                   variant="primary"
                   disabled={!!formSyncErrors.stepOne}
                   type="submit"
@@ -93,7 +103,10 @@ class SignupOne extends Component {
                 >
                   SIGN IN
                 </Link>
-                <Link className="w-100 text-center link-size" to="/auth/reset-password">
+                <Link
+                  className="w-100 text-center link-size"
+                  to="/auth/reset-password"
+                >
                   FORGOT PASSWORD?
                 </Link>
               </div>

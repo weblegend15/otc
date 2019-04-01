@@ -2,6 +2,7 @@
   input[type='tel'] {
     width: inherit;
     height: auto;
+    border-radius: 10px;
   }
 }
 
@@ -20,7 +21,7 @@
   border-left: none;
   border-top: none;
   border-bottom: none;
-  border-radius: 6px 0 0 6px;
+  border-radius: 10px 0 0 10px;
 }
 
 .react-tel-input .flag-dropdown:hover .selected-flag {
@@ -29,10 +30,10 @@
 
 .react-tel-input .flag-dropdown.open-dropdown .selected-flag {
   background-color: inherit;
-  border-radius: 6px 0 0 6px;
+  border-radius: 10px 0 0 10px;
 }
 
 .react-tel-input .flag-dropdown.open-dropdown {
   background-color: #eaeaea;
-  border-radius: 6px 0 0 6px;
+  border-radius: 10px 0 0 10px;
 }
