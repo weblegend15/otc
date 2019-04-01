@@ -44,3 +44,31 @@ export const readGroupSuccess = data => ({
 export const readGroupError = () => ({
   type: CONSTANTS.READ_GROUP_ERROR,
 });
+
+// delete group
+export const deleteGroupRequest = data => ({
+  type: CONSTANTS.DELETE_GROUP_REQUEST,
+  payload: data,
+});
+
+export const deleteGroupSuccess = () => ({
+  type: CONSTANTS.DELETE_GROUP_SUCCESS,
+});
+
+export const deleteGroupError = () => ({
+  type: CONSTANTS.DELETE_GROUP_ERROR,
+});
+
+// approve group
+export const approveGroupRequest = data => ({
+  type: CONSTANTS.APPROVE_GROUP_REQUEST,
+  payload: data,
+});
+
+export const approveGroupSuccess = () => ({
+  type: CONSTANTS.APPROVE_GROUP_SUCCESS,
+});
+
+export const approveGroupError = () => ({
+  type: CONSTANTS.APPROVE_GROUP_ERROR,
+});
