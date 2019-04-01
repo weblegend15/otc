@@ -2,7 +2,7 @@ import Timestamp from './Timestamp';
 import Icon from './Icon';
 import Button, { IconButton } from './Button';
 import Card from './Card';
-import Modal from './Modal';
+import Modal, { ModalHeader, ModalBody, ModalFooter } from './Modal';
 import Rating from './Rating';
 import Input from './Input';
 import Tabs from './Tabs';
@@ -16,6 +16,10 @@ import Overlay from './Overlay';
 import ButtonToolbar from './ButtonToolbar';
 import Popover from './Popover';
 import LoadingContainer from './LoadingContainer';
+import Form from './Form';
+import Col from './Col';
+import Row from './Row';
+import Container from './Container';
 
 export {
   Timestamp,
@@ -24,6 +28,9 @@ export {
   IconButton,
   Card,
   Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
   Rating,
   Input,
   Tabs,
@@ -37,4 +44,8 @@ export {
   Popover,
   ButtonToolbar,
   LoadingContainer,
+  Form,
+  Col,
+  Row,
+  Container,
 };

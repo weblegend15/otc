@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
-import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
+import { Row, Col, Container } from '../../components';
 import { GroupsList, GroupProfile } from './Groups';
 import { UserProfile } from './Users';
-
 import { Sidebar } from '../../layouts';
+import ModalContainer from '../../modals';
 
 class AppModule extends Component {
   renderAppRoutes = () => {
@@ -26,12 +23,11 @@ class AppModule extends Component {
 
   render() {
     return (
-      <Container className="mw-100">
-        <Row>
-          <Col className="my-4 ml-4 mr-lg-0" xl={3}>
-            <Sidebar />
-          </Col>
-          <Col className="m-4">{this.renderAppRoutes()}</Col>
+      <Container className="mw-100 p-md-4">
+        <ModalContainer />
+        <Row className="mx-md-4 mt-0 mb-4">
+          <Sidebar />
+          <Col className="p-0 ml-md-4">{this.renderAppRoutes()}</Col>
         </Row>
       </Container>
     );

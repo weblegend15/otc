@@ -1,5 +1,4 @@
-@import "./variables";
-
+// Bootstrap style override
 $theme-colors: (
   'primary': $primary,
   'secondary': $secondary,
@@ -10,7 +9,10 @@ $theme-colors: (
   'light': $light,
 );
 
+$card-cap-bg: #ebebeb;
 $btn-border-radius: $border-radius;
+
 $card-border-radius: $border-radius-lg;
+$card-border-color: #e5e5e5;
 
 @import '~bootstrap/scss/bootstrap';

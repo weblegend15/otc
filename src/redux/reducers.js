@@ -4,10 +4,12 @@ import { reducer as reduxFormReducer } from 'redux-form';
 
 import authReducer from '../screens/auth/redux/reducers';
 import appReducer from '../screens/app/redux/reducers';
+import modalReducer from '../modals/redux/reducers';
 
 export default combineReducers({
   routing: routerReducer,
   form: reduxFormReducer,
   auth: authReducer,
   app: appReducer,
+  modal: modalReducer,
 });

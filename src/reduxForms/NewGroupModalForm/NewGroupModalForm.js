@@ -6,11 +6,12 @@ import { Button } from '../../components';
 
 import { required } from '../../utils/validate';
 
-export default ({ handleSubmit, submitting, onSubmit }) => {
+export default ({ handleSubmit, onSubmit, proceeding }) => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <div className="modal-body px-4">
+      <div className="modal-body">
         <Field
+          className="mb-4"
           component={Input}
           type="text"
           name="groupName"
@@ -18,22 +19,17 @@ export default ({ handleSubmit, submitting, onSubmit }) => {
           validate={[required]}
         />
         <Field
-          className="mb-5"
           component={Input}
           as="textarea"
-          rows="4"
+          rows="3"
           name="groupDescription"
           label="GROUP DESCRIPTION"
           validate={[required]}
         />
       </div>
-      <div className="modal-footer px-4">
-        <Button
-          className="btn-block my-3 p-2"
-          disabled={submitting}
-          type="submit"
-        >
-          SEND REQUEST
+      <div className="modal-footer">
+        <Button className="btn-block" disabled={proceeding} type="submit">
+          {proceeding ? 'Sending...' : 'Send request'}
         </Button>
       </div>
     </Form>

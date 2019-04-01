@@ -1,20 +1,19 @@
-$primary-color: #000000;
-$backup-color: #ffffff;
+$nav-background-color: #101c2a;
+$main-background-color: #d4d4d4;
 
-$brand-bg-color: #019690;
-$primary-bg-color: #ffffff;
-$backup-bg-color: #e5e5e5;
-$deny-bg-color: #d4d4d4;
-
+$primary: #00988a;
+$secondary: #101c2a;
+// 'success': $success,
 $info: #45b8f1;
 $warning: #ff9c41;
 $danger: #ea3900;
 $light: #c4c4c4;
 $dark: #a6a6a6;
 
-$white: $backup-color;
-$primary: #019690;
-$secondary: #101c2a;
+$white: white;
+$black: black;
 
 $border-radius: 6px;
 $border-radius-lg: 10px;
+
+$card-cap-bg: #ebebeb;
