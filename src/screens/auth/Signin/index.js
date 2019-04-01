@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { signinRequest } from '../redux/actions';
 import Signin from './Signin';
+import './Signin.scss';
 
 Signin.propTypes = {
   signinRequest: PropTypes.func,

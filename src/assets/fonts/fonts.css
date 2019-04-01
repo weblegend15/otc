@@ -47,6 +47,20 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: proxima_nova;
+  src: url('./Proxima-Nova-Sbold.otf') format('otf');
+  font-weight: 600;
+  font-style: normal
+}
+
+@font-face {
+  font-family: proxima_nova;
+  src: url('./Proxima-Nova-Bold.otf') format('otf');
+  font-weight: 900;
+  font-style: normal;
+}
+
 /* variant of proxima nova font*/
 @font-face {
   font-family: proxima_scosfthin;

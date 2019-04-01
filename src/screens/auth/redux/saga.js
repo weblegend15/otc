@@ -11,6 +11,9 @@ import {
   sendConfirmError,
   verifyEmailSuccess,
   verifyEmailError,
+  forgotPasswordSuccess,
+  forgotPasswordError,
+  confirmPasswordError,
 } from './actions';
 
 import { history } from '../../../configureStore';
@@ -88,9 +91,38 @@ function* verifyEmail(action) {
   }
 }
 
+function* forgotPassword(action) {
+  try {
+    const requestData = {
+      email: action.email,
+    };
+
+    yield call(request, '/auth/request-reset-password', 'POST', requestData, false);
+    yield put(forgotPasswordSuccess(action.email));
+  } catch (err) {
+    yield put(forgotPasswordError(err));
+  }
+}
+
+function* confirmPassword(action) {
+  try {
+    const requestData = {
+      email: action.email,
+      password: action.password,
+      token: action.token,
+    };
+    yield call(request, '/auth/reset-password', 'POST', requestData, false);
+    history.push('/auth/signin');
+  } catch (err) {
+    yield put(confirmPasswordError(err));
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(CONSTANTS.SIGNUP_REQUEST, signup);
   yield takeLatest(CONSTANTS.SIGNIN_REQUEST, signin);
   yield takeLatest(CONSTANTS.SEND_CONFIRM_REQUEST, sendConfirm);
   yield takeLatest(CONSTANTS.VERIFY_EMAIL_REQUEST, verifyEmail);
+  yield takeLatest(CONSTANTS.FORGOT_PASSWORD_REQUEST, forgotPassword);
+  yield takeLatest(CONSTANTS.CONFIRM_PASSWORD_REQUEST, confirmPassword);
 }
