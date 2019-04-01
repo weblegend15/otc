@@ -1,7 +1,13 @@
+@import '../../../../../styles/variables';
+
 .group-card {
   .card-body {
     h4 {
+      color: black;
       font-size: 18px;
+      &:hover {
+        color: $primary;
+      }
     }
     &-status {
       span {
