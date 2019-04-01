@@ -1,0 +1,16 @@
+@import '../../../styles/variables';
+
+.state-dropdown {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #d4d4d4;
+  &.is-invalid {
+    border-color: $danger;
+  }
+  select {
+    border: none;
+    height: 38px;
+    width: 100%;
+    outline: none;
+  }
+}

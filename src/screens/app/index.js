@@ -4,7 +4,8 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import { Row, Col, Container } from '../../components';
 import { GroupsList, GroupProfile } from './Groups';
 import { UserProfile } from './Users';
-import { Sidebar } from '../../layouts';
+
+import { Sidebar, MobileSidebar } from '../../layouts';
 import ModalContainer from '../../modals';
 
 class AppModule extends Component {
@@ -23,11 +24,12 @@ class AppModule extends Component {
 
   render() {
     return (
-      <Container className="mw-100 p-md-4">
+      <Container className="mw-100 p-0 p-md-4">
         <ModalContainer />
-        <Row className="mx-md-4 mt-0 mb-4">
+        <MobileSidebar />
+        <Row className="mx-md-4 m-0 mb-4">
           <Sidebar />
-          <Col className="p-0 ml-md-4">{this.renderAppRoutes()}</Col>
+          <Col className="p-0 m-md-0 ml-md-4">{this.renderAppRoutes()}</Col>
         </Row>
       </Container>
     );

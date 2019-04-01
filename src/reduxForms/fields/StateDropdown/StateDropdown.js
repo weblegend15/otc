@@ -12,14 +12,19 @@ export default ({
   ...rest
 }) => (
   <FieldWrapper {...rest} error={error} label={label} touched={touched}>
-    <RegionDropdown
-      className={cx('form-control', { 'is-invalid': touched && error })}
-      disableWhenEmpty
-      country={country}
-      labelType="short"
-      valueType="short"
-      defaultOptionLabel="-"
-      {...input}
-    />
+    <div
+      className={cx('state-dropdown', {
+        'is-invalid': touched && error,
+      })}
+    >
+      <RegionDropdown
+        disableWhenEmpty
+        country={country}
+        labelType="short"
+        valueType="short"
+        defaultOptionLabel="-"
+        {...input}
+      />
+    </div>
   </FieldWrapper>
 );

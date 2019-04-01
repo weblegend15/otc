@@ -36,14 +36,19 @@ class Signin extends Component {
           </Col>
         </Row>
         <Row className="m-0 mt-4 mb-5">
-          <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
+          <Col
+            md={{ span: 8, offset: 2 }}
+            lg={{ span: 6, offset: 3 }}
+            className="p-0"
+          >
             <Form
               className="card login-form m-auto"
               validated={!signinFormState.syncErrors}
               onSubmit={this.handleSubmit}
             >
-              <div className="px-5 pb-5 card-body">
+              <div className="px-md-5 pb-md-5 card-body">
                 <Field
+                  className="mb-4 my-md-4"
                   component={Input}
                   type="email"
                   name="email"
@@ -51,6 +56,7 @@ class Signin extends Component {
                   validate={[required, isEmail]}
                 />
                 <Field
+                  className="mb-2 mb-md-0"
                   component={Input}
                   type="password"
                   name="password"
@@ -58,9 +64,9 @@ class Signin extends Component {
                   validate={[required]}
                 />
               </div>
-              <div className="text-center px-5 pt-5 pb-3 card-footer form-footer">
+              <div className="text-center pt-4 px-md-5 pt-md-5 pb-md-4 card-footer form-footer">
                 <Button
-                  className="mr-5 px-5 mb-5 btn-block"
+                  className="mr-5 px-5 mb-4 btn-block font-weight-bold h4-title"
                   disabled={!!signinFormState.syncErrors || currentUserLoading}
                   type="submit"
                 >
@@ -73,7 +79,10 @@ class Signin extends Component {
                 >
                   SIGN UP
                 </Link>
-                <Link className="w-100 text-center link-size" to="/auth/reset-password">
+                <Link
+                  className="w-100 text-center link-size"
+                  to="/auth/reset-password"
+                >
                   FORGOT PASSWORD?
                 </Link>
               </div>
