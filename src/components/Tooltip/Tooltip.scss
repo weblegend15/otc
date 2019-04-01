@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .tooltip-left {
-  background-color: $primary-bg-color;
+  background-color: $white;
   width: 150px;
   left: 30px;
   font-size: 12px;
@@ -12,14 +12,14 @@
     position: absolute;
     right: 45px;
     bottom: 100%;
-    border-bottom: 10px solid $primary-bg-color;
+    border-bottom: 10px solid $white;
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
   }
 }
 
 .tooltip-right {
-  background-color: $primary-bg-color;
+  background-color: $white;
   width: 150px;
   left: 10px;
   font-size: 12px;
@@ -30,7 +30,7 @@
     position: absolute;
     right: 15px;
     bottom: 100%;
-    border-bottom: 10px solid $primary-bg-color;
+    border-bottom: 10px solid $white;
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
   }

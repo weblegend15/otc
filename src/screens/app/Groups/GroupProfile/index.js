@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GroupProfile from './GroupProfile';
-
 import { readGroupRequest } from '../redux/actions';
+import toggleModal from '../../../../modals/redux/actions';
 
 GroupProfile.propTypes = {
   group: PropTypes.object.isRequired,
   readGroupRequest: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 const matStateToProps = state => ({
@@ -15,6 +16,7 @@ const matStateToProps = state => ({
 
 const mapDispatchToProps = {
   readGroupRequest,
+  toggleModal,
 };
 
 export default connect(

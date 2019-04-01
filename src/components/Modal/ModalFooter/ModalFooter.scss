@@ -1,0 +1,12 @@
+.modal-footer {
+  background: rgba(235, 235, 235, 0.5);
+  padding: 20px;
+  border: none;
+  .btn {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding-top: 7px;
+    height: 40px;
+  }
+}
