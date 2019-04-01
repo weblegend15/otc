@@ -16,6 +16,8 @@ import Overlay from './Overlay';
 import ButtonToolbar from './ButtonToolbar';
 import Popover from './Popover';
 import LoadingContainer from './LoadingContainer';
+import Nav from './Nav';
+import Navbar from './Navbar';
 
 export {
   Timestamp,
@@ -37,4 +39,6 @@ export {
   Popover,
   ButtonToolbar,
   LoadingContainer,
+  Nav,
+  Navbar,
 };
