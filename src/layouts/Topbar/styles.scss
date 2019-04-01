@@ -3,7 +3,6 @@
 .topbar {
   height: 100px;
   z-index: 99;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .topbar-item-active {
@@ -11,7 +10,8 @@
   text-decoration: none !important;
   border-bottom: 3px solid transparent;
   opacity: 0.5;
-  &:active, &:hover {
+  &:active,
+  &:hover {
     color: white;
     border-bottom: 3px solid $primary;
   }
@@ -52,7 +52,8 @@
   }
 }
 
-#popover-profile, #popover-alert {
+#popover-profile,
+#popover-alert {
   .popover-body {
     padding: 0;
   }

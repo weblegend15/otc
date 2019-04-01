@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import { GroupsList, GroupProfile } from './Groups';
 import { UserProfile } from './Users';
 
-import { Sidebar } from '../../layouts';
+import { Sidebar, MobileSidebar } from '../../layouts';
 
 class AppModule extends Component {
   renderAppRoutes = () => {
@@ -26,7 +26,8 @@ class AppModule extends Component {
 
   render() {
     return (
-      <Container className="mw-100">
+      <Container className="mw-100 p-0">
+        <MobileSidebar />
         <Row>
           <Col className="my-4 ml-4 mr-lg-0" xl={3}>
             <Sidebar />
