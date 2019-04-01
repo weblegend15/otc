@@ -12,3 +12,18 @@ export const getProfileSuccess = profile => ({
 export const getProfileError = () => ({
   type: CONSTANTS.GET_PROFILE_ERROR,
 });
+
+export const joinGroupRequest = (data, groupId) => ({
+  type: CONSTANTS.JOIN_GROUP_REQUEST,
+  payload: data,
+  groupId,
+});
+
+export const joinGroupSuccess = data => ({
+  type: CONSTANTS.JOIN_GROUP_SUCCESS,
+  payload: data,
+});
+
+export const joinGroupError = () => ({
+  type: CONSTANTS.JOIN_GROUP_ERROR,
+});

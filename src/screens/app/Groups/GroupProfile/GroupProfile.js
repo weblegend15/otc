@@ -7,6 +7,7 @@ import {
   Avatar,
   LoadingContainer,
 } from '../../../../components';
+
 import { formatNumber } from '../../../../utils/common';
 
 class GroupProfile extends Component {
@@ -15,47 +16,48 @@ class GroupProfile extends Component {
       match: {
         params: { groupId },
       },
+      readGroupRequest,
     } = this.props;
-    const { readGroupRequest } = this.props;
     readGroupRequest(groupId);
   }
 
   render() {
     const {
       group: { data, loading },
+      toggleModal,
     } = this.props;
 
     return (
       <LoadingContainer loading={loading}>
-        <Card>
-          <Card.Header className="border-none">
-            <h3 className="row mx-0">{data.name}</h3>
-            <div className="row mx-0">
-              <h6 className="mr-auto">{formatNumber(1234)} members</h6>
-              <h6 className="font-weight-light">
+        <Card className="border-0 m-3 m-md-0">
+          <Card.Header className="border-0 p-4">
+            <p className="h2-title font-weight-semibold">{data.name}</p>
+            <div className="d-flex flex-row">
+              <p className="p-sm">{formatNumber(1234)} members</p>
+              <div className="ml-auto p-sm opacity-5 d-flex flex-row">
                 Created on{' '}
                 <Timestamp
-                  className="d-inline"
+                  className=""
                   timestamp={data.createdAt}
                   format="D MMM YYYY"
                 />
-              </h6>
+              </div>
             </div>
           </Card.Header>
           <Card.Body className="p-0">
-            <div className="border-bottom p-4">
-              <h4 className="font-weight-light">GROUP DESCRIPTION</h4>
+            <div className="border-bottom p-4 border-default-color">
+              <p className="opacity-5 text-uppercase mb-3">Group description</p>
               <p>{data.description}</p>
             </div>
-            <div className="border-bottom p-4">
-              <h4 className="font-weight-light">RULES</h4>
+            <div className="border-bottom p-4 border-default-color">
+              <p className="opacity-5 text-uppercase mb-3">Rules</p>
               <p>{data.rules}</p>
             </div>
             <div className="p-4">
-              <h4 className="font-weight-light">ADMIN</h4>
+              <p className="opacity-5 text-uppercase mb-3">Admin</p>
               <div>
                 <Avatar
-                  className="sm"
+                  className=""
                   data={{
                     firstName: 'John',
                     lastName: 'Smith',
@@ -65,17 +67,25 @@ class GroupProfile extends Component {
               </div>
             </div>
           </Card.Body>
-          <Card.Footer className="row text-muted mx-0 border-none p-4">
-            <Button>JOIN THIS GROUP</Button>
-            <div className="ml-auto d-flex">
+          <Card.Footer className="d-flex flex-row border-0 py-3 py-md-4 align-items-center">
+            <Button
+              className="btn-block-xs-only font-weight-bold p-lg text-uppercase px-4 ml-md-3"
+              onClick={() => toggleModal('joinGroupModal', data)}
+            >
+              Join this group
+            </Button>
+            <div className="ml-auto d-none d-md-block opacity-5">
               <Icon
                 name="facebook"
-                className="btn text-light h4 mx-4 my-auto"
+                className="my-auto mx-2 mx-lg-4 h3-title h-100"
               />
-              <Icon name="twitter" className="btn text-light h4 mx-4 my-auto" />
+              <Icon
+                name="twitter"
+                className="my-auto mx-2 mx-lg-4 h3-title h-100"
+              />
               <Icon
                 name="paper-plane"
-                className="btn text-light h4 mx-4 my-auto"
+                className="my-auto mx-2 mx-lg-4 h3-title h-100"
               />
             </div>
           </Card.Footer>

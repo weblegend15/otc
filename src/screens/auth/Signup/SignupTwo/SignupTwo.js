@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { Card, Button } from '../../../../components';
+import { Button } from '../../../../components';
 
 import {
   CountryDropdown,
@@ -80,96 +80,101 @@ class SignupTwo extends Component {
     const { recaptchaValue } = this.state;
 
     return (
-      <Container>
+      <Container className="p-0 p-sm-3">
         <Row>
-          <Col className="mt-5 text-center">
-            <h3>Create Account - Step 2 of 2</h3>
+          <Col className="px-5 mt-5 text-center">
+            <h3 className="auth-form-header d-flex justify-content-center">
+              Create Account <span className="d-none d-sm-block">&nbsp; - &nbsp; </span>{' '}
+              <br className="d-sm-none" />
+              Step 2 of 2
+            </h3>
           </Col>
         </Row>
-        <Row className="m-0">
+        <Row className="m-0 mt-4 mb-5">
           <Col md={{ span: 8, offset: 2 }} lg={{ span: 6, offset: 3 }}>
-            <Card className="mt-4 mb-5">
-              <Form onSubmit={this.handleSubmit}>
-                <Container className="p-5">
-                  <Field
-                    component={PhoneInput}
-                    type="phone"
-                    name="phone"
-                    label="PHONE NUMBER"
-                    validate={[phoneRequire]}
-                  />
-                  <Field
-                    type="select"
-                    name="country"
-                    label="COUNTRY"
-                    validate={[required]}
-                    onChange={this.handleCountryChange}
-                    component={CountryDropdown}
-                  />
-                  <Row>
-                    <Col xs={{ span: 4 }}>
-                      <Field
-                        type="select"
-                        name="state"
-                        label="STATE"
-                        validate={[required]}
-                        component={StateDropdown}
-                        {...{ country: stepTwo ? stepTwo.country : '' }}
-                      />
-                    </Col>
-                    <Col xs={{ span: 8 }}>
-                      <Field
-                        component={Input}
-                        type="text"
-                        name="city"
-                        label="CITY"
-                        validate={[required]}
-                      />
-                    </Col>
-                  </Row>
-                  <div className="mb-4">
+            <Form className="sign-up-form card m-auto" onSubmit={this.handleSubmit}>
+              <div className="px-sm-5 pb-sm-5 card-body">
+                <Field
+                  component={PhoneInput}
+                  type="phone"
+                  name="phone"
+                  label="PHONE NUMBER"
+                  validate={[phoneRequire]}
+                />
+                <Field
+                  type="select"
+                  name="country"
+                  label="COUNTRY"
+                  validate={[required]}
+                  onChange={this.handleCountryChange}
+                  component={CountryDropdown}
+                />
+                <Row>
+                  <Col xs={{ span: 4 }}>
                     <Field
-                      className="mb-3"
+                      type="select"
+                      name="state"
+                      label="STATE"
+                      validate={[required]}
+                      component={StateDropdown}
+                      {...{ country: stepTwo ? stepTwo.country : '' }}
+                    />
+                  </Col>
+                  <Col xs={{ span: 8 }}>
+                    <Field
                       component={Input}
                       type="text"
-                      name="address1"
-                      label="ADDRESS"
+                      name="city"
+                      label="CITY"
+                      validate={[required]}
                     />
-                    <Field component={Input} type="text" name="address2" />
-                  </div>
+                  </Col>
+                </Row>
+                <div className="mb-4">
                   <Field
-                    name="agreeTerms"
-                    type="checkbox"
-                    label={this.renderTermsLabel()}
-                    component={Checkbox}
-                    validate={[required]}
+                    className="mb-3"
+                    component={Input}
+                    type="text"
+                    name="address1"
+                    label="ADDRESS"
                   />
+                  <Field component={Input} type="text" name="address2" />
+                </div>
+                <Field
+                  name="agreeTerms"
+                  type="checkbox"
+                  label={this.renderTermsLabel()}
+                  component={Checkbox}
+                  validate={[required]}
+                />
 
-                  <ReCAPTCHA
-                    className="custom-recaptcha mx-auto mt-4"
-                    style={{ width: '304px' }}
-                    sitekey={RECAPTCHA_KEY}
-                    onChange={this.handleRecaptcha}
-                  />
-                </Container>
-                <hr className="m-0" />
-                <Container className="text-center p-5">
-                  <Button
-                    block
-                    className="mb-5"
-                    variant="primary"
-                    disabled={
-                      !!formSyncErrors.stepTwo || !recaptchaValue || loading
-                    }
-                    type="submit"
-                  >
-                    SUBMIT
-                  </Button>
-                  <p>Already have an account?</p>
-                  <Link to="/auth/signin">SIGN IN</Link>
-                </Container>
-              </Form>
-            </Card>
+                <ReCAPTCHA
+                  className="custom-recaptcha mx-auto mt-4"
+                  style={{ width: '304px' }}
+                  sitekey={RECAPTCHA_KEY}
+                  onChange={this.handleRecaptcha}
+                />
+              </div>
+              <hr className="m-0" />
+              <div className="text-center px-5 pt-5 pb-3 card-footer card-footer-bg-color">
+                <Button
+                  block
+                  className="mb-5"
+                  variant="primary"
+                  disabled={!!formSyncErrors.stepTwo || !recaptchaValue || loading}
+                  type="submit"
+                >
+                  SUBMIT
+                </Button>
+                <p className="pb-2">Create your account</p>
+                <Link
+                  className="pb-3 d-block w-100 text-center link-size"
+                  to="/auth/signin"
+                >
+                  SIGN IN
+                </Link>
+              </div>
+            </Form>
           </Col>
         </Row>
       </Container>

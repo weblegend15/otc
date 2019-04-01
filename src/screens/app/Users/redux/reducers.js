@@ -5,6 +5,8 @@ const initialState = {
     data: {},
     loading: false,
   },
+
+  joinRequestLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -36,6 +38,21 @@ export default (state = initialState, action) => {
         },
       };
 
+    case CONSTANTS.JOIN_GROUP_REQUEST:
+      return {
+        ...state,
+        joinRequestLoading: true,
+      };
+    case CONSTANTS.JOIN_GROUP_SUCCESS:
+      return {
+        ...state,
+        joinRequestLoading: false,
+      };
+    case CONSTANTS.JOIN_GROUP_ERROR:
+      return {
+        ...state,
+        joinRequestLoading: false,
+      };
     default:
       return state;
   }

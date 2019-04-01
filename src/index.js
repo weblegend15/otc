@@ -6,10 +6,10 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import store, { history, persistor } from './configureStore';
 import * as serviceWorker from './serviceWorker';
-import Routes from './routes';
 
 import './styles/_global.scss';
 import './assets/fonts/fonts.css';
+import Routes from './routes';
 
 ReactDOM.render(
   <Provider store={store}>

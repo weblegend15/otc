@@ -1,15 +1,18 @@
 @import './variables';
 @import './theme';
 
-#root {
-  background: $deny-bg-color;
+#root,
+html,
+body {
+  background: $main-background-color;
   font-family: proxima_nova;
+  font-size: 14px;
+  color: $black;
 }
 
 html {
   min-height: 100%;
   position: relative;
-  background: $deny-bg-color;
   #root {
     display: flex;
     flex-direction: column;
@@ -20,6 +23,10 @@ html {
 
 .app-content {
   margin-bottom: 100px;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 button {
@@ -40,12 +47,22 @@ textarea.form-control {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.custom-checkbox .custom-control-label::before {
-  border-radius: 2px;
-}
-
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
   background-size: 76%;
+}
+
+.custom-control-label[type='checkbox'] {
+  font-size: 14px;
+  &::before,
+  &::after {
+    border-radius: 2px;
+    width: 16px;
+    height: 16px;
+    top: 3px;
+  }
+  & > div {
+    margin-left: 12px;
+  }
 }
 
 .was-validated .form-control:valid,
@@ -70,7 +87,7 @@ textarea.form-control {
 }
 
 .was-validated .custom-control-input:valid ~ .custom-control-label {
-  color: black;
+  color: $black;
 }
 
 .form-group {
@@ -79,11 +96,14 @@ textarea.form-control {
     font-size: 12px;
     opacity: 0.5;
     margin-bottom: 6px;
-    margin-top: 24px;
     text-transform: uppercase;
   }
   input {
+    min-height: 40px;
     border: 1px solid #d4d4d4;
+    border-radius: 10px;
+  }
+  textarea {
     border-radius: 10px;
   }
 }
@@ -96,25 +116,75 @@ button.btn-lg {
 }
 
 .h1-title {
-  font-size: 48px;
+  font-size: 36px;
 }
 
 .h2-title {
-  font-size: 36px;
+  font-size: 32px;
 }
 
 .h3-title {
   font-size: 24px;
 }
 
-.p-md {
-  font-size: 14px;
-}
-
 .p-lg {
   font-size: 16px;
 }
 
+.p-md {
+  font-size: 14px;
+}
+
+.p-sm {
+  font-size: 12px;
+}
+
 .opacity-5 {
   opacity: 0.5;
+}
+
+.border-default-color {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.font-weight-semibold {
+  font-weight: 600;
+}
+
+.auth-form-header {
+  font-size: 36px;
+  font-weight: 600;
+  font-family: 'proxima_nova';
+  @media screen and (max-width: 768px) {
+    font-size: 30px;
+  }
+}
+
+.card-footer-bg-color {
+  background-color: $white;
+}
+
+.link-size {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@include media-breakpoint-between(xs, sm) {
+  .groups-list-container {
+    background: none;
+    border: none;
+    box-shadow: none;
+    & > .card-header {
+      background: none;
+      border: none;
+      padding: 0 !important;
+    }
+  }
+}
+
+@include media-breakpoint-only(xs) {
+  .btn-block-xs-only {
+    display: block;
+    width: 100%;
+  }
 }

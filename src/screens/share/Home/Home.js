@@ -26,7 +26,10 @@ class Home extends Component {
   renderSigninForm = () => {
     const { signinFormState, currentUserLoading } = this.props;
     return (
-      <Form validated={!signinFormState.syncErrors} onSubmit={this.handleSubmit}>
+      <Form
+        validated={!signinFormState.syncErrors}
+        onSubmit={this.handleSubmit}
+      >
         <Field
           component={Input}
           type="email"
@@ -81,16 +84,16 @@ class Home extends Component {
   renderPlatformFeatures = () => {
     return (
       <Row className="pb-5 platform-features text-center d-flex justify-content-center ">
-        <h2 className="my-5 h2-title w-100">Platform Features</h2>
+        <h2 className="my-5 h1-title w-100">Platform Features</h2>
         <Col lg={3} md={6} xs={12}>
           <Card className="p-5 mb-5 mx-auto">
             <img src={salary} alt="salary" />
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
-            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget
-            gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam
-            elementum pulvinar etiam non.{' '}
+            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
+            eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
+            diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
         <Col lg={3} md={6} xs={12}>
@@ -99,9 +102,9 @@ class Home extends Component {
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
-            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget
-            gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam
-            elementum pulvinar etiam non.{' '}
+            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
+            eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
+            diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
         <Col lg={3} md={6} xs={12}>
@@ -110,9 +113,9 @@ class Home extends Component {
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
-            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget
-            gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam
-            elementum pulvinar etiam non.{' '}
+            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
+            eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
+            diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
         <Col lg={3} md={6} xs={12}>
@@ -121,9 +124,9 @@ class Home extends Component {
           </Card>
           <h3 className="my-4">Need Content Here</h3>
           <p className="p-md opacity-5">
-            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget
-            gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam
-            elementum pulvinar etiam non.{' '}
+            Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit
+            eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id
+            diam vel quam elementum pulvinar etiam non.{' '}
           </p>
         </Col>
       </Row>
@@ -138,7 +141,10 @@ class Home extends Component {
           Some expanation on why to create an account on the platform
         </p>
         <Col className="text-center mb-5">
-          <Link to="/auth/signup" className="mt-5 pr-5 pl-5 mx-auto btn btn-primary">
+          <Link
+            to="/auth/signup"
+            className="mt-5 pr-5 pl-5 mx-auto btn btn-primary"
+          >
             CREATE ACCOUNT
           </Link>
         </Col>
