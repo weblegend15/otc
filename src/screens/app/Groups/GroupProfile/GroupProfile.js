@@ -28,7 +28,7 @@ class GroupProfile extends Component {
     } = this.props;
 
     return (
-      <LoadingContainer className="h-100" loading={loading}>
+      <LoadingContainer loading={loading}>
         <Card className="border-0 m-3 m-md-0">
           <Card.Header className="border-0 p-4">
             <p className="h2-title font-weight-semibold">{data.name}</p>
