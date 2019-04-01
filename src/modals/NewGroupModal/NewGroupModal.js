@@ -13,8 +13,10 @@ export default class NewGroupModal extends Component {
   };
 
   render() {
+    const { createGroupRequest, ...rest } = this.props;
+
     return (
-      <Modal {...this.props}>
+      <Modal {...rest}>
         <ModalHeader
           closeButton
           title="Request to Create a Group"
