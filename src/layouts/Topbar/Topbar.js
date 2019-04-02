@@ -208,7 +208,9 @@ class Topbar extends Component {
         <Nav className="mx-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
-            to="/home"
+            to="/"
+            exact
+            activeClassName="active"
           >
             Home
           </NavLink>
@@ -229,8 +231,8 @@ class Topbar extends Component {
           <Link
             to="/auth/signin"
             className={cx('w-100 pl-4 pr-4 btn font-weight-bold p-lg', {
-              'btn-primary': pathname !== '/home',
-              'btn-outline-info': pathname === '/home',
+              'btn-primary': pathname !== '/',
+              'btn-outline-info': pathname === '/',
             })}
           >
             SIGN IN
@@ -275,7 +277,9 @@ class Topbar extends Component {
             <Nav className="p-0 h-100 w-100">
               <NavLink
                 className="py-3 ml-3 mobile-navbar-item-active h-100 d-flex align-items-center"
-                to="/home"
+                to="/"
+                exact
+                activeClassName="active"
                 onClick={this.hideMobileNavbar}
               >
                 Home
@@ -318,13 +322,15 @@ class Topbar extends Component {
       <Navbar
         variant="dark"
         expand="md"
-        bg={pathname !== '/home' && 'secondary'}
+        bg={pathname !== '/' && 'secondary'}
         className={cx('topbar py-0 px-2', {
-          'border-bottom': pathname === '/home',
+          'border-bottom': pathname === '/',
         })}
       >
-        <Navbar.Brand href="/" className="h-100 d-flex align-items-center">
-          <img className="ml-md-5" src={logoIcon} alt="logo" />
+        <Navbar.Brand className="h-100 d-flex align-items-center">
+          <Link to="/">
+            <img className="ml-md-5 my-auto" src={logoIcon} alt="logo" />
+          </Link>
         </Navbar.Brand>
         <Button
           className="d-md-none"
