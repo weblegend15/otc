@@ -41,7 +41,7 @@ export default ({
           </Button>
         )}
 
-        {currentUser.role === 'ADMIN' && (
+        {currentUser.role === 'ADMIN' && status !== 'ACTIVE' && (
           <Button
             variant="outline-link"
             onClick={() => toggleModal('approveGroupModal', groupId)}

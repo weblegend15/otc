@@ -76,8 +76,7 @@ function* deleteGroup(action) {
   try {
     yield call(request, `/groups/${action.payload}`, 'DELETE', null, true);
 
-    yield put(getGroupsRequest({ limit: PAGE_LIMIT, skip: 0 }));
-    yield put(deleteGroupSuccess());
+    yield put(deleteGroupSuccess(action.payload));
     yield put(toggleModal('deleteGroupModal'));
   } catch (err) {
     notify('error', err.message);
@@ -93,8 +92,7 @@ function* approveGroup(action) {
     };
     yield call(request, `/groups/${action.payload}`, 'PUT', requestData, true);
 
-    yield put(getGroupsRequest({ limit: PAGE_LIMIT, skip: 0 }));
-    yield put(approveGroupSuccess());
+    yield put(approveGroupSuccess(action.payload));
     yield put(toggleModal('approveGroupModal'));
   } catch (err) {
     notify('error', err.message);

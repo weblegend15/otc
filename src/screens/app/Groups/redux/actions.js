@@ -51,8 +51,9 @@ export const deleteGroupRequest = data => ({
   payload: data,
 });
 
-export const deleteGroupSuccess = () => ({
+export const deleteGroupSuccess = groupId => ({
   type: CONSTANTS.DELETE_GROUP_SUCCESS,
+  payload: groupId,
 });
 
 export const deleteGroupError = () => ({
@@ -65,8 +66,9 @@ export const approveGroupRequest = data => ({
   payload: data,
 });
 
-export const approveGroupSuccess = () => ({
+export const approveGroupSuccess = groupId => ({
   type: CONSTANTS.APPROVE_GROUP_SUCCESS,
+  payload: groupId,
 });
 
 export const approveGroupError = () => ({
