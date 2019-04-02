@@ -17,7 +17,7 @@ const Routes = ({ currentUser }) => (
     <Route exact path="/privacy-policy" component={PrivacyPolicy} />
     {!currentUser && <Route exact path="/home" component={Home} />}
     {currentUser && <Redirect to="/app" />}
-    {!currentUser && <Redirect to="/auth" />}
+    {!currentUser && <Redirect to="/home" />}
   </Switch>
 );
 
