@@ -12,7 +12,10 @@ export default ({
   currentUser,
   toggleModal,
 }) => {
-  const { isGroupAdmin } = checkGroupPermission(currentUser, groupId);
+  const { isGroupAdmin, isBanned, isApplied, isMember } = checkGroupPermission(
+    currentUser,
+    groupId,
+  );
 
   return (
     <Card className="group-card">
@@ -47,12 +50,20 @@ export default ({
           </Button>
         )}
 
-        <Link
-          to={`/app/groups/${groupId}`}
-          className="btn btn-primary ml-auto font-weight-bold"
-        >
-          REQUEST ACCESS
-        </Link>
+        <div className="ml-auto">
+          {isApplied && 'Applied'}
+          {isBanned && 'Banned'}
+          {isMember && 'Member'}
+        </div>
+
+        {!isGroupAdmin && !isBanned && !isMember && !isApplied && (
+          <Link
+            to={`/app/groups/${groupId}`}
+            className="btn btn-primary ml-auto font-weight-bold"
+          >
+            REQUEST ACCESS
+          </Link>
+        )}
       </Card.Footer>
     </Card>
   );
