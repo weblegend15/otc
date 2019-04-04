@@ -22,6 +22,9 @@ import Form from './Form';
 import Col from './Col';
 import Row from './Row';
 import Container from './Container';
+import GeneralAvatar from './Avatar/GeneralAvatar';
+import LabelRating from './Rating/LabelRating';
+import SocialIcons from './SocialIcons';
 
 export {
   Timestamp,
@@ -52,4 +55,7 @@ export {
   Col,
   Row,
   Container,
+  GeneralAvatar,
+  LabelRating,
+  SocialIcons,
 };
