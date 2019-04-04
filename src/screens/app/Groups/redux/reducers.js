@@ -102,6 +102,68 @@ export default (state = initialState, action) => {
         },
       };
 
+    case CONSTANTS.DELETE_GROUP_REQUEST:
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          loading: true,
+        },
+      };
+    case CONSTANTS.DELETE_GROUP_SUCCESS:
+      return {
+        ...state,
+        groups: {
+          ...state.groups,
+          list: state.groups.list.filter(item => item._id !== action.payload),
+        },
+        group: {
+          ...state.group,
+          loading: false,
+        },
+      };
+    case CONSTANTS.DELETE_GROUP_ERROR:
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          loading: false,
+          data: {},
+        },
+      };
+
+    case CONSTANTS.APPROVE_GROUP_REQUEST:
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          loading: true,
+        },
+      };
+    case CONSTANTS.APPROVE_GROUP_SUCCESS:
+      return {
+        ...state,
+        groups: {
+          ...state.groups,
+          list: state.groups.list.map(item =>
+            item._id === action.payload ? { ...item, status: 'ACTIVE' } : item,
+          ),
+        },
+        group: {
+          ...state.group,
+          loading: false,
+        },
+      };
+    case CONSTANTS.APPROVE_GROUP_ERROR:
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          loading: false,
+          data: {},
+        },
+      };
+
     default:
       return state;
   }

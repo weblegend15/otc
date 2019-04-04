@@ -9,6 +9,7 @@ import {
 } from '../../../../components';
 
 import { formatNumber } from '../../../../utils/common';
+import { checkGroupPermission } from '../../../../utils/permission';
 
 class GroupProfile extends Component {
   componentDidMount() {
@@ -25,7 +26,15 @@ class GroupProfile extends Component {
     const {
       group: { data, loading },
       toggleModal,
+      currentUser,
     } = this.props;
+
+    const {
+      isGroupAdmin,
+      isApplied,
+      isBanned,
+      isMember,
+    } = checkGroupPermission(currentUser, data._id);
 
     return (
       <LoadingContainer loading={loading}>
@@ -68,12 +77,20 @@ class GroupProfile extends Component {
             </div>
           </Card.Body>
           <Card.Footer className="d-flex flex-row border-0 py-3 py-md-4 align-items-center">
-            <Button
-              className="btn-block-xs-only font-weight-bold p-lg text-uppercase px-4 ml-md-3"
-              onClick={() => toggleModal('joinGroupModal', data)}
-            >
-              Join this group
-            </Button>
+            <div>
+              {isApplied && 'Applied'}
+              {isBanned && 'Banned'}
+              {isMember && 'Member'}
+            </div>
+
+            {!isGroupAdmin && !isBanned && !isMember && !isApplied && (
+              <Button
+                className="btn-block-xs-only font-weight-bold p-lg text-uppercase px-4 ml-md-3"
+                onClick={() => toggleModal('joinGroupModal', data)}
+              >
+                Join this group
+              </Button>
+            )}
             <div className="ml-auto d-none d-md-block opacity-5">
               <Icon
                 name="facebook"

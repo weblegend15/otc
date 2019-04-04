@@ -8,10 +8,12 @@ GroupProfile.propTypes = {
   group: PropTypes.object.isRequired,
   readGroupRequest: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 const matStateToProps = state => ({
   group: state.app.group.group,
+  currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = {

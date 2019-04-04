@@ -5,8 +5,11 @@ import { JoinGroupModalForm } from '../../reduxForms';
 
 export default class JoinGroupModal extends Component {
   handleSubmit = values => {
-    const { joinGroupRequest, groupId } = this.props;
-    joinGroupRequest(values, groupId);
+    const {
+      joinGroupRequest,
+      data: { _id },
+    } = this.props;
+    joinGroupRequest(values, _id);
   };
 
   render() {

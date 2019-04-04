@@ -4,24 +4,13 @@
   .card-body {
     h4 {
       color: black;
-      font-size: 18px;
       &:hover {
         color: $primary;
       }
     }
-    &-status {
-      span {
-        font-size: 18px;
-      }
-    }
-    &-status,
-    .card-footer {
-      font-size: 12px;
-    }
   }
 
   a.btn {
-    text-transform: uppercase;
     height: 35px;
     line-height: 26px;
   }
