@@ -19,6 +19,7 @@ import LoadingContainer from './LoadingContainer';
 import Nav from './Nav';
 import Navbar from './Navbar';
 import Form from './Form';
+import Dropdown from './Dropdown';
 import Col from './Col';
 import Row from './Row';
 import Container from './Container';
@@ -49,6 +50,7 @@ export {
   Nav,
   Navbar,
   Form,
+  Dropdown,
   Col,
   Row,
   Container,
