@@ -128,10 +128,7 @@ class Topbar extends Component {
 
   renderAuthNav = () => {
     return (
-      <Navbar.Collapse
-        id="basic-navbar-nav"
-        className="h-100 d-none d-md-block"
-      >
+      <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
         <Nav className="mr-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
@@ -141,7 +138,7 @@ class Topbar extends Component {
           </NavLink>
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"
-            to="/app/groups"
+            to="/app/my-groups"
           >
             My Groups
           </NavLink>
@@ -154,10 +151,7 @@ class Topbar extends Component {
               placement="bottom"
               overlay={this.renderAlertPopover()}
             >
-              <Button
-                variant="btn-outline-link"
-                className="navbar-icon-buttons"
-              >
+              <Button variant="btn-outline-link" className="navbar-icon-buttons">
                 <Icon name="bell-o" size="lg" className="text-white" />
               </Button>
             </OverlayTrigger>
@@ -168,10 +162,7 @@ class Topbar extends Component {
               placement="bottom"
               overlay={this.renderMessagePopover()}
             >
-              <Button
-                variant="btn-outline-link"
-                className="mx-2 navbar-icon-buttons"
-              >
+              <Button variant="btn-outline-link" className="mx-2 navbar-icon-buttons">
                 <Icon name="envelope-o" size="lg" className="text-white" />
               </Button>
             </OverlayTrigger>
@@ -182,10 +173,7 @@ class Topbar extends Component {
               placement="bottom"
               overlay={this.renderProfilePopover()}
             >
-              <Button
-                variant="btn-outline-link"
-                className="ml-2 navbar-icon-buttons"
-              >
+              <Button variant="btn-outline-link" className="ml-2 navbar-icon-buttons">
                 <Icon name="user-circle-o" size="3x" className="text-primary" />
               </Button>
             </OverlayTrigger>
@@ -201,10 +189,7 @@ class Topbar extends Component {
 
   renderNoAuthNav = pathname => {
     return (
-      <Navbar.Collapse
-        id="basic-navbar-nav"
-        className="h-100 d-none d-md-block"
-      >
+      <Navbar.Collapse id="basic-navbar-nav" className="h-100 d-none d-md-block">
         <Nav className="mx-auto p-0 h-100">
           <NavLink
             className="p-md-3 mx-lg-5 topbar-item-active h-100 d-flex align-items-center"

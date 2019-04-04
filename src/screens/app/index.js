@@ -6,6 +6,7 @@ import { GroupsList, GroupProfile, GroupAdmin } from './Groups';
 import { UserProfile } from './Users';
 
 import { Sidebar, MobileSidebar, GroupAdminNav } from '../../layouts';
+import MainArea from './MainArea';
 import ModalContainer from '../../modals';
 
 class AppModule extends Component {
@@ -20,9 +21,20 @@ class AppModule extends Component {
           component={GroupAdmin}
         />
         <Route path={`${match.url}/groups/:groupId`} component={GroupProfile} />
-        <Route path={`${match.url}/groups`} component={GroupsList} />
+        <Route path={`${match.url}/my-groups`} component={MainArea} />
         <Redirect to={`${match.url}/home`} />
       </Switch>
+    );
+  };
+
+  renderSidebar = () => {
+    const {
+      location: { pathname },
+    } = this.props;
+
+    return (
+      !pathname.includes('/admin') &&
+      !pathname.includes('/my-groups') && <Sidebar className="mr-md-4" />
     );
   };
 
@@ -37,7 +49,7 @@ class AppModule extends Component {
         {!pathname.includes('/admin') ? <MobileSidebar /> : <GroupAdminNav />}
 
         <Row className="mx-md-4 m-0 mb-4">
-          {!pathname.includes('/admin') && <Sidebar className="mr-md-4" />}
+          {this.renderSidebar()}
           <Col className="p-0 m-md-0">{this.renderAppRoutes()}</Col>
         </Row>
       </Container>
