@@ -10,12 +10,20 @@ import {
 
 export default class ManageUserModal extends Component {
   handleConfirm = () => {
-    const { banUserRequest, makeAdminRequest, modalData } = this.props;
+    const {
+      banUserRequest,
+      makeAdminRequest,
+      unbanUserRequest,
+      modalData,
+    } = this.props;
     if (modalData.actionType === 'ban') {
       banUserRequest(modalData.userId, modalData.groupId);
     }
     if (modalData.actionType === 'admin') {
       makeAdminRequest(modalData.userId, modalData.groupId);
+    }
+    if (modalData.actionType === 'unban') {
+      unbanUserRequest(modalData.userId, modalData.groupId);
     }
   };
 
@@ -31,8 +39,14 @@ export default class ManageUserModal extends Component {
       modalData,
       banUserLoading,
       makeAdminLoading,
+      toggleModal,
+      unbanUserRequest,
       ...rest
     } = this.props;
+
+    if (!modalData) {
+      return '';
+    }
 
     return (
       <Modal {...rest}>

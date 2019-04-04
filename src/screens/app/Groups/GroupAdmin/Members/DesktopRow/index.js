@@ -42,7 +42,14 @@ export default ({ userData, index, usersCount, groupId, onClick }) => {
         <Button
           className="text-uppercase font-weight-bold p-lg"
           variant="dark"
-          onClick={() => onClick('ban', userData._id)}
+          onClick={() =>
+            onClick(
+              checkGroupPermission(userData, groupId).isBanned
+                ? 'unban'
+                : 'ban',
+              userData._id,
+            )
+          }
         >
           {checkGroupPermission(userData, groupId).isBanned
             ? 'unban user'

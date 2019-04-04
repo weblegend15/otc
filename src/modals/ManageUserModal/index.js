@@ -3,15 +3,20 @@ import { connect } from 'react-redux';
 
 import ManageUserModal from './ManageUserModal';
 
+import toggleModal from '../redux/actions';
+
 import {
   banUserRequest,
+  unbanUserRequest,
   makeAdminRequest,
 } from '../../screens/app/Groups/GroupAdmin/redux/actions';
 
 ManageUserModal.propTypes = {
   banUserRequest: PropTypes.func.isRequired,
+  unbanUserRequest: PropTypes.func.isRequired,
   makeAdminRequest: PropTypes.func.isRequired,
   modalData: PropTypes.object.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -22,7 +27,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   banUserRequest,
+  unbanUserRequest,
   makeAdminRequest,
+  toggleModal,
 };
 
 export default connect(
