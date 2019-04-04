@@ -29,8 +29,10 @@ class Dashboard extends Component {
         params: { groupId },
       },
       getGroupsRequest,
+      readGroupRequest,
       getGroupMembersRequest,
     } = this.props;
+    readGroupRequest(groupId);
     getGroupMembersRequest({ skip: 0, limit: 100, groupId });
     getGroupsRequest({ skip: 0, limit: 100 });
   }
@@ -52,25 +54,30 @@ class Dashboard extends Component {
     memberInfo.location = 'London, UK';
 
     return (
-      <Row className="m-0 border-top" key={member._id}>
+      <Row className="py-2 m-0 border-top" key={member._id}>
         <GeneralAvatar data={memberInfo} className="my-2 px-4" />
       </Row>
     );
   };
 
   renderGroupMessages = () => {
-    const { groups } = this.props;
+    const {
+      groups,
+      group: { data, loading },
+    } = this.props;
 
     return (
       <Col lg={9} className="pl-0">
         <div className="p-3 border-bottom d-flex justify-content-end">
           <p className="d-flex align-items-center mr-3">Select Room:</p>
           <Dropdown>
-            <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-              Select Room
-            </Dropdown.Toggle>
+            <LoadingContainer loading={loading}>
+              <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
+                {data.name}
+              </Dropdown.Toggle>
+            </LoadingContainer>
             <Dropdown.Menu>
-              {groups.list.map(group => this.renderRooms(group))}
+              {groups.list.map(room => this.renderRooms(room))}
             </Dropdown.Menu>
           </Dropdown>
         </div>
@@ -80,10 +87,10 @@ class Dashboard extends Component {
     );
   };
 
-  renderRooms = group => {
+  renderRooms = room => {
     return (
-      group.status === 'ACTIVE' && (
-        <Dropdown.Item key={group._id}>{group.name}</Dropdown.Item>
+      room.status === 'ACTIVE' && (
+        <Dropdown.Item key={room._id}>{room.name}</Dropdown.Item>
       )
     );
   };
@@ -106,7 +113,7 @@ class Dashboard extends Component {
               Vouches/Proposals
             </NavLink>
           </Nav>
-          <Nav className="pr-5 pb-3">
+          <Nav className="pr-5 pb-2">
             <Link
               className="d-block w-100 text-center text-primary link-size btn btn-outline-primary"
               to={`${match.url}/chat`}

@@ -1,5 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { LoadingContainer } from '../../../../components';
 
-export default () => {
-  return <div>Chat page</div>;
-};
+class Chat extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <LoadingContainer>
+        <div className="p-2">
+          <h1>Hello</h1>
+        </div>
+      </LoadingContainer>
+    );
+  }
+}
+
+export default Chat;
