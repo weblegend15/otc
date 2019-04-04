@@ -24,11 +24,11 @@ class Dashboard extends Component {
       match: {
         params: { groupId },
       },
-      getGroupsRequest,
+      getPermissionGroupsRequest,
       getGroupMembersRequest,
     } = this.props;
     getGroupMembersRequest({ skip: 0, limit: PAGE_LIMIT, groupId });
-    getGroupsRequest({ skip: 0, limit: PAGE_LIMIT });
+    getPermissionGroupsRequest();
   }
 
   renderMembersStatus = () => {
@@ -55,6 +55,10 @@ class Dashboard extends Component {
 
   renderGroupMessages = () => {
     const { groups } = this.props;
+    const permissionGroups = groups.list
+      .filter(item => item.permission.indexOf(['MEMEBER', 'ADMIN']) && !!item.group)
+      .map(item => item.group)
+      .filter(item => item.status === 'ACTIVE');
 
     return (
       <Col lg={9} className="pl-0">
@@ -64,7 +68,7 @@ class Dashboard extends Component {
             <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
               Select Group
             </Dropdown.Toggle>
-            <Dropdown.Menu>{groups.list.map(this.renderRooms)}</Dropdown.Menu>
+            <Dropdown.Menu>{permissionGroups.map(this.renderRooms)}</Dropdown.Menu>
           </Dropdown>
         </div>
         {this.renderDashboardMenu()}
@@ -74,11 +78,7 @@ class Dashboard extends Component {
   };
 
   renderRooms = room => {
-    return (
-      room.status === 'ACTIVE' && (
-        <Dropdown.Item key={room._id}>{room.name}</Dropdown.Item>
-      )
-    );
+    return <Dropdown.Item key={room._id}>{room.name}</Dropdown.Item>;
   };
 
   renderDashboardMenu = () => {

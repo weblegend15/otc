@@ -2,24 +2,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MainArea from './MainArea';
 import './MainArea.scss';
-import { getGroupsRequest } from '../Groups/redux/actions';
-import { getGroupMembersRequest } from './redux/actions';
+import { getGroupMembersRequest, getPermissionGroupsRequest } from './redux/actions';
 import { GroupsList } from '../Groups';
 
 GroupsList.propTypes = {
   groups: PropTypes.object.isRequired,
   members: PropTypes.object.isRequired,
-  getGroupsRequest: PropTypes.func.isRequired,
+  getPermissionGroupsRequest: PropTypes.func.isRequired,
   getGroupMembersRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  groups: state.app.group.groups,
+  groups: state.app.main.myGroups,
   members: state.app.main.members,
 });
 
 const mapDispatchToProps = {
-  getGroupsRequest,
+  getPermissionGroupsRequest,
   getGroupMembersRequest,
 };
 

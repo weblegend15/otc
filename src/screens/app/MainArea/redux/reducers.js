@@ -6,6 +6,10 @@ const initialState = {
     list: [],
     total: 0,
   },
+  myGroups: {
+    loading: false,
+    list: [],
+  },
 };
 
 export default (state = initialState, action) => {
@@ -35,6 +39,31 @@ export default (state = initialState, action) => {
           loading: false,
           list: [],
           total: 0,
+        },
+      };
+    case CONSTANTS.GET_PERMISSION_GROUPS_REQUEST:
+      return {
+        ...state,
+        myGroups: {
+          ...state.myGroups,
+          loading: true,
+        },
+      };
+    case CONSTANTS.GET_PERMISSION_GROUPS_SUCCESS:
+      return {
+        ...state,
+        myGroups: {
+          ...state.myGroups,
+          loading: false,
+          list: action.payload,
+        },
+      };
+    case CONSTANTS.GET_PERMISSION_GROUPS_ERROR:
+      return {
+        myGroups: {
+          ...state.myGroups,
+          loading: false,
+          list: [],
         },
       };
     default:
