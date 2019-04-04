@@ -10,6 +10,12 @@ const initialState = {
     loading: false,
     data: {},
   },
+
+  groupMembers: {
+    loading: false,
+    list: [],
+    total: 0,
+  },
 };
 
 export default (state = initialState, action) => {
@@ -102,6 +108,33 @@ export default (state = initialState, action) => {
         },
       };
 
+    case CONSTANTS.UPDATE_GROUP_REQUEST:
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          loading: true,
+        },
+      };
+    case CONSTANTS.UPDATE_GROUP_SUCCESS:
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          data: action.payload,
+          loading: false,
+        },
+      };
+    case CONSTANTS.UPDATE_GROUP_ERROR:
+      return {
+        ...state,
+        group: {
+          ...state.group,
+          loading: false,
+          data: {},
+        },
+      };
+
     case CONSTANTS.DELETE_GROUP_REQUEST:
       return {
         ...state,
@@ -161,6 +194,35 @@ export default (state = initialState, action) => {
           ...state.group,
           loading: false,
           data: {},
+        },
+      };
+
+    case CONSTANTS.LIST_MEMBERS_REQUEST:
+      return {
+        ...state,
+        groupMembers: {
+          ...state.groupMembers,
+          loading: true,
+        },
+      };
+    case CONSTANTS.LIST_MEMBERS_SUCCESS:
+      return {
+        ...state,
+        groupMembers: {
+          ...state.groupMembers,
+          list: action.payload.data,
+          total: action.payload.total,
+          loading: false,
+        },
+      };
+    case CONSTANTS.LIST_MEMBERS_ERROR:
+      return {
+        ...state,
+        groupMembers: {
+          ...state.groupMembers,
+          loading: false,
+          list: [],
+          total: 0,
         },
       };
 

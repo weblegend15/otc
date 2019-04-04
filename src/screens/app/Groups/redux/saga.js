@@ -14,6 +14,10 @@ import {
   deleteGroupError,
   approveGroupSuccess,
   approveGroupError,
+  listMembersSuccess,
+  listMembersError,
+  updateGroupSuccess,
+  updateGroupError,
 } from './actions';
 import toggleModal from '../../../../modals/redux/actions';
 
@@ -85,6 +89,25 @@ function* deleteGroup(action) {
   }
 }
 
+function* updateGroup(action) {
+  try {
+    const data = yield call(
+      request,
+      `/groups/${action.payload.groupId}`,
+      'PUT',
+      action.payload.data,
+      true,
+    );
+
+    yield put(updateGroupSuccess(data));
+    yield put(toggleModal('updateGroupModal'));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(updateGroupError());
+    yield put(toggleModal('updateGroupModal'));
+  }
+}
+
 function* approveGroup(action) {
   try {
     const requestData = {
@@ -101,10 +124,34 @@ function* approveGroup(action) {
   }
 }
 
+function* listGroupMembers(action) {
+  try {
+    // {{host}}/groups/{{groupid}}/members?skip=0&limit=10
+    const requestData = {
+      skip: 0,
+      limit: 20,
+    };
+    const data = yield call(
+      request,
+      `/groups/${action.payload}/members`,
+      'GET',
+      requestData,
+      true,
+    );
+
+    yield put(listMembersSuccess(data));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(listMembersError());
+  }
+}
+
 export default function* groupSaga() {
   yield takeLatest(CONSTANTS.GET_GROUPS_REQUEST, getGroups);
   yield takeLatest(CONSTANTS.CREATE_GROUP_REQUEST, createGroup);
   yield takeLatest(CONSTANTS.READ_GROUP_REQUEST, readGroup);
+  yield takeLatest(CONSTANTS.UPDATE_GROUP_REQUEST, updateGroup);
   yield takeLatest(CONSTANTS.DELETE_GROUP_REQUEST, deleteGroup);
   yield takeLatest(CONSTANTS.APPROVE_GROUP_REQUEST, approveGroup);
+  yield takeLatest(CONSTANTS.LIST_MEMBERS_REQUEST, listGroupMembers);
 }

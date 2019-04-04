@@ -21,9 +21,14 @@ export default ({
     <Card className="group-card">
       <Card.Body>
         <Card.Title className="d-flex flex-row justify-content-between align-items-center">
-          <Link to={`/app/groups/${groupId}`}>
+          <Link
+            to={`/app/groups/${groupId}${
+              currentUser.role === 'ADMIN' || isGroupAdmin ? '/admin' : ''
+            }`}
+          >
             <h4 className="font-weight-bold">{name}</h4>
           </Link>
+
           <div className="group-card-status text-dark d-flex flex-row font-weight-semibold">
             <Icon name="lock" className="mr-3" />
             <p className="m-0 p-md d-flex align-items-center p-sm">{status}</p>

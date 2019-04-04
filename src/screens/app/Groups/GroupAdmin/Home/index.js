@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Members from './Members';
 
-import toggleModal from '../../../../../modals/redux/actions';
+import Home from './Home';
+
 import { readGroupRequest, listMembersRequest } from '../../redux/actions';
+import toggleModal from '../../../../../modals/redux/actions';
 
-Members.propTypes = {
+Home.propTypes = {
   group: PropTypes.object.isRequired,
-  groupMembers: PropTypes.object.isRequired,
-  readGroupRequest: PropTypes.func.isRequired,
-  listMembersRequest: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  groupMembers: PropTypes.object.isRequired,
+  listMembersRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -20,11 +20,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   readGroupRequest,
-  listMembersRequest,
   toggleModal,
+  listMembersRequest,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Members);
+)(Home);
