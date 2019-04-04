@@ -1,22 +1,13 @@
 /**
- * check group permisson
+ * check group permisson by user profile
  */
 const checkGroupPermission = (userProfile, groupId) => {
-  const isGroupAdmin = userProfile.groups.find(
-    item => item.group === groupId && item.permission === 'ADMIN',
-  );
+  const perm = userProfile.groups.find(item => item.group === groupId);
 
-  const isBanned = userProfile.groups.find(
-    item => item.group === groupId && item.permission === 'BANNED',
-  );
-
-  const isApplied = userProfile.groups.find(
-    item => item.group === groupId && item.permission === 'APPLIED',
-  );
-
-  const isMember = userProfile.groups.find(
-    item => item.group === groupId && item.permission === 'MEMBER',
-  );
+  const isGroupAdmin = perm && perm.permission === 'ADMIN';
+  const isBanned = perm && perm.permission === 'BANNED';
+  const isApplied = perm && perm.permission === 'APPLIED';
+  const isMember = perm && perm.permission === 'MEMBER';
 
   return {
     isGroupAdmin: !!isGroupAdmin,
