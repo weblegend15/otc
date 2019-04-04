@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LoadingContainer } from '../../../../components';
+import { Container } from '../../../../components';
 
 class Chat extends Component {
   constructor(props) {
@@ -9,12 +9,12 @@ class Chat extends Component {
 
   render() {
     return (
-      <LoadingContainer>
-        <div className="p-2 message-show-section">
+      <Container>
+        <div className="p-2">
           <h1>Hello</h1>
         </div>
         <div className="px-5 py-3" />
-      </LoadingContainer>
+      </Container>
     );
   }
 }

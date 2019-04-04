@@ -5,7 +5,7 @@ import { Row, Col, Container } from '../../components';
 import { GroupsList, GroupProfile } from './Groups';
 import { UserProfile } from './Users';
 import { Sidebar, MobileSidebar } from '../../layouts';
-import { Dashboard } from './Dashboard';
+import MainArea from './MainArea';
 import ModalContainer from '../../modals';
 
 class AppModule extends Component {
@@ -15,9 +15,8 @@ class AppModule extends Component {
       <Switch>
         <Route path={`${match.url}/home`} component={GroupsList} />
         <Route path={`${match.url}/profile`} component={UserProfile} />
-        <Route path={`${match.url}/groups/:groupId/dashboard`} component={Dashboard} />
         <Route path={`${match.url}/groups/:groupId`} component={GroupProfile} />
-        <Route path={`${match.url}/my-groups`} component={Dashboard} />
+        <Route path={`${match.url}/my-groups`} component={MainArea} />
         <Redirect to={`${match.url}/home`} />
       </Switch>
     );
