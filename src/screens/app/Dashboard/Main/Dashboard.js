@@ -29,10 +29,8 @@ class Dashboard extends Component {
         params: { groupId },
       },
       getGroupsRequest,
-      readGroupRequest,
       getGroupMembersRequest,
     } = this.props;
-    readGroupRequest(groupId);
     getGroupMembersRequest({ skip: 0, limit: 100, groupId });
     getGroupsRequest({ skip: 0, limit: 100 });
   }
@@ -61,21 +59,14 @@ class Dashboard extends Component {
   };
 
   renderGroupMessages = () => {
-    const {
-      groups,
-      group: { data, loading },
-    } = this.props;
+    const { groups } = this.props;
 
     return (
       <Col lg={9} className="pl-0">
         <div className="p-3 border-bottom d-flex justify-content-end">
-          <p className="d-flex align-items-center mr-3">Select Room:</p>
+          <p className="d-flex align-items-center mr-3">Select Group:</p>
           <Dropdown>
-            <LoadingContainer loading={loading}>
-              <Dropdown.Toggle variant="outline-primary" id="dropdown-basic">
-                {data.name}
-              </Dropdown.Toggle>
-            </LoadingContainer>
+            <Dropdown.Toggle variant="outline-primary" id="dropdown-basic" />
             <Dropdown.Menu>
               {groups.list.map(room => this.renderRooms(room))}
             </Dropdown.Menu>
@@ -103,17 +94,17 @@ class Dashboard extends Component {
         <Icon name="long-arrow-right" className="ml-2 text-primary" />
         <Navbar className="px-0 pt-5 pb-0">
           <Nav className="mr-auto">
-            <NavLink className="mx-3 pb-3 opacity-5" to={`${match.url}/chat`}>
+            <NavLink className="mx-3 pb-4 opacity-5" to={`${match.url}/chat`}>
               Chat
             </NavLink>
-            <NavLink className="mx-3 pb-3 opacity-5" to={`${match.url}/offers`}>
+            <NavLink className="mx-3 pb-4 opacity-5" to={`${match.url}/offers`}>
               All Offers
             </NavLink>
-            <NavLink className="mx-3 pb-3 opacity-5" to={`${match.url}/vouches`}>
+            <NavLink className="mx-3 pb-4 opacity-5" to={`${match.url}/vouches`}>
               Vouches/Proposals
             </NavLink>
           </Nav>
-          <Nav className="pr-5 pb-2">
+          <Nav className="pr-5 pb-3">
             <Link
               className="d-block w-100 text-center text-primary link-size btn btn-outline-primary"
               to={`${match.url}/chat`}

@@ -10,9 +10,10 @@ class Chat extends Component {
   render() {
     return (
       <LoadingContainer>
-        <div className="p-2">
+        <div className="p-2 message-show-section">
           <h1>Hello</h1>
         </div>
+        <div className="px-5 py-3" />
       </LoadingContainer>
     );
   }

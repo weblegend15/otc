@@ -42,7 +42,7 @@ class Profile extends Component {
           </Card.Title>
           <Row>
             {groups.list.map(({ _id, ...rest }, idx) => (
-              <Col md={6} key={`group_${idx}`}>
+              <Col lg={6} className="mb-4" key={`group_${idx}`}>
                 <GroupCard {...rest} memberCount={1231} groupId={_id} />
               </Col>
             ))}

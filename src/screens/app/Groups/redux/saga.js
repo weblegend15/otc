@@ -10,6 +10,10 @@ import {
   getGroupsRequest,
   readGroupSuccess,
   readGroupError,
+  deleteGroupSuccess,
+  deleteGroupError,
+  approveGroupSuccess,
+  approveGroupError,
 } from './actions';
 import toggleModal from '../../../../modals/redux/actions';
 
@@ -68,8 +72,39 @@ function* readGroup(action) {
   }
 }
 
+function* deleteGroup(action) {
+  try {
+    yield call(request, `/groups/${action.payload}`, 'DELETE', null, true);
+
+    yield put(deleteGroupSuccess(action.payload));
+    yield put(toggleModal('deleteGroupModal'));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(deleteGroupError());
+    yield put(toggleModal('deleteGroupModal'));
+  }
+}
+
+function* approveGroup(action) {
+  try {
+    const requestData = {
+      status: 'ACTIVE',
+    };
+    yield call(request, `/groups/${action.payload}`, 'PUT', requestData, true);
+
+    yield put(approveGroupSuccess(action.payload));
+    yield put(toggleModal('approveGroupModal'));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(approveGroupError());
+    yield put(toggleModal('approveGroupModal'));
+  }
+}
+
 export default function* groupSaga() {
   yield takeLatest(CONSTANTS.GET_GROUPS_REQUEST, getGroups);
   yield takeLatest(CONSTANTS.CREATE_GROUP_REQUEST, createGroup);
   yield takeLatest(CONSTANTS.READ_GROUP_REQUEST, readGroup);
+  yield takeLatest(CONSTANTS.DELETE_GROUP_REQUEST, deleteGroup);
+  yield takeLatest(CONSTANTS.APPROVE_GROUP_REQUEST, approveGroup);
 }
