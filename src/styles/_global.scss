@@ -99,14 +99,15 @@ textarea.form-control {
     margin-bottom: 6px;
     text-transform: uppercase;
   }
-  input {
-    min-height: 40px;
-    border: 1px solid #d4d4d4;
-    border-radius: 10px;
-  }
   textarea {
     border-radius: 10px;
   }
+}
+
+input.form-control {
+  border-radius: 10px;
+  min-height: 40px;
+  border: 1px solid #d4d4d4;
 }
 
 button.btn-lg {
@@ -152,6 +153,10 @@ button.btn-lg {
   opacity: 0.5;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .border-default-color {
   border-color: rgba(0, 0, 0, 0.1) !important;
 }
@@ -179,7 +184,9 @@ button.btn-lg {
 }
 
 @include media-breakpoint-between(xs, sm) {
-  .groups-list-container {
+  .groups-list-container,
+  .group-admin-area-applications,
+  .group-admin-area {
     background: none;
     border: none;
     box-shadow: none;
@@ -187,6 +194,22 @@ button.btn-lg {
       background: none;
       border: none;
       padding: 0 !important;
+    }
+  }
+
+  .members-search-nav {
+    background: none !important;
+    border-bottom: none !important;
+    .navbar-nav {
+      a {
+        border-bottom: 3px solid transparent;
+        &.active {
+          border-bottom-color: $primary;
+        }
+      }
+      & > div:first-child {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }
