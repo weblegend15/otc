@@ -10,12 +10,14 @@ MembersBar.propTypes = {
   selectedGroupId: PropTypes.string.isRequired,
   members: PropTypes.object.isRequired,
   selectGroupMember: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   selectedGroupId: state.app.main.selectedGroupId,
   members: state.app.main.members,
   selectedGroupMemberId: state.app.main.selectedGroupMemberId,
+  currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = {

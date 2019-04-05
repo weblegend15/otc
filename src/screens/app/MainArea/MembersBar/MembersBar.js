@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import { LoadingContainer, GeneralAvatar, Input } from '../../../../components';
+import { checkGroupPermission } from '../../../../utils/permission';
 
 export default class MembersBar extends Component {
   componentDidMount() {
@@ -27,7 +28,16 @@ export default class MembersBar extends Component {
       members: { list, loading },
       selectedGroupMemberId,
       match: { url },
+      selectedGroupId,
+      currentUser,
     } = this.props;
+
+    const realMembers = list.filter(
+      item =>
+        (checkGroupPermission(item, selectedGroupId).isMember ||
+          checkGroupPermission(item, selectedGroupId).isGroupAdmin) &&
+        item._id !== currentUser._id,
+    );
 
     return (
       <LoadingContainer loading={loading} className="members-bar-section">
@@ -40,7 +50,7 @@ export default class MembersBar extends Component {
           />
         </div>
         <ListGroup>
-          {list.map(({ firstName, _id }) => (
+          {realMembers.map(({ firstName, _id }) => (
             <ListGroup.Item
               key={_id}
               as={Link}

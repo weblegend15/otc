@@ -86,10 +86,10 @@ class MemberContent extends Component {
     } = this.props;
     return (
       <div className="border-bottom border-default-color px-3 pt-3 member-content-section-header">
-        <p className="opacity-5 p-sm mb-2 d-flex flex-row justify-content-end">
+        <div className="opacity-5 p-sm mb-2 d-flex flex-row justify-content-end">
           Joined
           <Timestamp className="mx-2" date={new Date()} />
-        </p>
+        </div>
         <Row className="d-flex flex-row justify-content-between align-items-center mb-5 mx-0">
           <Col>
             <Avatar
