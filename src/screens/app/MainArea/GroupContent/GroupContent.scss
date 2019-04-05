@@ -1,0 +1,17 @@
+@import '../../../../styles/variables';
+
+.group-content-section {
+  & > div:first-child {
+    background: rgba(196, 196, 196, 0.1);
+  }
+  .nav {
+    a {
+      color: rgba(0, 0, 0, 0.5);
+      border-bottom: 3px solid transparent;
+      &.active {
+        color: $black;
+        border-bottom-color: $primary;
+      }
+    }
+  }
+}

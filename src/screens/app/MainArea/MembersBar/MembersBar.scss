@@ -1,0 +1,22 @@
+@import '../../../../styles/variables';
+
+.members-bar-section {
+  max-width: 310px;
+  .list-group {
+    .list-group-item {
+      border-radius: unset;
+      border-top: unset;
+      border-left: unset;
+      border-right: unset;
+      background-color: transparent;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+      color: $black;
+      &.active {
+        background-color: rgba(0, 152, 138, 0.1);
+      }
+      &:hover {
+        background-color: rgba(0, 152, 138, 0.05);
+      }
+    }
+  }
+}
