@@ -17,4 +17,21 @@ const checkGroupPermission = (userProfile, groupId) => {
   };
 };
 
-export { checkGroupPermission };
+/**
+ * get my active groups
+ *
+ * @param {*} groups
+ * @returns
+ */
+const getMyActiveGroups = groups => {
+  return groups
+    .filter(
+      item =>
+        !!item.group &&
+        ['MEMBER', 'ADMIN'].indexOf(item.permission) > -1 &&
+        item.group.status === 'ACTIVE',
+    )
+    .map(item => item.group);
+};
+
+export { checkGroupPermission, getMyActiveGroups };
