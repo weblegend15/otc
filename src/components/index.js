@@ -23,6 +23,7 @@ import Dropdown from './Dropdown';
 import Col from './Col';
 import Row from './Row';
 import Container from './Container';
+import GeneralAvatar from './Avatar/GeneralAvatar';
 
 export {
   Timestamp,
@@ -54,4 +55,5 @@ export {
   Col,
   Row,
   Container,
+  GeneralAvatar,
 };

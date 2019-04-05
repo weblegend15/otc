@@ -14,6 +14,12 @@ const initialState = {
     loading: false,
     channel: [],
   },
+  user: {
+    data: {},
+    loading: false,
+  },
+  selectedGroupId: '',
+  selectedGroupMemberId: '',
 };
 
 export default (state = initialState, action) => {
@@ -28,6 +34,7 @@ export default (state = initialState, action) => {
       };
     case CONSTANTS.GET_GROUP_MEMBERS_SUCCESS:
       return {
+        ...state,
         members: {
           ...state.members,
           loading: false,
@@ -97,6 +104,46 @@ export default (state = initialState, action) => {
           channel: [],
         },
       };
+
+    case CONSTANTS.READ_USER_REQUEST:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          loading: true,
+        },
+      };
+    case CONSTANTS.READ_USER_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          data: action.payload,
+          loading: false,
+        },
+      };
+    case CONSTANTS.READ_USER_ERROR:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          data: {},
+          loading: false,
+        },
+      };
+
+    case CONSTANTS.SELECT_ACTIVE_GROUP:
+      return {
+        ...state,
+        selectedGroupId: action.payload,
+      };
+
+    case CONSTANTS.SELECT_GROUP_MEMBER:
+      return {
+        ...state,
+        selectedGroupMemberId: action.payload,
+      };
+
     default:
       return state;
   }

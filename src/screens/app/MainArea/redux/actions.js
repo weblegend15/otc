@@ -59,3 +59,25 @@ export const sendMessageSuccess = data => ({
 export const sendMessageError = () => ({
   type: CONSTANTS.SEND_MESSAGE_ERROR,
 });
+
+export const readUserRequest = userId => ({
+  type: CONSTANTS.READ_USER_REQUEST,
+  payload: userId,
+});
+export const readUserSuccess = userData => ({
+  type: CONSTANTS.READ_USER_SUCCESS,
+  payload: userData,
+});
+export const readUserError = () => ({
+  type: CONSTANTS.READ_USER_ERROR,
+});
+
+export const selectActiveGroup = groupId => ({
+  type: CONSTANTS.SELECT_ACTIVE_GROUP,
+  payload: groupId,
+});
+
+export const selectGroupMember = memberId => ({
+  type: CONSTANTS.SELECT_GROUP_MEMBER,
+  payload: memberId,
+});
