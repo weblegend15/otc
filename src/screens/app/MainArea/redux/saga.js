@@ -1,15 +1,21 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, call, select } from 'redux-saga/effects';
 import notify from '../../../../utils/notify';
 import * as CONSTANTS from './constants';
+
+import { getMyActiveGroups } from '../../../../utils/permission';
 
 import {
   getGroupMembersSuccess,
   getGroupMembersError,
   getPermissionGroupsError,
   getPermissionGroupsSuccess,
+  selectActiveGroup,
+  readUserSuccess,
+  readUserError,
 } from './actions';
 
 import request from '../../../../utils/apiRequest';
+import { history } from '../../../../configureStore';
 
 function* getGroupMembers(action) {
   try {
@@ -35,7 +41,28 @@ function* getGroupMembers(action) {
 
 function* getPermissionGroups() {
   try {
-    const myGroups = yield call(request, '/profile/permissions', 'GET', null, true);
+    const myGroups = yield call(
+      request,
+      '/profile/permissions',
+      'GET',
+      null,
+      true,
+    );
+
+    const myActiveGroups = yield getMyActiveGroups(myGroups.groups);
+    const selectedGroupId = yield select(
+      state => state.app.main.selectedGroupId,
+    );
+
+    if (!myActiveGroups.length) {
+      yield put(selectActiveGroup(''));
+    } else if (
+      myActiveGroups.map(item => item._id).indexOf(selectedGroupId) < 0
+    ) {
+      yield put(selectActiveGroup(myActiveGroups[0]._id));
+      history.push(`/app/my-groups/${myActiveGroups[0]._id}/group`);
+    }
+
     yield put(getPermissionGroupsSuccess(myGroups.groups));
   } catch (err) {
     notify('error', err.meesage);
@@ -43,7 +70,28 @@ function* getPermissionGroups() {
   }
 }
 
-export default function* dashboardSaga() {
+function* readUser(action) {
+  try {
+    const data = yield call(
+      request,
+      `/users/${action.payload}`,
+      'GET',
+      null,
+      true,
+    );
+
+    yield put(readUserSuccess(data));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(readUserError());
+  }
+}
+
+export default function* mainAreaSaga() {
   yield takeLatest(CONSTANTS.GET_GROUP_MEMBERS_REQUEST, getGroupMembers);
-  yield takeLatest(CONSTANTS.GET_PERMISSION_GROUPS_REQUEST, getPermissionGroups);
+  yield takeLatest(
+    CONSTANTS.GET_PERMISSION_GROUPS_REQUEST,
+    getPermissionGroups,
+  );
+  yield takeLatest(CONSTANTS.READ_USER_REQUEST, readUser);
 }

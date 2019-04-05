@@ -16,7 +16,7 @@ class AppModule extends Component {
         <Route path={`${match.url}/home`} component={GroupsList} />
         <Route path={`${match.url}/profile`} component={UserProfile} />
         <Route path={`${match.url}/groups/:groupId`} component={GroupProfile} />
-        <Route path={`${match.url}/my-groups`} component={MainArea} />
+        <Route path={`${match.url}/my-groups/:groupId`} component={MainArea} />
         <Redirect to={`${match.url}/home`} />
       </Switch>
     );
@@ -29,7 +29,7 @@ class AppModule extends Component {
 
     return (
       !pathname.includes('/admin') &&
-      !pathname.includes('/my-groups') && <Sidebar className="mr-md-4" />
+      !pathname.includes('/my-groups') && <Sidebar />
     );
   };
 
@@ -40,7 +40,7 @@ class AppModule extends Component {
         <MobileSidebar />
         <Row className="mx-md-4 m-0 mb-4">
           {this.renderSidebar()}
-          <Col className="p-0 m-md-0 ml-md-4">{this.renderAppRoutes()}</Col>
+          <Col className="p-0">{this.renderAppRoutes()}</Col>
         </Row>
       </Container>
     );

@@ -1,0 +1,20 @@
+@import '../../../../styles/variables';
+
+.member-content-section {
+  &-header {
+    background: rgba(196, 196, 196, 0.1);
+  }
+  .nav {
+    a {
+      color: rgba(0, 0, 0, 0.5);
+      border-bottom: 3px solid transparent;
+      &.active {
+        color: $black;
+        border-bottom-color: $primary;
+      }
+      &.messaging-nav {
+        color: $primary;
+      }
+    }
+  }
+}
