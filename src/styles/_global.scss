@@ -117,6 +117,13 @@ button.btn-lg {
   text-transform: uppercase;
 }
 
+.line-ellipsis {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .btn-dark {
   color: $white;
 }
