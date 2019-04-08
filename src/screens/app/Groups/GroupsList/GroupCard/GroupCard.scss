@@ -1,6 +1,12 @@
 @import '../../../../../styles/variables';
 
 .group-card {
+  .card-title {
+    a {
+      width: 60%;
+    }
+  }
+
   .card-body {
     h4 {
       color: black;
@@ -8,10 +14,21 @@
         color: $primary;
       }
     }
+    .card-text {
+      height: 40px;
+    }
   }
 
   a.btn {
     height: 35px;
     line-height: 26px;
+  }
+
+  .card-footer {
+    height: 70px;
+    button {
+      height: 35px;
+      padding: 0;
+    }
   }
 }

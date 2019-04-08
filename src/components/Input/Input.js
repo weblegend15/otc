@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 
-export default ({ icon, iconPosition, ...rest }) => {
+export default ({ icon, iconPosition, className, ...rest }) => {
   return (
     <div
       className={cx('inner-addon border-radius-10', {
