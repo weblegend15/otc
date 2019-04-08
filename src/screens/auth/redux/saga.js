@@ -14,11 +14,14 @@ import {
   forgotPasswordSuccess,
   forgotPasswordError,
   confirmPasswordError,
+  refreshFirebaseTokenSuccess,
+  refreshFirebaseTokenError,
 } from './actions';
 
 import { history } from '../../../configureStore';
 import request from '../../../utils/apiRequest';
 import notify from '../../../utils/notify';
+import firebaseAuth from '../../../utils/firebase';
 
 function* signup(action) {
   try {
@@ -97,7 +100,13 @@ function* forgotPassword(action) {
       email: action.email,
     };
 
-    yield call(request, '/auth/request-reset-password', 'POST', requestData, false);
+    yield call(
+      request,
+      '/auth/request-reset-password',
+      'POST',
+      requestData,
+      false,
+    );
     yield put(forgotPasswordSuccess(action.email));
   } catch (err) {
     yield put(forgotPasswordError(err));
@@ -118,6 +127,24 @@ function* confirmPassword(action) {
   }
 }
 
+function* refreshToken() {
+  try {
+    const responseData = yield call(
+      request,
+      '/profile/refresh-firebase-token',
+      'GET',
+      null,
+      true,
+    );
+    yield firebaseAuth(responseData.firebaseToken);
+
+    yield put(refreshFirebaseTokenSuccess(responseData));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(refreshFirebaseTokenError());
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(CONSTANTS.SIGNUP_REQUEST, signup);
   yield takeLatest(CONSTANTS.SIGNIN_REQUEST, signin);
@@ -125,4 +152,5 @@ export default function* authSaga() {
   yield takeLatest(CONSTANTS.VERIFY_EMAIL_REQUEST, verifyEmail);
   yield takeLatest(CONSTANTS.FORGOT_PASSWORD_REQUEST, forgotPassword);
   yield takeLatest(CONSTANTS.CONFIRM_PASSWORD_REQUEST, confirmPassword);
+  yield takeLatest(CONSTANTS.REFRESH_FIREBASE_TOKEN_REQUEST, refreshToken);
 }

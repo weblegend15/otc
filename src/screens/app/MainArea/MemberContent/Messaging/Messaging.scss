@@ -1,0 +1,12 @@
+.message-input {
+  background-color: #ebebeb;
+  textarea {
+    resize: none;
+  }
+}
+
+.message-box {
+  position: relative;
+  height: 500px;
+  overflow: scroll;
+}

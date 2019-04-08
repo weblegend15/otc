@@ -60,6 +60,11 @@ export const sendMessageError = () => ({
   type: CONSTANTS.SEND_MESSAGE_ERROR,
 });
 
+export const messageStore = data => ({
+  type: CONSTANTS.MESSAGE_STORE,
+  payload: data,
+});
+
 export const readUserRequest = userId => ({
   type: CONSTANTS.READ_USER_REQUEST,
   payload: userId,

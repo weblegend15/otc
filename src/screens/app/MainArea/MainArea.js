@@ -11,8 +11,12 @@ import { getMyActiveGroups } from '../../../utils/permission';
 
 class MainArea extends Component {
   componentDidMount() {
-    const { getPermissionGroupsRequest } = this.props;
+    const {
+      getPermissionGroupsRequest,
+      refreshFirebaseTokenRequest,
+    } = this.props;
     getPermissionGroupsRequest();
+    refreshFirebaseTokenRequest();
   }
 
   handleSelectGroup = groupId => {

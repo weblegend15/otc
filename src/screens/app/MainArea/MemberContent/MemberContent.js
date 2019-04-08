@@ -19,8 +19,14 @@ import Messaging from './Messaging';
 
 class MemberContent extends Component {
   componentDidMount() {
-    const { readUserRequest, selectedGroupMemberId } = this.props;
+    const {
+      readUserRequest,
+      createPrivateChatRequest,
+      selectedGroupMemberId,
+      selectedGroupId,
+    } = this.props;
     readUserRequest(selectedGroupMemberId);
+    createPrivateChatRequest(selectedGroupMemberId, selectedGroupId);
   }
 
   componentDidUpdate(prevProps) {
@@ -120,17 +126,17 @@ class MemberContent extends Component {
 
   renderRoutes = () => {
     const {
-      match: { url },
+      match: { path },
     } = this.props;
 
     return (
       <Switch>
-        <Route path={`${url}/profile`} component={Profile} />
-        <Route path={`${url}/feedback`} component={Feedback} />
-        <Route path={`${url}/current-offers`} component={CurrentOffers} />
-        <Route path={`${url}/past-offers`} component={PastOffers} />
-        <Route path={`${url}/messaging`} component={Messaging} />
-        <Redirect to={`${url}/messaging`} />
+        <Route path={`${path}/profile`} component={Profile} />
+        <Route path={`${path}/feedback`} component={Feedback} />
+        <Route path={`${path}/current-offers`} component={CurrentOffers} />
+        <Route path={`${path}/past-offers`} component={PastOffers} />
+        <Route path={`${path}/messaging`} component={Messaging} />
+        <Redirect to={`${path}/messaging`} />
       </Switch>
     );
   };
@@ -142,7 +148,7 @@ class MemberContent extends Component {
     return (
       <LoadingContainer className="member-content-section" loading={loading}>
         {this.renderHeader()}
-        <div className="p-4">{this.renderRoutes()}</div>
+        {this.renderRoutes()}
       </LoadingContainer>
     );
   }

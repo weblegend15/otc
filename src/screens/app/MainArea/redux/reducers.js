@@ -14,6 +14,10 @@ const initialState = {
     loading: false,
     channel: [],
   },
+  messageList: {
+    chats: [],
+    loading: false,
+  },
   user: {
     data: {},
     loading: false,
@@ -102,6 +106,16 @@ export default (state = initialState, action) => {
           ...state.privateChannel,
           loading: false,
           channel: [],
+        },
+      };
+
+    case CONSTANTS.MESSAGE_STORE:
+      return {
+        ...state,
+        messageList: {
+          ...state.messageList,
+          chats: action.payload,
+          loading: false,
         },
       };
 

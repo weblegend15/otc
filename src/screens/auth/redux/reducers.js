@@ -7,6 +7,7 @@ const initialState = {
   verifyState: '',
   sendConfirmState: '',
   email: '',
+  firebaseToken: '',
   token: '',
   forgotPassword: {
     step: 1,
@@ -47,6 +48,7 @@ export default (state = initialState, action) => {
         ...state,
         currentUser: action.payload.user,
         token: action.payload.token,
+        firebaseToken: action.payload.firebaseToken,
         currentUserLoading: false,
       };
 
@@ -141,6 +143,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
+      };
+    case CONSTANTS.REFRESH_FIREBASE_TOKEN_REQUEST:
+      return {
+        ...state,
+        firebaseToken: '',
+      };
+    case CONSTANTS.REFRESH_FIREBASE_TOKEN_SUCCESS:
+      return {
+        ...state,
+        firebaseToken: action.payload.firebaseToken,
       };
     default:
       return state;

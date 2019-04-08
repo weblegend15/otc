@@ -98,3 +98,16 @@ export const confirmPasswordError = error => ({
   type: CONSTANTS.CONFIRM_PASSWORD_ERROR,
   error,
 });
+
+export const refreshFirebaseTokenRequest = () => ({
+  type: CONSTANTS.REFRESH_FIREBASE_TOKEN_REQUEST,
+});
+
+export const refreshFirebaseTokenSuccess = firebaseToken => ({
+  type: CONSTANTS.REFRESH_FIREBASE_TOKEN_SUCCESS,
+  payload: firebaseToken,
+});
+
+export const refreshFirebaseTokenError = () => ({
+  type: CONSTANTS.REFRESH_FIREBASE_TOKEN_ERROR,
+});

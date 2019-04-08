@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import MemberContent from './MemberContent';
 import './MemberContent.scss';
-import { readUserRequest } from '../redux/actions';
+import { readUserRequest, createPrivateChatRequest } from '../redux/actions';
 
 MemberContent.propTypes = {
   selectedGroupId: PropTypes.string.isRequired,
@@ -20,6 +20,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   readUserRequest,
+  createPrivateChatRequest,
 };
 
 export default connect(
