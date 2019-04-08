@@ -18,8 +18,8 @@ export default ({ data, className }) => (
       </div>
     </Row>
     <Row className="mx-0 px-4 mb-3 d-flex flex-row justify-content-between p-sm align-items-center">
-      <div>
-        by John Smith <Rating initialRating={4} readonly />
+      <div className="d-flex flex-row align-item-center">
+        by John Smith <Rating className="ml-2" initialRating={4} readonly />
       </div>
       <p className="m-0">Ends in 1h 15m</p>
     </Row>

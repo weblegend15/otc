@@ -112,7 +112,7 @@ export default class VouchesProposals extends Component {
       <div className="d-flex flex-column align-items-center justify-content-center">
         <Row className="mx-0 mb-3">
           <Button
-            className="mr-3 text-primary"
+            className="mr-3 text-primary d-flex flex-row align-items-center"
             onClick={this.handleClick('vouches')}
             aria-controls="vouches-collapse-list"
             aria-expanded={isOpenVouches}
@@ -121,13 +121,13 @@ export default class VouchesProposals extends Component {
             Vouches{' '}
             <Badge
               variant="primary"
-              className="px-0 text-center font-weight-semibold rounded-circle"
+              className="px-0 ml-2 text-center font-weight-semibold rounded-circle"
             >
               {vouches.length}
             </Badge>
           </Button>
           <Button
-            className="text-primary"
+            className="text-primary d-flex flex-row align-items-center"
             onClick={this.handleClick('proposals')}
             aria-controls="proposals-collapse-list"
             aria-expanded={isOpenProposals}
@@ -136,7 +136,7 @@ export default class VouchesProposals extends Component {
             Proposals{' '}
             <Badge
               variant="primary"
-              className="px-0 text-center font-weight-semibold rounded-circle"
+              className="px-0 ml-2 text-center font-weight-semibold rounded-circle"
             >
               {proposals.length}
             </Badge>
