@@ -1,0 +1,31 @@
+@import '../../styles/variables';
+
+.group-admin-mobile-nav {
+  .row {
+    a {
+      color: $white;
+      span {
+        color: $primary;
+      }
+      &:hover {
+        color: $primary;
+      }
+    }
+    p {
+      height: fit-content;
+      color: rgba(255, 255, 255, 0.5);
+      border-left-color: rgba(196, 196, 196, 0.2) !important;
+    }
+  }
+
+  .navbar-nav {
+    a {
+      color: rgba(255, 255, 255, 0.5);
+      border-bottom: 3px solid $secondary;
+      &.active {
+        color: $white;
+        border-bottom-color: $primary;
+      }
+    }
+  }
+}

@@ -9,6 +9,9 @@ import DeleteGroupModal from './DeleteGroupModal';
 import ApproveGroupModal from './ApproveGroupModal';
 import NewOfferModal from './NewOfferModal';
 import ViewOfferModal from './ViewOfferModal';
+import ViewApplicationModal from './ViewApplicationModal';
+import EditGroupModal from './EditGroupModal';
+import ManageUserModal from './ManageUserModal';
 
 const Modals = {
   newGroupModal: NewGroupModal,
@@ -17,6 +20,9 @@ const Modals = {
   approveGroupModal: ApproveGroupModal,
   newOfferModal: NewOfferModal,
   viewOfferModal: ViewOfferModal,
+  viewApplicationModal: ViewApplicationModal,
+  editGroupModal: EditGroupModal,
+  manageUserModal: ManageUserModal,
 };
 
 const ModalContainer = ({ type, ...rest }) => {

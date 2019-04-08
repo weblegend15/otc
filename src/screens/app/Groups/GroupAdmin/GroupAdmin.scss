@@ -1,0 +1,27 @@
+@import '../../../../styles/variables';
+
+.group-admin-area {
+  .card-header {
+    background: $white;
+  }
+  .group-admin-nav {
+    a {
+      color: $black;
+      border-bottom: 3px solid $white;
+      &.active {
+        opacity: 1;
+        border-color: $primary;
+      }
+    }
+  }
+
+  .members-search-nav {
+    background: rgba(245, 245, 245, 0.5);
+    a {
+      color: rgba(0, 0, 0, 0.5);
+      &.active {
+        color: $primary;
+      }
+    }
+  }
+}

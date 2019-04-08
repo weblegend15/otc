@@ -9,7 +9,10 @@ import {
   Timestamp,
   Row,
   Col,
+  Button,
 } from '../../../../components';
+
+import { history } from '../../../../configureStore';
 
 import Profile from './Profile';
 import Feedback from './Feedback';
@@ -31,6 +34,11 @@ class MemberContent extends Component {
     ) {
       readUserRequest(selectedGroupMemberId);
     }
+  }
+
+  handleBackClick = () => {
+    const { selectedGroupId } = this.props;
+    history.push(`/app/my-groups/${selectedGroupId}`);
   }
 
   renderTabs = () => {
@@ -84,12 +92,18 @@ class MemberContent extends Component {
     const {
       userData: { data },
     } = this.props;
+
     return (
       <div className="border-bottom border-default-color px-3 pt-3 member-content-section-header">
-        <div className="opacity-5 p-sm mb-2 d-flex flex-row justify-content-end">
-          Joined
-          <Timestamp className="mx-2" date={new Date()} />
-        </div>
+        <Row className="mx-0 mb-3 d-flex align-items-center">
+          <Button variant="outline-link" className="p-0 mr-auto text-primary font-weight-semibold p-lg" onClick={this.handleBackClick}>
+            <Icon name="arrow-left" className="mr-2" />Back
+          </Button>
+          <div className="opacity-5 p-sm d-flex flex-row">
+            Joined
+            <Timestamp className="ml-2" date={new Date()} format="D MMM YYYY" />
+          </div>
+        </Row>
         <Row className="d-flex flex-row justify-content-between align-items-center mb-5 mx-0">
           <Col>
             <Avatar

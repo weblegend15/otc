@@ -1,10 +1,10 @@
 @import '../../styles/variables';
 
-.inner-addon { 
+.inner-addon {
   position: relative;
-  border: 1px solid $light;
-  background-color: #f9f9f9;
-  border-radius: $border-radius-lg;
+  input {
+    height: 40px;
+  }
   .input-icon {
     position: absolute;
     padding: 12px;

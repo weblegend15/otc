@@ -24,6 +24,8 @@ import Col from './Col';
 import Row from './Row';
 import Container from './Container';
 import GeneralAvatar from './Avatar/GeneralAvatar';
+import LabelRating from './Rating/LabelRating';
+import SocialIcons from './SocialIcons';
 
 import OfferDetail from './OfferDetail';
 
@@ -59,4 +61,6 @@ export {
   Container,
   GeneralAvatar,
   OfferDetail,
+  LabelRating,
+  SocialIcons,
 };

@@ -1,7 +1,20 @@
 @import '../../../../styles/variables';
 
 .members-bar-section {
-  max-width: 310px;
+  transition: all 0.4s ease-in-out;
+  width: 310px;
+
+  &.expanded {
+    animation-duration: 2s;
+    animation-name: fadeMembersBar;
+  }
+  &.collapsed {
+    width: 0;
+    & > * {
+      display: none;
+    }
+  }
+
   .list-group {
     .list-group-item {
       border-radius: unset;
@@ -19,4 +32,9 @@
       }
     }
   }
+}
+
+@keyframes fadeMembersBar {
+  from { opacity: 0;}
+  to { opacity: 1;}
 }
