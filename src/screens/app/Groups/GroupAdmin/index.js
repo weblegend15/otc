@@ -2,23 +2,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import GroupAdmin from './GroupAdmin';
-
-import { readGroupRequest } from '../redux/actions';
+import './GroupAdmin.scss';
 
 GroupAdmin.propTypes = {
-  data: PropTypes.object.isRequired,
-  readGroupRequest: PropTypes.func.isRequired,
+  group: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  data: state.group.group,
+  group: state.app.group.group,
 });
 
-const mapDispatchToProps = {
-  readGroupRequest,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(GroupAdmin);
+export default connect(mapStateToProps)(GroupAdmin);

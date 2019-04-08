@@ -45,6 +45,24 @@ export const readGroupError = () => ({
   type: CONSTANTS.READ_GROUP_ERROR,
 });
 
+// update group
+export const updateGroupRequest = (groupId, data) => ({
+  type: CONSTANTS.UPDATE_GROUP_REQUEST,
+  payload: {
+    groupId,
+    data,
+  },
+});
+
+export const updateGroupSuccess = data => ({
+  type: CONSTANTS.UPDATE_GROUP_SUCCESS,
+  payload: data,
+});
+
+export const updateGroupError = () => ({
+  type: CONSTANTS.UPDATE_GROUP_ERROR,
+});
+
 // delete group
 export const deleteGroupRequest = data => ({
   type: CONSTANTS.DELETE_GROUP_REQUEST,
@@ -73,4 +91,19 @@ export const approveGroupSuccess = groupId => ({
 
 export const approveGroupError = () => ({
   type: CONSTANTS.APPROVE_GROUP_ERROR,
+});
+
+// list group members
+export const listMembersRequest = groupId => ({
+  type: CONSTANTS.LIST_MEMBERS_REQUEST,
+  payload: groupId,
+});
+
+export const listMembersSuccess = data => ({
+  type: CONSTANTS.LIST_MEMBERS_SUCCESS,
+  payload: data,
+});
+
+export const listMembersError = () => ({
+  type: CONSTANTS.LIST_MEMBERS_ERROR,
 });
