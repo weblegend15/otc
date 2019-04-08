@@ -4,12 +4,18 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import {
   Element,
   Events,
-  scrollSpy,
   scroller,
   animateScroll as scroll,
 } from 'react-scroll';
-import { IconButton, LoadingContainer } from '../../../../../components';
+import {
+  IconButton,
+  LoadingContainer,
+  GeneralAvatar,
+} from '../../../../../components';
 import { firestore } from '../../../../../configureStore';
+import { getMessageServices } from '../../../Services/firebase';
+import { MSG_COUNT_LIMIT } from '../../../../../config';
+import getMember from '../../../../../utils/getMember';
 
 class Messaging extends Component {
   constructor(props) {
@@ -19,7 +25,11 @@ class Messaging extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    document
+      .getElementById('message-container')
+      .addEventListener('scroll', this.handleScroll);
+  }
 
   componentDidUpdate(prevProps) {
     const {
@@ -36,31 +46,32 @@ class Messaging extends Component {
         .doc(channel._id)
         .collection('messages')
         .orderBy('created_at', 'desc')
-        .limit(10)
+        .limit(MSG_COUNT_LIMIT)
         .onSnapshot(messages => {
           let msgs = [];
-          messages.forEach(message => {
-            msgs.push({ id: message.id, ...message.data() });
-          });
-          msgs = msgs.reverse();
-          messageStore(msgs);
-          this.goToContainer = new Promise(resolve => {
-            Events.scrollEvent.register('end', () => {
-              resolve();
-              Events.scrollEvent.remove('end');
+          if (!messages.empty) {
+            messages.forEach(message => {
+              msgs.push({ id: message.id, ...message.data() });
             });
-            scroller.scrollTo('message-container', {
-              duration: 0,
-              delay: 0,
-              smooth: 'easeInOutQuart',
+            msgs = msgs.reverse();
+            messageStore(msgs);
+            this.goToContainer = new Promise(resolve => {
+              Events.scrollEvent.register('end', () => {
+                resolve();
+                Events.scrollEvent.remove('end');
+              });
+              scroller.scrollTo('message-container', {
+                duration: 0,
+                delay: 0,
+                smooth: 'easeInOutQuart',
+              });
             });
-          });
 
-          this.goToContainer.then(() =>
-            this.scrollTo(msgs[msgs.length - 1].id),
-          );
+            this.goToContainer.then(() =>
+              this.scrollTo(msgs[msgs.length - 1].id),
+            );
+          }
         });
-      scrollSpy.update();
     }
   }
 
@@ -69,6 +80,25 @@ class Messaging extends Component {
       this.unsubscribe();
     }
   }
+
+  handleScroll = () => {
+    const {
+      privateChannel: { channel },
+      messageList: { chats },
+      getMoreMessages,
+    } = this.props;
+
+    const scrollY = document.getElementById('message-container').scrollTop;
+    if (scrollY === 0) {
+      this.unsubscribe = getMessageServices(
+        chats[0].created_at,
+        MSG_COUNT_LIMIT,
+        channel._id,
+        getMoreMessages,
+      );
+      this.scrollTo(chats[0].id);
+    }
+  };
 
   scrollToBottom = () => {
     scroll.scrollToBottom();
@@ -116,20 +146,30 @@ class Messaging extends Component {
     sendMessageRequest(message, groupId, _id);
   };
 
+  renderMessage = msg => {
+    const {
+      members: { list },
+    } = this.props;
+    const member = getMember(list, msg.sender_id);
+
+    return (
+      <Element name={msg.id} className="p-3" key={msg.id}>
+        <GeneralAvatar
+          data={{ firstName: member.firstName, message: msg.text }}
+        />
+      </Element>
+    );
+  };
+
   renderMessages = () => {
     const {
       privateChannel: { loading },
       messageList,
     } = this.props;
-
     return (
       <LoadingContainer loading={loading && messageList.loading}>
         <Element className="element message-box p-4" id="message-container">
-          {messageList.chats.map(msg => (
-            <Element name={msg.id} className="p-3" key={msg.id}>
-              {msg.text}
-            </Element>
-          ))}
+          {messageList.chats.map(this.renderMessage)}
         </Element>
       </LoadingContainer>
     );
@@ -144,11 +184,11 @@ class Messaging extends Component {
             <InputGroup>
               <FormControl
                 placeholder="New Message"
-                className="p-4"
+                className="py-3 px-4"
                 onChange={this.handleMessageChange}
                 onKeyPress={this.keypress}
                 as="textarea"
-                rows={2}
+                rows={3}
                 aria-label="With textarea"
               />
               <InputGroup.Prepend>
@@ -156,7 +196,7 @@ class Messaging extends Component {
                   onClick={this.sendMessage}
                   icon="long-arrow-right"
                   iconSize="2x"
-                  className="px-3"
+                  className="px-4"
                   buttonClassName="rounded-right"
                 />
               </InputGroup.Prepend>

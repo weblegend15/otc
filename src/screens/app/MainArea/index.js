@@ -7,8 +7,8 @@ import {
   getPermissionGroupsRequest,
   selectActiveGroup,
   selectGroupMember,
+  refreshFirebaseTokenRequest,
 } from './redux/actions';
-import { refreshFirebaseTokenRequest } from '../../auth/redux/actions';
 
 MainArea.propTypes = {
   groups: PropTypes.object.isRequired,

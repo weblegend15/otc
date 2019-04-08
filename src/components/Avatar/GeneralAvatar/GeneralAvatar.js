@@ -25,6 +25,7 @@ export default ({ data, className, ...rest }) => {
           <p>{data.firstName}</p>&nbsp;
           <p>{data.lastName}</p>
         </div>
+        {data.message && <p>{data.message}</p>}
         <p className="opacity-5">{data.location}</p>
       </div>
     </div>

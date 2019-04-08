@@ -30,6 +30,7 @@ export default class MembersBar extends Component {
       match: { url },
       selectedGroupId,
       currentUser,
+      className,
     } = this.props;
 
     const realMembers = list.filter(
@@ -40,28 +41,30 @@ export default class MembersBar extends Component {
     );
 
     return (
-      <LoadingContainer loading={loading} className="members-bar-section">
-        <div className="p-4 border-bottom border-default-color">
-          <p className="font-weight-bold h4-title mb-4">Members</p>
-          <Input
-            icon="search"
-            iconPosition="right"
-            placeholder="Search people"
-          />
+      <LoadingContainer loading={loading} >
+        <div className={`members-bar-section ${className}`}>
+          <div className="p-4 border-bottom border-default-color">
+            <p className="font-weight-bold h4-title mb-4">Members</p>
+            <Input
+              icon="search"
+              iconPosition="right"
+              placeholder="Search people"
+            />
+          </div>
+          <ListGroup>
+            {realMembers.map(({ firstName, _id }) => (
+              <ListGroup.Item
+                key={_id}
+                as={Link}
+                to={`${url}/member/${_id}`}
+                onClick={() => this.handleClick(_id)}
+                active={_id === selectedGroupMemberId}
+              >
+                <GeneralAvatar data={{ firstName, location: 'London, UK' }} />
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
         </div>
-        <ListGroup>
-          {realMembers.map(({ firstName, _id }) => (
-            <ListGroup.Item
-              key={_id}
-              as={Link}
-              to={`${url}/member/${_id}`}
-              onClick={() => this.handleClick(_id)}
-              active={_id === selectedGroupMemberId}
-            >
-              <GeneralAvatar data={{ firstName, location: 'London, UK' }} />
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
       </LoadingContainer>
     );
   }

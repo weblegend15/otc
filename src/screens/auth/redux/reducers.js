@@ -144,16 +144,6 @@ export default (state = initialState, action) => {
         ...state,
         error: action.error,
       };
-    case CONSTANTS.REFRESH_FIREBASE_TOKEN_REQUEST:
-      return {
-        ...state,
-        firebaseToken: '',
-      };
-    case CONSTANTS.REFRESH_FIREBASE_TOKEN_SUCCESS:
-      return {
-        ...state,
-        firebaseToken: action.payload.firebaseToken,
-      };
     default:
       return state;
   }

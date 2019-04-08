@@ -20,6 +20,7 @@ import {
 
 import request from '../../../../utils/apiRequest';
 import { history } from '../../../../configureStore';
+import { firebaseAuth } from '../../Services/firebase';
 
 function* getGroupMembers(action) {
   try {
@@ -130,6 +131,21 @@ function* readUser(action) {
   }
 }
 
+function* refreshToken() {
+  try {
+    const responseData = yield call(
+      request,
+      '/profile/refresh-firebase-token',
+      'GET',
+      null,
+      true,
+    );
+    yield firebaseAuth(responseData.firebaseToken);
+  } catch (err) {
+    notify('error', err.message);
+  }
+}
+
 export default function* mainAreaSaga() {
   yield takeLatest(CONSTANTS.GET_GROUP_MEMBERS_REQUEST, getGroupMembers);
   yield takeLatest(
@@ -139,4 +155,5 @@ export default function* mainAreaSaga() {
   yield takeLatest(CONSTANTS.CREATE_PRIVATE_CHAT_REQUEST, createPrivateChat);
   yield takeLatest(CONSTANTS.SEND_MESSAGE_REQUEST, sendMessage);
   yield takeLatest(CONSTANTS.READ_USER_REQUEST, readUser);
+  yield takeLatest(CONSTANTS.REFRESH_FIREBASE_TOKEN_REQUEST, refreshToken);
 }

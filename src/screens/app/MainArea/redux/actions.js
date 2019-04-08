@@ -60,8 +60,17 @@ export const sendMessageError = () => ({
   type: CONSTANTS.SEND_MESSAGE_ERROR,
 });
 
+export const setResetMessages = () => ({
+  type: CONSTANTS.SET_RESET_MESSAGES,
+});
+
 export const messageStore = data => ({
   type: CONSTANTS.MESSAGE_STORE,
+  payload: data,
+});
+
+export const getMoreMessages = data => ({
+  type: CONSTANTS.GET_MORE_MESSAGES,
   payload: data,
 });
 
@@ -85,4 +94,17 @@ export const selectActiveGroup = groupId => ({
 export const selectGroupMember = memberId => ({
   type: CONSTANTS.SELECT_GROUP_MEMBER,
   payload: memberId,
+});
+
+export const refreshFirebaseTokenRequest = () => ({
+  type: CONSTANTS.REFRESH_FIREBASE_TOKEN_REQUEST,
+});
+
+export const refreshFirebaseTokenSuccess = firebaseToken => ({
+  type: CONSTANTS.REFRESH_FIREBASE_TOKEN_SUCCESS,
+  payload: firebaseToken,
+});
+
+export const refreshFirebaseTokenError = () => ({
+  type: CONSTANTS.REFRESH_FIREBASE_TOKEN_ERROR,
 });

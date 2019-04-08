@@ -109,6 +109,15 @@ export default (state = initialState, action) => {
         },
       };
 
+    case CONSTANTS.SET_RESET_MESSAGES:
+      return {
+        ...state,
+        messageList: {
+          ...state.messageList,
+          chats: [],
+        },
+      };
+
     case CONSTANTS.MESSAGE_STORE:
       return {
         ...state,
@@ -116,6 +125,15 @@ export default (state = initialState, action) => {
           ...state.messageList,
           chats: action.payload,
           loading: false,
+        },
+      };
+
+    case CONSTANTS.GET_MORE_MESSAGES:
+      return {
+        ...state,
+        messageList: {
+          ...state.messageList,
+          chats: action.payload.concat(state.messageList.chats),
         },
       };
 

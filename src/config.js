@@ -15,7 +15,7 @@ export const RECAPTCHA_KEY =
     : RECAPTCHA_DEV_KEY;
 
 export const PAGE_LIMIT = 4;
-
+export const MSG_COUNT_LIMIT = 10;
 export const FIREBASE_CONFIG = {
   apiKey: FIREBASE_API_KEY,
   authDomain: FIREBASE_AUTH_DOMAIN,
