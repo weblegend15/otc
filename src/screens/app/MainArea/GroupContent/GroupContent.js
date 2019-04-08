@@ -7,6 +7,11 @@ import Offers from './Offers';
 import Vouches from './Vouches';
 
 class GroupContent extends Component {
+  handleClickNewOffer = () => {
+    const { toggleModal, selectedGroupId } = this.props;
+    toggleModal('newOfferModal', { groupId: selectedGroupId });
+  }
+
   renderTabs = () => {
     const {
       match: { url },
@@ -35,6 +40,7 @@ class GroupContent extends Component {
           Vouches/Proposals
         </NavLink>
         <Button
+          onClick={this.handleClickNewOffer}
           variant="outline-primary"
           className="ml-auto my-2 text-uppercase font-weight-bold"
         >

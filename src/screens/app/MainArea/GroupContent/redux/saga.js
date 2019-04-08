@@ -14,6 +14,8 @@ import {
   deleteOfferError,
 } from './actions';
 
+import toggleModal from '../../../../../modals/redux/actions';
+
 import request from '../../../../../utils/apiRequest';
 import notify from '../../../../../utils/notify';
 
@@ -54,9 +56,11 @@ function* createGroupOffer(action) {
     const data = yield call(request, `/groups/${groupId}/offers`, 'POST', reqeustData, true);
 
     yield put(createOfferSuccess(data));
+    yield put(toggleModal('newOfferModal'));
   } catch (err) {
     notify('error', err.message);
     yield put(createOfferError());
+    yield put(toggleModal('newOfferModal'));
   }
 }
 
