@@ -14,21 +14,21 @@ class GroupContent extends Component {
     return (
       <Nav className="w-100 d-flex justify-content-around flex-row align-items-center">
         <NavLink
-          className="px-1 py-3 mx-2 p-lg"
+          className="px-1 py-3 mx-3 p-lg"
           activeClassName="active font-weight-bold"
           to={`${url}/chat`}
         >
           Chat
         </NavLink>
         <NavLink
-          className="px-1 py-3 mx-2 p-lg"
+          className="px-1 py-3 mx-3 p-lg"
           activeClassName="active font-weight-bold"
           to={`${url}/offers`}
         >
           All Offers
         </NavLink>
         <NavLink
-          className="px-1 py-3 mx-2 p-lg"
+          className="px-1 py-3 mx-3 p-lg"
           activeClassName="active font-weight-bold"
           to={`${url}/vouches`}
         >

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link, Switch, Route, withRouter, Redirect } from 'react-router-dom';
-
-import { Card, LoadingContainer, Dropdown } from '../../../components';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
+import { history } from '../../../configureStore';
+import { Card, LoadingContainer, Form, Icon, Button } from '../../../components';
 
 import MembersBar from './MembersBar';
 import GroupContent from './GroupContent';
@@ -10,6 +10,13 @@ import MemberContent from './MemberContent';
 import { getMyActiveGroups } from '../../../utils/permission';
 
 class MainArea extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isCollapsed: false,
+    };
+  }
+
   componentDidMount() {
     const { getPermissionGroupsRequest } = this.props;
     getPermissionGroupsRequest();
@@ -17,14 +24,19 @@ class MainArea extends Component {
 
   handleSelectGroup = groupId => {
     const { selectActiveGroup, selectGroupMember } = this.props;
-    selectActiveGroup(groupId);
+    selectActiveGroup(groupId.target.value);
+    history.push(`/app/my-groups/${groupId.target.value}`);
     selectGroupMember('');
   };
+
+  handleHamburgerClick = () => {
+    const { isCollapsed } = this.state;
+    this.setState({ isCollapsed: !isCollapsed });
+  }
 
   renderHeader = () => {
     const {
       groups: { list },
-      selectedGroupId,
     } = this.props;
 
     const myActiveGroups = getMyActiveGroups(list);
@@ -33,31 +45,23 @@ class MainArea extends Component {
       return <div>You are not a member in any group!</div>;
     }
 
-    const selectedGroup = myActiveGroups.find(
-      item => item._id === selectedGroupId,
-    );
-
     return (
-      <div className="ml-auto d-flex flex-row align-items-center">
-        <p className="p-lg ml-auto mr-3 opacity-5">Select group: </p>
-        <Dropdown className="mr-3" onSelect={this.handleSelectGroup}>
-          <Dropdown.Toggle>
-            {selectedGroup && selectedGroup.name}
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
+      <div className="d-flex flex-row align-items-center justify-content-between">
+        <Button variant="outline-link" onClick={this.handleHamburgerClick}><Icon name="bars" size="2x" /></Button>
+        <Form.Group
+          className="d-flex flex-row my-group-selector"
+          controlId="activeGroupSelect"
+          onChange={this.handleSelectGroup}
+        >
+          <Form.Label className="m-0 d-flex align-items-center text-unset">Select group: </Form.Label>
+          <Form.Control as="select" className="h4-title font-weight-semibold">
             {myActiveGroups.map(item => (
-              <Dropdown.Item
-                key={item._id}
-                eventKey={item._id}
-                active={item._id === selectedGroupId}
-                as={Link}
-                to={`/app/my-groups/${item._id}/group`}
-              >
+              <option key={item._id} value={item._id}>
                 {item.name}
-              </Dropdown.Item>
+              </option>
             ))}
-          </Dropdown.Menu>
-        </Dropdown>
+          </Form.Control>
+        </Form.Group>
       </div>
     );
   };
@@ -81,10 +85,12 @@ class MainArea extends Component {
       groups: { loading },
     } = this.props;
 
+    const { isCollapsed } =this.state;
+
     return (
       <LoadingContainer loading={loading}>
         <Card className="p-0 d-flex flex-row border-0 overflow-hidden">
-          <MembersBar {...this.props} />
+          <MembersBar className={isCollapsed ? 'collapsed' : 'expanded'} {...this.props} />
           <div className="d-flex flex-column p-0 w-100 border-left border-default-color">
             <div className="border-bottom p-3 border-default-color">
               {this.renderHeader()}
