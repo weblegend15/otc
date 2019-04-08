@@ -1,3 +1,26 @@
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Offers from './Offers';
+import { getOffersRequest } from '../redux/actions';
 
-export default Offers;
+Offers.propTypes = {
+  getOffersRequest: PropTypes.func.isRequired,
+  selectedGroupId: PropTypes.string.isRequired,
+  groupOffers: PropTypes.object.isRequired,
+  groupMembers: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  selectedGroupId: state.app.main.selectedGroupId,
+  groupOffers: state.app.offer.groupOffers,
+  groupMembers: state.app.main.members,
+});
+
+const mapDispatchToProps = {
+  getOffersRequest,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Offers);

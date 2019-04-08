@@ -13,7 +13,6 @@ const initialState = {
   },
 };
 
-
 export default (state = initialState, action) => {
   switch (action.type) {
     case CONSTANTS.GET_OFFERS_REQUEST:
@@ -29,7 +28,7 @@ export default (state = initialState, action) => {
         ...state,
         groupOffers: {
           ...state.groupOffers,
-          list: action.payload.list,
+          list: action.payload.data,
           total: action.payload.total,
           loading: false,
         },
@@ -60,6 +59,11 @@ export default (state = initialState, action) => {
           ...state.groupOffer,
           data: action.payload,
           loading: false,
+        },
+        groupOffers: {
+          ...state.groupOffers,
+          list: [action.payload, ...state.groupOffers.list],
+          total: state.groupOffers.total + 1,
         },
       };
     case CONSTANTS.CREATE_OFFER_ERROR:

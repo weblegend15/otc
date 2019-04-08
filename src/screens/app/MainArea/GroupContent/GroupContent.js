@@ -10,7 +10,7 @@ class GroupContent extends Component {
   handleClickNewOffer = () => {
     const { toggleModal, selectedGroupId } = this.props;
     toggleModal('newOfferModal', { groupId: selectedGroupId });
-  }
+  };
 
   renderTabs = () => {
     const {
@@ -80,7 +80,7 @@ class GroupContent extends Component {
     return (
       <div className="group-content-section">
         {this.renderHeader()}
-        <div className="p-4">{this.renderRoutes()}</div>
+        <div className="p-0">{this.renderRoutes()}</div>
       </div>
     );
   }
