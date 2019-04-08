@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Offers from './Offers';
 import { getOffersRequest } from '../redux/actions';
+import toggleModal from '../../../../../modals/redux/actions';
 
 Offers.propTypes = {
   getOffersRequest: PropTypes.func.isRequired,
@@ -18,6 +19,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getOffersRequest,
+  toggleModal,
 };
 
 export default connect(

@@ -30,7 +30,7 @@ export default ({ handleSubmit, onSubmit, proceeding }) => {
           component={Input}
           as="textarea"
           rows="3"
-          name="notes"
+          name="note"
           label="Notes"
           validate={[required]}
         />

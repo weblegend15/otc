@@ -11,3 +11,9 @@ export const RECAPTCHA_KEY =
     : RECAPTCHA_DEV_KEY;
 
 export const PAGE_LIMIT = 4;
+
+export const OFFER_STATUS_CLASS = {
+  accepted: 'primary',
+  rejected: 'warning',
+  pending: 'dark',
+};

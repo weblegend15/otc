@@ -5,11 +5,14 @@ import { Modal, ModalHeader } from '../../components';
 
 export default class NewOfferModal extends Component {
   handleSubmit = values => {
-    const { createOfferRequest, data: { groupId } } = this.props;
+    const {
+      createOfferRequest,
+      data: { groupId },
+    } = this.props;
     const offerData = {
       have: values.have,
       want: values.want,
-      notes: values.notes,
+      note: values.note,
     };
     createOfferRequest({ offerData, groupId });
   };
@@ -19,10 +22,7 @@ export default class NewOfferModal extends Component {
 
     return (
       <Modal {...rest}>
-        <ModalHeader
-          closeButton
-          title="Add Offer"
-        />
+        <ModalHeader closeButton title="Add Offer" />
         <NewOfferModalForm onSubmit={this.handleSubmit} />
       </Modal>
     );

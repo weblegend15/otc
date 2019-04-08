@@ -13,17 +13,18 @@ import {
 import { findElement } from '../../../../../utils/common';
 
 export default class Offers extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   componentDidMount() {
     const { getOffersRequest, selectedGroupId } = this.props;
     getOffersRequest({ limit: 20, skip: 0, groupId: selectedGroupId });
   }
 
-  handleViewClick = offerId => {};
+  handleViewClick = offerData => {
+    const { toggleModal, selectedGroupId } = this.props;
+    toggleModal('viewOfferModal', {
+      offerData,
+      groupId: selectedGroupId,
+    });
+  };
 
   renderTableHeader = () => {
     return (
@@ -68,7 +69,7 @@ export default class Offers extends Component {
             <Col md={3} className="d-flex justify-content-between p-0">
               <Button
                 className="text-uppercase font-weight-bold px-5"
-                onClick={() => this.handleViewClick(item._id)}
+                onClick={() => this.handleViewClick(item)}
               >
                 View
               </Button>
