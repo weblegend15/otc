@@ -9,6 +9,7 @@ import { signout } from '../../screens/auth/redux/actions';
 Topbar.propTypes = {
   currentUser: PropTypes.object,
   signout: PropTypes.func,
+  selectedGroupId: PropTypes.string.isRequired,
 };
 
 Topbar.defaultProps = {
@@ -16,11 +17,15 @@ Topbar.defaultProps = {
   signout: () => {},
 };
 
+const mapStateToProps = state => ({
+  selectedGroupId: state.app.main.selectedGroupId,
+});
+
 const mapDispatchToProps = {
   signout,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(Topbar);

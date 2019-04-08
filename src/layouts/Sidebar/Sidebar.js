@@ -31,7 +31,9 @@ class Sidebar extends Component {
     const { currentUser, className } = this.props;
 
     return (
-      <Card className={`app-sidebar d-none d-md-block border-0 ${className}`}>
+      <Card
+        className={`app-sidebar d-none d-md-block border-0 mr-md-4 ${className}`}
+      >
         <Card.Body className="p-0">
           <Row className="px-5 py-4 m-0">
             <Avatar data={currentUser} editable location="London, UK" />

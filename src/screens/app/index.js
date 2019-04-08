@@ -21,7 +21,7 @@ class AppModule extends Component {
           component={GroupAdmin}
         />
         <Route path={`${match.url}/groups/:groupId`} component={GroupProfile} />
-        <Route path={`${match.url}/my-groups`} component={MainArea} />
+        <Route path={`${match.url}/my-groups/:groupId`} component={MainArea} />
         <Redirect to={`${match.url}/home`} />
       </Switch>
     );
@@ -34,7 +34,7 @@ class AppModule extends Component {
 
     return (
       !pathname.includes('/admin') &&
-      !pathname.includes('/my-groups') && <Sidebar className="mr-md-4" />
+      !pathname.includes('/my-groups') && <Sidebar />
     );
   };
 
