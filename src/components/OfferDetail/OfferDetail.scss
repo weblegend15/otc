@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+
+.offer-detail {
+  .offer-status {
+    height: 22px;
+    padding-top: 2px;
+    min-width: 70px;
+  }
+  &-have,
+  &-want {
+    & > div {
+      background: #f5f5f5;
+    }
+  }
+
+  button {
+    .badge {
+      width: 19px;
+      height: 19px;
+      font-size: 10px;
+      padding-top: 4.5px;
+    }
+    &[aria-expanded='true'] {
+      opacity: 0.7;
+
+      .badge {
+        border: 1px solid $primary;
+        background: $white;
+        color: $primary;
+      }
+    }
+  }
+}

@@ -25,6 +25,8 @@ import Row from './Row';
 import Container from './Container';
 import GeneralAvatar from './Avatar/GeneralAvatar';
 
+import OfferDetail from './OfferDetail';
+
 export {
   Timestamp,
   Icon,
@@ -56,4 +58,5 @@ export {
   Row,
   Container,
   GeneralAvatar,
+  OfferDetail,
 };
