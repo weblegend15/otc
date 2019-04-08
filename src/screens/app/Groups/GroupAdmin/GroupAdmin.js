@@ -1,73 +1,103 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import cx from 'classnames';
+import { Route, Switch, withRouter, Redirect, NavLink } from 'react-router-dom';
 
 import Applications from './Applications';
 import Members from './Members';
 import Offers from './Offers';
+import Home from './Home';
+import Form from './Form';
 
-import { Card, Timestamp, LoadingContainer } from '../../../../components';
+import { Card, Timestamp, Row, Navbar, Nav } from '../../../../components';
 
 class GroupAdminRoutes extends Component {
-  componentDidMount() {
-    const {
-      match: {
-        params: { groupId },
-      },
-      readGroupRequest,
-    } = this.props;
-    readGroupRequest(groupId);
-  }
+  renderHeader = data => (
+    <Card.Header className="border-bottom pb-0 pt-4 px-4 border-default-color d-none d-md-flex flex-column">
+      <Row className="mx-0 mb-4">
+        <div className="d-flex justify-content-center align-items-center">
+          <p className="row mx-0 font-weight-semibold h2-title">{data.name}</p>
+          <p className="opacity-5 p-sm text-uppercase ml-4">Admin area</p>
+        </div>
+        <div className="ml-auto p-sm d-flex">
+          <p className="opacity-5">Created on&nbsp;</p>
+          <Timestamp
+            className="d-inline"
+            timestamp={data.createdAt}
+            format="D MMM YYYY"
+          />
+        </div>
+      </Row>
+      <Navbar className="group-admin-nav p-0">
+        <Nav className="p-0">
+          <NavLink
+            className="ml-0 mr-5 pb-3 h4-title opacity-5"
+            activeClassName="active font-weight-bold"
+            to={`/app/groups/${data._id}/admin/home`}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className="mx-5 pb-3 h4-title opacity-5"
+            activeClassName="active font-weight-bold"
+            to={`/app/groups/${data._id}/admin/applications`}
+          >
+            Applications
+          </NavLink>
+          <NavLink
+            className="mx-5 pb-3 h4-title opacity-5"
+            activeClassName="active font-weight-bold"
+            to={`/app/groups/${data._id}/admin/members`}
+          >
+            Members
+          </NavLink>
+          <NavLink
+            className="mx-5 pb-3 h4-title opacity-5"
+            activeClassName="active font-weight-bold"
+            to={`/app/groups/${data._id}/admin/offers`}
+          >
+            Offers
+          </NavLink>
+          <NavLink
+            className="mx-5 pb-3 h4-title opacity-5"
+            activeClassName="active font-weight-bold"
+            to={`/app/groups/${data._id}/admin/form`}
+          >
+            Form
+          </NavLink>
+        </Nav>
+      </Navbar>
+    </Card.Header>
+  );
 
-  renderHeader = () => {
-    const {
-      group: { data, loading },
-    } = this.props;
-    return (
-      <LoadingContainer loading={loading}>
-        <Card>
-          <Card.Header className="border-0">
-            <h3 className="row mx-0 font-weight-semibold">{data.name}</h3>
-            <div className="row mx-0">
-              <h6>
-                Created on{' '}
-                <Timestamp
-                  className="d-inline"
-                  timestamp={data.createdAt}
-                  format="D MMM YYYY"
-                />
-              </h6>
-            </div>
-          </Card.Header>
-          <Navbar>
-            <Nav>
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#applications">Applications</Nav.Link>
-              <Nav.Link href="#members">Members</Nav.Link>
-              <Nav.Link href="#offers">Offers</Nav.Link>
-            </Nav>
-          </Navbar>
-        </Card>
-      </LoadingContainer>
-    );
-  };
-
-  renderRoutes = () => {
-    const { match } = this.props;
-    return (
-      <Switch>
-        <Route path={`${match.url}/home`} component={Applications} />
-        <Route path={`${match.url}/applications`} component={Applications} />
-        <Route path={`${match.url}/members`} component={Members} />
-        <Route path={`${match.url}/offers`} component={Offers} />
-        <Redirect to={`${match.url}/home`} component={Applications} />
-      </Switch>
-    );
-  };
+  renderRoutes = path => (
+    <Switch>
+      <Route path={`${path}/home`} component={Home} />
+      <Route path={`${path}/applications`} component={Applications} />
+      <Route path={`${path}/members/:searchKey`} component={Members} />
+      <Route path={`${path}/members`} component={Members} />
+      <Route path={`${path}/offers`} component={Offers} />
+      <Route path={`${path}/form`} component={Form} />
+      <Redirect to={`${path}/home`} component={Applications} />
+    </Switch>
+  );
 
   render() {
-    return this.renderRoutes();
+    const {
+      location: { pathname },
+      match: { path },
+      group: { data },
+    } = this.props;
+
+    const className = cx('group-admin-area m-3 m-md-0', {
+      'bg-white': pathname.includes('/home'),
+    });
+
+    return (
+      <Card className={className}>
+        {this.renderHeader(data)}
+        {this.renderRoutes(path)}
+      </Card>
+    );
   }
 }
 
