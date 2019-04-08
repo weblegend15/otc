@@ -7,12 +7,14 @@ import JoinGroupModal from './JoinGroupModal';
 import toggleModal from './redux/actions';
 import DeleteGroupModal from './DeleteGroupModal';
 import ApproveGroupModal from './ApproveGroupModal';
+import NewOfferModal from './NewOfferModal';
 
 const Modals = {
   newGroupModal: NewGroupModal,
   joinGroupModal: JoinGroupModal,
   deleteGroupModal: DeleteGroupModal,
   approveGroupModal: ApproveGroupModal,
+  newOfferModal: NewOfferModal,
 };
 
 const ModalContainer = ({ type, ...rest }) => {
