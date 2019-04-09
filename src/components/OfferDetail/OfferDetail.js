@@ -7,7 +7,7 @@ import Timestamp from '../Timestamp';
 
 import VouchesProposals from './VouchesProposals';
 
-export default ({ data, className }) => (
+export default ({ data, proposals, vouches, className }) => (
   <div className={`offer-detail ${className}`}>
     <Row className="mx-0 mb-2 px-4 d-flex flex-row justify-content-between align-items-center">
       <div className="p-sm opacity-5 d-flex flex-row">
@@ -25,17 +25,13 @@ export default ({ data, className }) => (
     </Row>
     <Row className="m-0 border-bottom border-default-color">
       <Col className="offer-detail-have p-0 border-right border-default-color d-flex flex-column align-items-center">
-        <div className="opacity-5 p-2 text-uppercase w-100 text-center">
-          Have
-        </div>
+        <div className="p-2 text-uppercase w-100 text-center">Has</div>
         <p className="font-weight-bold h3-title p-4 text-primary">
           {data.have}
         </p>
       </Col>
       <Col className="offer-detail-want p-0 d-flex flex-column align-items-center">
-        <div className="opacity-5 p-2 text-uppercase w-100 text-center">
-          Want
-        </div>
+        <div className="p-2 text-uppercase w-100 text-center">Wants</div>
         <p className="font-weight-bold h3-title p-4 text-primary">
           {data.want}
         </p>
@@ -45,6 +41,6 @@ export default ({ data, className }) => (
       <p className="m-0 text-uppercase opacity-5 p-sm">Comments from seller</p>
       <p className="m-0 p-sm">{data.note}</p>
     </Row>
-    <VouchesProposals vouches={data.vouches} proposals={data.proposals} />
+    <VouchesProposals vouches={vouches} proposals={proposals} />
   </div>
 );

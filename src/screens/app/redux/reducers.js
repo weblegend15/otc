@@ -5,6 +5,7 @@ import userReducer from '../Users/redux/reducers';
 import groupAdminReducer from '../Groups/GroupAdmin/redux/reducers';
 import mainReducer from '../MainArea/redux/reducers';
 import offerReducer from '../MainArea/GroupContent/redux/reducers';
+import proposalReducer from '../MainArea/GroupContent/Proposals/redux/reducers';
 
 export default combineReducers({
   group: groupReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   groupAdmin: groupAdminReducer,
   main: mainReducer,
   offer: offerReducer,
+  proposal: proposalReducer,
 });

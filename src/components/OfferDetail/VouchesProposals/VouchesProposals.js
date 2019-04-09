@@ -39,10 +39,12 @@ export default class VouchesProposals extends Component {
         className="w-100 border-top border-default-color"
       >
         <Row className="px-4 py-2 mx-0">Vouches</Row>
-        {vouches.map(item => (
+        {vouches.map((item, idx) => (
           <Row
             key={item._id}
-            className="border-bottom border-default-color mx-0 py-2 px-4"
+            className={`border-default-color mx-0 py-2 px-4 ${
+              idx === vouches.length - 1 ? '' : 'border-bottom'
+            }`}
           >
             <GeneralAvatar
               data={{
@@ -73,8 +75,13 @@ export default class VouchesProposals extends Component {
           </Col>
           <Col md={4} className="p-0" />
         </Row>
-        {proposals.map(item => (
-          <Row className="mx-0 border-bottom border-default-color px-4 py-2 d-flex align-items-center">
+        {proposals.map((item, idx) => (
+          <Row
+            key={item._id}
+            className={`mx-0 border-default-color px-4 py-2 d-flex align-items-center ${
+              idx === proposals.length - 1 ? '' : 'border-bottom'
+            }`}
+          >
             <Col md={5} className="p-0">
               <GeneralAvatar
                 data={{
