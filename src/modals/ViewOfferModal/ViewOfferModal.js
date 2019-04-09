@@ -7,35 +7,85 @@ import {
   ModalFooter,
   Button,
   OfferDetail,
+  LoadingContainer,
 } from '../../components';
 
+import { ProposalForm } from '../../reduxForms';
+
 export default class NewGroupModal extends Component {
-  handleTradeClick = () => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isTrade: false,
+    };
+  }
+
+  componentDidMount() {
     const {
-      data: { offerId },
+      getProposalsRequest,
+      data: { offerData, groupId },
+    } = this.props;
+    getProposalsRequest({
+      limit: 20,
+      skip: 0,
+      offerId: offerData._id,
+      groupId,
+    });
+  }
+
+  handleTradeClick = () => {
+    this.setState({ isTrade: true });
+  };
+
+  handleSubmit = values => {
+    const {
+      createProposalRequest,
+      data: { offerData, groupId },
     } = this.props;
 
-    // TODO handle trade
+    const proposalData = {
+      have: values.have,
+      want: values.want,
+    };
+
+    createProposalRequest({ proposalData, offerId: offerData._id, groupId });
   };
 
   render() {
     const {
-      createGroupRequest,
-      data: { offerData },
+      createProposalRequest,
+      getProposalsRequest,
+      data,
+      proposals: { list, loading },
+      currentUser,
       ...rest
     } = this.props;
+    const { isTrade } = this.state;
+
+    if (!data) {
+      return null;
+    }
+
+    const myProposal = list.find(item => item.proposedBy === currentUser._id);
 
     return (
       <Modal {...rest}>
         <ModalHeader closeButton className="border-0 pb-2" title="Offer" />
         <ModalBody className="p-0">
-          <OfferDetail data={offerData} />
+          <LoadingContainer loading={loading}>
+            <OfferDetail data={data.offerData} proposals={list} vouches={[]} />
+          </LoadingContainer>
         </ModalBody>
-        <ModalFooter>
-          <Button className="btn-block" onClick={this.handleTradeClick}>
-            Trade
-          </Button>
-        </ModalFooter>
+        {!myProposal && isTrade && (
+          <ProposalForm onSubmit={this.handleSubmit} />
+        )}
+        {!myProposal && !isTrade && (
+          <ModalFooter>
+            <Button className="btn-block" onClick={this.handleTradeClick}>
+              Trade
+            </Button>
+          </ModalFooter>
+        )}
       </Modal>
     );
   }
