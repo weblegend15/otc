@@ -7,7 +7,7 @@ import Timestamp from '../Timestamp';
 
 import VouchesProposals from './VouchesProposals';
 
-export default ({ data, proposals, vouches, className }) => (
+export default ({ data, proposals, vouches, className, type }) => (
   <div className={`offer-detail ${className}`}>
     <Row className="mx-0 mb-2 px-4 d-flex flex-row justify-content-between align-items-center">
       <div className="p-sm opacity-5 d-flex flex-row">
@@ -23,7 +23,7 @@ export default ({ data, proposals, vouches, className }) => (
       </div>
       <p className="m-0">Ends in 1h 15m</p>
     </Row>
-    <Row className="m-0 border-bottom border-default-color">
+    <Row className="m-0">
       <Col className="offer-detail-have p-0 border-right border-default-color d-flex flex-column align-items-center">
         <div className="p-2 text-uppercase w-100 text-center">Has</div>
         <p className="font-weight-bold h3-title p-4 text-primary">
@@ -37,10 +37,16 @@ export default ({ data, proposals, vouches, className }) => (
         </p>
       </Col>
     </Row>
-    <Row className="mx-0 d-flex flex-column p-4">
-      <p className="m-0 text-uppercase opacity-5 p-sm">Comments from seller</p>
-      <p className="m-0 p-sm">{data.note}</p>
-    </Row>
-    <VouchesProposals vouches={vouches} proposals={proposals} />
+    {type !== 'activeDeal' && (
+      <Row className="mx-0 d-flex flex-column p-4 border-top border-default-color">
+        <p className="m-0 text-uppercase opacity-5 p-sm">
+          Comments from seller
+        </p>
+        <p className="m-0 p-sm">{data.note}</p>
+      </Row>
+    )}
+    {type !== 'activeDeal' && (
+      <VouchesProposals vouches={vouches} proposals={proposals} />
+    )}
   </div>
 );
