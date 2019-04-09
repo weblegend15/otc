@@ -74,6 +74,11 @@ export const getMoreMessages = data => ({
   payload: data,
 });
 
+export const addNewMessage = data => ({
+  type: CONSTANTS.ADD_NEW_MESSAGE,
+  payload: data,
+});
+
 export const readUserRequest = userId => ({
   type: CONSTANTS.READ_USER_REQUEST,
   payload: userId,

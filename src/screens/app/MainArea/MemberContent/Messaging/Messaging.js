@@ -1,34 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
-import {
-  Element,
-  Events,
-  scroller,
-  animateScroll as scroll,
-} from 'react-scroll';
+import _ from 'lodash';
+import { Element, scroller } from 'react-scroll';
 import {
   IconButton,
   LoadingContainer,
   GeneralAvatar,
+  Timestamp,
 } from '../../../../../components';
-import { firestore } from '../../../../../configureStore';
-import { getMessageServices } from '../../../Services/firebase';
+import {
+  getMessageServices,
+  getInitialMessages,
+} from '../../../Services/firebase';
 import { MSG_COUNT_LIMIT } from '../../../../../config';
-import getMember from '../../../../../utils/getMember';
+import { getMember } from '../../../../../utils/filterObject';
 
 class Messaging extends Component {
   constructor(props) {
     super(props);
     this.state = {
       message: '',
+      scrollPosition: 'bottom',
+      topRenderMessageId: '',
     };
   }
 
   componentDidMount() {
     document
       .getElementById('message-container')
-      .addEventListener('scroll', this.handleScroll);
+      .addEventListener('scroll', _.debounce(this.handleScroll, 300));
   }
 
   componentDidUpdate(prevProps) {
@@ -36,42 +37,21 @@ class Messaging extends Component {
       privateChannel: { channel },
       messageStore,
     } = this.props;
+    const { scrollPosition, topRenderMessageId } = this.state;
 
     if (
       prevProps.privateChannel.channel !== channel &&
       Object.keys(channel).length
     ) {
-      this.unsubscribe = firestore
-        .collection('chats')
-        .doc(channel._id)
-        .collection('messages')
-        .orderBy('created_at', 'desc')
-        .limit(MSG_COUNT_LIMIT)
-        .onSnapshot(messages => {
-          let msgs = [];
-          if (!messages.empty) {
-            messages.forEach(message => {
-              msgs.push({ id: message.id, ...message.data() });
-            });
-            msgs = msgs.reverse();
-            messageStore(msgs);
-            this.goToContainer = new Promise(resolve => {
-              Events.scrollEvent.register('end', () => {
-                resolve();
-                Events.scrollEvent.remove('end');
-              });
-              scroller.scrollTo('message-container', {
-                duration: 0,
-                delay: 0,
-                smooth: 'easeInOutQuart',
-              });
-            });
-
-            this.goToContainer.then(() =>
-              this.scrollTo(msgs[msgs.length - 1].id),
-            );
-          }
-        });
+      getInitialMessages(
+        channel._id,
+        MSG_COUNT_LIMIT,
+        messageStore,
+        this.scrollTo,
+      );
+    }
+    if (scrollPosition === 'top') {
+      this.scrollTo(topRenderMessageId);
     }
   }
 
@@ -79,6 +59,10 @@ class Messaging extends Component {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
+
+    document
+      .getElementById('message-container')
+      .removeEventListener('scroll', _.debounce(this.handleScroll, 100));
   }
 
   handleScroll = () => {
@@ -88,20 +72,21 @@ class Messaging extends Component {
       getMoreMessages,
     } = this.props;
 
+    const chat = chats[0].id === 'first' ? chats[1] : chats[0];
+
     const scrollY = document.getElementById('message-container').scrollTop;
-    if (scrollY === 0) {
+    if (scrollY === 0 && chats[0].id !== 'first') {
       this.unsubscribe = getMessageServices(
-        chats[0].created_at,
+        chat.created_at,
         MSG_COUNT_LIMIT,
         channel._id,
         getMoreMessages,
       );
-      this.scrollTo(chats[0].id);
+      this.setState({
+        scrollPosition: 'top',
+        topRenderMessageId: chat.id,
+      });
     }
-  };
-
-  scrollToBottom = () => {
-    scroll.scrollToBottom();
   };
 
   scrollTo = element => {
@@ -134,16 +119,14 @@ class Messaging extends Component {
   sendMessage = () => {
     const { message } = this.state;
     const {
-      match: {
-        params: { groupId },
-      },
+      selectedGroupId,
       privateChannel: {
         channel: { _id },
       },
       sendMessageRequest,
     } = this.props;
 
-    sendMessageRequest(message, groupId, _id);
+    sendMessageRequest(message, selectedGroupId, _id);
   };
 
   renderMessage = msg => {
@@ -153,10 +136,25 @@ class Messaging extends Component {
     const member = getMember(list, msg.sender_id);
 
     return (
-      <Element name={msg.id} className="p-3" key={msg.id}>
-        <GeneralAvatar
-          data={{ firstName: member.firstName, message: msg.text }}
-        />
+      <Element
+        name={msg.id}
+        className="p-3 d-flex justify-content-between"
+        key={msg.id}
+      >
+        {msg.type === 'first_message' ? (
+          <p className="text-center">{msg.text}</p>
+        ) : (
+          <Fragment>
+            <GeneralAvatar
+              data={{ firstName: member.firstName, message: msg.text }}
+            />
+            <Timestamp
+              className="opacity-5"
+              timestamp={msg.created_at}
+              format="LT"
+            />
+          </Fragment>
+        )}
       </Element>
     );
   };
@@ -166,6 +164,7 @@ class Messaging extends Component {
       privateChannel: { loading },
       messageList,
     } = this.props;
+
     return (
       <LoadingContainer loading={loading && messageList.loading}>
         <Element className="element message-box p-4" id="message-container">

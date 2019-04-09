@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { history } from '../../../configureStore';
-import { Card, LoadingContainer, Form, Icon, Button } from '../../../components';
+import {
+  Card,
+  LoadingContainer,
+  Form,
+  Icon,
+  Button,
+} from '../../../components';
 
 import MembersBar from './MembersBar';
 import GroupContent from './GroupContent';
@@ -36,7 +42,7 @@ class MainArea extends Component {
   handleHamburgerClick = () => {
     const { isCollapsed } = this.state;
     this.setState({ isCollapsed: !isCollapsed });
-  }
+  };
 
   renderHeader = () => {
     const {
@@ -51,13 +57,17 @@ class MainArea extends Component {
 
     return (
       <div className="d-flex flex-row align-items-center justify-content-between">
-        <Button variant="outline-link" onClick={this.handleHamburgerClick}><Icon name="bars" size="2x" /></Button>
+        <Button variant="outline-link" onClick={this.handleHamburgerClick}>
+          <Icon name="bars" size="2x" />
+        </Button>
         <Form.Group
           className="d-flex flex-row my-group-selector"
           controlId="activeGroupSelect"
           onChange={this.handleSelectGroup}
         >
-          <Form.Label className="m-0 d-flex align-items-center text-unset">Select group: </Form.Label>
+          <Form.Label className="m-0 d-flex align-items-center text-unset">
+            Select group:{' '}
+          </Form.Label>
           <Form.Control as="select" className="h4-title font-weight-semibold">
             {myActiveGroups.map(item => (
               <option key={item._id} value={item._id}>
@@ -72,14 +82,14 @@ class MainArea extends Component {
 
   renderRoutes = () => {
     const {
-      match: { path },
+      match: { url },
     } = this.props;
 
     return (
       <Switch>
-        <Route path={`${path}/member/:userId`} component={MemberContent} />
-        <Route path={`${path}/group`} component={GroupContent} />
-        <Redirect to={`${path}/group`} />
+        <Route path={`${url}/member/:userId`} component={MemberContent} />
+        <Route path={`${url}/group`} component={GroupContent} />
+        <Redirect to={`${url}/group`} />
       </Switch>
     );
   };
@@ -89,12 +99,15 @@ class MainArea extends Component {
       groups: { loading },
     } = this.props;
 
-    const { isCollapsed } =this.state;
+    const { isCollapsed } = this.state;
 
     return (
       <LoadingContainer loading={loading}>
         <Card className="p-0 d-flex flex-row border-0 overflow-hidden">
-          <MembersBar className={isCollapsed ? 'collapsed' : 'expanded'} {...this.props} />
+          <MembersBar
+            className={isCollapsed ? 'collapsed' : 'expanded'}
+            {...this.props}
+          />
           <div className="d-flex flex-column p-0 w-100 border-left border-default-color">
             <div className="border-bottom p-3 border-default-color">
               {this.renderHeader()}

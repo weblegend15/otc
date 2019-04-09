@@ -147,17 +147,17 @@ class MemberContent extends Component {
 
   renderRoutes = () => {
     const {
-      match: { path },
+      match: { url },
     } = this.props;
 
     return (
       <Switch>
-        <Route path={`${path}/profile`} component={Profile} />
-        <Route path={`${path}/feedback`} component={Feedback} />
-        <Route path={`${path}/current-offers`} component={CurrentOffers} />
-        <Route path={`${path}/past-offers`} component={PastOffers} />
-        <Route path={`${path}/messaging`} component={Messaging} />
-        <Redirect to={`${path}/messaging`} />
+        <Route path={`${url}/profile`} component={Profile} />
+        <Route path={`${url}/feedback`} component={Feedback} />
+        <Route path={`${url}/current-offers`} component={CurrentOffers} />
+        <Route path={`${url}/past-offers`} component={PastOffers} />
+        <Route path={`${url}/messaging`} component={Messaging} />
+        <Redirect to={`${url}/messaging`} />
       </Switch>
     );
   };

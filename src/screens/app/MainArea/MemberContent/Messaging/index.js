@@ -4,6 +4,7 @@ import {
   createPrivateChatRequest,
   sendMessageRequest,
   messageStore,
+  addNewMessage,
   getMoreMessages,
 } from '../../redux/actions';
 import Messaging from './Messaging';
@@ -20,6 +21,7 @@ Messaging.propTypes = {
 const matStateToProps = state => ({
   privateChannel: state.app.main.privateChannel,
   messageList: state.app.main.messageList,
+  selectedGroupId: state.app.main.selectedGroupId,
   members: state.app.main.members,
 });
 
@@ -27,6 +29,7 @@ const mapDispatchToProps = {
   createPrivateChatRequest,
   sendMessageRequest,
   getMoreMessages,
+  addNewMessage,
   messageStore,
 };
 

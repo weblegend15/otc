@@ -118,6 +118,15 @@ export default (state = initialState, action) => {
         },
       };
 
+    case CONSTANTS.ADD_NEW_MESSAGE:
+      return {
+        ...state,
+        messageList: {
+          ...state.messageList,
+          chats: state.messageList.chats.push(action.payload[0]),
+        },
+      };
+
     case CONSTANTS.MESSAGE_STORE:
       return {
         ...state,
