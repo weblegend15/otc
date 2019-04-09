@@ -13,7 +13,7 @@ export default ({ data, className, ...rest }) => {
       {!data.imgUrl ? (
         <Icon
           name="user"
-          className="text-primary mr-2 d-flex justify-content-center align-items-center rounded-circle"
+          className="text-primary mr-3 d-flex px-3 justify-content-center align-items-center rounded-circle"
           size="2x"
         />
       ) : (
@@ -25,7 +25,7 @@ export default ({ data, className, ...rest }) => {
           <p>{data.firstName}</p>&nbsp;
           <p>{data.lastName}</p>
         </div>
-        {data.message && <p>{data.message}</p>}
+        {data.message && <p className="mt-1">{data.message}</p>}
         <p className="opacity-5">{data.location}</p>
       </div>
     </div>
