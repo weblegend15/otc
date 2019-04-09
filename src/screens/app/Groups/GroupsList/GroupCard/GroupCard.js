@@ -23,11 +23,12 @@ export default ({
       <Card.Body className="p-4">
         <Card.Title className="d-flex flex-row justify-content-between align-items-center">
           <Link
+            className="font-weight-bold h4-title font-black"
             to={`/app/groups/${groupId}${
               currentUser.role === 'ADMIN' || isGroupAdmin ? '/admin' : ''
             }`}
           >
-            <h4 className="font-weight-bold line-ellipsis">{name}</h4>
+            <Truncate lines={1}>{name}</Truncate>
           </Link>
 
           <div className="group-card-status text-dark d-flex flex-row font-weight-semibold">
