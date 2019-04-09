@@ -4,7 +4,7 @@ import { Nav, Button, Icon } from '../../../../components';
 
 import GroupChat from './GroupChat';
 import Offers from './Offers';
-import Vouches from './Vouches';
+import VouchesProposals from './VouchesProposals';
 
 class GroupContent extends Component {
   handleClickNewOffer = () => {
@@ -19,23 +19,23 @@ class GroupContent extends Component {
     return (
       <Nav className="w-100 d-flex justify-content-around flex-row align-items-center">
         <NavLink
-          className="px-1 py-3 mx-3 p-lg"
+          className="px-1 py-3 pr-4 p-lg"
           activeClassName="active font-weight-bold"
           to={`${url}/chat`}
         >
           Chat
         </NavLink>
         <NavLink
-          className="px-1 py-3 mx-3 p-lg"
+          className="px-1 py-3 mx-4 p-lg"
           activeClassName="active font-weight-bold"
           to={`${url}/offers`}
         >
           All Offers
         </NavLink>
         <NavLink
-          className="px-1 py-3 mx-3 p-lg"
+          className="px-1 py-3 mx-4 p-lg"
           activeClassName="active font-weight-bold"
-          to={`${url}/vouches`}
+          to={`${url}/vouches-proposals`}
         >
           Vouches/Proposals
         </NavLink>
@@ -52,7 +52,7 @@ class GroupContent extends Component {
 
   renderHeader = () => {
     return (
-      <div className="border-bottom border-default-color px-3 pt-3">
+      <div className="border-bottom border-default-color pl-3 pr-4 pt-3">
         <div className="mb-5 p-sm d-flex flex-row align-items-center">
           <p className="text-uppercase opacity-5 mr-3">message from admin</p>
           <Icon className="text-primary" name="arrow-right" />
@@ -70,7 +70,7 @@ class GroupContent extends Component {
       <Switch>
         <Route path={`${url}/chat`} component={GroupChat} />
         <Route path={`${url}/offers`} component={Offers} />
-        <Route path={`${url}/vouches`} component={Vouches} />
+        <Route path={`${url}/vouches-proposals`} component={VouchesProposals} />
         <Redirect to={`${url}/chat`} />
       </Switch>
     );

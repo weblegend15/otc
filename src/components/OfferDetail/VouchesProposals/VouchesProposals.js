@@ -48,8 +48,8 @@ export default class VouchesProposals extends Component {
           >
             <GeneralAvatar
               data={{
-                firstName: 'John',
-                lastName: 'Smith',
+                firstName: item.requestedBy.firstName,
+                lastName: item.requestedBy.lastName,
                 location: 'London, UK',
               }}
             />
@@ -85,8 +85,8 @@ export default class VouchesProposals extends Component {
             <Col md={5} className="p-0">
               <GeneralAvatar
                 data={{
-                  firstName: 'John',
-                  lastName: 'Smith',
+                  firstName: item.proposedBy.firstName,
+                  lastName: item.proposedBy.lastName,
                   location: 'London, UK',
                 }}
               />

@@ -28,7 +28,7 @@ function* getVouches(action) {
 
     const data = yield call(
       request,
-      `groups/${groupId}/offers/${offerId}/vouches`,
+      `/groups/${groupId}/offers/${offerId}/vouches`,
       'GET',
       requestData,
       true,
@@ -49,7 +49,7 @@ function* createVouch(action) {
 
     const data = yield call(
       request,
-      `groups/${groupId}/offers/${offerId}/vouches`,
+      `/groups/${groupId}/offers/${offerId}/vouches`,
       'GET',
       requestData,
       true,
@@ -70,7 +70,7 @@ function* deleteVouch(action) {
 
     const data = yield call(
       request,
-      `groups/${groupId}/offers/${offerId}/vouches/${vouchId}`,
+      `/groups/${groupId}/offers/${offerId}/vouches/${vouchId}`,
       'DELETE',
       null,
       true,
@@ -91,7 +91,7 @@ function* acceptVouch(action) {
 
     const data = yield call(
       request,
-      `groups/${groupId}/offers/${offerId}/vouches/${vouchId}/accept`,
+      `/groups/${groupId}/offers/${offerId}/vouches/${vouchId}/accept`,
       'PUT',
       {},
       true,
@@ -112,7 +112,7 @@ function* rejectVouch(action) {
 
     const data = yield call(
       request,
-      `groups/${groupId}/offers/${offerId}/vouches/${vouchId}/reject`,
+      `/groups/${groupId}/offers/${offerId}/vouches/${vouchId}/reject`,
       'PUT',
       {},
       true,

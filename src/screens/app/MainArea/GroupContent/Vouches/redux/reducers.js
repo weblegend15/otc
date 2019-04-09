@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
         },
       };
 
-    case CONSTANTS.CREATE_VOUCHE_REQUEST:
+    case CONSTANTS.CREATE_VOUCH_REQUEST:
       return {
         ...state,
         vouch: {
@@ -54,7 +54,7 @@ export default (state = initialState, action) => {
           loading: true,
         },
       };
-    case CONSTANTS.CREATE_VOUCHE_SUCCESS:
+    case CONSTANTS.CREATE_VOUCH_SUCCESS:
       return {
         ...state,
         vouch: {
@@ -67,7 +67,7 @@ export default (state = initialState, action) => {
           list: [action.payload, ...state.vouches.list],
         },
       };
-    case CONSTANTS.CREATE_VOUCHE_ERROR:
+    case CONSTANTS.CREATE_VOUCH_ERROR:
       return {
         ...state,
         vouch: {
@@ -77,7 +77,7 @@ export default (state = initialState, action) => {
         },
       };
 
-    case CONSTANTS.DELETE_VOUCHE_REQUEST:
+    case CONSTANTS.DELETE_VOUCH_REQUEST:
       return {
         ...state,
         vouch: {
@@ -85,7 +85,7 @@ export default (state = initialState, action) => {
           loading: true,
         },
       };
-    case CONSTANTS.DELETE_VOUCHE_SUCCESS:
+    case CONSTANTS.DELETE_VOUCH_SUCCESS:
       return {
         ...state,
         vouch: {
@@ -94,7 +94,7 @@ export default (state = initialState, action) => {
           loading: false,
         },
       };
-    case CONSTANTS.DELETE_VOUCHE_ERROR:
+    case CONSTANTS.DELETE_VOUCH_ERROR:
       return {
         ...state,
         vouch: {
@@ -104,33 +104,33 @@ export default (state = initialState, action) => {
         },
       };
 
-    case CONSTANTS.ACCEPT_VOUCHE_REQUEST:
+    case CONSTANTS.ACCEPT_VOUCH_REQUEST:
       return {
         ...state,
         handleVouchLoading: true,
       };
-    case CONSTANTS.ACCEPT_VOUCHE_SUCCESS:
+    case CONSTANTS.ACCEPT_VOUCH_SUCCESS:
       return {
         ...state,
         handleVouchLoading: false,
       };
-    case CONSTANTS.ACCEPT_VOUCHE_ERROR:
+    case CONSTANTS.ACCEPT_VOUCH_ERROR:
       return {
         ...state,
         handleVouchLoading: false,
       };
 
-    case CONSTANTS.REJECT_VOUCHE_REQUEST:
+    case CONSTANTS.REJECT_VOUCH_REQUEST:
       return {
         ...state,
         handleVouchLoading: true,
       };
-    case CONSTANTS.REJECT_VOUCHE_SUCCESS:
+    case CONSTANTS.REJECT_VOUCH_SUCCESS:
       return {
         ...state,
         handleVouchLoading: false,
       };
-    case CONSTANTS.REJECT_VOUCHE_ERROR:
+    case CONSTANTS.REJECT_VOUCH_ERROR:
       return {
         ...state,
         handleVouchLoading: false,

@@ -1,6 +1,9 @@
 @import '../../styles/variables';
 
 .offer-detail {
+  .general-avatar p {
+    margin: 0;
+  }
   .offer-status {
     height: 22px;
     padding-top: 2px;

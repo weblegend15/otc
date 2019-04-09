@@ -28,7 +28,7 @@ export default class Offers extends Component {
 
   renderTableHeader = () => {
     return (
-      <Row className="border-bottom border-default-color py-3 m-0 px-5">
+      <Row className="border-bottom border-default-color py-3 m-0 px-4">
         <Col className="font-weight-semibold p-0 opacity-5 p-sm">DATE</Col>
         <Col className="font-weight-semibold p-0 opacity-5 p-sm">USER</Col>
         <Col className="font-weight-semibold p-0 opacity-5 p-sm">HAS</Col>
@@ -51,7 +51,7 @@ export default class Offers extends Component {
         {list.map(item => (
           <Row
             key={item._id}
-            className="border-bottom border-default-color py-4 px-5 m-0 d-flex align-items-center"
+            className="border-bottom border-default-color p-4 m-0 d-flex align-items-center"
           >
             <Col className="p-0">
               <Timestamp className="p-sm" date={item.createdAt} />
@@ -74,7 +74,10 @@ export default class Offers extends Component {
                 View
               </Button>
               <Button className="p-0" variant="outline-link">
-                <Icon name="edit" className="text-primary" size="2x" />
+                <Icon name="edit" className="text-primary h4-title" />
+              </Button>
+              <Button className="p-0" variant="outline-link">
+                <Icon name="paperclip" className="text-primary h4-title" />
               </Button>
             </Col>
           </Row>
