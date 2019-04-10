@@ -15,7 +15,10 @@ export default class ActiveDeals extends Component {
     getOffersRequest({ skip: 0, limit: 1000, groupId: selectedGroupId });
   }
 
-  handleProposalsClick = () => {};
+  handleProposalsClick = offerId => {
+    const { toggleModal, selectedGroupId } = this.props;
+    toggleModal('viewProposalsModal', { offerId, groupId: selectedGroupId });
+  };
 
   handleVouchRequest = offerId => {
     const { toggleModal, selectedGroupId } = this.props;
@@ -29,8 +32,12 @@ export default class ActiveDeals extends Component {
         <Col className="p-sm font-weight-semibold opacity-5">GROUP</Col>
         <Col className="p-sm font-weight-semibold opacity-5">HAS</Col>
         <Col className="p-sm font-weight-semibold opacity-5">WANTS</Col>
-        <Col className="p-sm font-weight-semibold opacity-5">PROPOSALS</Col>
-        <Col className="p-sm font-weight-semibold opacity-5">VOUCHES</Col>
+        <Col className="p-sm font-weight-semibold opacity-5 text-center">
+          PROPOSALS
+        </Col>
+        <Col className="p-sm font-weight-semibold opacity-5  text-center">
+          VOUCHES
+        </Col>
       </Row>
     );
   };
@@ -53,20 +60,24 @@ export default class ActiveDeals extends Component {
         </Col>
         <Col className="font-weight-semibold">{item.have}</Col>
         <Col className="font-weight-semibold">{item.want}</Col>
-        <Col className="font-weight-semibold">
-          <Button
-            variant="outline-primary font-weight-semibold text-uppercase d-flex flex-row algin-items-center btn-regular"
-            onClick={this.handleProposalsClick}
-          >
-            Proposals&nbsp;
-            <Badge variant="primary">{item.proposals.length}</Badge>
-          </Button>
+        <Col className="font-weight-semibold text-center">
+          {!item.proposals.length ? (
+            '-'
+          ) : (
+            <Button
+              variant="link"
+              className="btn-regular font-weight-bold"
+              onClick={() => this.handleProposalsClick(item._id)}
+            >
+              <Badge variant="primary">{item.proposals.length}</Badge>
+            </Button>
+          )}
         </Col>
         <Col
-          className="font-weight-semibold"
+          className="font-weight-semibold text-center"
           onClick={() => this.handleVouchRequest(item._id)}
         >
-          <Button className="text-uppercase font-weight-bold btn-regular">
+          <Button className="px-4 text-uppercase font-weight-bold btn-regular">
             Request
           </Button>
         </Col>

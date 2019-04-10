@@ -17,3 +17,9 @@ export const OFFER_STATUS_CLASS = {
   rejected: 'warning',
   pending: 'dark',
 };
+
+export const PROPOSAL_STATUS_CLASS = {
+  active: 'primary',
+  rejected: 'warning',
+  pending: 'dark',
+};

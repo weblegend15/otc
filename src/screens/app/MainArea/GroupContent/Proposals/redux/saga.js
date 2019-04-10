@@ -121,9 +121,11 @@ function* acceptProposal(action) {
     );
 
     yield put(acceptProposalSuccess(data));
+    yield put(toggleModal('viewProposalsModal'));
   } catch (err) {
     notify('error', err.message);
     yield put(acceptProposalError());
+    yield put(toggleModal('viewProposalsModal'));
   }
 }
 
@@ -141,9 +143,11 @@ function* rejectProposal(action) {
     );
 
     yield put(rejectProposalSuccess(data));
+    yield put(toggleModal('viewProposalsModal'));
   } catch (err) {
     notify('error', err.message);
     yield put(rejectProposalError());
+    yield put(toggleModal('viewProposalsModal'));
   }
 }
 
