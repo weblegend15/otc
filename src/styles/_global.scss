@@ -117,6 +117,11 @@ button.btn-lg {
   text-transform: uppercase;
 }
 
+.btn-regular {
+  height: 35px;
+  padding-top: 7px;
+}
+
 .line-ellipsis {
   max-width: 100%;
   overflow: hidden;
@@ -192,6 +197,17 @@ button.btn-lg {
 .link-size {
   font-size: 14px;
   font-weight: 600;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar-thumb {
+  background-color: #c4c4c4;
+  border-radius: 6px;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
 @include media-breakpoint-between(xs, sm) {
