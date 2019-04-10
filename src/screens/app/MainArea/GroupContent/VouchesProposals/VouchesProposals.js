@@ -6,7 +6,6 @@ import { Nav } from '../../../../../components';
 import ActiveDeals from './ActiveDeals';
 import ActiveProposals from './ActiveProposals';
 import PeopleRequestVouch from './PeopleRequestVouch';
-import AcceptedVouches from './AcceptedVouches';
 
 class VouchesProposals extends Component {
   renderTabs = () => {
@@ -37,13 +36,6 @@ class VouchesProposals extends Component {
         >
           People Requesting Your Vouch
         </NavLink>
-        <NavLink
-          className="px-1 py-4 mx-3 p-lg"
-          activeClassName="active font-weight-bold"
-          to={`${url}/accepted-vouches`}
-        >
-          Accepted Vouches
-        </NavLink>
       </Nav>
     );
   };
@@ -60,7 +52,6 @@ class VouchesProposals extends Component {
           path={`${url}/people-request-vouch`}
           component={PeopleRequestVouch}
         />
-        <Route path={`${url}/accepted-vouches`} component={AcceptedVouches} />
         <Redirect to={`${url}/active-deals`} />
       </Switch>
     );

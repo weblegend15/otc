@@ -7,6 +7,7 @@ import mainSaga from '../MainArea/redux/saga';
 import offerSaga from '../MainArea/GroupContent/redux/saga';
 import proposalSaga from '../MainArea/GroupContent/Proposals/redux/saga';
 import vouchSaga from '../MainArea/GroupContent/Vouches/redux/saga';
+import groupProposalsSaga from '../MainArea/GroupContent/VouchesProposals/ActiveProposals/redux/saga';
 
 export default function* appSaga() {
   yield all([
@@ -17,5 +18,6 @@ export default function* appSaga() {
     fork(offerSaga),
     fork(proposalSaga),
     fork(vouchSaga),
+    fork(groupProposalsSaga),
   ]);
 }
