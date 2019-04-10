@@ -2,21 +2,31 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ActiveDeals from './ActiveDeals';
 
-import { getProposalsRequest } from '../../Proposals/redux/actions';
+import {
+  getActiveGroupOffers,
+  getMyActiveGroups,
+} from '../../../../../../selectors';
+
+import { getOffersRequest } from '../../redux/actions';
+import toggleModal from '../../../../../../modals/redux/actions';
 
 ActiveDeals.propTypes = {
-  getProposalsRequest: PropTypes.func.isRequired,
-  proposals: PropTypes.object.isRequired,
-  groupId: PropTypes.string.isRequired,
+  selectedGroupId: PropTypes.string.isRequired,
+  getOffersRequest: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  activeGroupOffers: PropTypes.object.isRequired,
+  myActiveGroups: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  proposals: state.app.proposal.proposals,
-  groupId: state.app.main.selectedGroupId,
+  selectedGroupId: state.app.main.selectedGroupId,
+  myActiveGroups: getMyActiveGroups(state),
+  activeGroupOffers: getActiveGroupOffers(state),
 });
 
 const mapDispatchToProps = {
-  getProposalsRequest,
+  getOffersRequest,
+  toggleModal,
 };
 
 export default connect(

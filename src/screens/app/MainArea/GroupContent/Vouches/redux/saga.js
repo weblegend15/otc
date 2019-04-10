@@ -14,6 +14,8 @@ import {
   rejectVouchError,
 } from './actions';
 
+import toggleModal from '../../../../../../modals/redux/actions';
+
 import notify from '../../../../../../utils/notify';
 import request from '../../../../../../utils/apiRequest';
 
@@ -36,7 +38,7 @@ function* getVouches(action) {
 
     yield put(getVouchesSuccess(data));
   } catch (err) {
-    notify('error', err.meesage);
+    notify('error', err.message);
     yield put(getVouchesError());
   }
 }
@@ -50,15 +52,17 @@ function* createVouch(action) {
     const data = yield call(
       request,
       `/groups/${groupId}/offers/${offerId}/vouches`,
-      'GET',
+      'POST',
       requestData,
       true,
     );
 
     yield put(createVouchSuccess(data));
+    yield put(toggleModal('requestVouchModal'));
   } catch (err) {
-    notify('error', err.meesage);
+    notify('error', err.message);
     yield put(createVouchError());
+    yield put(toggleModal('requestVouchModal'));
   }
 }
 
@@ -78,7 +82,7 @@ function* deleteVouch(action) {
 
     yield put(deleteVouchSuccess(data));
   } catch (err) {
-    notify('error', err.meesage);
+    notify('error', err.message);
     yield put(deleteVouchError());
   }
 }
@@ -99,7 +103,7 @@ function* acceptVouch(action) {
 
     yield put(acceptVouchSuccess(data));
   } catch (err) {
-    notify('error', err.meesage);
+    notify('error', err.message);
     yield put(acceptVouchError());
   }
 }
@@ -120,7 +124,7 @@ function* rejectVouch(action) {
 
     yield put(rejectVouchSuccess(data));
   } catch (err) {
-    notify('error', err.meesage);
+    notify('error', err.message);
     yield put(rejectVouchError());
   }
 }

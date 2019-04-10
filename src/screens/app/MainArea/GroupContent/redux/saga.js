@@ -19,7 +19,6 @@ import toggleModal from '../../../../../modals/redux/actions';
 import request from '../../../../../utils/apiRequest';
 import notify from '../../../../../utils/notify';
 
-
 function* getGroupOffers(action) {
   try {
     const { groupId } = action.payload;
@@ -27,7 +26,14 @@ function* getGroupOffers(action) {
       limit: action.payload.limit,
       skip: action.payload.skip,
     };
-    const data = yield call(request, `/groups/${groupId}/offers`, 'GET', requestData, true);
+
+    const data = yield call(
+      request,
+      `/groups/${groupId}/offers`,
+      'GET',
+      requestData,
+      true,
+    );
 
     yield put(getOffersSuccess(data));
   } catch (err) {
@@ -40,7 +46,13 @@ function* readGroupOffer(action) {
   try {
     const { groupId } = action.payload;
     const { offerId } = action.payload;
-    const data = yield call(request, `/groups/${groupId}/offers/${offerId}`, 'GET', null, true);
+    const data = yield call(
+      request,
+      `/groups/${groupId}/offers/${offerId}`,
+      'GET',
+      null,
+      true,
+    );
 
     yield put(readOfferSuccess(data));
   } catch (err) {
@@ -53,7 +65,13 @@ function* createGroupOffer(action) {
   try {
     const { groupId } = action.payload;
     const reqeustData = action.payload.offerData;
-    const data = yield call(request, `/groups/${groupId}/offers`, 'POST', reqeustData, true);
+    const data = yield call(
+      request,
+      `/groups/${groupId}/offers`,
+      'POST',
+      reqeustData,
+      true,
+    );
 
     yield put(createOfferSuccess(data));
     yield put(toggleModal('newOfferModal'));
@@ -64,13 +82,18 @@ function* createGroupOffer(action) {
   }
 }
 
-
 function* updateGroupOffer(action) {
   try {
     const { groupId } = action.payload;
     const { offerId } = action.payload;
     const reqeustData = action.payload.offerData;
-    const data = yield call(request, `/groups/${groupId}/offers/${offerId}`, 'PUT', reqeustData, true);
+    const data = yield call(
+      request,
+      `/groups/${groupId}/offers/${offerId}`,
+      'PUT',
+      reqeustData,
+      true,
+    );
 
     yield put(updateOfferSuccess(data));
   } catch (err) {
@@ -79,12 +102,17 @@ function* updateGroupOffer(action) {
   }
 }
 
-
 function* deleteGroupOffer(action) {
   try {
     const { groupId } = action.payload;
     const { offerId } = action.payload;
-    const data = yield call(request, `/groups/${groupId}/offers/${offerId}`, 'DELETE', null, true);
+    const data = yield call(
+      request,
+      `/groups/${groupId}/offers/${offerId}`,
+      'DELETE',
+      null,
+      true,
+    );
 
     yield put(deleteOfferSuccess(data));
   } catch (err) {
@@ -92,7 +120,6 @@ function* deleteGroupOffer(action) {
     yield put(deleteOfferError());
   }
 }
-
 
 export default function* userSaga() {
   yield takeLatest(CONSTANTS.GET_OFFERS_REQUEST, getGroupOffers);
