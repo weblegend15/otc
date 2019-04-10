@@ -46,7 +46,7 @@ export default ({ data, proposals, vouches, className, type }) => (
       </Row>
     )}
     {type !== 'activeDeal' && (
-      <VouchesProposals vouches={vouches} proposals={proposals} />
+      <VouchesProposals data={data} vouches={vouches} proposals={proposals} />
     )}
   </div>
 );

@@ -112,7 +112,7 @@ export default class VouchesProposals extends Component {
   };
 
   render() {
-    const { vouches, proposals } = this.props;
+    const { data } = this.props;
 
     const { isOpenVouches, isOpenProposals } = this.state;
     return (
@@ -130,7 +130,7 @@ export default class VouchesProposals extends Component {
               variant="primary"
               className="px-0 ml-2 text-center font-weight-semibold rounded-circle"
             >
-              {vouches.length}
+              {data.vouches.length}
             </Badge>
           </Button>
           <Button
@@ -145,7 +145,7 @@ export default class VouchesProposals extends Component {
               variant="primary"
               className="px-0 ml-2 text-center font-weight-semibold rounded-circle"
             >
-              {proposals.length}
+              {data.proposals.length}
             </Badge>
           </Button>
         </Row>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
   LoadingContainer,
   Col,
@@ -8,9 +7,17 @@ import {
   Button,
   Icon,
   Timestamp,
+  BSTooltip,
+  OverlayTrigger,
 } from '../../../../../components';
 
 import { findElement } from '../../../../../utils/common';
+
+const popoverFocus = (
+  <BSTooltip id="tooltip-offer-note">
+    This offer has a note. Please view the offer to see its full details
+  </BSTooltip>
+);
 
 export default class Offers extends Component {
   componentDidMount() {
@@ -73,12 +80,13 @@ export default class Offers extends Component {
               >
                 View
               </Button>
-              <Button className="p-0" variant="outline-link">
-                <Icon name="edit" className="text-primary h4-title" />
-              </Button>
-              <Button className="p-0" variant="outline-link">
-                <Icon name="paperclip" className="text-primary h4-title" />
-              </Button>
+              {item.note && (
+                <OverlayTrigger overlay={popoverFocus}>
+                  <Button className="p-0" variant="outline-link">
+                    <Icon name="edit" className="text-primary h4-title" />
+                  </Button>
+                </OverlayTrigger>
+              )}
             </Col>
           </Row>
         ))}
