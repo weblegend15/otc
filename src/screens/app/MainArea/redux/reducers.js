@@ -123,7 +123,13 @@ export default (state = initialState, action) => {
         ...state,
         messageList: {
           ...state.messageList,
-          chats: state.messageList.chats.push(action.payload[0]),
+          chats: [
+            ...new Set(
+              [...state.messageList.chats, ...action.payload].map(item =>
+                JSON.stringify(item),
+              ),
+            ),
+          ].map(item => JSON.parse(item)),
         },
       };
 

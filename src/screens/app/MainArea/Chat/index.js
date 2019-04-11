@@ -1,20 +1,34 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createPrivateChatRequest, sendMessageRequest } from '../redux/actions';
+import {
+  sendMessageRequest,
+  messageStore,
+  addNewMessage,
+  getMoreMessages,
+} from '../redux/actions';
 import Chat from './Chat';
 import './Chat.scss';
 
 Chat.propTypes = {
-  privateChannel: PropTypes.object,
+  chatId: PropTypes.string.isRequired,
+  members: PropTypes.object.isRequired,
+  messageList: PropTypes.object.isRequired,
+  messageStore: PropTypes.func.isRequired,
+  getMoreMessages: PropTypes.func.isRequired,
+  addNewMessage: PropTypes.func.isRequired,
 };
 
 const matStateToProps = state => ({
-  privateChannel: state.app.main.privateChannel,
+  messageList: state.app.main.messageList,
+  selectedGroupId: state.app.main.selectedGroupId,
+  members: state.app.main.members,
 });
 
 const mapDispatchToProps = {
-  createPrivateChatRequest,
   sendMessageRequest,
+  getMoreMessages,
+  addNewMessage,
+  messageStore,
 };
 
 export default connect(

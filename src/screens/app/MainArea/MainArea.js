@@ -33,10 +33,15 @@ class MainArea extends Component {
   }
 
   handleSelectGroup = groupId => {
-    const { selectActiveGroup, selectGroupMember } = this.props;
+    const {
+      selectActiveGroup,
+      selectGroupMember,
+      setResetMessages,
+    } = this.props;
     selectActiveGroup(groupId.target.value);
     history.push(`/app/my-groups/${groupId.target.value}`);
     selectGroupMember('');
+    setResetMessages();
   };
 
   handleHamburgerClick = () => {

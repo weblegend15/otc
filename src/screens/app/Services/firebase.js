@@ -11,37 +11,36 @@ const firebaseAuth = token => {
     });
 };
 
-const getMessageServices = (createdAt, limit, id, action) => {
+const getNewMessage = (id, action) => {
   return firestore
     .collection('chats')
     .doc(id)
     .collection('messages')
-    .where('created_at', '<', createdAt)
     .orderBy('created_at', 'desc')
-    .limit(limit)
+    .limit(1)
     .onSnapshot(messages => {
-      let msgs = [];
+      const msgs = [];
       if (!messages.empty) {
         messages.forEach(message => {
           msgs.push({ id: message.id, ...message.data() });
         });
-        if (messages.size !== limit) {
-          msgs.push(FIREST_MESSAGE_TEXT);
-        }
-        msgs = msgs.reverse();
-        action(msgs);
-      } else {
-        msgs.push(FIREST_MESSAGE_TEXT);
         action(msgs);
       }
     });
 };
 
-const getInitialMessages = (id, limit, action, scrollEvent = null) => {
+const getMessagesService = (
+  createdAt,
+  id,
+  limit,
+  action,
+  scrollEvent = null,
+) => {
   return firestore
     .collection('chats')
     .doc(id)
     .collection('messages')
+    .where('created_at', '<', createdAt)
     .orderBy('created_at', 'desc')
     .limit(limit)
     .get()
@@ -66,4 +65,4 @@ const getInitialMessages = (id, limit, action, scrollEvent = null) => {
     });
 };
 
-export { firebaseAuth, getMessageServices, getInitialMessages };
+export { firebaseAuth, getMessagesService, getNewMessage };

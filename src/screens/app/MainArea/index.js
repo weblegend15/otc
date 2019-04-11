@@ -8,6 +8,7 @@ import {
   selectActiveGroup,
   selectGroupMember,
   refreshFirebaseTokenRequest,
+  setResetMessages,
 } from './redux/actions';
 
 MainArea.propTypes = {
@@ -19,6 +20,7 @@ MainArea.propTypes = {
   selectActiveGroup: PropTypes.func.isRequired,
   selectGroupMember: PropTypes.func.isRequired,
   refreshFirebaseTokenRequest: PropTypes.func.isRequired,
+  setResetMessages: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -34,6 +36,7 @@ const mapDispatchToProps = {
   getGroupMembersRequest,
   selectActiveGroup,
   selectGroupMember,
+  setResetMessages,
 };
 
 export default connect(

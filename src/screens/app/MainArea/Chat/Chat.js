@@ -1,62 +1,86 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { Element, Events, scrollSpy, scroller } from 'react-scroll';
-import { IconButton, LoadingContainer } from '../../../../components';
-import { firestore } from '../../../../configureStore';
+import _ from 'lodash';
+import moment from 'moment';
+import { Element, scroller } from 'react-scroll';
+import {
+  IconButton,
+  LoadingContainer,
+  GeneralAvatar,
+  Timestamp,
+} from '../../../../components';
+import { getMessagesService, getNewMessage } from '../../Services/firebase';
+import { MSG_COUNT_LIMIT } from '../../../../config';
+import { getMember } from '../../../../utils/filterObject';
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
       message: '',
-      msgs: null,
+      sent: false,
     };
   }
 
   componentDidMount() {
+    const { chatId, messageStore, addNewMessage } = this.props;
+
+    getMessagesService(
+      parseInt(moment().format('x'), 10),
+      chatId,
+      MSG_COUNT_LIMIT,
+      messageStore,
+      this.scrollTo,
+    );
+
+    this.unsubscribe = getNewMessage(chatId, addNewMessage);
+
+    document
+      .getElementById('message-container')
+      .addEventListener('scroll', _.debounce(this.handleScroll, 500));
+  }
+
+  componentDidUpdate(prevProp) {
     const {
-      match: {
-        params: { groupId, userId },
-      },
-      createPrivateChatRequest,
+      messageList: { chats },
     } = this.props;
-    if (userId) {
-      createPrivateChatRequest(userId, groupId);
+    const { sent } = this.state;
+    if (chats !== prevProp.messageList.chats && sent) {
+      this.scrollTo(chats[chats.length - 1].id);
     }
-
-    this.unsubscribe = firestore
-      .collection('chats')
-      .doc('5ca674d9e2e90a000403d086')
-      .collection('messages')
-      .orderBy('created_at', 'desc')
-      .limit(10)
-      .onSnapshot(messages => {
-        const msgs = [];
-        messages.forEach(message => {
-          msgs.push({ id: message.id, ...message.data() });
-        });
-        this.setState({ msgs: msgs.reverse() });
-        this.goToContainer = new Promise(resolve => {
-          Events.scrollEvent.register('end', () => {
-            resolve();
-            Events.scrollEvent.remove('end');
-          });
-          scroller.scrollTo('message-container', {
-            duration: 0,
-            delay: 0,
-            smooth: 'easeInOutQuart',
-          });
-        });
-
-        this.goToContainer.then(() => this.scrollTo(msgs[msgs.length - 1].id));
-      });
-    scrollSpy.update();
   }
 
   componentWillUnmount() {
-    this.unsubscribe();
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+
+    document
+      .getElementById('message-container')
+      .removeEventListener('scroll', _.debounce(this.handleScroll, 500));
   }
+
+  handleScroll = () => {
+    const {
+      chatId,
+      messageList: { chats },
+      getMoreMessages,
+    } = this.props;
+
+    const scrollY = document.getElementById('message-container').scrollTop;
+
+    this.setState({ sent: false });
+    if (scrollY === 0 && chats[0].id !== 'first') {
+      getMessagesService(
+        chats[0].created_at,
+        chatId,
+        MSG_COUNT_LIMIT,
+        getMoreMessages,
+      );
+      this.scrollTo(chats[0].id);
+    }
+  };
 
   scrollTo = element => {
     scroller.scrollTo(element, {
@@ -87,34 +111,64 @@ class Chat extends Component {
 
   sendMessage = () => {
     const { message } = this.state;
-    const {
-      match: {
-        params: { groupId },
-      },
-      privateChannel: {
-        channel: { _id },
-      },
-      sendMessageRequest,
-    } = this.props;
+    const { selectedGroupId, chatId, sendMessageRequest } = this.props;
 
-    sendMessageRequest(message, groupId, _id);
+    this.setState({ sent: true });
+    sendMessageRequest(message, selectedGroupId, chatId);
+  };
+
+  diffDay = (current, prev) => {
+    const standardMessageDate = moment(current).format('ll');
+    const prevMessageDate = moment(prev).format('ll');
+    return moment(standardMessageDate).diff(moment(prevMessageDate), 'days');
+  };
+
+  renderMessage = (msg, index, messages) => {
+    const {
+      members: { list },
+    } = this.props;
+    const member = getMember(list, msg.sender_id);
+    let diffDay = 0;
+
+    if (index > 1) {
+      diffDay = this.diffDay(msg.created_at, messages[index - 1].created_at);
+    }
+
+    return (
+      <Element name={msg.id} key={msg.id}>
+        {msg.type === 'first_message' ? (
+          <p className="text-center my-4">{msg.text}</p>
+        ) : (
+          <Fragment>
+            {diffDay > 0 && (
+              <div className="w-100 border-bottom my-3">
+                <p className="pl-5 opacity-5">
+                  {moment(msg.created_at).format('dddd, MMMM, DD, YYYY')}
+                </p>
+              </div>
+            )}
+            <div className="d-flex justify-content-between p-3">
+              <GeneralAvatar
+                data={{ firstName: member.firstName, message: msg.text }}
+              />
+              <Timestamp
+                className="opacity-5"
+                timestamp={msg.created_at}
+                format="LT"
+              />
+            </div>
+          </Fragment>
+        )}
+      </Element>
+    );
   };
 
   renderMessages = () => {
-    const { msgs } = this.state;
-    const loading = !msgs;
-
-    if (!msgs) {
-      return <LoadingContainer loading={loading} />;
-    }
+    const { messageList } = this.props;
     return (
-      <LoadingContainer loading={loading}>
-        <Element className="element message-box" id="message-container">
-          {msgs.map(msg => (
-            <Element name={msg.id} className="p-3" key={msg.id}>
-              {msg.text}
-            </Element>
-          ))}
+      <LoadingContainer loading={messageList.loading}>
+        <Element className="element message-box p-1" id="message-container">
+          {messageList.chats.map(this.renderMessage)}
         </Element>
       </LoadingContainer>
     );
@@ -129,11 +183,11 @@ class Chat extends Component {
             <InputGroup>
               <FormControl
                 placeholder="New Message"
-                className="p-4"
+                className="py-3 px-4"
                 onChange={this.handleMessageChange}
                 onKeyPress={this.keypress}
                 as="textarea"
-                rows={2}
+                rows={3}
                 aria-label="With textarea"
               />
               <InputGroup.Prepend>
@@ -141,7 +195,7 @@ class Chat extends Component {
                   onClick={this.sendMessage}
                   icon="long-arrow-right"
                   iconSize="2x"
-                  className="px-3"
+                  className="px-4"
                   buttonClassName="rounded-right"
                 />
               </InputGroup.Prepend>

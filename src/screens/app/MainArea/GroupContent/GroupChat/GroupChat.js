@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { getGroup } from '../../../../../utils/filterObject';
+import Chats from '../../Chat';
 
 class GroupChats extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {}
-
-  componentDidUpdate(prevProp) {
-    const { selectedGroupId, myGroups } = this.props;
-    if (prevProp.myGroups !== myGroups && myGroups.list.length) {
-      const group = getGroup(myGroups.list, selectedGroupId);
-      console.log(group);
-    }
-  }
-
   render() {
-    return <h1>Hello</h1>;
+    const {
+      selectedGroupId,
+      myGroups: { list },
+      members,
+    } = this.props;
+    const group = getGroup(list, selectedGroupId);
+    return (
+      selectedGroupId &&
+      list.length &&
+      members.list.length &&
+      !members.loading &&
+      group.group.chat && <Chats chatId={group.group.chat} />
+    );
   }
 }
 
