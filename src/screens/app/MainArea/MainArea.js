@@ -57,7 +57,11 @@ class MainArea extends Component {
 
     return (
       <div className="d-flex flex-row align-items-center justify-content-between">
-        <Button variant="outline-link" onClick={this.handleHamburgerClick}>
+        <Button
+          className="p-0"
+          variant="outline-link"
+          onClick={this.handleHamburgerClick}
+        >
           <Icon name="bars" size="2x" />
         </Button>
         <Form.Group
@@ -109,7 +113,7 @@ class MainArea extends Component {
             {...this.props}
           />
           <div className="d-flex flex-column p-0 w-100 border-left border-default-color">
-            <div className="border-bottom p-3 border-default-color">
+            <div className="border-bottom py-3 pl-3 pr-4 border-default-color">
               {this.renderHeader()}
             </div>
             {this.renderRoutes()}

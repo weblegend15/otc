@@ -9,12 +9,15 @@ import {
   setResetMessages,
 } from '../redux/actions';
 
+import { getGroupsRequest } from '../../Groups/redux/actions';
+
 MemberContent.propTypes = {
   selectedGroupId: PropTypes.string.isRequired,
   selectedGroupMemberId: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
   readUserRequest: PropTypes.func.isRequired,
   setResetMessages: PropTypes.func.isRequired,
+  getGroupsRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -27,6 +30,7 @@ const mapDispatchToProps = {
   readUserRequest,
   createPrivateChatRequest,
   setResetMessages,
+  getGroupsRequest,
 };
 
 export default connect(

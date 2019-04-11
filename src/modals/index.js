@@ -7,18 +7,26 @@ import JoinGroupModal from './JoinGroupModal';
 import toggleModal from './redux/actions';
 import DeleteGroupModal from './DeleteGroupModal';
 import ApproveGroupModal from './ApproveGroupModal';
+import NewOfferModal from './NewOfferModal';
+import ViewOfferModal from './ViewOfferModal';
 import ViewApplicationModal from './ViewApplicationModal';
 import EditGroupModal from './EditGroupModal';
 import ManageUserModal from './ManageUserModal';
+import RequestVouchModal from './RequestVouchModal';
+import ViewProposalsModal from './ViewProposalsModal';
 
 const Modals = {
   newGroupModal: NewGroupModal,
   joinGroupModal: JoinGroupModal,
   deleteGroupModal: DeleteGroupModal,
   approveGroupModal: ApproveGroupModal,
+  newOfferModal: NewOfferModal,
+  viewOfferModal: ViewOfferModal,
   viewApplicationModal: ViewApplicationModal,
   editGroupModal: EditGroupModal,
   manageUserModal: ManageUserModal,
+  requestVouchModal: RequestVouchModal,
+  viewProposalsModal: ViewProposalsModal,
 };
 
 const ModalContainer = ({ type, ...rest }) => {
