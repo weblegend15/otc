@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Timestamp from './Timestamp';
 
 Timestamp.propTypes = {
-  timestamp: PropTypes.instanceOf(Date),
   format: PropTypes.string,
 };
 

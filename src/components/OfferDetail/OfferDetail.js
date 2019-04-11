@@ -11,7 +11,8 @@ export default ({ data, proposals, vouches, className, type }) => (
   <div className={`offer-detail ${className}`}>
     <Row className="mx-0 mb-2 px-4 d-flex flex-row justify-content-between align-items-center">
       <div className="p-sm opacity-5 d-flex flex-row">
-        Posted on <Timestamp format="D MMM YYYY" />
+        Posted on&nbsp;
+        <Timestamp timestamp={data.createdAt} format="D MMM YYYY" />
       </div>
       <div className="offer-status border border-primary text-primary rounded px-2 font-weight-bold text-uppercase p-sm text-center">
         {data.status}
