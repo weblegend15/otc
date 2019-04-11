@@ -5,11 +5,14 @@ import MemberContent from './MemberContent';
 import './MemberContent.scss';
 import { readUserRequest } from '../redux/actions';
 
+import { getGroupsRequest } from '../../Groups/redux/actions';
+
 MemberContent.propTypes = {
   selectedGroupId: PropTypes.string.isRequired,
   selectedGroupMemberId: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
   readUserRequest: PropTypes.func.isRequired,
+  getGroupsRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -20,6 +23,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   readUserRequest,
+  getGroupsRequest,
 };
 
 export default connect(

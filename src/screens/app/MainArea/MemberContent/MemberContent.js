@@ -22,8 +22,13 @@ import Messaging from './Messaging';
 
 class MemberContent extends Component {
   componentDidMount() {
-    const { readUserRequest, selectedGroupMemberId } = this.props;
+    const {
+      readUserRequest,
+      selectedGroupMemberId,
+      getGroupsRequest,
+    } = this.props;
     readUserRequest(selectedGroupMemberId);
+    getGroupsRequest({ skip: 0, limit: 1000 });
   }
 
   componentDidUpdate(prevProps) {
@@ -39,7 +44,7 @@ class MemberContent extends Component {
   handleBackClick = () => {
     const { selectedGroupId } = this.props;
     history.push(`/app/my-groups/${selectedGroupId}`);
-  }
+  };
 
   renderTabs = () => {
     const {
@@ -96,8 +101,13 @@ class MemberContent extends Component {
     return (
       <div className="border-bottom border-default-color px-3 pt-3 member-content-section-header">
         <Row className="mx-0 mb-3 d-flex align-items-center">
-          <Button variant="outline-link" className="p-0 mr-auto text-primary font-weight-semibold p-lg" onClick={this.handleBackClick}>
-            <Icon name="arrow-left" className="mr-2" />Back
+          <Button
+            variant="outline-link"
+            className="p-0 mr-auto text-primary font-weight-semibold p-lg"
+            onClick={this.handleBackClick}
+          >
+            <Icon name="arrow-left" className="mr-2" />
+            Back
           </Button>
           <div className="opacity-5 p-sm d-flex flex-row">
             Joined
@@ -156,7 +166,7 @@ class MemberContent extends Component {
     return (
       <LoadingContainer className="member-content-section" loading={loading}>
         {this.renderHeader()}
-        <div className="p-4">{this.renderRoutes()}</div>
+        {this.renderRoutes()}
       </LoadingContainer>
     );
   }
