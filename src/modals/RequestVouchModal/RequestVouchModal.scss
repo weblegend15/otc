@@ -1,0 +1,19 @@
+.request-vouch-modal {
+  .general-avatar p {
+    margin-bottom: 0;
+  }
+
+  .members-list {
+    max-height: 310px;
+    overflow: auto;
+    .row {
+      cursor: pointer;
+      &:hover {
+        background: #f5f5f5;
+      }
+      &.active {
+        background: rgba(0, 152, 138, 0.1);
+      }
+    }
+  }
+}

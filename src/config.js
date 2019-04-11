@@ -11,3 +11,15 @@ export const RECAPTCHA_KEY =
     : RECAPTCHA_DEV_KEY;
 
 export const PAGE_LIMIT = 4;
+
+export const OFFER_STATUS_CLASS = {
+  accepted: 'primary',
+  rejected: 'warning',
+  pending: 'dark',
+};
+
+export const PROPOSAL_STATUS_CLASS = {
+  active: 'primary',
+  rejected: 'warning',
+  pending: 'dark',
+};
