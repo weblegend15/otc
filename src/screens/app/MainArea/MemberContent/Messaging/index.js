@@ -11,9 +11,4 @@ const matStateToProps = state => ({
   privateChannel: state.app.main.privateChannel,
 });
 
-const mapDispatchToProps = {};
-
-export default connect(
-  matStateToProps,
-  mapDispatchToProps,
-)(Messaging);
+export default connect(matStateToProps)(Messaging);

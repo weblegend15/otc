@@ -10,12 +10,13 @@ class GroupChats extends Component {
       members,
     } = this.props;
     const group = getGroup(list, selectedGroupId);
+
     return (
       selectedGroupId &&
       list.length &&
       members.list.length &&
       !members.loading &&
-      group.group.chat && <Chats chatId={group.group.chat} />
+      group.chat && <Chats chatId={group.chat} />
     );
   }
 }

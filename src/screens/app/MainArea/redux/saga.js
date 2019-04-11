@@ -11,8 +11,6 @@ import {
   getPermissionGroupsSuccess,
   createPrivateChatSuccess,
   createPrivateChatError,
-  sendMessageSuccess,
-  sendMessageError,
   selectActiveGroup,
   readUserSuccess,
   readUserError,
@@ -95,25 +93,6 @@ function* createPrivateChat(action) {
   }
 }
 
-function* sendMessage(action) {
-  try {
-    const requestData = {
-      text: action.message,
-    };
-    const responseData = yield call(
-      request,
-      `/groups/${action.groupId}/chats/${action.chatId}/messages`,
-      'POST',
-      requestData,
-      true,
-    );
-    yield put(sendMessageSuccess(responseData));
-  } catch (err) {
-    notify('error', err.meesage);
-    yield put(sendMessageError());
-  }
-}
-
 function* readUser(action) {
   try {
     const data = yield call(
@@ -153,7 +132,6 @@ export default function* mainAreaSaga() {
     getPermissionGroups,
   );
   yield takeLatest(CONSTANTS.CREATE_PRIVATE_CHAT_REQUEST, createPrivateChat);
-  yield takeLatest(CONSTANTS.SEND_MESSAGE_REQUEST, sendMessage);
   yield takeLatest(CONSTANTS.READ_USER_REQUEST, readUser);
   yield takeLatest(CONSTANTS.REFRESH_FIREBASE_TOKEN_REQUEST, refreshToken);
 }

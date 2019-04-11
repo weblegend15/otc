@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import GroupChat from './GroupChat';
+import { getMyActiveGroups } from '../../../../../selectors';
 
 GroupChat.propTypes = {
   myGroups: PropTypes.object.isRequired,
@@ -8,14 +9,9 @@ GroupChat.propTypes = {
 };
 
 const matStateToProps = state => ({
-  myGroups: state.app.main.myGroups,
+  myGroups: getMyActiveGroups(state),
   selectedGroupId: state.app.main.selectedGroupId,
   members: state.app.main.members,
 });
 
-const mapDispatchToProps = {};
-
-export default connect(
-  matStateToProps,
-  mapDispatchToProps,
-)(GroupChat);
+export default connect(matStateToProps)(GroupChat);

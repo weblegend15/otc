@@ -5,7 +5,7 @@ import {
   messageStore,
   addNewMessage,
   getMoreMessages,
-} from '../redux/actions';
+} from './redux/actions';
 import Chat from './Chat';
 import './Chat.scss';
 
@@ -19,7 +19,7 @@ Chat.propTypes = {
 };
 
 const matStateToProps = state => ({
-  messageList: state.app.main.messageList,
+  messageList: state.app.chats.messageList,
   selectedGroupId: state.app.main.selectedGroupId,
   members: state.app.main.members,
 });

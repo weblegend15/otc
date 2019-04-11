@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 
 import MemberContent from './MemberContent';
 import './MemberContent.scss';
-import {
-  readUserRequest,
-  createPrivateChatRequest,
-  setResetMessages,
-} from '../redux/actions';
+import { readUserRequest, createPrivateChatRequest } from '../redux/actions';
 
+import { setResetMessages } from '../Chat/redux/actions';
 import { getGroupsRequest } from '../../Groups/redux/actions';
 
 MemberContent.propTypes = {

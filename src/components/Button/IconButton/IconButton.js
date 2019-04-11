@@ -14,17 +14,13 @@ export default ({
   children,
   ...rest
 }) => (
-  <Button
-    className={cx({ [buttonClassName]: buttonClassName })}
-    onClick={onClick}
-    {...rest}
-  >
+  <Button className={cx(buttonClassName)} {...rest}>
     {icon && (
       <Icon
         name={icon}
         size={iconSize}
         color={variant}
-        className={cx({ [className]: className })}
+        className={cx(className)}
       />
     )}
     {children}

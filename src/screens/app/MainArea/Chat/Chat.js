@@ -1,18 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
-import _ from 'lodash';
+import debounce from 'lodash/debounce';
 import moment from 'moment';
 import { Element, scroller } from 'react-scroll';
 import {
   IconButton,
   LoadingContainer,
-  GeneralAvatar,
+  PureAvatar,
   Timestamp,
 } from '../../../../components';
 import { getMessagesService, getNewMessage } from '../../Services/firebase';
 import { MSG_COUNT_LIMIT } from '../../../../config';
-import { getMember } from '../../../../utils/filterObject';
+import { findByField } from '../../../../utils/filterObject';
 
 class Chat extends Component {
   constructor(props) {
@@ -38,7 +38,7 @@ class Chat extends Component {
 
     document
       .getElementById('message-container')
-      .addEventListener('scroll', _.debounce(this.handleScroll, 500));
+      .addEventListener('scroll', debounce(this.handleScroll, 500));
   }
 
   componentDidUpdate(prevProp) {
@@ -58,7 +58,7 @@ class Chat extends Component {
 
     document
       .getElementById('message-container')
-      .removeEventListener('scroll', _.debounce(this.handleScroll, 500));
+      .removeEventListener('scroll', debounce(this.handleScroll, 500));
   }
 
   handleScroll = () => {
@@ -127,7 +127,7 @@ class Chat extends Component {
     const {
       members: { list },
     } = this.props;
-    const member = getMember(list, msg.sender_id);
+    const member = findByField(list, '_id', msg.sender_id);
     let diffDay = 0;
 
     if (index > 1) {
@@ -141,16 +141,22 @@ class Chat extends Component {
         ) : (
           <Fragment>
             {diffDay > 0 && (
-              <div className="w-100 border-bottom my-3">
-                <p className="pl-5 opacity-5">
-                  {moment(msg.created_at).format('dddd, MMMM, DD, YYYY')}
-                </p>
-              </div>
+              <Timestamp
+                className="opacity-5 w-100 my-3 border-bottom pl-3 p-sm"
+                timestamp={msg.created_at}
+                format="dddd, MMMM DD, YYYY"
+              />
             )}
             <div className="d-flex justify-content-between p-3">
-              <GeneralAvatar
-                data={{ firstName: member.firstName, message: msg.text }}
-              />
+              <div className="d-flex">
+                <PureAvatar />
+                <div className="d-flex flex-column align-items-start">
+                  <p className="font-weight-semibold h4-title">
+                    {member.firstName}
+                  </p>
+                  <p className="mt-1">{msg.text}</p>
+                </div>
+              </div>
               <Timestamp
                 className="opacity-5"
                 timestamp={msg.created_at}
@@ -178,29 +184,27 @@ class Chat extends Component {
     return (
       <div>
         {this.renderMessages()}
-        <div className="message-input">
-          <div className="p-4">
-            <InputGroup>
-              <FormControl
-                placeholder="New Message"
-                className="py-3 px-4"
-                onChange={this.handleMessageChange}
-                onKeyPress={this.keypress}
-                as="textarea"
-                rows={3}
-                aria-label="With textarea"
+        <div className="message-input p-4">
+          <InputGroup>
+            <FormControl
+              placeholder="New Message"
+              className="py-3 px-4"
+              onChange={this.handleMessageChange}
+              onKeyPress={this.keypress}
+              as="textarea"
+              rows={3}
+              aria-label="With textarea"
+            />
+            <InputGroup.Prepend>
+              <IconButton
+                onClick={this.sendMessage}
+                icon="long-arrow-right"
+                iconSize="2x"
+                className="px-4"
+                buttonClassName="rounded-right"
               />
-              <InputGroup.Prepend>
-                <IconButton
-                  onClick={this.sendMessage}
-                  icon="long-arrow-right"
-                  iconSize="2x"
-                  className="px-4"
-                  buttonClassName="rounded-right"
-                />
-              </InputGroup.Prepend>
-            </InputGroup>
-          </div>
+            </InputGroup.Prepend>
+          </InputGroup>
         </div>
       </div>
     );

@@ -18,7 +18,7 @@ export const PAGE_LIMIT = 4;
 
 export const MSG_COUNT_LIMIT = 10;
 
-export const FIREST_MESSAGE_TEXT = {
+export const FIRST_MESSAGE_TEXT = {
   id: 'first',
   type: 'first_message',
   text:

@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import { firestore } from '../../../configureStore';
-import { FIREST_MESSAGE_TEXT } from '../../../config';
+import { FIRST_MESSAGE_TEXT } from '../../../config';
 
 const firebaseAuth = token => {
   firebase
@@ -51,7 +51,7 @@ const getMessagesService = (
           msgs.push({ id: message.id, ...message.data() });
         });
         if (messages.size !== limit) {
-          msgs.push(FIREST_MESSAGE_TEXT);
+          msgs.push(FIRST_MESSAGE_TEXT);
         }
         msgs = msgs.reverse();
         action(msgs);
@@ -59,7 +59,7 @@ const getMessagesService = (
           scrollEvent(msgs[msgs.length - 1].id);
         }
       } else {
-        msgs.push(FIREST_MESSAGE_TEXT);
+        msgs.push(FIRST_MESSAGE_TEXT);
         action(msgs);
       }
     });

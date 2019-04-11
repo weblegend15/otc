@@ -8,8 +8,9 @@ import {
   selectActiveGroup,
   selectGroupMember,
   refreshFirebaseTokenRequest,
-  setResetMessages,
 } from './redux/actions';
+
+import { setResetMessages } from './Chat/redux/actions';
 
 MainArea.propTypes = {
   groups: PropTypes.object.isRequired,
