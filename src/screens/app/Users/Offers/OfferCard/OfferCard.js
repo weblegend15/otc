@@ -45,6 +45,11 @@ export default class OfferCard extends Component {
     });
   };
 
+  handleLeaveReview = () => {
+    const { toggleModal, offerData } = this.props;
+    toggleModal('leaveFeedbackModal', { offerData });
+  };
+
   renderEndPopover = () => (
     <Popover id="popover-message" className="p-sm">
       X&nbsp;&nbsp;&nbsp;End Listing

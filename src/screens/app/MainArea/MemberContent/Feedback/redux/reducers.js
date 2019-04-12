@@ -6,6 +6,11 @@ const initialState = {
     list: [],
     total: 0,
   },
+
+  feedback: {
+    loading: false,
+    data: {},
+  },
 };
 
 export default (state = initialState, action) => {
@@ -33,6 +38,32 @@ export default (state = initialState, action) => {
         ...state,
         feedbackList: {
           ...state.feedbackList,
+          loading: false,
+        },
+      };
+
+    case CONSTANTS.LEAVE_FEEDBACK_REQUEST:
+      return {
+        ...state,
+        feedback: {
+          ...state.feedback,
+          loading: true,
+        },
+      };
+    case CONSTANTS.LEAVE_FEEDBACK_SUCCESS:
+      return {
+        ...state,
+        feedback: {
+          ...state.feedback,
+          data: action.payload.data,
+          loading: false,
+        },
+      };
+    case CONSTANTS.LEAVE_FEEDBACK_ERROR:
+      return {
+        ...state,
+        feedback: {
+          ...state.feedback,
           loading: false,
         },
       };

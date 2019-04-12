@@ -8,6 +8,7 @@ import offerReducer from '../MainArea/GroupContent/redux/reducers';
 import proposalReducer from '../MainArea/GroupContent/Proposals/redux/reducers';
 import vouchReducer from '../MainArea/GroupContent/Vouches/redux/reducers';
 import groupProposalsReducer from '../MainArea/GroupContent/VouchesProposals/ActiveProposals/redux/reducers';
+import feedbackReducer from '../MainArea/MemberContent/Feedback/redux/reducers';
 
 export default combineReducers({
   group: groupReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
   proposal: proposalReducer,
   vouch: vouchReducer,
   groupProposals: groupProposalsReducer,
+  feedback: feedbackReducer,
 });
