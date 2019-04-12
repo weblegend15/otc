@@ -14,7 +14,11 @@ import { OFFER_STATUS_CLASS } from '../../../../../../config';
 export default class ActiveProposals extends Component {
   componentDidMount() {
     const { getMyProposalsRequest, selectedGroupId } = this.props;
-    getMyProposalsRequest({ skip: 0, limit: 1000, groupId: selectedGroupId });
+    getMyProposalsRequest({
+      skip: 0,
+      limit: 1000,
+      groupId: selectedGroupId,
+    });
   }
 
   handleVouchRequest = data => {
@@ -45,63 +49,66 @@ export default class ActiveProposals extends Component {
   renderTableBody = proposals => {
     const { activeMembers } = this.props;
 
-    return proposals.map((proposal, idx) => {
-      const offeredMember = activeMembers.find(
-        member => member._id === proposal.offer.offeredBy,
-      );
-      const rowClass = cx('p-4 m-0 d-flex align-items-center', {
-        'border-bottom': idx !== proposals.length,
-      });
-      const statusClass = OFFER_STATUS_CLASS[proposal.status.toLowerCase()];
+    return proposals
+      .filter(proposal => proposal.status !== 'ENDED' && proposal.offer)
+      .map((proposal, idx) => {
+        const offeredMember = activeMembers.find(
+          member => member._id === proposal.offer.offeredBy,
+        );
 
-      return (
-        <Row key={proposal._id} className={rowClass}>
-          <Col className="p-sm">
-            <Timestamp timestamp={proposal.createdAt} />
-          </Col>
-          <Col md={3}>
-            <GeneralAvatar
-              data={{
-                firstName: offeredMember.firstName,
-                lastName: offeredMember.lastName,
-                location: 'London, UK',
-              }}
-            />
-          </Col>
-          <Col className="font-weight-semibold d-flex flex-column">
-            <div className="d-flex flex-row">
-              <p className="opacity-5">HAS:&nbsp;</p>
-              <p>{proposal.offer.have}</p>
-            </div>
-            <div className="d-flex flex-row">
-              <p className="opacity-5">WANTS:&nbsp;</p>
-              <p>{proposal.offer.want}</p>
-            </div>
-          </Col>
-          <Col className="font-weight-semibold d-flex flex-column">
-            <div className="d-flex flex-row">
-              <p>I HAVE:&nbsp;</p>
-              <p className="text-primary">{proposal.have}</p>
-            </div>
-            <div className="d-flex flex-row">
-              <p>I WANT:&nbsp;</p>
-              <p className="text-primary">{proposal.want}</p>
-            </div>
-          </Col>
-          <Col className={`font-weight-semibold text-${statusClass}`}>
-            {proposal.status}
-          </Col>
-          <Col md={1}>
-            <Button
-              className="font-weight-bold btn-regular"
-              onClick={() => this.handleVouchRequest(proposal)}
-            >
-              REQUEST
-            </Button>
-          </Col>
-        </Row>
-      );
-    });
+        const rowClass = cx('p-4 m-0 d-flex align-items-center', {
+          'border-bottom': idx !== proposals.length,
+        });
+        const statusClass = OFFER_STATUS_CLASS[proposal.status.toLowerCase()];
+
+        return (
+          <Row key={proposal._id} className={rowClass}>
+            <Col className="p-sm">
+              <Timestamp timestamp={proposal.createdAt} />
+            </Col>
+            <Col md={3}>
+              <GeneralAvatar
+                data={{
+                  firstName: offeredMember.firstName,
+                  lastName: offeredMember.lastName,
+                  location: 'London, UK',
+                }}
+              />
+            </Col>
+            <Col className="font-weight-semibold d-flex flex-column">
+              <div className="d-flex flex-row">
+                <p className="opacity-5">HAS:&nbsp;</p>
+                <p>{proposal.offer.have}</p>
+              </div>
+              <div className="d-flex flex-row">
+                <p className="opacity-5">WANTS:&nbsp;</p>
+                <p>{proposal.offer.want}</p>
+              </div>
+            </Col>
+            <Col className="font-weight-semibold d-flex flex-column">
+              <div className="d-flex flex-row">
+                <p>I HAVE:&nbsp;</p>
+                <p className="text-primary">{proposal.have}</p>
+              </div>
+              <div className="d-flex flex-row">
+                <p>I WANT:&nbsp;</p>
+                <p className="text-primary">{proposal.want}</p>
+              </div>
+            </Col>
+            <Col className={`font-weight-semibold text-${statusClass}`}>
+              {proposal.status}
+            </Col>
+            <Col md={1}>
+              <Button
+                className="font-weight-bold btn-regular"
+                onClick={() => this.handleVouchRequest(proposal)}
+              >
+                REQUEST
+              </Button>
+            </Col>
+          </Row>
+        );
+      });
   };
 
   render() {
