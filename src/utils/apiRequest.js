@@ -1,7 +1,6 @@
 import 'whatwg-fetch';
-// import queryString from 'query-string';
-import { baseUrl } from '../config';
 import queryString from 'qs';
+import { baseUrl } from '../config';
 import store from '../configureStore';
 
 /**
