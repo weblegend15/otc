@@ -28,25 +28,14 @@ export default class ActiveProposals extends Component {
   renderTableHeader = () => {
     return (
       <Row className="m-0 pt-3 pb-2 px-4 font-weight-semibold p-sm border-bottom border-default-color">
-        <Col className="opacity-5" md={1}>
-          POSTED
-        </Col>
-        <Col className="opacity-5" md={3}>
+        <Col className="opacity-5">POSTED</Col>
+        <Col md={3} className="opacity-5">
           USER
         </Col>
-        <Col className="opacity-5" md={2}>
-          GROUP
-        </Col>
-        <Col className="opacity-5" md={2}>
-          OFFER
-        </Col>
-        <Col className="opacity-5" md={2}>
-          MY PROPOSAL
-        </Col>
-        <Col className="opacity-5" md={1}>
-          STATUS
-        </Col>
-        <Col className="opacity-5" md={1}>
+        <Col className="opacity-5">OFFER</Col>
+        <Col className="opacity-5">MY PROPOSAL</Col>
+        <Col className="opacity-5">STATUS</Col>
+        <Col md={1} className="opacity-5">
           VOUCHES
         </Col>
       </Row>
@@ -54,16 +43,7 @@ export default class ActiveProposals extends Component {
   };
 
   renderTableBody = proposals => {
-    const {
-      activeMembers,
-      selectedGroupId,
-      activeGroups: { list },
-    } = this.props;
-    if (!list.length) {
-      return null;
-    }
-    const selectedGroupName = list.find(group => group._id === selectedGroupId)
-      .name;
+    const { activeMembers } = this.props;
 
     return proposals.map((proposal, idx) => {
       const offeredMember = activeMembers.find(
@@ -76,7 +56,7 @@ export default class ActiveProposals extends Component {
 
       return (
         <Row key={proposal._id} className={rowClass}>
-          <Col className="p-sm" md={1}>
+          <Col className="p-sm">
             <Timestamp timestamp={proposal.createdAt} />
           </Col>
           <Col md={3}>
@@ -88,10 +68,7 @@ export default class ActiveProposals extends Component {
               }}
             />
           </Col>
-          <Col md={2} className="font-weight-semibold">
-            {selectedGroupName}
-          </Col>
-          <Col md={2} className="font-weight-semibold d-flex flex-column">
+          <Col className="font-weight-semibold d-flex flex-column">
             <div className="d-flex flex-row">
               <p className="opacity-5">HAS:&nbsp;</p>
               <p>{proposal.offer.have}</p>
@@ -101,7 +78,7 @@ export default class ActiveProposals extends Component {
               <p>{proposal.offer.want}</p>
             </div>
           </Col>
-          <Col md={2} className="font-weight-semibold d-flex flex-column">
+          <Col className="font-weight-semibold d-flex flex-column">
             <div className="d-flex flex-row">
               <p>I HAVE:&nbsp;</p>
               <p className="text-primary">{proposal.have}</p>
@@ -111,7 +88,7 @@ export default class ActiveProposals extends Component {
               <p className="text-primary">{proposal.want}</p>
             </div>
           </Col>
-          <Col md={1} className={`font-weight-semibold text-${statusClass}`}>
+          <Col className={`font-weight-semibold text-${statusClass}`}>
             {proposal.status}
           </Col>
           <Col md={1}>

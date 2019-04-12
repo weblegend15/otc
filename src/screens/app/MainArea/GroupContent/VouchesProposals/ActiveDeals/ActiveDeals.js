@@ -29,7 +29,6 @@ export default class ActiveDeals extends Component {
     return (
       <Row className="mx-0 border-bottom border-default-color py-3">
         <Col className="p-sm font-weight-semibold opacity-5">DATE</Col>
-        <Col className="p-sm font-weight-semibold opacity-5">GROUP</Col>
         <Col className="p-sm font-weight-semibold opacity-5">HAS</Col>
         <Col className="p-sm font-weight-semibold opacity-5">WANTS</Col>
         <Col className="p-sm font-weight-semibold opacity-5 text-center">
@@ -43,10 +42,6 @@ export default class ActiveDeals extends Component {
   };
 
   renderTableBody = offersList => {
-    const {
-      myActiveGroups: { list: groupsList },
-    } = this.props;
-
     return offersList.map(item => (
       <Row
         key={item._id}
@@ -54,9 +49,6 @@ export default class ActiveDeals extends Component {
       >
         <Col className="p-sm">
           <Timestamp timestamp={item.createdAt} />
-        </Col>
-        <Col className="font-weight-semibold">
-          {groupsList.find(el => el._id === item.group).name}
         </Col>
         <Col className="font-weight-semibold">{item.have}</Col>
         <Col className="font-weight-semibold">{item.want}</Col>
