@@ -97,7 +97,13 @@ function* forgotPassword(action) {
       email: action.email,
     };
 
-    yield call(request, '/auth/request-reset-password', 'POST', requestData, false);
+    yield call(
+      request,
+      '/auth/request-reset-password',
+      'POST',
+      requestData,
+      false,
+    );
     yield put(forgotPasswordSuccess(action.email));
   } catch (err) {
     yield put(forgotPasswordError(err));

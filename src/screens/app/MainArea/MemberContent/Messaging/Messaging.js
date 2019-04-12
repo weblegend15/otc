@@ -1,5 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Chat from '../../Chat';
 
-export default () => {
-  return <div>messaging page</div>;
-};
+class Messaging extends Component {
+  render() {
+    const {
+      privateChannel: { channel },
+    } = this.props;
+
+    return Object.keys(channel).length && <Chat chatId={channel._id} />;
+  }
+}
+
+export default Messaging;

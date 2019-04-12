@@ -5,6 +5,11 @@ import storage from 'redux-persist/lib/storage';
 import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/firestore';
+import { FIREBASE_CONFIG } from './config';
 
 import rootReducer from './redux/reducers';
 import sagas from './redux/saga';
@@ -14,8 +19,9 @@ const persistConfig = {
   storage,
   whitelist: ['auth'],
 };
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+firebase.initializeApp(FIREBASE_CONFIG);
+export const firestore = firebase.firestore();
 
 export const history = createBrowserHistory();
 const devToolsOptions = {};

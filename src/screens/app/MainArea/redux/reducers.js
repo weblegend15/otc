@@ -10,6 +10,10 @@ const initialState = {
     loading: false,
     list: [],
   },
+  privateChannel: {
+    loading: false,
+    channel: [],
+  },
   user: {
     data: {},
     loading: false,
@@ -72,6 +76,32 @@ export default (state = initialState, action) => {
           ...state.myGroups,
           loading: false,
           list: [],
+        },
+      };
+    case CONSTANTS.CREATE_PRIVATE_CHAT_REQUEST:
+      return {
+        ...state,
+        privateChannel: {
+          ...state.privateChannel,
+          loading: true,
+        },
+      };
+    case CONSTANTS.CREATE_PRIVATE_CHAT_SUCCESS:
+      return {
+        ...state,
+        privateChannel: {
+          ...state.privateChannel,
+          loading: false,
+          channel: action.payload,
+        },
+      };
+    case CONSTANTS.CREATE_PRIVATE_CHAT_ERROR:
+      return {
+        ...state,
+        privateChannel: {
+          ...state.privateChannel,
+          loading: false,
+          channel: [],
         },
       };
 

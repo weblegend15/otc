@@ -7,7 +7,10 @@ import {
   getPermissionGroupsRequest,
   selectActiveGroup,
   selectGroupMember,
+  refreshFirebaseTokenRequest,
 } from './redux/actions';
+
+import { setResetMessages } from './Chat/redux/actions';
 
 MainArea.propTypes = {
   groups: PropTypes.object.isRequired,
@@ -17,6 +20,8 @@ MainArea.propTypes = {
   selectedGroupId: PropTypes.string.isRequired,
   selectActiveGroup: PropTypes.func.isRequired,
   selectGroupMember: PropTypes.func.isRequired,
+  refreshFirebaseTokenRequest: PropTypes.func.isRequired,
+  setResetMessages: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -28,9 +33,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getPermissionGroupsRequest,
+  refreshFirebaseTokenRequest,
   getGroupMembersRequest,
   selectActiveGroup,
   selectGroupMember,
+  setResetMessages,
 };
 
 export default connect(

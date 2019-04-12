@@ -27,6 +27,22 @@ export const getPermissionGroupsError = () => ({
   type: CONSTANTS.GET_PERMISSION_GROUPS_ERROR,
 });
 
+// create private channel
+export const createPrivateChatRequest = (id, groupId) => ({
+  type: CONSTANTS.CREATE_PRIVATE_CHAT_REQUEST,
+  id,
+  groupId,
+});
+
+export const createPrivateChatSuccess = data => ({
+  type: CONSTANTS.CREATE_PRIVATE_CHAT_SUCCESS,
+  payload: data,
+});
+
+export const createPrivateChatError = () => ({
+  type: CONSTANTS.CREATE_PRIVATE_CHAT_ERROR,
+});
+
 export const readUserRequest = userId => ({
   type: CONSTANTS.READ_USER_REQUEST,
   payload: userId,
@@ -47,4 +63,17 @@ export const selectActiveGroup = groupId => ({
 export const selectGroupMember = memberId => ({
   type: CONSTANTS.SELECT_GROUP_MEMBER,
   payload: memberId,
+});
+
+export const refreshFirebaseTokenRequest = () => ({
+  type: CONSTANTS.REFRESH_FIREBASE_TOKEN_REQUEST,
+});
+
+export const refreshFirebaseTokenSuccess = firebaseToken => ({
+  type: CONSTANTS.REFRESH_FIREBASE_TOKEN_SUCCESS,
+  payload: firebaseToken,
+});
+
+export const refreshFirebaseTokenError = () => ({
+  type: CONSTANTS.REFRESH_FIREBASE_TOKEN_ERROR,
 });
