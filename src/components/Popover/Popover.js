@@ -1,3 +1,1 @@
-import Popover from 'react-bootstrap/Popover';
-
-export default Popover;
+export { default } from 'react-bootstrap/Popover';

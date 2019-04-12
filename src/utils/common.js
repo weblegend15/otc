@@ -53,3 +53,7 @@ export const getFormLabel = str => {
 export const formatNumber = num => {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 };
+
+export const findElement = (list, searchId) => {
+  return list.find(item => item._id === searchId);
+};
