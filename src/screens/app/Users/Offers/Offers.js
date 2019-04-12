@@ -14,49 +14,55 @@ export default class Offers extends Component {
   }
 
   componentDidMount() {
-    const {
-      getMyOffersRequest,
-      getPermissionGroupsRequest,
-      match: {
-        params: { offerType },
-      },
-    } = this.props;
-    const filters = { status: offerType === 'current' ? 'ACTIVE' : 'ENDED' };
-    getMyOffersRequest({ limit: PAGE_LIMIT, skip: 0, filters });
+    const { getPermissionGroupsRequest } = this.props;
+    this.getOffers();
     getPermissionGroupsRequest();
   }
 
   componentDidUpdate(prevProps) {
     const {
       match: {
-        params: { offerType },
-      },
-      getMyOffersRequest,
-    } = this.props;
-    const {
-      match: {
         params: { offerType: prevOfferType },
       },
     } = prevProps;
-    if (!!prevOfferType && prevOfferType !== offerType) {
-      const filters = { status: offerType === 'current' ? 'ACTIVE' : 'ENDED' };
-      getMyOffersRequest({ limit: PAGE_LIMIT, skip: 0, filters });
+
+    if (!!prevOfferType && prevOfferType !== this.getOfferType()) {
+      this.getOffers();
     }
   }
 
-  handlePageChange = value => {
+  getOfferType = () => {
+    const {
+      match: {
+        params: { offerType },
+      },
+    } = this.props;
+    return offerType;
+  };
+
+  getFilters() {
+    return { status: this.getOfferType() === 'current' ? 'ACTIVE' : 'ENDED' };
+  }
+
+  getOffers(currentPage) {
     const { getMyOffersRequest } = this.props;
 
+    getMyOffersRequest({
+      skip: (currentPage || 0) * PAGE_LIMIT,
+      limit: PAGE_LIMIT,
+      filters: this.getFilters(),
+    });
+  }
+
+  handlePageChange = value => {
     this.setState({ currentPage: value });
-    getMyOffersRequest({ skip: value * PAGE_LIMIT, limit: PAGE_LIMIT });
+    this.getOffers(value);
   };
 
   renderOffersList = () => {
     const {
       myOffers: { list, total },
-      match: {
-        params: { offerType },
-      },
+      currentUser,
     } = this.props;
     const { currentPage } = this.state;
 
@@ -64,7 +70,10 @@ export default class Offers extends Component {
       <Row className="m-0">
         {list.map(offer => (
           <Col lg={6} key={offer._id} className="mb-4 mb-lg-5">
-            <OfferCard offerData={offer} cardType={offerType} />
+            <OfferCard
+              offerData={{ ...offer, offeredBy: currentUser }}
+              cardType={this.getOfferType()}
+            />
           </Col>
         ))}
         <Col md={12} className="d-flex mb-2">
@@ -82,16 +91,13 @@ export default class Offers extends Component {
 
   render() {
     const {
-      match: {
-        params: { offerType },
-      },
       myOffers: { loading },
     } = this.props;
     return (
       <LoadingContainer loading={loading}>
         <Row className="groups-list-title mx-2 d-none d-md-block">
           <h3 className="mr-auto">
-            {offerType === 'current' ? 'Active' : 'Past'} Offers
+            {this.getOfferType() === 'current' ? 'Active' : 'Past'} Offers
           </h3>
         </Row>
         {this.renderOffersList()}

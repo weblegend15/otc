@@ -136,7 +136,7 @@ class Chat extends Component {
 
     return (
       <Element name={msg.id} key={msg.id}>
-        {msg.type === 'first_message' ? (
+        {msg.type === 'first_message' || !member ? (
           <p className="text-center my-4">{msg.text}</p>
         ) : (
           <Fragment>

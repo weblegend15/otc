@@ -16,8 +16,7 @@ import { history } from '../../../../configureStore';
 
 import Profile from './Profile';
 import Feedback from './Feedback';
-import CurrentOffers from './CurrentOffers';
-import PastOffers from './PastOffers';
+import Offers from './Offers';
 import Messaging from './Messaging';
 
 class MemberContent extends Component {
@@ -74,7 +73,7 @@ class MemberContent extends Component {
         <NavLink
           className="pb-3 px-1 mx-3 p-lg"
           activeClassName="active font-weight-bold"
-          to={`${url}/current-offers`}
+          to={`${url}/offers/current`}
         >
           Current Offers
         </NavLink>
@@ -82,7 +81,7 @@ class MemberContent extends Component {
         <NavLink
           className="pb-3 px-1 mx-3 p-lg"
           activeClassName="active font-weight-bold"
-          to={`${url}/past-offers`}
+          to={`${url}/offers/past`}
         >
           Past Offers
         </NavLink>
@@ -156,8 +155,7 @@ class MemberContent extends Component {
       <Switch>
         <Route path={`${url}/profile`} component={Profile} />
         <Route path={`${url}/feedback`} component={Feedback} />
-        <Route path={`${url}/current-offers`} component={CurrentOffers} />
-        <Route path={`${url}/past-offers`} component={PastOffers} />
+        <Route path={`${url}/offers/:offerType`} component={Offers} />
         <Route path={`${url}/messaging`} component={Messaging} />
         <Redirect to={`${url}/messaging`} />
       </Switch>

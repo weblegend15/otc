@@ -11,10 +11,12 @@ Offers.propTypes = {
   myOffers: PropTypes.object.isRequired,
   toggleModal: PropTypes.func.isRequired,
   getPermissionGroupsRequest: PropTypes.func.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   myOffers: state.app.user.myOffers,
+  currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = {
