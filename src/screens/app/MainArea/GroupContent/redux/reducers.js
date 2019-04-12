@@ -157,6 +157,31 @@ export default (state = initialState, action) => {
         },
       };
 
+    case CONSTANTS.END_OFFER_REQUEST:
+      return {
+        ...state,
+        groupOffer: {
+          ...state.groupOffer,
+          loading: true,
+        },
+      };
+    case CONSTANTS.END_OFFER_SUCCESS:
+      return {
+        ...state,
+        groupOffer: {
+          ...state.groupOffer,
+          loading: false,
+        },
+      };
+    case CONSTANTS.END_OFFER_ERROR:
+      return {
+        ...state,
+        groupOffer: {
+          ...state.groupOffer,
+          loading: false,
+        },
+      };
+
     default:
       return state;
   }

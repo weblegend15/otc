@@ -59,3 +59,15 @@ export const deleteOfferSuccess = data => ({
 export const deleteOfferError = () => ({
   type: CONSTANTS.DELETE_OFFER_ERROR,
 });
+
+export const endOfferRequest = data => ({
+  type: CONSTANTS.END_OFFER_REQUEST,
+  payload: data,
+});
+export const endOfferSuccess = data => ({
+  type: CONSTANTS.END_OFFER_SUCCESS,
+  payload: data,
+});
+export const endOfferError = () => ({
+  type: CONSTANTS.END_OFFER_ERROR,
+});

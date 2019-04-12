@@ -26,9 +26,16 @@ export default class Offers extends Component {
   }
 
   handleViewClick = offerData => {
-    const { toggleModal, selectedGroupId } = this.props;
+    const {
+      toggleModal,
+      selectedGroupId,
+      groupMembers: { list },
+    } = this.props;
     toggleModal('viewOfferModal', {
-      offerData,
+      offerData: {
+        ...offerData,
+        offeredBy: findElement(list, offerData.offeredBy),
+      },
       groupId: selectedGroupId,
     });
   };

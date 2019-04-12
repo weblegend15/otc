@@ -6,6 +6,12 @@ const initialState = {
     loading: false,
   },
 
+  myOffers: {
+    list: [],
+    total: 0,
+    loading: false,
+  },
+
   joinRequestLoading: false,
 };
 
@@ -52,6 +58,47 @@ export default (state = initialState, action) => {
       return {
         ...state,
         joinRequestLoading: false,
+      };
+
+    case CONSTANTS.GET_MY_OFFERS_REQUEST:
+      return {
+        ...state,
+        myOffers: {
+          ...state.myOffers,
+          loading: true,
+        },
+      };
+    case CONSTANTS.GET_MY_OFFERS_SUCCESS:
+      return {
+        ...state,
+        myOffers: {
+          ...state.myOffers,
+          list: action.payload.data,
+          total: action.payload.total,
+          loading: false,
+        },
+      };
+    case CONSTANTS.GET_MY_OFFERS_ERROR:
+      return {
+        ...state,
+        myOffers: {
+          ...state.myOffers,
+          list: [],
+          total: 0,
+          loading: false,
+        },
+      };
+
+    case CONSTANTS.DELETE_MY_OFFER:
+      return {
+        ...state,
+        myOffers: {
+          ...state.myOffers,
+          list: state.myOffers.list.filter(
+            offer => offer._id !== action.payload,
+          ),
+          total: state.myOffers.total - 1,
+        },
       };
     default:
       return state;

@@ -13,9 +13,10 @@ export const RECAPTCHA_KEY =
 export const PAGE_LIMIT = 4;
 
 export const OFFER_STATUS_CLASS = {
-  accepted: 'primary',
+  active: 'primary',
   rejected: 'warning',
   pending: 'dark',
+  ended: 'light',
 };
 
 export const PROPOSAL_STATUS_CLASS = {

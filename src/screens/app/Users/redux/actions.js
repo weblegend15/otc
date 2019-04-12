@@ -27,3 +27,20 @@ export const joinGroupSuccess = data => ({
 export const joinGroupError = () => ({
   type: CONSTANTS.JOIN_GROUP_ERROR,
 });
+
+export const getMyOffersRequest = data => ({
+  type: CONSTANTS.GET_MY_OFFERS_REQUEST,
+  payload: data,
+});
+export const getMyOffersSuccess = data => ({
+  type: CONSTANTS.GET_MY_OFFERS_SUCCESS,
+  payload: data,
+});
+export const getMyOffersError = () => ({
+  type: CONSTANTS.GET_MY_OFFERS_ERROR,
+});
+
+export const deleteMyOffer = data => ({
+  type: CONSTANTS.DELETE_MY_OFFER,
+  payload: data,
+});

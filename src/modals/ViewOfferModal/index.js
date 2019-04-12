@@ -7,7 +7,12 @@ import {
   getProposalsRequest,
 } from '../../screens/app/MainArea/GroupContent/Proposals/redux/actions';
 
+import { getGroupMembersRequest } from '../../screens/app/MainArea/redux/actions';
 import { getVouchesRequest } from '../../screens/app/MainArea/GroupContent/Vouches/redux/actions';
+import {
+  deleteOfferRequest,
+  endOfferRequest,
+} from '../../screens/app/MainArea/GroupContent/redux/actions';
 
 ViewOfferModal.propTypes = {
   data: PropTypes.object.isRequired,
@@ -17,6 +22,9 @@ ViewOfferModal.propTypes = {
   proposals: PropTypes.object,
   getVouchesRequest: PropTypes.func.isRequired,
   groupMembers: PropTypes.array.isRequired,
+  getGroupMembersRequest: PropTypes.func.isRequired,
+  deleteOfferRequest: PropTypes.func.isRequired,
+  endOfferRequest: PropTypes.func.isRequired,
 };
 
 ViewOfferModal.defaultProps = {
@@ -28,12 +36,16 @@ const mapStateToProps = state => ({
   vouches: state.app.vouch.vouches,
   currentUser: state.auth.currentUser,
   groupMembers: state.app.main.members.list,
+  groupOffer: state.app.offer.groupOffer,
 });
 
 const mapDispatchToProps = {
   createProposalRequest,
   getProposalsRequest,
   getVouchesRequest,
+  getGroupMembersRequest,
+  deleteOfferRequest,
+  endOfferRequest,
 };
 
 export default connect(
