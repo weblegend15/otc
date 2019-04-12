@@ -26,6 +26,7 @@ import Col from './Col';
 import Row from './Row';
 import Container from './Container';
 import GeneralAvatar from './Avatar/GeneralAvatar';
+import PureAvatar from './Avatar/PureAvatar';
 import LabelRating from './Rating/LabelRating';
 import SocialIcons from './SocialIcons';
 
@@ -50,6 +51,7 @@ export {
   Badge,
   Collapse,
   Avatar,
+  PureAvatar,
   OverlayTrigger,
   Overlay,
   Popover,

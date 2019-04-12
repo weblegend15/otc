@@ -9,6 +9,8 @@ import {
   getGroupMembersError,
   getPermissionGroupsError,
   getPermissionGroupsSuccess,
+  createPrivateChatSuccess,
+  createPrivateChatError,
   selectActiveGroup,
   readUserSuccess,
   readUserError,
@@ -16,6 +18,7 @@ import {
 
 import request from '../../../../utils/apiRequest';
 import { history } from '../../../../configureStore';
+import { firebaseAuth } from '../../Services/firebase';
 
 function* getGroupMembers(action) {
   try {
@@ -70,6 +73,26 @@ function* getPermissionGroups() {
   }
 }
 
+function* createPrivateChat(action) {
+  try {
+    const requestData = {
+      userId: action.id,
+    };
+
+    const responseData = yield call(
+      request,
+      `/groups/${action.groupId}/chats`,
+      'POST',
+      requestData,
+      true,
+    );
+    yield put(createPrivateChatSuccess(responseData));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(createPrivateChatError());
+  }
+}
+
 function* readUser(action) {
   try {
     const data = yield call(
@@ -87,11 +110,28 @@ function* readUser(action) {
   }
 }
 
+function* refreshToken() {
+  try {
+    const responseData = yield call(
+      request,
+      '/profile/refresh-firebase-token',
+      'GET',
+      null,
+      true,
+    );
+    yield firebaseAuth(responseData.firebaseToken);
+  } catch (err) {
+    notify('error', err.message);
+  }
+}
+
 export default function* mainAreaSaga() {
   yield takeLatest(CONSTANTS.GET_GROUP_MEMBERS_REQUEST, getGroupMembers);
   yield takeLatest(
     CONSTANTS.GET_PERMISSION_GROUPS_REQUEST,
     getPermissionGroups,
   );
+  yield takeLatest(CONSTANTS.CREATE_PRIVATE_CHAT_REQUEST, createPrivateChat);
   yield takeLatest(CONSTANTS.READ_USER_REQUEST, readUser);
+  yield takeLatest(CONSTANTS.REFRESH_FIREBASE_TOKEN_REQUEST, refreshToken);
 }

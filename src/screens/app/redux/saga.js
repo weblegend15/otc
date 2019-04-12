@@ -9,6 +9,7 @@ import proposalSaga from '../MainArea/GroupContent/Proposals/redux/saga';
 import vouchSaga from '../MainArea/GroupContent/Vouches/redux/saga';
 import groupProposalsSaga from '../MainArea/GroupContent/VouchesProposals/ActiveProposals/redux/saga';
 import feedbackSaga from '../MainArea/MemberContent/Feedback/redux/saga';
+import chatsSaga from '../MainArea/Chat/redux/saga';
 
 export default function* appSaga() {
   yield all([
@@ -21,5 +22,6 @@ export default function* appSaga() {
     fork(vouchSaga),
     fork(groupProposalsSaga),
     fork(feedbackSaga),
+    fork(chatsSaga),
   ]);
 }

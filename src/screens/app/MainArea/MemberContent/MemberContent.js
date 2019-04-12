@@ -24,10 +24,15 @@ class MemberContent extends Component {
   componentDidMount() {
     const {
       readUserRequest,
+      createPrivateChatRequest,
       selectedGroupMemberId,
+      selectedGroupId,
+      setResetMessages,
       getGroupsRequest,
     } = this.props;
     readUserRequest(selectedGroupMemberId);
+    setResetMessages();
+    createPrivateChatRequest(selectedGroupMemberId, selectedGroupId);
     getGroupsRequest({ skip: 0, limit: 1000 });
   }
 

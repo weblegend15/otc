@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 
 import MemberContent from './MemberContent';
 import './MemberContent.scss';
-import { readUserRequest } from '../redux/actions';
+import { readUserRequest, createPrivateChatRequest } from '../redux/actions';
 
+import { setResetMessages } from '../Chat/redux/actions';
 import { getGroupsRequest } from '../../Groups/redux/actions';
 
 MemberContent.propTypes = {
@@ -12,6 +13,7 @@ MemberContent.propTypes = {
   selectedGroupMemberId: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
   readUserRequest: PropTypes.func.isRequired,
+  setResetMessages: PropTypes.func.isRequired,
   getGroupsRequest: PropTypes.func.isRequired,
 };
 
@@ -23,6 +25,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   readUserRequest,
+  createPrivateChatRequest,
+  setResetMessages,
   getGroupsRequest,
 };
 

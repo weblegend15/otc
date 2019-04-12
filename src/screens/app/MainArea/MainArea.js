@@ -24,15 +24,24 @@ class MainArea extends Component {
   }
 
   componentDidMount() {
-    const { getPermissionGroupsRequest } = this.props;
+    const {
+      getPermissionGroupsRequest,
+      refreshFirebaseTokenRequest,
+    } = this.props;
     getPermissionGroupsRequest();
+    refreshFirebaseTokenRequest();
   }
 
   handleSelectGroup = groupId => {
-    const { selectActiveGroup, selectGroupMember } = this.props;
+    const {
+      selectActiveGroup,
+      selectGroupMember,
+      setResetMessages,
+    } = this.props;
     selectActiveGroup(groupId.target.value);
     history.push(`/app/my-groups/${groupId.target.value}`);
     selectGroupMember('');
+    setResetMessages();
   };
 
   handleHamburgerClick = () => {
@@ -82,14 +91,14 @@ class MainArea extends Component {
 
   renderRoutes = () => {
     const {
-      match: { path },
+      match: { url },
     } = this.props;
 
     return (
       <Switch>
-        <Route path={`${path}/member/:userId`} component={MemberContent} />
-        <Route path={`${path}/group`} component={GroupContent} />
-        <Redirect to={`${path}/group`} />
+        <Route path={`${url}/member/:userId`} component={MemberContent} />
+        <Route path={`${url}/group`} component={GroupContent} />
+        <Redirect to={`${url}/group`} />
       </Switch>
     );
   };

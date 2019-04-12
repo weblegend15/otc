@@ -9,6 +9,7 @@ import proposalReducer from '../MainArea/GroupContent/Proposals/redux/reducers';
 import vouchReducer from '../MainArea/GroupContent/Vouches/redux/reducers';
 import groupProposalsReducer from '../MainArea/GroupContent/VouchesProposals/ActiveProposals/redux/reducers';
 import feedbackReducer from '../MainArea/MemberContent/Feedback/redux/reducers';
+import chatsReducer from '../MainArea/Chat/redux/reducers';
 
 export default combineReducers({
   group: groupReducer,
@@ -20,4 +21,5 @@ export default combineReducers({
   vouch: vouchReducer,
   groupProposals: groupProposalsReducer,
   feedback: feedbackReducer,
+  chats: chatsReducer,
 });
