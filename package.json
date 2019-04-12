@@ -5,7 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
-    "firebase": "^5.9.2",
+    "firebase": "^5.9.4",
     "history": "^4.9.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
