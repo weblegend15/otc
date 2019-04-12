@@ -15,13 +15,17 @@ import request from '../../../../../../utils/apiRequest';
 
 function* getFeedbackList(action) {
   try {
-    const memberId = action.payload;
+    const requestData = {
+      limit: action.payload.limit,
+      skip: action.payload.skip,
+    };
+    const { memberId } = action.payload;
 
     const members = yield call(
       request,
       `/users/${memberId}/feedback`,
       'GET',
-      null,
+      requestData,
       true,
     );
 

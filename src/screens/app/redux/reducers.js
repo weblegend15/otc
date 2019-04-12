@@ -10,7 +10,7 @@ import vouchReducer from '../MainArea/GroupContent/Vouches/redux/reducers';
 import groupProposalsReducer from '../MainArea/GroupContent/VouchesProposals/ActiveProposals/redux/reducers';
 import feedbackReducer from '../MainArea/MemberContent/Feedback/redux/reducers';
 import chatsReducer from '../MainArea/Chat/redux/reducers';
-import memberOffersReducer from '../MainArea/MemberContent/CurrentOffers/redux/reducers';
+// import memberOffersReducer from '../MainArea/MemberContent/CurrentOffers/redux/reducers';
 
 export default combineReducers({
   group: groupReducer,
@@ -23,5 +23,5 @@ export default combineReducers({
   groupProposals: groupProposalsReducer,
   feedback: feedbackReducer,
   chats: chatsReducer,
-  memberOffers: memberOffersReducer,
+  // memberOffers: memberOffersReducer,
 });

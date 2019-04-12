@@ -38,6 +38,8 @@ export default (state = initialState, action) => {
         ...state,
         feedbackList: {
           ...state.feedbackList,
+          list: [],
+          total: 0,
           loading: false,
         },
       };

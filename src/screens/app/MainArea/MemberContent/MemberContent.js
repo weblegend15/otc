@@ -115,7 +115,11 @@ class MemberContent extends Component {
           </Button>
           <div className="opacity-5 p-sm d-flex flex-row">
             Joined
-            <Timestamp className="ml-2" date={new Date()} format="D MMM YYYY" />
+            <Timestamp
+              className="ml-2"
+              timestamp={data.createdAt}
+              format="D MMM YYYY"
+            />
           </div>
         </Row>
         <Row className="d-flex flex-row justify-content-between align-items-center mb-5 mx-0">
@@ -129,7 +133,11 @@ class MemberContent extends Component {
             />
           </Col>
           <Col className="border-right border-left border-default-color text-center py-3">
-            <Rating initialRating={3.7} readonly />
+            <Rating
+              className="justify-content-center"
+              initialRating={data.avgRating}
+              readonly
+            />
           </Col>
           <Col>
             <div className="d-flex flex-row align-items-center justify-content-center">
