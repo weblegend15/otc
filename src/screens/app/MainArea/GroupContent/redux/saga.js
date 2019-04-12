@@ -12,8 +12,11 @@ import {
   updateOfferError,
   deleteOfferSuccess,
   deleteOfferError,
+  endOfferSuccess,
+  endOfferError,
 } from './actions';
 
+import { deleteMyOffer } from '../../../Users/redux/actions';
 import toggleModal from '../../../../../modals/redux/actions';
 
 import request from '../../../../../utils/apiRequest';
@@ -115,9 +118,33 @@ function* deleteGroupOffer(action) {
     );
 
     yield put(deleteOfferSuccess(data));
+    yield put(deleteMyOffer(offerId));
+    yield put(toggleModal('viewOfferModal'));
   } catch (err) {
     notify('error', err.message);
     yield put(deleteOfferError());
+    yield put(toggleModal('viewOfferModal'));
+  }
+}
+
+function* endGroupOffer(action) {
+  try {
+    const { groupId } = action.payload;
+    const { offerId } = action.payload;
+    const data = yield call(
+      request,
+      `/groups/${groupId}/offers/${offerId}/end`,
+      'PUT',
+      {},
+      true,
+    );
+
+    yield put(endOfferSuccess(data));
+    yield put(toggleModal('viewOfferModal'));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(endOfferError());
+    yield put(toggleModal('viewOfferModal'));
   }
 }
 
@@ -127,4 +154,5 @@ export default function* userSaga() {
   yield takeLatest(CONSTANTS.CREATE_OFFER_REQUEST, createGroupOffer);
   yield takeLatest(CONSTANTS.UPDATE_OFFER_REQUEST, updateGroupOffer);
   yield takeLatest(CONSTANTS.DELETE_OFFER_REQUEST, deleteGroupOffer);
+  yield takeLatest(CONSTANTS.END_OFFER_REQUEST, endGroupOffer);
 }
