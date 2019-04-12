@@ -215,6 +215,10 @@ button.btn-lg {
   height: 6px;
 }
 
+.modal-dialog .general-avatar p {
+  margin-bottom: 0;
+}
+
 @include media-breakpoint-between(xs, sm) {
   .groups-list-container,
   .group-admin-area-applications,
