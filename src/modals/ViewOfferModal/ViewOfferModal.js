@@ -26,22 +26,26 @@ export default class NewGroupModal extends Component {
       getVouchesRequest,
       getGroupMembersRequest,
 
-      data: { offerData, groupId, actionType },
+      data: { offerData, actionType },
     } = this.props;
     getProposalsRequest({
       limit: 20,
       skip: 0,
       offerId: offerData._id,
-      groupId,
+      groupId: offerData.group,
     });
     getVouchesRequest({
       limit: 20,
       skip: 0,
       offerId: offerData._id,
-      groupId,
+      groupId: offerData.group,
     });
     if (actionType === 'delete') {
-      getGroupMembersRequest({ groupId, skip: 0, limit: 1000 });
+      getGroupMembersRequest({
+        groupId: offerData.group,
+        skip: 0,
+        limit: 1000,
+      });
     }
     //     if (actionType === 'end') {
     //   getGroupMembersRequest({ groupId, skip: 0, limit: 1000 });
@@ -55,7 +59,7 @@ export default class NewGroupModal extends Component {
   handleSubmit = values => {
     const {
       createProposalRequest,
-      data: { offerData, groupId },
+      data: { offerData },
     } = this.props;
 
     const proposalData = {
@@ -63,7 +67,11 @@ export default class NewGroupModal extends Component {
       want: values.want,
     };
 
-    createProposalRequest({ proposalData, offerId: offerData._id, groupId });
+    createProposalRequest({
+      proposalData,
+      offerId: offerData._id,
+      groupId: offerData.group,
+    });
   };
 
   handleDeleteOffer = () => {
