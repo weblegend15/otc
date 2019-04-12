@@ -14,6 +14,7 @@ import EditGroupModal from './EditGroupModal';
 import ManageUserModal from './ManageUserModal';
 import RequestVouchModal from './RequestVouchModal';
 import ViewProposalsModal from './ViewProposalsModal';
+import LeaveFeedbackModal from './LeaveFeedbackModal';
 
 const Modals = {
   newGroupModal: NewGroupModal,
@@ -27,6 +28,7 @@ const Modals = {
   manageUserModal: ManageUserModal,
   requestVouchModal: RequestVouchModal,
   viewProposalsModal: ViewProposalsModal,
+  leaveFeedbackModal: LeaveFeedbackModal,
 };
 
 const ModalContainer = ({ type, ...rest }) => {
