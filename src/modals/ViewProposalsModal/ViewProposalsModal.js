@@ -82,7 +82,6 @@ export default class ViewProposalsModal extends Component {
 
   renderProposalsList = () => {
     const {
-      activeMembers,
       proposals: { list: proposalsList, loading: proposalsLoading },
     } = this.props;
 
@@ -92,9 +91,6 @@ export default class ViewProposalsModal extends Component {
       <LoadingContainer loading={proposalsLoading}>
         <div className="proposals-list">
           {proposalsList.map((proposal, idx) => {
-            const proposedMember = activeMembers.find(
-              member => member._id === proposal.proposedBy,
-            );
             const statusClass =
               PROPOSAL_STATUS_CLASS[proposal.status.toLowerCase()];
             const rowClass = cx(
@@ -118,7 +114,7 @@ export default class ViewProposalsModal extends Component {
                 <Col>
                   <GeneralAvatar
                     data={{
-                      firstName: proposedMember.firstName,
+                      firstName: proposal.proposedBy.firstName,
                       location: 'London, UK',
                     }}
                   />
