@@ -69,18 +69,18 @@ class Chat extends Component {
       messageList: { chats },
       getMoreMessages,
     } = this.props;
-
-    const scrollY = document.getElementById('message-container').scrollTop;
-
-    this.setState({ sent: false });
-    if (scrollY === 0 && chats[0].id !== 'first') {
-      getMessagesService(
-        chats[0].created_at,
-        chatId,
-        MSG_COUNT_LIMIT,
-        getMoreMessages,
-      );
-      this.scrollTo(chats[0].id);
+    if (document.getElementById('message-container')) {
+      const scrollY = document.getElementById('message-container').scrollTop;
+      this.setState({ sent: false });
+      if (scrollY === 0 && chats[0].id !== 'first') {
+        getMessagesService(
+          chats[0].created_at,
+          chatId,
+          MSG_COUNT_LIMIT,
+          getMoreMessages,
+        );
+        this.scrollTo(chats[0].id);
+      }
     }
   };
 

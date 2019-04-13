@@ -37,6 +37,7 @@ const getMessagesService = (
   action,
   scrollEvent = null,
 ) => {
+  const storageRef = firebase.storage().ref();
   return firestore
     .collection('chats')
     .doc(id)
@@ -45,31 +46,52 @@ const getMessagesService = (
     .orderBy('created_at', 'desc')
     .limit(limit)
     .get()
-    .then(messages => {
-      let msgs = [];
+    .then(msgs => {
+      let promises = [];
+      const messages = [];
+
+      msgs.forEach(msg => {
+        messages.push(msg.data());
+      });
+
       if (!messages.empty) {
-        messages.forEach(message => {
-          msgs.push({ id: message.id, ...message.data() });
+        promises = messages.map(message => {
+          if (!message.extra) Promise.resolve(message);
+
+          return storageRef
+            .child(message.extra.file.uuid)
+            .getDownloadURL()
+            .then(url => {
+              return { id: message.id, ...message, url };
+            });
         });
-        if (messages.size !== limit) {
-          msgs.push(FIRST_MESSAGE_TEXT);
-        }
-        msgs = msgs.reverse();
-        action(msgs);
-        if (scrollEvent !== null) {
-          scrollEvent(msgs[msgs.length - 1].id);
-        }
-      } else {
-        msgs.push(FIRST_MESSAGE_TEXT);
-        action(msgs);
       }
+
+      return Promise.all(promises).then(result => {
+        action(result);
+      });
+      //   msgs.push({ id: message.id, ...message.data() });
+      // });
+      // if (messages.size !== limit) {
+      //   msgs.push(FIRST_MESSAGE_TEXT);
+      // }
+      //   msgs = msgs.reverse();
+      //   if (scrollEvent !== null) {
+      //     scrollEvent(msgs[msgs.length - 1].id);
+      //   }
+      // } else {
+      //   msgs.push(FIRST_MESSAGE_TEXT);
+      // }
+      // action(msgs);
     });
 };
 
 const getFileDownloadUrl = msg => {
+  if (!msg.extra) Promise.resolve(msg);
   const storageRef = firebase.storage().ref();
   const startRef = storageRef.child(msg.extra.file.uuid);
-  startRef
+
+  return startRef
     .getDownloadURL()
     .then(url => {
       return url;
