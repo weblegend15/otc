@@ -35,3 +35,23 @@ export const getMoreMessages = data => ({
   type: CONSTANTS.GET_MORE_MESSAGES,
   payload: data,
 });
+
+export const sendFileMessageReqeust = (
+  groupId,
+  chatId,
+  text,
+  file,
+  fileName,
+) => ({
+  type: CONSTANTS.SEND_FILE_MESSAGE_REQUEST,
+  groupId,
+  chatId,
+  text,
+  file,
+  fileName,
+});
+
+export const sendFileMessageError = error => ({
+  type: CONSTANTS.SEND_FILE_MESSAGE_ERROR,
+  error,
+});

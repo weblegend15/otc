@@ -1,7 +1,21 @@
+@import '../../../../styles/variables';
 .message-input {
   background-color: #ebebeb;
   textarea {
     resize: none;
+  }
+  .buttons {
+    display: grid;
+    .send-message {
+      border-top-right-radius: $border-radius !important;
+      border-bottom: 1px solid $light;
+    }
+    .file-upload {
+      border-bottom-right-radius: $border-radius !important;
+      .rotate-icon {
+        transform: rotate(270deg);
+      }
+    }
   }
 }
 
@@ -9,4 +23,22 @@
   position: relative;
   height: 500px;
   overflow: scroll;
+}
+
+.inputWrapper {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  /*Using a background color, but you can use a background image to represent a button*/
+  background-color: #ddf;
+}
+
+.fileInput {
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  /*This makes the button huge so that it can be clicked on*/
+  font-size: 50px;
 }

@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/storage';
 import { firestore } from '../../../configureStore';
 import { FIRST_MESSAGE_TEXT } from '../../../config';
 
@@ -65,4 +66,17 @@ const getMessagesService = (
     });
 };
 
-export { firebaseAuth, getMessagesService, getNewMessage };
+const getFileDownloadUrl = msg => {
+  const storageRef = firebase.storage().ref();
+  const startRef = storageRef.child(msg.extra.file.uuid);
+  startRef
+    .getDownloadURL()
+    .then(url => {
+      return url;
+    })
+    .catch(err => {
+      return err;
+    });
+};
+
+export { firebaseAuth, getMessagesService, getFileDownloadUrl, getNewMessage };

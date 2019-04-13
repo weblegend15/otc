@@ -5,11 +5,13 @@ import {
   messageStore,
   addNewMessage,
   getMoreMessages,
+  sendFileMessageReqeust,
 } from './redux/actions';
 import Chat from './Chat';
 import './Chat.scss';
 
 Chat.propTypes = {
+  sendFileMessageReqeust: PropTypes.func.isRequired,
   chatId: PropTypes.string.isRequired,
   members: PropTypes.object.isRequired,
   messageList: PropTypes.object.isRequired,
@@ -29,6 +31,7 @@ const mapDispatchToProps = {
   getMoreMessages,
   addNewMessage,
   messageStore,
+  sendFileMessageReqeust,
 };
 
 export default connect(
