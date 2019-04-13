@@ -44,7 +44,7 @@ class GroupProfile extends Component {
             <div className="d-flex flex-row">
               <p className="p-sm">{formatNumber(1234)} members</p>
               <div className="ml-auto p-sm opacity-5 d-flex flex-row">
-                Created on{' '}
+                Created on&nbsp;
                 <Timestamp timestamp={data.createdAt} format="D MMM YYYY" />
               </div>
             </div>
