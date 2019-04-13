@@ -68,41 +68,44 @@ export default class Offers extends Component {
       );
     }
 
-    return list.map(item => (
-      <Row
-        key={item._id}
-        className="border-bottom border-default-color p-4 m-0 d-flex align-items-center"
-      >
-        <Col className="p-0">
-          <Timestamp className="p-sm" date={item.createdAt} />
-        </Col>
-        <Col className="p-0">
-          <GeneralAvatar
-            data={{
-              ...findElement(membersList, item.offeredBy),
-              location: 'London, UK',
-            }}
-          />
-        </Col>
-        <Col className="font-weight-semibold p-0">{item.have}</Col>
-        <Col className="font-weight-semibold p-0">{item.want}</Col>
-        <Col md={3} className="d-flex justify-content-between p-0">
-          <Button
-            className="text-uppercase font-weight-bold px-5"
-            onClick={() => this.handleViewClick(item)}
-          >
-            View
-          </Button>
-          {item.note && (
-            <OverlayTrigger overlay={popoverFocus}>
-              <Button className="p-0" variant="outline-link">
-                <Icon name="edit" className="text-primary h4-title" />
-              </Button>
-            </OverlayTrigger>
-          )}
-        </Col>
-      </Row>
-    ));
+    return list.map(item => {
+      const member = findElement(membersList, item.offeredBy);
+      return (
+        <Row
+          key={item._id}
+          className="border-bottom border-default-color p-4 m-0 d-flex align-items-center"
+        >
+          <Col className="p-0">
+            <Timestamp className="p-sm" date={item.createdAt} />
+          </Col>
+          <Col className="p-0">
+            <GeneralAvatar
+              data={{
+                ...member,
+                location: `${member.city}, ${member.country}`,
+              }}
+            />
+          </Col>
+          <Col className="font-weight-semibold p-0">{item.have}</Col>
+          <Col className="font-weight-semibold p-0">{item.want}</Col>
+          <Col md={3} className="d-flex justify-content-between p-0">
+            <Button
+              className="text-uppercase font-weight-bold px-5"
+              onClick={() => this.handleViewClick(item)}
+            >
+              View
+            </Button>
+            {item.note && (
+              <OverlayTrigger overlay={popoverFocus}>
+                <Button className="p-0" variant="outline-link">
+                  <Icon name="edit" className="text-primary h4-title" />
+                </Button>
+              </OverlayTrigger>
+            )}
+          </Col>
+        </Row>
+      );
+    });
   };
 
   render() {

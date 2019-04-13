@@ -71,7 +71,7 @@ export default class Offers extends Component {
 
   renderOffersList = () => {
     const {
-      memberOffers: { list, total },
+      memberOffers: { list, total, loading },
       selectedMember: { data },
     } = this.props;
     const { currentPage } = this.state;
@@ -81,17 +81,26 @@ export default class Offers extends Component {
         ? 'memberActiveOffer'
         : 'memberPastOffer';
 
+    if (!list.length) {
+      return (
+        <div className="h3-title font-weight-semibold text-center">No data</div>
+      );
+    }
+
     return (
       <Row className="m-5">
-        {list.map(offer => (
-          <Col lg={6} key={offer._id} className="pl-0 pr-4 ml-0 mb-4 mb-lg-5">
-            <OfferCard
-              offerData={{ ...offer, offeredBy: data }}
-              cardType={cardType}
-            />
-          </Col>
-        ))}
-        {!!total && (
+        <LoadingContainer loading={loading}>
+          {list.map(offer => (
+            <Col lg={6} key={offer._id} className="pl-0 pr-4 ml-0 mb-4 mb-lg-5">
+              <OfferCard
+                offerData={{ ...offer, offeredBy: data }}
+                cardType={cardType}
+              />
+            </Col>
+          ))}
+        </LoadingContainer>
+
+        {total && (
           <Col md={12} className="d-flex mb-2">
             <Pagination
               className="ml-auto"
@@ -107,13 +116,6 @@ export default class Offers extends Component {
   };
 
   render() {
-    const {
-      memberOffers: { loading },
-    } = this.props;
-    return (
-      <LoadingContainer loading={loading}>
-        {this.renderOffersList()}
-      </LoadingContainer>
-    );
+    return this.renderOffersList();
   }
 }

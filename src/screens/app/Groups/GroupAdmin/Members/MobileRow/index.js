@@ -18,7 +18,12 @@ export default ({ userData, groupId, onClick }) => {
     <div className="mb-4">
       <Card className="p-3 mb-3 border-0">
         <Row className="m-0 d-flex justify-content-between mb-4">
-          <GeneralAvatar data={{ ...userData, location: 'London, UK' }} />
+          <GeneralAvatar
+            data={{
+              ...userData,
+              location: `${userData.city}, ${userData.country}`,
+            }}
+          />
           <div className="d-flex flex-column justify-content-center align-items-center">
             <p className="text-uppercase opacity-5 font-weight-semibold p-sm">
               Joined

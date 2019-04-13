@@ -15,7 +15,12 @@ export default ({ userData, onViewClick }) => {
     <Card className="mb-3 border-0">
       <Card.Body className="p-3">
         <Row className="mx-0 mb-4">
-          <GeneralAvatar data={{ ...userData, location: 'London, UK' }} />
+          <GeneralAvatar
+            data={{
+              ...userData,
+              location: `${userData.city}, ${userData.country}`,
+            }}
+          />
           <div className="ml-auto d-flex flex-column justify-content-center align-items-center p-sm">
             <p className="text-uppercase font-weight-semibold opacity-5">
               Sent

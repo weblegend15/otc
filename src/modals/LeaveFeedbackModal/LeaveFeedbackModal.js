@@ -79,7 +79,7 @@ export default class LeaveFeedbackModal extends Component {
               data={{
                 firstName: data.firstName,
                 lastName: data.lastName,
-                location: 'London, UK',
+                location: `${data.city}, ${data.country}`,
               }}
             />
           </LoadingContainer>

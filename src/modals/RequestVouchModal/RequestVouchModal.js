@@ -96,7 +96,7 @@ export default class RequestVouchModal extends Component {
                   <GeneralAvatar
                     data={{
                       firstName: member.firstName,
-                      location: 'London, UK',
+                      location: `${member.city}, ${member.country}`,
                     }}
                   />
                 </Col>

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {
@@ -20,46 +20,49 @@ class GroupsList extends Component {
   }
 
   componentDidMount() {
+    this.getGroups();
+  }
+
+  getGroups(currentPage) {
     const { getGroupsRequest } = this.props;
-    getGroupsRequest({ skip: 0, limit: PAGE_LIMIT });
+    getGroupsRequest({
+      skip: (currentPage || 0) * PAGE_LIMIT,
+      limit: PAGE_LIMIT,
+    });
   }
 
   handlePageChange = value => {
-    const { getGroupsRequest } = this.props;
-
     this.setState({ currentPage: value });
-    getGroupsRequest({ skip: value * PAGE_LIMIT, limit: PAGE_LIMIT });
+    this.getGroups(value);
   };
 
   renderGroupsList = () => {
-    const { currentPage } = this.state;
-    const { groups } = this.props;
+    const {
+      groups: { list },
+    } = this.props;
 
-    return (
-      <Fragment>
-        {groups.list.map(({ _id, ...rest }, idx) => (
-          <Col lg={6} key={`group_${idx}`} className="px-lg-4 mb-4 mb-lg-5">
-            <GroupCard {...rest} memberCount={1231} groupId={_id} />
-          </Col>
-        ))}
-        <Col md={12} className="d-flex mb-2">
-          <Pagination
-            className="ml-auto"
-            total={groups.total}
-            perPage={PAGE_LIMIT}
-            currentPage={currentPage}
-            onChange={this.handlePageChange}
-          />
-        </Col>
-      </Fragment>
-    );
+    if (!list.length) {
+      return (
+        <div className="h3-title font-weight-semibold text-center">No data</div>
+      );
+    }
+
+    return list.map(({ _id, ...rest }, idx) => (
+      <Col lg={6} key={`group_${idx}`} className="px-lg-4 mb-4 mb-lg-5">
+        <GroupCard {...rest} memberCount={1231} groupId={_id} />
+      </Col>
+    ));
   };
 
   render() {
-    const { groups, toggleModal } = this.props;
+    const {
+      groups: { loading, total },
+      toggleModal,
+    } = this.props;
+    const { currentPage } = this.state;
 
     return (
-      <LoadingContainer loading={groups.loading}>
+      <div>
         <Row className="groups-list-title mx-2 d-none d-md-block">
           <h3 className="mr-auto">Home</h3>
         </Row>
@@ -74,14 +77,26 @@ class GroupsList extends Component {
             </Button>
           </Card.Header>
           <Card.Body className="pt-3 px-0 px-lg-4 pt-lg-5">
-            {!groups.list.length ? (
-              <Card.Title className="text-center m-5">No Group</Card.Title>
-            ) : (
-              <Row className="m-0">{this.renderGroupsList()}</Row>
-            )}
+            <Row className="m-0">
+              <LoadingContainer loading={loading} className="mx-auto">
+                {this.renderGroupsList()}
+              </LoadingContainer>
+
+              {total && (
+                <Col md={12} className="d-flex mb-2">
+                  <Pagination
+                    className="ml-auto"
+                    total={total}
+                    perPage={PAGE_LIMIT}
+                    currentPage={currentPage}
+                    onChange={this.handlePageChange}
+                  />
+                </Col>
+              )}
+            </Row>
           </Card.Body>
         </Card>
-      </LoadingContainer>
+      </div>
     );
   }
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import { LoadingContainer, Col, Row, Pagination } from '../../../../components';
 
@@ -61,47 +61,55 @@ export default class Offers extends Component {
 
   renderOffersList = () => {
     const {
-      myOffers: { list, total },
+      myOffers: { list, total, loading },
       currentUser,
     } = this.props;
     const { currentPage } = this.state;
 
+    if (!list.length) {
+      return (
+        <div className="h3-title font-weight-semibold text-center">No data</div>
+      );
+    }
+
     return (
       <Row className="m-0">
-        {list.map(offer => (
-          <Col lg={6} key={offer._id} className="mb-4 mb-lg-5">
-            <OfferCard
-              offerData={{ ...offer, offeredBy: currentUser }}
-              cardType={this.getOfferType()}
+        <LoadingContainer loading={loading}>
+          {list.map(offer => (
+            <Col lg={6} key={offer._id} className="mb-4 mb-lg-5">
+              <OfferCard
+                offerData={{ ...offer, offeredBy: currentUser }}
+                cardType={this.getOfferType()}
+              />
+            </Col>
+          ))}
+        </LoadingContainer>
+
+        {total && (
+          <Col md={12} className="d-flex mb-2">
+            <Pagination
+              className="ml-auto"
+              total={total}
+              perPage={PAGE_LIMIT}
+              currentPage={currentPage}
+              onChange={this.handlePageChange}
             />
           </Col>
-        ))}
-        <Col md={12} className="d-flex mb-2">
-          <Pagination
-            className="ml-auto"
-            total={total}
-            perPage={PAGE_LIMIT}
-            currentPage={currentPage}
-            onChange={this.handlePageChange}
-          />
-        </Col>
+        )}
       </Row>
     );
   };
 
   render() {
-    const {
-      myOffers: { loading },
-    } = this.props;
     return (
-      <LoadingContainer loading={loading}>
+      <Fragment>
         <Row className="groups-list-title mx-2 d-none d-md-block">
           <h3 className="mr-auto">
             {this.getOfferType() === 'current' ? 'Active' : 'Past'} Offers
           </h3>
         </Row>
         {this.renderOffersList()}
-      </LoadingContainer>
+      </Fragment>
     );
   }
 }

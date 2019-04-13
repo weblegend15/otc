@@ -78,11 +78,6 @@ export default class Feedback extends Component {
   };
 
   renderFeedbackList = () => {
-    const {
-      feedbackList: { list, total },
-    } = this.props;
-    const { currentPage } = this.state;
-
     const feedback = {
       comment:
         'Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam elementum pulvinar etiam non. ',
@@ -92,38 +87,44 @@ export default class Feedback extends Component {
       <Fragment>
         {/* {list.map(this.renderFeedback)} */}
         {this.renderFeedback(feedback)}
-        <Row className="m-0">
-          <Pagination
-            className="ml-auto py-5 px-2"
-            total={total}
-            perPage={PAGE_LIMIT}
-            currentPage={currentPage}
-            onChange={this.handlePageChange}
-          />
-        </Row>
       </Fragment>
     );
   };
 
   render() {
     const {
-      feedbackList: { list, loading },
+      feedbackList: { list, loading, total },
       user: { data },
     } = this.props;
+    const { currentPage } = this.state;
 
     return (
-      <LoadingContainer loading={loading}>
-        <Row className="m-0 p-4 border-bottom border-default-color">
-          Overall transaction feedback since
-          <Timestamp
-            className="ml-1 mr-3"
-            timestamp={data.createdAt}
-            format="MM D, YYYY"
-          />
-          <Rating initialRating={data.avgRating} readonly />
-        </Row>
+      <Fragment>
+        <LoadingContainer loading={loading}>
+          <Row className="m-0 p-4 border-bottom border-default-color">
+            Overall transaction feedback since
+            <Timestamp
+              className="ml-1 mr-3"
+              timestamp={data.createdAt}
+              format="MM D, YYYY"
+            />
+            <Rating initialRating={data.avgRating} readonly />
+          </Row>
+        </LoadingContainer>
+
         {this.renderFeedbackList()}
-      </LoadingContainer>
+        {total && (
+          <Row className="m-0">
+            <Pagination
+              className="ml-auto py-5 px-2"
+              total={total}
+              perPage={PAGE_LIMIT}
+              currentPage={currentPage}
+              onChange={this.handlePageChange}
+            />
+          </Row>
+        )}
+      </Fragment>
     );
   }
 }

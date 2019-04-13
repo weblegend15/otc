@@ -129,7 +129,7 @@ class MemberContent extends Component {
                 firstName: data.firstName,
                 lastName: data.lastName,
               }}
-              location="London, UK"
+              location={`${data.city}, ${data.country}`}
             />
           </Col>
           <Col className="border-right border-left border-default-color text-center py-3">

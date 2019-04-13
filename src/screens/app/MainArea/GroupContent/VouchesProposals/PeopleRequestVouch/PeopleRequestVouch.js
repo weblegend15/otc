@@ -11,11 +11,6 @@ import {
 } from '../../../../../../components';
 
 export default class PeopleRequestVouch extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   componentDidMount() {
     const { getMyVouchesRequest, selectedGroupId } = this.props;
     getMyVouchesRequest({ limit: 1000, skip: 0, groupId: selectedGroupId });
@@ -75,7 +70,9 @@ export default class PeopleRequestVouch extends Component {
                 data={{
                   firstName: memberRequested.firstName,
                   lastName: memberRequested.lastName,
-                  location: 'London, UK',
+                  location: `${memberRequested.city}, ${
+                    memberRequested.country
+                  }`,
                 }}
               />
             ) : (

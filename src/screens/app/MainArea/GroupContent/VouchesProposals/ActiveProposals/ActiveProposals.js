@@ -81,7 +81,7 @@ export default class ActiveProposals extends Component {
                 data={{
                   firstName: offeredMember.firstName,
                   lastName: offeredMember.lastName,
-                  location: 'London, UK',
+                  location: `${offeredMember.city}, ${offeredMember.country}`,
                 }}
               />
             </Col>

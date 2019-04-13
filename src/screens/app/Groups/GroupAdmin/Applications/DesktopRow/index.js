@@ -22,7 +22,12 @@ export default ({ userData, index, usersCount, onViewClick }) => {
         <Timestamp />
       </Col>
       <Col className="text-center" md={3}>
-        <GeneralAvatar data={{ ...userData, location: 'London, UK' }} />
+        <GeneralAvatar
+          data={{
+            ...userData,
+            location: `${userData.city}, ${userData.country}`,
+          }}
+        />
       </Col>
       <Col className="text-center" md={2}>
         <LabelRating
