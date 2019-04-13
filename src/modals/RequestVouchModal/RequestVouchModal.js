@@ -59,7 +59,7 @@ export default class RequestVouchModal extends Component {
 
   renderMembersList = () => {
     const {
-      activeMembers,
+      activeMembers: { list: membersList },
       vouches: { list: vouchesList, loading: vouchesLoading },
     } = this.props;
     const { selectedMember } = this.state;
@@ -67,7 +67,7 @@ export default class RequestVouchModal extends Component {
     return (
       <LoadingContainer loading={vouchesLoading}>
         <div className="members-list">
-          {activeMembers.map((member, idx) => {
+          {membersList.map((member, idx) => {
             const requestedMember = vouchesList.find(
               vouch => vouch.requestedTo === member._id,
             );
@@ -79,7 +79,7 @@ export default class RequestVouchModal extends Component {
               'mx-0 py-3 px-4 border-default-color d-flex align-items-center',
               {
                 active: selectedMember[member._id],
-                'border-bottom': idx !== activeMembers.length - 1,
+                'border-bottom': idx !== membersList.length - 1,
                 vouched: vouchStatus,
               },
             );
@@ -96,7 +96,7 @@ export default class RequestVouchModal extends Component {
                   <GeneralAvatar
                     data={{
                       firstName: member.firstName,
-                      location: 'London, UK',
+                      location: `${member.city}, ${member.country}`,
                     }}
                   />
                 </Col>

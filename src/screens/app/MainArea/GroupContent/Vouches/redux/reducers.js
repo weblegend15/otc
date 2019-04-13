@@ -11,8 +11,6 @@ const initialState = {
     loading: false,
     data: {},
   },
-
-  handleVouchLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -102,38 +100,6 @@ export default (state = initialState, action) => {
           data: {},
           loading: false,
         },
-      };
-
-    case CONSTANTS.ACCEPT_VOUCH_REQUEST:
-      return {
-        ...state,
-        handleVouchLoading: true,
-      };
-    case CONSTANTS.ACCEPT_VOUCH_SUCCESS:
-      return {
-        ...state,
-        handleVouchLoading: false,
-      };
-    case CONSTANTS.ACCEPT_VOUCH_ERROR:
-      return {
-        ...state,
-        handleVouchLoading: false,
-      };
-
-    case CONSTANTS.REJECT_VOUCH_REQUEST:
-      return {
-        ...state,
-        handleVouchLoading: true,
-      };
-    case CONSTANTS.REJECT_VOUCH_SUCCESS:
-      return {
-        ...state,
-        handleVouchLoading: false,
-      };
-    case CONSTANTS.REJECT_VOUCH_ERROR:
-      return {
-        ...state,
-        handleVouchLoading: false,
       };
 
     default:

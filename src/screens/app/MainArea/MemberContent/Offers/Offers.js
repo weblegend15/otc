@@ -1,9 +1,15 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
-import { LoadingContainer, Col, Row, Pagination } from '../../../../components';
+import {
+  LoadingContainer,
+  Row,
+  Col,
+  Pagination,
+} from '../../../../../components';
 
-import OfferCard from './OfferCard';
-import { PAGE_LIMIT } from '../../../../config';
+import OfferCard from '../../../Users/Offers/OfferCard';
+
+import { PAGE_LIMIT } from '../../../../../config';
 
 export default class Offers extends Component {
   constructor(props) {
@@ -14,9 +20,7 @@ export default class Offers extends Component {
   }
 
   componentDidMount() {
-    const { getPermissionGroupsRequest } = this.props;
     this.getOffers();
-    getPermissionGroupsRequest();
   }
 
   componentDidUpdate(prevProps) {
@@ -37,19 +41,25 @@ export default class Offers extends Component {
         params: { offerType },
       },
     } = this.props;
+
     return offerType;
   };
 
   getFilters() {
-    return { status: this.getOfferType() === 'current' ? 'ACTIVE' : 'ENDED' };
+    const { selectedGroupMemberId } = this.props;
+
+    return {
+      offeredBy: selectedGroupMemberId,
+      status: this.getOfferType() === 'current' ? 'ACTIVE' : 'ENDED',
+    };
   }
 
   getOffers(currentPage) {
-    const { getMyOffersRequest } = this.props;
-
-    getMyOffersRequest({
-      skip: (currentPage || 0) * PAGE_LIMIT,
+    const { selectedGroupId, getOffersRequest } = this.props;
+    getOffersRequest({
       limit: PAGE_LIMIT,
+      skip: (currentPage || 0) * PAGE_LIMIT,
+      groupId: selectedGroupId,
       filters: this.getFilters(),
     });
   }
@@ -59,27 +69,34 @@ export default class Offers extends Component {
     this.getOffers(value);
   };
 
-  renderOffersList = () => {
+  render() {
     const {
-      myOffers: { list, total, loading },
-      currentUser,
+      memberOffers: { list, total, loading },
+      selectedMember: { data },
     } = this.props;
     const { currentPage } = this.state;
 
+    const cardType =
+      this.getOfferType() === 'current'
+        ? 'memberActiveOffer'
+        : 'memberPastOffer';
+
     if (!list.length) {
       return (
-        <div className="h3-title font-weight-semibold text-center">No data</div>
+        <div className="h3-title font-weight-semibold text-center p-5">
+          No data
+        </div>
       );
     }
 
     return (
-      <Row className="m-0">
-        <LoadingContainer loading={loading}>
+      <Row className="m-5">
+        <LoadingContainer loading={loading} className="mx-auto">
           {list.map(offer => (
-            <Col lg={6} key={offer._id} className="mb-4 mb-lg-5">
+            <Col lg={6} key={offer._id} className="pl-0 pr-4 ml-0 mb-4 mb-lg-5">
               <OfferCard
-                offerData={{ ...offer, offeredBy: currentUser }}
-                cardType={this.getOfferType()}
+                offerData={{ ...offer, offeredBy: data }}
+                cardType={cardType}
               />
             </Col>
           ))}
@@ -97,19 +114,6 @@ export default class Offers extends Component {
           </Col>
         )}
       </Row>
-    );
-  };
-
-  render() {
-    return (
-      <Fragment>
-        <Row className="groups-list-title mx-2 d-none d-md-block">
-          <h3 className="mr-auto">
-            {this.getOfferType() === 'current' ? 'Active' : 'Past'} Offers
-          </h3>
-        </Row>
-        {this.renderOffersList()}
-      </Fragment>
     );
   }
 }

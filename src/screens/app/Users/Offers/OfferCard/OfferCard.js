@@ -34,15 +34,22 @@ export default class OfferCard extends Component {
   };
 
   handleClickEndlist = () => {
-    const { offerData, toggleModal, currentUser } = this.props;
+    const { offerData, toggleModal } = this.props;
     toggleModal('viewOfferModal', {
       groupId: offerData.group,
-      offerData: {
-        ...offerData,
-        offeredBy: currentUser,
-      },
+      offerData,
       actionType: 'end',
     });
+  };
+
+  handleLeaveReview = () => {
+    const { toggleModal, offerData } = this.props;
+    toggleModal('leaveFeedbackModal', { offerData });
+  };
+
+  handleTradeOffer = () => {
+    const { toggleModal, offerData } = this.props;
+    toggleModal('viewOfferModal', { offerData });
   };
 
   renderEndPopover = () => (
@@ -90,11 +97,31 @@ export default class OfferCard extends Component {
     );
   };
 
+  renderMemberActiveOfferFooter = () => {
+    return (
+      <Card.Footer className="py-3 border-0">
+        <Button
+          className="btn-large btn-block font-weight-bold text-uppercase"
+          onClick={this.handleTradeOffer}
+        >
+          Trade
+        </Button>
+      </Card.Footer>
+    );
+  };
+
+  renderMemberPastOfferFooter = () => {
+    return (
+      <Card.Footer className="py-3 border-0 text-center text-primary p-lg font-weight-semibold">
+        Performed trade on platform
+      </Card.Footer>
+    );
+  };
+
   render() {
     const {
       offerData,
       myActiveGroups: { list },
-      currentUser,
       cardType,
     } = this.props;
 
@@ -110,7 +137,7 @@ export default class OfferCard extends Component {
           <p className="h4-title font-weight-bold">
             Offer in {offeredGroup.name}
           </p>
-          {cardType === 'active' && (
+          {cardType === 'current' && (
             <OverlayTrigger
               trigger="hover"
               delay={2}
@@ -127,12 +154,12 @@ export default class OfferCard extends Component {
             </OverlayTrigger>
           )}
         </Card.Header>
-        <OfferDetail
-          data={{ ...offerData, offeredBy: currentUser }}
-          type="profileOffer"
-        />
-        {cardType === 'active' && this.renderActiveOfferFooter()}
+        <OfferDetail data={offerData} type="profileOffer" />
+        {cardType === 'current' && this.renderActiveOfferFooter()}
         {cardType === 'past' && this.renderPastOfferFooter()}
+        {cardType === 'memberActiveOffer' &&
+          this.renderMemberActiveOfferFooter()}
+        {cardType === 'memberPastOffer' && this.renderMemberPastOfferFooter()}
       </Card>
     );
   }

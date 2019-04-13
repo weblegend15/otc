@@ -21,10 +21,15 @@ export default ({ userData, index, usersCount, groupId, onClick }) => {
       } border-default-color d-flex align-items-center justify-content-center py-4`}
     >
       <Col className="text-center p-sm p-0" md={1}>
-        <Timestamp />
+        <Timestamp timestamp={userData.createdAt} />
       </Col>
       <Col className="text-center p-0" md={2}>
-        <GeneralAvatar data={{ ...userData, location: 'London, UK' }} />
+        <GeneralAvatar
+          data={{
+            ...userData,
+            location: `${userData.city}, ${userData.country}`,
+          }}
+        />
       </Col>
       <Col className="text-center p-0" md={2}>
         <LabelRating

@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import ActiveProposals from './ActiveProposals';
 import './ActiveProposals.scss';
 
-import {
-  getActiveMembers,
-  getMyActiveGroups,
-} from '../../../../../../selectors';
+import { getActiveMembers } from '../../../../../../selectors';
 import toggleModal from '../../../../../../modals/redux/actions';
 import { getMyProposalsRequest } from './redux/actions';
 
@@ -14,8 +11,7 @@ ActiveProposals.propTypes = {
   getMyProposalsRequest: PropTypes.func.isRequired,
   groupProposals: PropTypes.object.isRequired,
   selectedGroupId: PropTypes.string.isRequired,
-  activeMembers: PropTypes.array.isRequired,
-  activeGroups: PropTypes.object.isRequired,
+  activeMembers: PropTypes.object.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };
 
@@ -23,7 +19,6 @@ const mapStateToProps = state => ({
   groupProposals: state.app.groupProposals.myProposals,
   selectedGroupId: state.app.main.selectedGroupId,
   activeMembers: getActiveMembers(state),
-  activeGroups: getMyActiveGroups(state),
 });
 
 const mapDispatchToProps = {

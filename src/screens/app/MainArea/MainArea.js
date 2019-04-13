@@ -74,7 +74,7 @@ class MainArea extends Component {
           controlId="activeGroupSelect"
           onChange={this.handleSelectGroup}
         >
-          <Form.Label className="m-0 d-flex align-items-center text-unset">
+          <Form.Label className="m-0 d-flex align-items-center text-unset p-lg">
             Select group:{' '}
           </Form.Label>
           <Form.Control as="select" className="h4-title font-weight-semibold">

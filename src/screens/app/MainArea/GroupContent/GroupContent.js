@@ -19,7 +19,7 @@ class GroupContent extends Component {
     return (
       <Nav className="w-100 d-flex justify-content-around flex-row align-items-center">
         <NavLink
-          className="px-1 py-3 pr-4 p-lg"
+          className="px-1 py-3 p-lg"
           activeClassName="active font-weight-bold"
           to={`${url}/chat`}
         >
@@ -42,7 +42,7 @@ class GroupContent extends Component {
         <Button
           onClick={this.handleClickNewOffer}
           variant="outline-primary"
-          className="ml-auto my-2 text-uppercase font-weight-bold"
+          className="btn-regular ml-auto my-2 text-uppercase font-weight-bold"
         >
           + New offer
         </Button>

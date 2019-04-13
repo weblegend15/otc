@@ -38,27 +38,3 @@ export const deleteVouchSuccess = data => ({
 export const deleteVouchError = () => ({
   type: CONSTANTS.DELETE_VOUCH_ERROR,
 });
-
-// accept vouch
-export const acceptVouchRequest = data => ({
-  type: CONSTANTS.ACCEPT_VOUCH_REQUEST,
-  payload: data,
-});
-export const acceptVouchSuccess = () => ({
-  type: CONSTANTS.ACCEPT_VOUCH_SUCCESS,
-});
-export const acceptVouchError = () => ({
-  type: CONSTANTS.ACCEPT_VOUCH_ERROR,
-});
-
-// reject vouch
-export const rejectVouchRequest = data => ({
-  type: CONSTANTS.REJECT_VOUCH_REQUEST,
-  payload: data,
-});
-export const rejectVouchSuccess = () => ({
-  type: CONSTANTS.REJECT_VOUCH_SUCCESS,
-});
-export const rejectVouchError = () => ({
-  type: CONSTANTS.REJECT_VOUCH_ERROR,
-});

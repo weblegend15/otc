@@ -36,7 +36,11 @@ class Sidebar extends Component {
       >
         <Card.Body className="p-0">
           <Row className="px-5 py-4 m-0">
-            <Avatar data={currentUser} editable location="London, UK" />
+            <Avatar
+              data={currentUser}
+              editable
+              location={`${currentUser.city}, ${currentUser.country}`}
+            />
           </Row>
           <Row className="app-sidebar-status px-5 py-4 m-0 text-primary">
             <Icon name="check-circle" className="mb-0 mr-3 h4" />

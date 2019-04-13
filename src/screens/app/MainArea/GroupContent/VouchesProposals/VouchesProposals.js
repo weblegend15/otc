@@ -11,7 +11,6 @@ class VouchesProposals extends Component {
   renderTabs = () => {
     const {
       match: { url },
-      proposals: { list, loading },
     } = this.props;
     return (
       <Nav className="w-100 pt-4 px-3 d-flex flex-row border-bottom border-default-color">

@@ -5,7 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
-    "firebase": "^5.9.2",
+    "firebase": "^5.9.4",
     "history": "^4.9.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
@@ -19,7 +19,6 @@
     "react-dropzone": "^10.0.4",
     "react-fontawesome": "^1.6.1",
     "react-google-recaptcha": "^1.0.5",
-    "react-loading-overlay": "^1.0.1",
     "react-phone-input-2": "^2.8.0",
     "react-provide-scroll-position": "^1.0.2",
     "react-rating": "^1.6.2",
