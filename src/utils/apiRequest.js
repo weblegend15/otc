@@ -12,24 +12,33 @@ import store from '../configureStore';
  * @param {boolean} [isToken=false]
  * @returns
  */
-async function request(endpoint, method = 'GET', data = {}, isToken = false) {
+async function request(
+  endpoint,
+  method = 'GET',
+  data = {},
+  isToken = false,
+  isFormData = false,
+) {
   return new Promise((resolve, reject) => {
     let qs = '';
     let body;
+
     if (['GET', 'DELETE'].indexOf(method) > -1) {
       qs = `?${queryString.stringify(data, { arrayFormat: 'bracket' })}`;
     } else {
-      body = JSON.stringify(data);
+      body = isFormData ? data : JSON.stringify(data);
     }
 
     const requestUrl = `${baseUrl}${endpoint}${qs}`;
     const options = {
       method,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: {},
       body,
     };
+
+    if (!isFormData) {
+      options.headers['Content-Type'] = 'application/json';
+    }
 
     if (isToken) {
       options.headers.Authorization = `Bearer ${store.getState().auth.token}`;

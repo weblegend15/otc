@@ -8,6 +8,8 @@ import {
   IconButton,
   LoadingContainer,
   PureAvatar,
+  Icon,
+  Form,
   Timestamp,
 } from '../../../../components';
 import { getMessagesService, getNewMessage } from '../../Services/firebase';
@@ -20,12 +22,12 @@ class Chat extends Component {
     this.state = {
       message: '',
       sent: false,
+      file: null,
     };
   }
 
   componentDidMount() {
     const { chatId, messageStore, addNewMessage } = this.props;
-
     getMessagesService(
       parseInt(moment().format('x'), 10),
       chatId,
@@ -41,12 +43,12 @@ class Chat extends Component {
       .addEventListener('scroll', debounce(this.handleScroll, 500));
   }
 
-  componentDidUpdate(prevProp) {
+  componentDidUpdate(prevProps) {
     const {
       messageList: { chats },
     } = this.props;
     const { sent } = this.state;
-    if (chats !== prevProp.messageList.chats && sent) {
+    if (chats !== prevProps.messageList.chats && sent) {
       this.scrollTo(chats[chats.length - 1].id);
     }
   }
@@ -110,17 +112,31 @@ class Chat extends Component {
   };
 
   sendMessage = () => {
-    const { message } = this.state;
-    const { selectedGroupId, chatId, sendMessageRequest } = this.props;
+    const { message, file } = this.state;
+    const {
+      selectedGroupId,
+      chatId,
+      sendMessageRequest,
+      sendFileMessageReqeust,
+    } = this.props;
 
     this.setState({ sent: true });
-    sendMessageRequest(message, selectedGroupId, chatId);
+    if (file) {
+      sendFileMessageReqeust(selectedGroupId, chatId, message, file, file.name);
+      this.setState({ message: '', file: null });
+    } else {
+      sendMessageRequest(message, selectedGroupId, chatId);
+    }
   };
 
   diffDay = (current, prev) => {
     const standardMessageDate = moment(current).format('ll');
     const prevMessageDate = moment(prev).format('ll');
     return moment(standardMessageDate).diff(moment(prevMessageDate), 'days');
+  };
+
+  fileLoad = () => e => {
+    this.setState({ file: e.target.files[0] });
   };
 
   renderMessage = (msg, index, messages) => {
@@ -136,7 +152,7 @@ class Chat extends Component {
 
     return (
       <Element name={msg.id} key={msg.id}>
-        {msg.type === 'first_message' ? (
+        {msg.type === 'first_message' || !member ? (
           <p className="text-center my-4">{msg.text}</p>
         ) : (
           <Fragment>
@@ -171,6 +187,7 @@ class Chat extends Component {
 
   renderMessages = () => {
     const { messageList } = this.props;
+
     return (
       <LoadingContainer loading={messageList.loading}>
         <Element className="element message-box p-1" id="message-container">
@@ -181,6 +198,8 @@ class Chat extends Component {
   };
 
   render() {
+    const { message, file } = this.state;
+
     return (
       <div>
         {this.renderMessages()}
@@ -189,21 +208,44 @@ class Chat extends Component {
             <FormControl
               placeholder="New Message"
               className="py-3 px-4"
+              value={message}
               onChange={this.handleMessageChange}
               onKeyPress={this.keypress}
               as="textarea"
               rows={3}
               aria-label="With textarea"
             />
-            <InputGroup.Prepend>
-              <IconButton
-                onClick={this.sendMessage}
-                icon="long-arrow-right"
-                iconSize="2x"
-                className="px-4"
-                buttonClassName="rounded-right"
-              />
-            </InputGroup.Prepend>
+            <div className="buttons">
+              <InputGroup.Prepend>
+                <IconButton
+                  onClick={this.sendMessage}
+                  icon="long-arrow-right"
+                  iconSize="2x"
+                  className="px-4"
+                  buttonClassName="rounded-0 send-message"
+                />
+              </InputGroup.Prepend>
+              <InputGroup.Prepend>
+                {file ? (
+                  <IconButton
+                    disabled
+                    icon="times"
+                    iconSize="2x"
+                    className="px-4"
+                    buttonClassName="rounded-0 m-0 file-upload w-100"
+                  />
+                ) : (
+                  <Form.Label className="rounded-0 m-0 btn btn-primary file-upload w-100">
+                    <Icon name="paperclip" size="lg" className="rotate-icon" />
+                    <input
+                      type="file"
+                      className="d-none"
+                      onChange={this.fileLoad()}
+                    />
+                  </Form.Label>
+                )}
+              </InputGroup.Prepend>
+            </div>
           </InputGroup>
         </div>
       </div>
