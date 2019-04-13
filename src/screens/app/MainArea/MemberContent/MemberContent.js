@@ -175,9 +175,11 @@ class MemberContent extends Component {
       userData: { loading },
     } = this.props;
     return (
-      <LoadingContainer className="member-content-section" loading={loading}>
-        {this.renderHeader()}
-        {this.renderRoutes()}
+      <LoadingContainer loading={loading}>
+        <div className="member-content-section">
+          {this.renderHeader()}
+          {this.renderRoutes()}
+        </div>
       </LoadingContainer>
     );
   }

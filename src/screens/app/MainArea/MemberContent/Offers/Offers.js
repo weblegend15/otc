@@ -69,7 +69,7 @@ export default class Offers extends Component {
     this.getOffers(value);
   };
 
-  renderOffersList = () => {
+  render() {
     const {
       memberOffers: { list, total, loading },
       selectedMember: { data },
@@ -83,13 +83,15 @@ export default class Offers extends Component {
 
     if (!list.length) {
       return (
-        <div className="h3-title font-weight-semibold text-center">No data</div>
+        <div className="h3-title font-weight-semibold text-center p-5">
+          No data
+        </div>
       );
     }
 
     return (
       <Row className="m-5">
-        <LoadingContainer loading={loading}>
+        <LoadingContainer loading={loading} className="mx-auto">
           {list.map(offer => (
             <Col lg={6} key={offer._id} className="pl-0 pr-4 ml-0 mb-4 mb-lg-5">
               <OfferCard
@@ -100,7 +102,7 @@ export default class Offers extends Component {
           ))}
         </LoadingContainer>
 
-        {total && (
+        {!!total && (
           <Col md={12} className="d-flex mb-2">
             <Pagination
               className="ml-auto"
@@ -113,9 +115,5 @@ export default class Offers extends Component {
         )}
       </Row>
     );
-  };
-
-  render() {
-    return this.renderOffersList();
   }
 }

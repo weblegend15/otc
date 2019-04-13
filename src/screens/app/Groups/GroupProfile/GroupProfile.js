@@ -45,11 +45,7 @@ class GroupProfile extends Component {
               <p className="p-sm">{formatNumber(1234)} members</p>
               <div className="ml-auto p-sm opacity-5 d-flex flex-row">
                 Created on{' '}
-                <Timestamp
-                  className=""
-                  timestamp={data.createdAt}
-                  format="D MMM YYYY"
-                />
+                <Timestamp timestamp={data.createdAt} format="D MMM YYYY" />
               </div>
             </div>
           </Card.Header>

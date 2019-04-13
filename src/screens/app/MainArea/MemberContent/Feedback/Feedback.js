@@ -106,14 +106,14 @@ export default class Feedback extends Component {
             <Timestamp
               className="ml-1 mr-3"
               timestamp={data.createdAt}
-              format="MM D, YYYY"
+              format="MMM D, YYYY"
             />
             <Rating initialRating={data.avgRating} readonly />
           </Row>
+          {this.renderFeedbackList()}
         </LoadingContainer>
 
-        {this.renderFeedbackList()}
-        {total && (
+        {!!total && (
           <Row className="m-0">
             <Pagination
               className="ml-auto py-5 px-2"

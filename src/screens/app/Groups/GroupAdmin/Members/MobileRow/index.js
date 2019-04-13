@@ -28,7 +28,7 @@ export default ({ userData, groupId, onClick }) => {
             <p className="text-uppercase opacity-5 font-weight-semibold p-sm">
               Joined
             </p>
-            <Timestamp className="p-sm" />
+            <Timestamp timestamp={userData.createdAt} className="p-sm" />
           </div>
         </Row>
         <div className="text-center mb-4">

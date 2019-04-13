@@ -52,9 +52,7 @@ export default class VouchesProposals extends Component {
                 data={{
                   firstName: item.requestedTo.firstName,
                   lastName: item.requestedTo.lastName,
-                  location: `${item.requestedTo.city}, ${
-                    item.requestedTo.country
-                  }`,
+                  location: 'London, UK',
                 }}
               />
             </Row>
@@ -99,9 +97,7 @@ export default class VouchesProposals extends Component {
                   data={{
                     firstName: item.proposedBy.firstName,
                     lastName: item.proposedBy.lastName,
-                    location: `${item.proposedBy.city}, ${
-                      item.proposedBy.country
-                    }`,
+                    location: 'London, UK',
                   }}
                 />
               </Col>

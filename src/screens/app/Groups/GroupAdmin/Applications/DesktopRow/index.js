@@ -19,7 +19,7 @@ export default ({ userData, index, usersCount, onViewClick }) => {
       } border-default-color d-flex align-items-center justify-content-center py-4`}
     >
       <Col className="text-center p-sm" md={2}>
-        <Timestamp />
+        <Timestamp timestamp={userData.createdAt} />
       </Col>
       <Col className="text-center" md={3}>
         <GeneralAvatar

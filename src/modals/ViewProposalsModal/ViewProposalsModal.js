@@ -115,9 +115,7 @@ export default class ViewProposalsModal extends Component {
                   <GeneralAvatar
                     data={{
                       firstName: proposal.proposedBy.firstName,
-                      location: `${proposal.proposedBy.city}, ${
-                        proposal.proposedBy.country
-                      }`,
+                      location: 'London, UK',
                     }}
                   />
                 </Col>

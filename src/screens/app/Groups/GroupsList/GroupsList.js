@@ -82,7 +82,7 @@ class GroupsList extends Component {
                 {this.renderGroupsList()}
               </LoadingContainer>
 
-              {total && (
+              {!!total && (
                 <Col md={12} className="d-flex mb-2">
                   <Pagination
                     className="ml-auto"

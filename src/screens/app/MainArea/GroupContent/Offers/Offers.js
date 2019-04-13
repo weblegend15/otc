@@ -76,7 +76,7 @@ export default class Offers extends Component {
           className="border-bottom border-default-color p-4 m-0 d-flex align-items-center"
         >
           <Col className="p-0">
-            <Timestamp className="p-sm" date={item.createdAt} />
+            <Timestamp className="p-sm" timestamp={item.createdAt} />
           </Col>
           <Col className="p-0">
             <GeneralAvatar

@@ -25,7 +25,7 @@ export default ({ userData, onViewClick }) => {
             <p className="text-uppercase font-weight-semibold opacity-5">
               Sent
             </p>
-            <Timestamp />
+            <Timestamp timestamp={userData.createdAt} />
           </div>
         </Row>
         <div className="text-center mb-4">

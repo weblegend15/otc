@@ -85,7 +85,7 @@ export default class Offers extends Component {
           ))}
         </LoadingContainer>
 
-        {total && (
+        {!!total && (
           <Col md={12} className="d-flex mb-2">
             <Pagination
               className="ml-auto"
