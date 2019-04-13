@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 import MembersBar from './MembersBar';
 import './MembersBar.scss';
 
+import { getActiveMembers } from '../../../../selectors';
+
 import { getGroupMembersRequest, selectGroupMember } from '../redux/actions';
 
 MembersBar.propTypes = {
   getGroupMembersRequest: PropTypes.func.isRequired,
   selectedGroupId: PropTypes.string.isRequired,
-  members: PropTypes.object.isRequired,
+  activeMembers: PropTypes.object.isRequired,
   selectGroupMember: PropTypes.func.isRequired,
-  currentUser: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   selectedGroupId: state.app.main.selectedGroupId,
-  members: state.app.main.members,
+  activeMembers: getActiveMembers(state),
   selectedGroupMemberId: state.app.main.selectedGroupMemberId,
-  currentUser: state.auth.currentUser,
 });
 
 const mapDispatchToProps = {

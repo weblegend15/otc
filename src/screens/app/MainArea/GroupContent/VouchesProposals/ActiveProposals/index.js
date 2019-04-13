@@ -11,7 +11,7 @@ ActiveProposals.propTypes = {
   getMyProposalsRequest: PropTypes.func.isRequired,
   groupProposals: PropTypes.object.isRequired,
   selectedGroupId: PropTypes.string.isRequired,
-  activeMembers: PropTypes.array.isRequired,
+  activeMembers: PropTypes.object.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };
 

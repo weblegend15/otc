@@ -10,7 +10,7 @@ import vouchSaga from '../MainArea/GroupContent/Vouches/redux/saga';
 import groupProposalsSaga from '../MainArea/GroupContent/VouchesProposals/ActiveProposals/redux/saga';
 import feedbackSaga from '../MainArea/MemberContent/Feedback/redux/saga';
 import chatsSaga from '../MainArea/Chat/redux/saga';
-// import memberOffersSaga from '../MainArea/MemberContent/CurrentOffers/redux/saga';
+import groupVouchesSaga from '../MainArea/GroupContent/VouchesProposals/PeopleRequestVouch/redux/saga';
 
 export default function* appSaga() {
   yield all([
@@ -24,6 +24,6 @@ export default function* appSaga() {
     fork(groupProposalsSaga),
     fork(feedbackSaga),
     fork(chatsSaga),
-    // fork(memberOffersSaga),
+    fork(groupVouchesSaga),
   ]);
 }

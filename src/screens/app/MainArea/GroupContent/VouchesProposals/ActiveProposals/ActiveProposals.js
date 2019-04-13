@@ -47,12 +47,22 @@ export default class ActiveProposals extends Component {
   };
 
   renderTableBody = proposals => {
-    const { activeMembers } = this.props;
+    const {
+      activeMembers: { list },
+    } = this.props;
+
+    if (!proposals.length) {
+      return (
+        <div className="font-weight-semibold text-center p-5 h3-title">
+          No data
+        </div>
+      );
+    }
 
     return proposals
       .filter(proposal => proposal.status !== 'ENDED' && proposal.offer)
       .map((proposal, idx) => {
-        const offeredMember = activeMembers.find(
+        const offeredMember = list.find(
           member => member._id === proposal.offer.offeredBy,
         );
 
@@ -117,12 +127,12 @@ export default class ActiveProposals extends Component {
     } = this.props;
 
     return (
-      <LoadingContainer loading={loading}>
-        <div className="my-active-proposals">
-          {this.renderTableHeader()}
+      <div className="my-active-proposals">
+        {this.renderTableHeader()}
+        <LoadingContainer loading={loading}>
           {this.renderTableBody(list)}
-        </div>
-      </LoadingContainer>
+        </LoadingContainer>
+      </div>
     );
   }
 }

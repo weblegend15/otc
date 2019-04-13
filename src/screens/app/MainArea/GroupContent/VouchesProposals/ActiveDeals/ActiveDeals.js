@@ -42,6 +42,14 @@ export default class ActiveDeals extends Component {
   };
 
   renderTableBody = offersList => {
+    if (!offersList.length) {
+      return (
+        <div className="font-weight-semibold text-center p-5 h3-title">
+          No data
+        </div>
+      );
+    }
+
     return offersList.map(item => (
       <Row
         key={item._id}
@@ -83,10 +91,12 @@ export default class ActiveDeals extends Component {
     } = this.props;
 
     return (
-      <LoadingContainer loading={loading}>
+      <div>
         {this.renderTableHeader()}
-        {this.renderTableBody(list)}
-      </LoadingContainer>
+        <LoadingContainer loading={loading}>
+          {this.renderTableBody(list)}
+        </LoadingContainer>
+      </div>
     );
   }
 }

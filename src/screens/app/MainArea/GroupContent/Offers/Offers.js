@@ -56,56 +56,66 @@ export default class Offers extends Component {
 
   renderTableBody = () => {
     const {
-      groupOffers: { list, loading },
+      groupOffers: { list },
       groupMembers: { list: membersList },
     } = this.props;
 
-    return (
-      <LoadingContainer loading={loading}>
-        {list.map(item => (
-          <Row
-            key={item._id}
-            className="border-bottom border-default-color p-4 m-0 d-flex align-items-center"
+    if (!list.length) {
+      return (
+        <div className="font-weight-semibold text-center p-5 h3-title">
+          No data
+        </div>
+      );
+    }
+
+    return list.map(item => (
+      <Row
+        key={item._id}
+        className="border-bottom border-default-color p-4 m-0 d-flex align-items-center"
+      >
+        <Col className="p-0">
+          <Timestamp className="p-sm" date={item.createdAt} />
+        </Col>
+        <Col className="p-0">
+          <GeneralAvatar
+            data={{
+              ...findElement(membersList, item.offeredBy),
+              location: 'London, UK',
+            }}
+          />
+        </Col>
+        <Col className="font-weight-semibold p-0">{item.have}</Col>
+        <Col className="font-weight-semibold p-0">{item.want}</Col>
+        <Col md={3} className="d-flex justify-content-between p-0">
+          <Button
+            className="text-uppercase font-weight-bold px-5"
+            onClick={() => this.handleViewClick(item)}
           >
-            <Col className="p-0">
-              <Timestamp className="p-sm" date={item.createdAt} />
-            </Col>
-            <Col className="p-0">
-              <GeneralAvatar
-                data={{
-                  ...findElement(membersList, item.offeredBy),
-                  location: 'London, UK',
-                }}
-              />
-            </Col>
-            <Col className="font-weight-semibold p-0">{item.have}</Col>
-            <Col className="font-weight-semibold p-0">{item.want}</Col>
-            <Col md={3} className="d-flex justify-content-between p-0">
-              <Button
-                className="text-uppercase font-weight-bold px-5"
-                onClick={() => this.handleViewClick(item)}
-              >
-                View
+            View
+          </Button>
+          {item.note && (
+            <OverlayTrigger overlay={popoverFocus}>
+              <Button className="p-0" variant="outline-link">
+                <Icon name="edit" className="text-primary h4-title" />
               </Button>
-              {item.note && (
-                <OverlayTrigger overlay={popoverFocus}>
-                  <Button className="p-0" variant="outline-link">
-                    <Icon name="edit" className="text-primary h4-title" />
-                  </Button>
-                </OverlayTrigger>
-              )}
-            </Col>
-          </Row>
-        ))}
-      </LoadingContainer>
-    );
+            </OverlayTrigger>
+          )}
+        </Col>
+      </Row>
+    ));
   };
 
   render() {
+    const {
+      groupOffers: { loading },
+    } = this.props;
+
     return (
       <div className="group-offers pt-4">
         {this.renderTableHeader()}
-        {this.renderTableBody()}
+        <LoadingContainer loading={loading}>
+          {this.renderTableBody()}
+        </LoadingContainer>
       </div>
     );
   }
