@@ -1,8 +1,14 @@
 import React from 'react';
-import LoadingOverlay from 'react-loading-overlay';
+import cx from 'classnames';
 
-export default ({ loading, children, ...rest }) => (
-  <LoadingOverlay active={loading} spinner text="Loading..." {...rest}>
-    {children}
-  </LoadingOverlay>
-);
+import Icon from '../Icon';
+
+export default ({ loading, children, className, ...rest }) => {
+  return loading ? (
+    <div className={cx('w-auto my-auto text-center p-4', className)} {...rest}>
+      <Icon name="spinner" spin size="3x" />
+    </div>
+  ) : (
+    children
+  );
+};
