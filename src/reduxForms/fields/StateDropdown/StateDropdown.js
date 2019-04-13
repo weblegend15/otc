@@ -23,6 +23,7 @@ export default ({
         labelType="short"
         valueType="short"
         defaultOptionLabel="-"
+        countryValueType="short"
         {...input}
       />
     </div>

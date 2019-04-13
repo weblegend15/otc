@@ -5,10 +5,10 @@ import { checkGroupPermission } from '../utils/permission';
 const getActiveMembers = createSelector(
   [
     state => state.app.main.selectedGroupId,
-    state => state.app.main.members.list,
+    state => state.app.main.members,
     state => state.auth.currentUser,
   ],
-  (selectedGroupId, list, currentUser) => {
+  (selectedGroupId, { list, loading }, currentUser) => {
     const activeMembers = list.filter(
       item =>
         (checkGroupPermission(item, selectedGroupId).isMember ||
@@ -16,7 +16,10 @@ const getActiveMembers = createSelector(
         item._id !== currentUser._id,
     );
 
-    return activeMembers;
+    return {
+      list: activeMembers,
+      loading,
+    };
   },
 );
 
