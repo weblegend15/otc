@@ -158,7 +158,7 @@ class Chat extends Component {
     return types.indexOf(filetype) > -1 ? (
       <Fragment>
         <b className="pt-2">{filename}</b>
-        <img src={msg.url} className="file-messege-size" alt="file-message" />
+        <img src={msg.url} className="w-100" alt="file-message" />
       </Fragment>
     ) : (
       <Card className="p-3 d-inline-flex">
