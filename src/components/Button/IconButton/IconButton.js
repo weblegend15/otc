@@ -10,7 +10,6 @@ export default ({
   iconPosition,
   className,
   buttonClassName,
-  onClick,
   children,
   ...rest
 }) => (
