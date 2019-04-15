@@ -160,11 +160,11 @@ export default class VouchesProposals extends Component {
             </Badge>
           </Button>
         </Row>
-        {type !== 'profileOffer' &&
+        {(type !== 'profileOffer' || type === 'messageType') &&
           !!data.vouches.length &&
           this.renderVouchesList()}
 
-        {type !== 'profileOffer' &&
+        {(type !== 'profileOffer' || type === 'messageType') &&
           !!data.proposals.length &&
           isMyOffer &&
           this.renderProposalsList()}

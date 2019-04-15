@@ -10,6 +10,7 @@ import {
   PureAvatar,
   Icon,
   Card,
+  OfferDetail,
   Form,
   Timestamp,
 } from '../../../../components';
@@ -28,16 +29,18 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    const { chatId, messageStore, addNewMessage } = this.props;
+    const { chatId, selectedGroupId, messageStore, addNewMessage } = this.props;
+
     getMessagesService(
       parseInt(moment().format('x'), 10),
       chatId,
+      selectedGroupId,
       MSG_COUNT_LIMIT,
       messageStore,
       this.scrollTo,
     );
 
-    this.unsubscribe = getNewMessage(chatId, addNewMessage);
+    this.unsubscribe = getNewMessage(chatId, selectedGroupId, addNewMessage);
 
     document
       .getElementById('message-container')
@@ -70,6 +73,7 @@ class Chat extends Component {
   handleScroll = () => {
     const {
       chatId,
+      selectedGroupId,
       messageList: { chats },
       getMoreMessages,
     } = this.props;
@@ -81,6 +85,7 @@ class Chat extends Component {
         getMessagesService(
           chats[0].created_at,
           chatId,
+          selectedGroupId,
           MSG_COUNT_LIMIT,
           getMoreMessages,
         );
@@ -125,19 +130,23 @@ class Chat extends Component {
       sendFileMessageReqeust,
     } = this.props;
 
-    this.setState({ sent: true });
     if (file) {
       sendFileMessageReqeust(selectedGroupId, chatId, message, file, file.name);
-      this.setState({ message: '', file: null });
+      this.setState({ file: null });
     } else {
       sendMessageRequest(message, selectedGroupId, chatId);
     }
+    this.setState({ message: '', sent: true });
   };
 
   diffDay = (current, prev) => {
     const standardMessageDate = moment(current).format('ll');
     const prevMessageDate = moment(prev).format('ll');
     return moment(standardMessageDate).diff(moment(prevMessageDate), 'days');
+  };
+
+  removeFile = () => {
+    this.setState({ file: null });
   };
 
   fileLoad = () => e => {
@@ -147,34 +156,69 @@ class Chat extends Component {
   renderFile = (filetype, filename, msg) => {
     const types = ['bmp', 'jpg', 'jpeg', 'png', 'gif'];
     return types.indexOf(filetype) > -1 ? (
-      <Fragment>
+      <a href={msg.url} className="d-flex flex-column">
         <b className="pt-2">{filename}</b>
         <img src={msg.url} className="file-messege-size" alt="file-message" />
-      </Fragment>
+      </a>
     ) : (
-      <Card className="p-3 d-inline-flex">
-        <Card.Body className="d-flex align-items-center">
-          <Icon name="file-o" size="3x" />
-          <b className="ml-3">{filetype.toUpperCase()} file</b>
-        </Card.Body>
-        <Card.Footer className="card-footer-bg-color border-0">
-          <p>{filename}</p>
-        </Card.Footer>
-      </Card>
+      <a href={msg.url}>
+        <Card className="p-2 mt-2 d-inline-flex">
+          <Card.Body className="d-flex align-items-center">
+            <Icon name="file-o" size="3x" />
+            <b className="ml-3">{filetype.toUpperCase()} file</b>
+          </Card.Body>
+          <Card.Footer className="card-footer-bg-color border-0 pt-0">
+            <p>{filename}</p>
+          </Card.Footer>
+        </Card>
+      </a>
     );
   };
 
-  renderMessage = (msg, index, messages) => {
+  renderOffer = (msg, diffDay) => {
+    return (
+      <Element name={msg.id} key={msg.id}>
+        {msg.type === 'first_message' || !msg.offer ? (
+          <p className="text-center my-4">{msg.text}</p>
+        ) : (
+          <Fragment>
+            {diffDay > 0 && (
+              <Timestamp
+                className="opacity-5 w-100 my-3 border-bottom pl-3 p-sm"
+                timestamp={msg.created_at}
+                format="dddd, MMMM DD, YYYY"
+              />
+            )}
+            <div className="d-flex justify-content-between p-3">
+              <div className="d-flex">
+                <PureAvatar />
+                <div className="d-flex flex-column align-items-start">
+                  <p className="font-weight-semibold h4-title">
+                    {msg.offer.offeredBy.firstName}
+                  </p>
+                  <Card className="p-2 mt-2">
+                    <OfferDetail data={msg.offer} type="messageType" />
+                  </Card>
+                </div>
+              </div>
+              <Timestamp
+                className="opacity-5"
+                timestamp={msg.created_at}
+                format="LT"
+              />
+            </div>
+          </Fragment>
+        )}
+      </Element>
+    );
+  };
+
+  renderMessage = (msg, diffDay) => {
     const {
       members: { list },
     } = this.props;
     const member = findByField(list, '_id', msg.sender_id);
-    let diffDay = 0;
     let filetype = '';
-
-    if (index > 1) {
-      diffDay = this.diffDay(msg.created_at, messages[index - 1].created_at);
-    }
 
     if (msg.extra && msg.extra.file.name) {
       filetype = this.getFileExtension(msg.extra.file.name);
@@ -218,13 +262,27 @@ class Chat extends Component {
     );
   };
 
+  renderChats = (msg, index, messages) => {
+    let diffDay = 0;
+
+    if (index > 1) {
+      diffDay = this.diffDay(msg.created_at, messages[index - 1].created_at);
+    } else if (index === 1) {
+      diffDay = 1;
+    }
+
+    return msg.type !== 'OFFER'
+      ? this.renderMessage(msg, diffDay)
+      : this.renderOffer(msg, diffDay);
+  };
+
   renderMessages = () => {
     const { messageList } = this.props;
 
     return (
       <LoadingContainer loading={messageList.loading}>
         <Element className="element message-box p-1" id="message-container">
-          {messageList.chats.map(this.renderMessage)}
+          {messageList.chats.map(this.renderChats)}
         </Element>
       </LoadingContainer>
     );
@@ -261,15 +319,15 @@ class Chat extends Component {
               <InputGroup.Prepend>
                 {file ? (
                   <IconButton
-                    disabled
+                    onClick={this.removeFile}
                     icon="times"
                     iconSize="2x"
                     className="px-4"
                     buttonClassName="rounded-0 m-0 file-upload w-100"
                   />
                 ) : (
-                  <Form.Label className="rounded-0 m-0 btn btn-primary file-upload w-100">
-                    <Icon name="paperclip" size="lg" className="rotate-icon" />
+                  <Form.Label className="rounded-0 m-0 btn btn-primary btn-regular file-upload w-100 h-100">
+                    <Icon name="paperclip" size="2x" className="rotate-icon" />
                     <input
                       type="file"
                       className="d-none"
