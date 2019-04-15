@@ -156,22 +156,20 @@ class Chat extends Component {
   renderFile = (filetype, filename, msg) => {
     const types = ['bmp', 'jpg', 'jpeg', 'png', 'gif'];
     return types.indexOf(filetype) > -1 ? (
-      <a href={msg.url} className="d-flex flex-column">
+      <Fragment>
         <b className="pt-2">{filename}</b>
         <img src={msg.url} className="file-messege-size" alt="file-message" />
-      </a>
+      </Fragment>
     ) : (
-      <a href={msg.url}>
-        <Card className="p-2 mt-2 d-inline-flex">
-          <Card.Body className="d-flex align-items-center">
-            <Icon name="file-o" size="3x" />
-            <b className="ml-3">{filetype.toUpperCase()} file</b>
-          </Card.Body>
-          <Card.Footer className="card-footer-bg-color border-0 pt-0">
-            <p>{filename}</p>
-          </Card.Footer>
-        </Card>
-      </a>
+      <Card className="p-3 d-inline-flex">
+        <Card.Body className="d-flex align-items-center">
+          <Icon name="file-o" size="3x" />
+          <b className="ml-3">{filetype.toUpperCase()} file</b>
+        </Card.Body>
+        <Card.Footer className="card-footer-bg-color border-0">
+          <p>{filename}</p>
+        </Card.Footer>
+      </Card>
     );
   };
 
@@ -192,7 +190,7 @@ class Chat extends Component {
             <div className="d-flex justify-content-between p-3">
               <div className="d-flex">
                 <PureAvatar />
-                <div className="d-flex flex-column align-items-start">
+                <div className="d-flex flex-column message-user-info align-items-start">
                   <p className="font-weight-semibold h4-title">
                     {msg.offer.offeredBy.firstName}
                   </p>
@@ -237,24 +235,28 @@ class Chat extends Component {
                 format="dddd, MMMM DD, YYYY"
               />
             )}
-            <div className="d-flex justify-content-between p-3">
-              <div className="d-flex">
-                <PureAvatar />
-                <div className="d-flex flex-column align-items-start">
+            <div className="d-flex p-3">
+              <PureAvatar />
+              <div className="d-flex flex-column align-items-start w-100">
+                <div className="d-flex justify-content-between message-user-info w-100">
                   <p className="font-weight-semibold h4-title">
                     {member.firstName}
                   </p>
-                  <p className="mt-1">{msg.text}</p>
-                  {msg.extra &&
-                    msg.extra.file.name &&
-                    this.renderFile(filetype, msg.extra.file.name, msg)}
+                  <Timestamp
+                    className="opacity-5"
+                    timestamp={msg.created_at}
+                    format="LT"
+                  />
+                </div>
+                <div className="message-content w-100">
+                  <p className="my-1">{msg.text}</p>
+                  {msg.extra && msg.extra.file.name && (
+                    <a href={msg.url} className="mt-2">
+                      {this.renderFile(filetype, msg.extra.file.name, msg)}
+                    </a>
+                  )}
                 </div>
               </div>
-              <Timestamp
-                className="opacity-5"
-                timestamp={msg.created_at}
-                format="LT"
-              />
             </div>
           </Fragment>
         )}
@@ -312,7 +314,7 @@ class Chat extends Component {
                   onClick={this.sendMessage}
                   icon="long-arrow-right"
                   iconSize="2x"
-                  className="px-4"
+                  className="px-4 py-1"
                   buttonClassName="rounded-0 send-message"
                 />
               </InputGroup.Prepend>
