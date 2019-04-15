@@ -36,7 +36,11 @@ class Sidebar extends Component {
       >
         <Card.Body className="p-0">
           <Row className="px-5 py-4 m-0">
-            <Avatar data={currentUser} editable location="London, UK" />
+            <Avatar
+              data={currentUser}
+              editable
+              location={`${currentUser.city}, ${currentUser.country}`}
+            />
           </Row>
           <Row className="app-sidebar-status px-5 py-4 m-0 text-primary">
             <Icon name="check-circle" className="mb-0 mr-3 h4" />
@@ -59,17 +63,25 @@ class Sidebar extends Component {
               </Link>
             </Row>
             <Row className="d-flex justify-content-start px-5 pt-4 pb-3 m-0">
-              {this.renderSidebarLink('/app/groups', 'star', 'Current Offers')}
+              {this.renderSidebarLink(
+                '/app/offers/current',
+                'star',
+                'Current Offers',
+              )}
             </Row>
             <Row className="d-flex justify-content-start px-5 pt-3 pb-4 m-0">
-              {this.renderSidebarLink('/app/groups', 'history', 'Past Offers')}
+              {this.renderSidebarLink(
+                '/app/offers/past',
+                'history',
+                'Past Offers',
+              )}
             </Row>
           </ListGroupItem>
           <ListGroupItem className="px-5 py-4">
-            {this.renderSidebarLink('/app/groups', 'users', 'My Groups')}
+            {this.renderSidebarLink('/app/my-groups', 'users', 'My Groups')}
           </ListGroupItem>
           <ListGroupItem className="px-5 py-4">
-            {this.renderSidebarLink('/app/groups', 'cog', 'Settings')}
+            {this.renderSidebarLink('/app/settings', 'cog', 'Settings')}
           </ListGroupItem>
         </ListGroup>
         <Card.Body className="p-5 d-flex flex-row justify-content-around align-items-center">

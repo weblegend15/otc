@@ -24,20 +24,32 @@ export default class NewGroupModal extends Component {
     const {
       getProposalsRequest,
       getVouchesRequest,
-      data: { offerData, groupId },
+      getGroupMembersRequest,
+
+      data: { offerData, actionType },
     } = this.props;
     getProposalsRequest({
       limit: 20,
       skip: 0,
       offerId: offerData._id,
-      groupId,
+      groupId: offerData.group,
     });
     getVouchesRequest({
       limit: 20,
       skip: 0,
       offerId: offerData._id,
-      groupId,
+      groupId: offerData.group,
     });
+    if (actionType === 'delete') {
+      getGroupMembersRequest({
+        groupId: offerData.group,
+        skip: 0,
+        limit: 1000,
+      });
+    }
+    //     if (actionType === 'end') {
+    //   getGroupMembersRequest({ groupId, skip: 0, limit: 1000 });
+    // }
   }
 
   handleTradeClick = () => {
@@ -47,7 +59,7 @@ export default class NewGroupModal extends Component {
   handleSubmit = values => {
     const {
       createProposalRequest,
-      data: { offerData, groupId },
+      data: { offerData },
     } = this.props;
 
     const proposalData = {
@@ -55,15 +67,74 @@ export default class NewGroupModal extends Component {
       want: values.want,
     };
 
-    createProposalRequest({ proposalData, offerId: offerData._id, groupId });
+    createProposalRequest({
+      proposalData,
+      offerId: offerData._id,
+      groupId: offerData.group,
+    });
   };
 
-  addMembers = (list, field) => {
-    const { groupMembers } = this.props;
-    return list.map(item => ({
-      ...item,
-      [field]: groupMembers.find(member => member._id === item[field]),
-    }));
+  handleDeleteOffer = () => {
+    const {
+      deleteOfferRequest,
+      data: { offerData },
+    } = this.props;
+    deleteOfferRequest({ groupId: offerData.group, offerId: offerData._id });
+  };
+
+  handleEndOffer = () => {
+    const {
+      endOfferRequest,
+      data: { offerData },
+    } = this.props;
+    endOfferRequest({ groupId: offerData.group, offerId: offerData._id });
+  };
+
+  renderModalFooter = (isMyOffer, myProposal) => {
+    const {
+      data: { actionType },
+      groupOffer: { loading },
+    } = this.props;
+    const { isTrade } = this.state;
+
+    if (!isMyOffer && !myProposal && !isTrade) {
+      return (
+        <ModalFooter>
+          <Button className="btn-block" onClick={this.handleTradeClick}>
+            Trade
+          </Button>
+        </ModalFooter>
+      );
+    }
+    if (actionType === 'delete') {
+      return (
+        <ModalFooter>
+          <Button
+            className="btn-block"
+            variant="dark"
+            onClick={this.handleDeleteOffer}
+            disabled={loading}
+          >
+            {loading ? 'Deleting...' : 'Delete Offer'}
+          </Button>
+        </ModalFooter>
+      );
+    }
+    if (actionType === 'end') {
+      return (
+        <ModalFooter>
+          <Button
+            className="btn-block"
+            variant="dark"
+            onClick={this.handleEndOffer}
+            disabled={loading}
+          >
+            {loading ? 'Ending...' : 'End Offer'}
+          </Button>
+        </ModalFooter>
+      );
+    }
+    return null;
   };
 
   render() {
@@ -72,40 +143,37 @@ export default class NewGroupModal extends Component {
       currentUser,
       show,
       onHide,
-      proposals: { list, loading },
+      proposals: { list: proposalsList, loading },
       vouches: { list: vouchesList, loading: vouchesLoading },
     } = this.props;
-    const { isTrade } = this.state;
 
     if (!data) {
       return null;
     }
 
-    const myProposal = list.find(item => item.proposedBy === currentUser._id);
-    const isMyOffer = data.offerData.offeredBy === currentUser._id;
+    const { isTrade } = this.state;
+    const isMyOffer = data.offerData.offeredBy._id === currentUser._id;
+    const myProposal = proposalsList.find(
+      item => item.proposedBy === currentUser._id,
+    );
 
     return (
       <Modal show={show} onHide={onHide}>
-        <ModalHeader closeButton className="border-0 pb-2" title="Offer" />
+        <ModalHeader closeButton className="border-0 pb-0" title="Offer" />
         <ModalBody className="p-0">
           <LoadingContainer loading={loading || vouchesLoading}>
             <OfferDetail
               data={data.offerData}
-              proposals={this.addMembers(list, 'proposedBy')}
-              vouches={this.addMembers(vouchesList, 'requestedBy')}
+              proposals={proposalsList}
+              vouches={vouchesList}
+              isMyOffer={isMyOffer}
             />
           </LoadingContainer>
         </ModalBody>
         {!isMyOffer && !myProposal && isTrade && (
           <ProposalForm onSubmit={this.handleSubmit} />
         )}
-        {!isMyOffer && !myProposal && !isTrade && (
-          <ModalFooter>
-            <Button className="btn-block" onClick={this.handleTradeClick}>
-              Trade
-            </Button>
-          </ModalFooter>
-        )}
+        {this.renderModalFooter(isMyOffer, myProposal)}
       </Modal>
     );
   }

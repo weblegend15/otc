@@ -12,6 +12,7 @@ function* getMyProposals(action) {
     const requestData = {
       limit: action.payload.limit,
       skip: action.payload.skip,
+      filters: action.payload.filters,
     };
 
     const data = yield call(

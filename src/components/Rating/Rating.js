@@ -10,10 +10,9 @@ const FullStar = () => <img src={fullStarIcon} alt="star" className="star" />;
 
 export default ({ className, ...rest }) => (
   <Rating
-    className={cx(
-      'rating d-flex flex-row align-items-center justify-content-center',
-      { [className]: className },
-    )}
+    className={cx('rating d-flex flex-row align-items-center', {
+      [className]: className,
+    })}
     placeholderSymbol={<EmptyStar />}
     emptySymbol={<EmptyStar />}
     fullSymbol={<FullStar />}

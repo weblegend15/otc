@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import ViewProposalsModal from './ViewProposalsModal';
 import './ViewProposalsModal.scss';
 
-import { getActiveMembers } from '../../selectors';
-
 import {
   acceptProposalRequest,
   rejectProposalRequest,
@@ -12,7 +10,6 @@ import {
 } from '../../screens/app/MainArea/GroupContent/Proposals/redux/actions';
 
 ViewProposalsModal.propTypes = {
-  activeMembers: PropTypes.array.isRequired,
   acceptProposalRequest: PropTypes.func.isRequired,
   rejectProposalRequest: PropTypes.func.isRequired,
   getProposalsRequest: PropTypes.func.isRequired,
@@ -22,7 +19,6 @@ ViewProposalsModal.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  activeMembers: getActiveMembers(state),
   proposals: state.app.proposal.proposals,
   modalData: state.modal.modalData,
   acceptProposalLoading: state.app.proposal.acceptProposalLoading,

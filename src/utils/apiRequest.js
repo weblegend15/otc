@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import queryString from 'query-string';
+import queryString from 'qs';
 import { baseUrl } from '../config';
 import store from '../configureStore';
 
@@ -24,7 +24,7 @@ async function request(
     let body;
 
     if (['GET', 'DELETE'].indexOf(method) > -1) {
-      qs = `?${queryString.stringify(data)}`;
+      qs = `?${queryString.stringify(data, { arrayFormat: 'bracket' })}`;
     } else {
       body = isFormData ? data : JSON.stringify(data);
     }

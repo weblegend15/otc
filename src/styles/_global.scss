@@ -122,6 +122,11 @@ button.btn-lg {
   padding-top: 7px;
 }
 
+.btn-large {
+  height: 40px;
+  padding-top: 8px;
+}
+
 .line-ellipsis {
   max-width: 100%;
   overflow: hidden;
@@ -208,6 +213,10 @@ button.btn-lg {
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
+}
+
+.modal-dialog .general-avatar p {
+  margin-bottom: 0;
 }
 
 @include media-breakpoint-between(xs, sm) {

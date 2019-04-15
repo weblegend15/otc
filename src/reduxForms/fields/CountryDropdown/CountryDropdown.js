@@ -19,6 +19,7 @@ export default ({
       <CountryDropdown
         priorityOptions={['US']}
         autoFocus={false}
+        valueType="short"
         defaultOptionLabel="-"
         {...input}
       />

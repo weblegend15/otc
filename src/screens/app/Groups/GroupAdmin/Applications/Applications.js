@@ -56,6 +56,28 @@ export default class Applications extends Component {
     });
   };
 
+  renderTableHeader = () => {
+    return (
+      <Row className="border-bottom border-default-color py-2 p-sm font-weight-semibold text-uppercase d-none d-md-flex">
+        <Col className="text-center opacity-5" md={2}>
+          Received
+        </Col>
+        <Col className="text-center opacity-5" md={3}>
+          User
+        </Col>
+        <Col className="text-center opacity-5" md={2}>
+          Feadback score
+        </Col>
+        <Col className="text-center opacity-5" md={3}>
+          Social profile
+        </Col>
+        <Col className="text-center opacity-5" md={2}>
+          Actions
+        </Col>
+      </Row>
+    );
+  };
+
   render() {
     const {
       groupMembers: { list, loading },
@@ -79,26 +101,9 @@ export default class Applications extends Component {
     }
 
     return (
-      <LoadingContainer loading={loading}>
-        <Card.Body className="group-admin-area-applications p-0 p-md-3">
-          <Row className="border-bottom border-default-color py-2 p-sm font-weight-semibold text-uppercase d-none d-md-flex">
-            <Col className="text-center opacity-5" md={2}>
-              Received
-            </Col>
-            <Col className="text-center opacity-5" md={3}>
-              User
-            </Col>
-            <Col className="text-center opacity-5" md={2}>
-              Feadback score
-            </Col>
-            <Col className="text-center opacity-5" md={3}>
-              Social profile
-            </Col>
-            <Col className="text-center opacity-5" md={2}>
-              Actions
-            </Col>
-          </Row>
-
+      <Card.Body className="group-admin-area-applications p-0 p-md-3">
+        {this.renderTableHeader()}
+        <LoadingContainer loading={loading}>
           {applications.map((userData, index) => {
             return currentWidth > 767 ? (
               <DesktopRow
@@ -116,8 +121,8 @@ export default class Applications extends Component {
               />
             );
           })}
-        </Card.Body>
-      </LoadingContainer>
+        </LoadingContainer>
+      </Card.Body>
     );
   }
 }

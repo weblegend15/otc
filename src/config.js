@@ -35,9 +35,10 @@ export const FIREBASE_CONFIG = {
 };
 
 export const OFFER_STATUS_CLASS = {
-  accepted: 'primary',
+  active: 'primary',
   rejected: 'warning',
   pending: 'dark',
+  ended: 'light',
 };
 
 export const PROPOSAL_STATUS_CLASS = {
