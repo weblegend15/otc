@@ -90,6 +90,15 @@ export default class NewGroupModal extends Component {
     endOfferRequest({ groupId: offerData.group, offerId: offerData._id });
   };
 
+  handleLeaveFeedback = () => {
+    const {
+      toggleModal,
+      data: { offerData },
+    } = this.props;
+    toggleModal('viewOfferModal');
+    toggleModal('leaveFeedbackModal', { offerData });
+  };
+
   renderModalFooter = (isMyOffer, myProposal) => {
     const {
       data: { actionType },
@@ -97,7 +106,12 @@ export default class NewGroupModal extends Component {
     } = this.props;
     const { isTrade } = this.state;
 
-    if (!isMyOffer && !myProposal && !isTrade) {
+    if (
+      actionType !== 'feedbackByCounterpart' &&
+      !isMyOffer &&
+      !myProposal &&
+      !isTrade
+    ) {
       return (
         <ModalFooter>
           <Button className="btn-block" onClick={this.handleTradeClick}>
@@ -130,6 +144,15 @@ export default class NewGroupModal extends Component {
             disabled={loading}
           >
             {loading ? 'Ending...' : 'End Offer'}
+          </Button>
+        </ModalFooter>
+      );
+    }
+    if (actionType === 'feedbackByCounterpart') {
+      return (
+        <ModalFooter>
+          <Button className="btn-block" onClick={this.handleLeaveFeedback}>
+            Leave Feedback
           </Button>
         </ModalFooter>
       );
@@ -170,9 +193,10 @@ export default class NewGroupModal extends Component {
             />
           </LoadingContainer>
         </ModalBody>
-        {!isMyOffer && !myProposal && isTrade && (
-          <ProposalForm onSubmit={this.handleSubmit} />
-        )}
+        {data.actionType !== 'feedbackByCounterpart' &&
+          !isMyOffer &&
+          !myProposal &&
+          isTrade && <ProposalForm onSubmit={this.handleSubmit} />}
         {this.renderModalFooter(isMyOffer, myProposal)}
       </Modal>
     );

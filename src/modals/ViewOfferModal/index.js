@@ -7,6 +7,7 @@ import {
   getProposalsRequest,
 } from '../../screens/app/MainArea/GroupContent/Proposals/redux/actions';
 
+import toggleModal from '../redux/actions';
 import { getGroupMembersRequest } from '../../screens/app/MainArea/redux/actions';
 import { getVouchesRequest } from '../../screens/app/MainArea/GroupContent/Vouches/redux/actions';
 import {
@@ -25,6 +26,7 @@ ViewOfferModal.propTypes = {
   getGroupMembersRequest: PropTypes.func.isRequired,
   deleteOfferRequest: PropTypes.func.isRequired,
   endOfferRequest: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 ViewOfferModal.defaultProps = {
@@ -46,6 +48,7 @@ const mapDispatchToProps = {
   getGroupMembersRequest,
   deleteOfferRequest,
   endOfferRequest,
+  toggleModal,
 };
 
 export default connect(

@@ -70,6 +70,32 @@ export default (state = initialState, action) => {
         },
       };
 
+    case CONSTANTS.LEAVE_FEEDBACK_TO_OFFER_REQUEST:
+      return {
+        ...state,
+        feedback: {
+          ...state.feedback,
+          loading: true,
+        },
+      };
+    case CONSTANTS.LEAVE_FEEDBACK_TO_OFFER_SUCCESS:
+      return {
+        ...state,
+        feedback: {
+          ...state.feedback,
+          data: action.payload.data,
+          loading: false,
+        },
+      };
+    case CONSTANTS.LEAVE_FEEDBACK_TO_OFFER_ERROR:
+      return {
+        ...state,
+        feedback: {
+          ...state.feedback,
+          loading: false,
+        },
+      };
+
     default:
       return state;
   }

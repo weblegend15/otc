@@ -41,7 +41,9 @@ export default class LeaveFeedbackModal extends Component {
   handleProceed = () => {
     const {
       leaveFeedbackRequest,
+      leaveFeedbackToOfferRequest,
       modalData: { offerData },
+      currentUser,
     } = this.props;
     const { comm, time, comment } = this.state;
 
@@ -50,12 +52,19 @@ export default class LeaveFeedbackModal extends Component {
       communication: comm,
       comment,
     };
-
-    leaveFeedbackRequest({
-      offerId: offerData._id,
-      groupId: offerData.group,
-      feedbackData,
-    });
+    if (offerData.counterpart === currentUser._id) {
+      leaveFeedbackToOfferRequest({
+        offerId: offerData._id,
+        groupId: offerData.group,
+        feedbackData,
+      });
+    } else {
+      leaveFeedbackRequest({
+        offerId: offerData._id,
+        groupId: offerData.group,
+        feedbackData,
+      });
+    }
   };
 
   render() {
@@ -64,8 +73,19 @@ export default class LeaveFeedbackModal extends Component {
       user: { data, loading: userLoading },
       show,
       onHide,
+      modalData,
+      currentUser,
     } = this.props;
     const { comm, time, comment } = this.state;
+
+    if (!modalData) {
+      return null;
+    }
+
+    const userData =
+      modalData.offerData.counterpart === currentUser._id
+        ? modalData.offerData.offeredBy
+        : data;
 
     return (
       <Modal show={show} onHide={onHide}>
@@ -77,9 +97,9 @@ export default class LeaveFeedbackModal extends Component {
           <LoadingContainer loading={userLoading}>
             <GeneralAvatar
               data={{
-                firstName: data.firstName,
-                lastName: data.lastName,
-                location: `${data.city}, ${data.country}`,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                location: `${userData.city}, ${userData.country}`,
               }}
             />
           </LoadingContainer>

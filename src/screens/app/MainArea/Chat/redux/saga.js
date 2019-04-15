@@ -23,7 +23,7 @@ function* sendMessage(action) {
     );
     yield put(sendMessageSuccess(responseData));
   } catch (err) {
-    notify('error', err.meesage);
+    notify('error', err.message);
     yield put(sendMessageError());
   }
 }
@@ -45,7 +45,7 @@ function* sendFileMessage(action) {
       true,
     );
   } catch (err) {
-    notify('error', err.meesage);
+    notify('error', err.message);
     yield put(sendFileMessageError(err));
   }
 }

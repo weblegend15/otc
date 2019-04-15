@@ -30,6 +30,7 @@ export default class Offers extends Component {
       toggleModal,
       selectedGroupId,
       groupMembers: { list },
+      currentUser,
     } = this.props;
     toggleModal('viewOfferModal', {
       offerData: {
@@ -37,6 +38,11 @@ export default class Offers extends Component {
         offeredBy: findElement(list, offerData.offeredBy),
       },
       groupId: selectedGroupId,
+      actionType:
+        offerData.counterpart === currentUser._id &&
+        offerData.status === 'ENDED'
+          ? 'feedbackByCounterpart'
+          : '',
     });
   };
 

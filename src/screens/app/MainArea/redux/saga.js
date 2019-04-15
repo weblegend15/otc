@@ -37,7 +37,7 @@ function* getGroupMembers(action) {
 
     yield put(getGroupMembersSuccess(members));
   } catch (err) {
-    notify('error', err.meesage);
+    notify('error', err.message);
     yield put(getGroupMembersError());
   }
 }
@@ -68,7 +68,7 @@ function* getPermissionGroups() {
 
     yield put(getPermissionGroupsSuccess(myGroups.groups));
   } catch (err) {
-    notify('error', err.meesage);
+    notify('error', err.message);
     yield put(getPermissionGroupsError());
   }
 }
