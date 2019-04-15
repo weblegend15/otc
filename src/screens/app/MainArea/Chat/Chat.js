@@ -9,6 +9,7 @@ import {
   LoadingContainer,
   PureAvatar,
   Icon,
+  Card,
   Form,
   Timestamp,
 } from '../../../../components';
@@ -63,12 +64,16 @@ class Chat extends Component {
       .removeEventListener('scroll', debounce(this.handleScroll, 500));
   }
 
+  getFileExtension = filename =>
+    filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2); // eslint-disable-line
+
   handleScroll = () => {
     const {
       chatId,
       messageList: { chats },
       getMoreMessages,
     } = this.props;
+
     if (document.getElementById('message-container')) {
       const scrollY = document.getElementById('message-container').scrollTop;
       this.setState({ sent: false });
@@ -139,15 +144,40 @@ class Chat extends Component {
     this.setState({ file: e.target.files[0] });
   };
 
+  renderFile = (filetype, filename, msg) => {
+    const types = ['bmp', 'jpg', 'jpeg', 'png', 'gif'];
+    return types.indexOf(filetype) > -1 ? (
+      <Fragment>
+        <b className="pt-2">{filename}</b>
+        <img src={msg.url} className="file-messege-size" alt="file-message" />
+      </Fragment>
+    ) : (
+      <Card className="p-3 d-inline-flex">
+        <Card.Body className="d-flex align-items-center">
+          <Icon name="file-o" size="3x" />
+          <b className="ml-3">{filetype.toUpperCase()} file</b>
+        </Card.Body>
+        <Card.Footer className="card-footer-bg-color border-0">
+          <p>{filename}</p>
+        </Card.Footer>
+      </Card>
+    );
+  };
+
   renderMessage = (msg, index, messages) => {
     const {
       members: { list },
     } = this.props;
     const member = findByField(list, '_id', msg.sender_id);
     let diffDay = 0;
+    let filetype = '';
 
     if (index > 1) {
       diffDay = this.diffDay(msg.created_at, messages[index - 1].created_at);
+    }
+
+    if (msg.extra && msg.extra.file.name) {
+      filetype = this.getFileExtension(msg.extra.file.name);
     }
 
     return (
@@ -171,6 +201,9 @@ class Chat extends Component {
                     {member.firstName}
                   </p>
                   <p className="mt-1">{msg.text}</p>
+                  {msg.extra &&
+                    msg.extra.file.name &&
+                    this.renderFile(filetype, msg.extra.file.name, msg)}
                 </div>
               </div>
               <Timestamp

@@ -51,13 +51,14 @@ const getMessagesService = (
       const messages = [];
 
       msgs.forEach(msg => {
-        messages.push(msg.data());
+        messages.push({ id: msg.id, ...msg.data() });
       });
 
       if (!messages.empty) {
         promises = messages.map(message => {
-          if (!message.extra) Promise.resolve(message);
-
+          if (!message.extra) {
+            return message;
+          }
           return storageRef
             .child(message.extra.file.uuid)
             .getDownloadURL()
@@ -67,38 +68,17 @@ const getMessagesService = (
         });
       }
 
-      return Promise.all(promises).then(result => {
-        action(result);
+      return Promise.all(promises).then(allMsgs => {
+        if (allMsgs.size !== limit) {
+          allMsgs.push(FIRST_MESSAGE_TEXT);
+        }
+        const chats = allMsgs.reverse();
+        if (scrollEvent !== null) {
+          scrollEvent(allMsgs[allMsgs.length - 1].id);
+        }
+        action(chats);
       });
-      //   msgs.push({ id: message.id, ...message.data() });
-      // });
-      // if (messages.size !== limit) {
-      //   msgs.push(FIRST_MESSAGE_TEXT);
-      // }
-      //   msgs = msgs.reverse();
-      //   if (scrollEvent !== null) {
-      //     scrollEvent(msgs[msgs.length - 1].id);
-      //   }
-      // } else {
-      //   msgs.push(FIRST_MESSAGE_TEXT);
-      // }
-      // action(msgs);
     });
 };
 
-const getFileDownloadUrl = msg => {
-  if (!msg.extra) Promise.resolve(msg);
-  const storageRef = firebase.storage().ref();
-  const startRef = storageRef.child(msg.extra.file.uuid);
-
-  return startRef
-    .getDownloadURL()
-    .then(url => {
-      return url;
-    })
-    .catch(err => {
-      return err;
-    });
-};
-
-export { firebaseAuth, getMessagesService, getFileDownloadUrl, getNewMessage };
+export { firebaseAuth, getMessagesService, getNewMessage };
