@@ -41,14 +41,24 @@ export default class Feedback extends Component {
 
   renderFeedback = feedback => {
     return (
-      <Row className="m-0 p-4 border-bottom border-default-color">
+      <div
+        key={feedback._id}
+        className="m-0 p-4 border-bottom border-default-color d-flex flex-column"
+      >
         <Row className="m-0 d-flex flex-column">
-          <p className="mb-1 navtext-primary font-weight-bold p-lg">
-            Transaction in Crypto OTC group
+          <p className="mb-1 text-primary font-weight-bold p-lg">
+            Transaction in {feedback.group.name}
           </p>
           <div className="mb-3 d-flex flex-row">
-            <p className="opacity-5">Left on Dec 15, 2018 by</p>&nbsp;
-            <p className="text-primary font-weight-semibold">John Smith</p>
+            <div className="opacity-5 d-flex flex-row">
+              Left on&nbsp;&nbsp;
+              <Timestamp timestamp={feedback.updatedAt} format="MMM D, YYYY" />
+              &nbsp;&nbsp;by
+            </div>
+            &nbsp;&nbsp;
+            <p className="text-primary font-weight-semibold">
+              {feedback.fbBy.firstName} {feedback.fbBy.lastName}
+            </p>
           </div>
         </Row>
         <Row className="m-0">
@@ -56,7 +66,11 @@ export default class Feedback extends Component {
             <Row className="mx-0 mb-3">
               <Col className="font-weight-semibold p-0">Communication</Col>
               <Col>
-                <Rating initialRating={3} readonly className="flex-start" />
+                <Rating
+                  initialRating={feedback.fb.communication}
+                  readonly
+                  className="flex-start"
+                />
               </Col>
             </Row>
             <Row className="m-0">
@@ -64,36 +78,53 @@ export default class Feedback extends Component {
                 Timeliness of Tansaction
               </Col>
               <Col>
-                <Rating initialRating={4} readonly className="flex-start" />
+                <Rating
+                  initialRating={feedback.fb.timeline}
+                  readonly
+                  className="flex-start"
+                />
               </Col>
             </Row>
           </Col>
           <Col className="p-0 p-sm mb-2" md={7}>
-            <p className="mb-2 opacity-5">COMMENT</p>
-            <p>{feedback.comment}</p>
+            {feedback.fb.comment && <p className="mb-2 opacity-5">COMMENT</p>}
+            <p>{feedback.fb.comment}</p>
           </Col>
         </Row>
-      </Row>
+      </div>
     );
   };
 
   renderFeedbackList = () => {
-    const feedback = {
-      comment:
-        'Faucibus in ornare quam viverra orci sagittis eu. Pellentesque elit eget gravida cum. Magna fermentum iaculis eu non diam phasellus. Id diam vel quam elementum pulvinar etiam non. ',
-    };
+    const {
+      user: { data },
+      feedbackList: { list },
+    } = this.props;
 
     return (
       <Fragment>
-        {/* {list.map(this.renderFeedback)} */}
-        {this.renderFeedback(feedback)}
+        {list.map(item => {
+          const fb =
+            item.counterpart._id === data._id
+              ? item.feedbackToProposal
+              : item.feedbackToOffer;
+          const fbBy =
+            item.counterpart._id === data._id
+              ? item.offeredBy
+              : item.counterpart;
+          return this.renderFeedback({
+            ...item,
+            fb,
+            fbBy,
+          });
+        })}
       </Fragment>
     );
   };
 
   render() {
     const {
-      feedbackList: { list, loading, total },
+      feedbackList: { loading, total },
       user: { data },
     } = this.props;
     const { currentPage } = this.state;
