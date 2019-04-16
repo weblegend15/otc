@@ -60,6 +60,7 @@ export default class NewGroupModal extends Component {
     const {
       createProposalRequest,
       data: { offerData },
+      toggleModal,
     } = this.props;
 
     const proposalData = {
@@ -67,10 +68,14 @@ export default class NewGroupModal extends Component {
       want: values.want,
     };
 
-    createProposalRequest({
-      proposalData,
-      offerId: offerData._id,
-      groupId: offerData.group,
+    toggleModal('viewOfferModal');
+    toggleModal('twoFAModal', {
+      submitAction: createProposalRequest,
+      actionPayload: {
+        proposalData,
+        offerId: offerData._id,
+        groupId: offerData.group,
+      },
     });
   };
 
@@ -86,8 +91,14 @@ export default class NewGroupModal extends Component {
     const {
       endOfferRequest,
       data: { offerData },
+      toggleModal,
     } = this.props;
-    endOfferRequest({ groupId: offerData.group, offerId: offerData._id });
+
+    toggleModal('viewOfferModal');
+    toggleModal('twoFAModal', {
+      submitAction: endOfferRequest,
+      actionPayload: { groupId: offerData.group, offerId: offerData._id },
+    });
   };
 
   handleLeaveFeedback = () => {
