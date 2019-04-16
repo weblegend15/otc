@@ -77,13 +77,17 @@ export default class ActiveProposals extends Component {
               <Timestamp timestamp={proposal.createdAt} />
             </Col>
             <Col md={3}>
-              <GeneralAvatar
-                data={{
-                  firstName: offeredMember.firstName,
-                  lastName: offeredMember.lastName,
-                  location: `${offeredMember.city}, ${offeredMember.country}`,
-                }}
-              />
+              {offeredMember ? (
+                <GeneralAvatar
+                  data={{
+                    firstName: offeredMember.firstName,
+                    lastName: offeredMember.lastName,
+                    location: `${offeredMember.city}, ${offeredMember.country}`,
+                  }}
+                />
+              ) : (
+                '-'
+              )}
             </Col>
             <Col className="font-weight-semibold d-flex flex-column">
               <div className="d-flex flex-row">
