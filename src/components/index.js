@@ -31,6 +31,7 @@ import LabelRating from './Rating/LabelRating';
 import SocialIcons from './SocialIcons';
 
 import OfferDetail from './OfferDetail';
+import TwoFACard from './TwoFACard';
 
 export {
   Timestamp,
@@ -69,4 +70,5 @@ export {
   OfferDetail,
   LabelRating,
   SocialIcons,
+  TwoFACard,
 };
