@@ -21,7 +21,7 @@ export default class TwoFAModal extends Component {
   handleGoSetting = () => {
     const { toggleModal } = this.props;
     toggleModal('twoFAModal');
-    history.push('/app/settings');
+    history.push('/app/settings/security');
   };
 
   handleCodeChange = e => {
