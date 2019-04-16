@@ -11,7 +11,7 @@ import {
 
 RequestVouchModal.propTypes = {
   createVouchRequest: PropTypes.func.isRequired,
-  activeMembers: PropTypes.array.isRequired,
+  activeMembers: PropTypes.object.isRequired,
   getVouchesRequest: PropTypes.func.isRequired,
   vouches: PropTypes.object.isRequired,
 };
