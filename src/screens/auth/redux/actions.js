@@ -98,3 +98,8 @@ export const confirmPasswordError = error => ({
   type: CONSTANTS.CONFIRM_PASSWORD_ERROR,
   error,
 });
+
+export const setNotifications = notifications => ({
+  type: CONSTANTS.SET_NOTIFICATIONS,
+  notifications,
+});

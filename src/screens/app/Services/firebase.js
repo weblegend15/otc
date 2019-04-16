@@ -13,6 +13,27 @@ const firebaseAuth = token => {
     });
 };
 
+const getNotifications = (id, action) => {
+  return firestore
+    .collection('users')
+    .doc(id)
+    .collection('notifications')
+    .orderBy('timestamp', 'desc')
+    .limit(4)
+    .onSnapshot(notifications => {
+      const notifies = [];
+      if (!notifications.empty) {
+        notifications.forEach(notification => {
+          notifies.push({
+            id: notification.id,
+            ...notification.data(),
+          });
+        });
+        action(notifies);
+      }
+    });
+};
+
 const getNewMessage = (id, groupId, action) => {
   const storageRef = firebase.storage().ref();
 
@@ -128,4 +149,4 @@ const getMessagesService = (
     });
 };
 
-export { firebaseAuth, getMessagesService, getNewMessage };
+export { firebaseAuth, getNotifications, getMessagesService, getNewMessage };

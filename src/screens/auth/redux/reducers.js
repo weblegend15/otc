@@ -14,6 +14,10 @@ const initialState = {
     email: '',
     state: false,
   },
+  notifications: {
+    list: [],
+    loading: false,
+  },
   error: '',
 };
 
@@ -143,6 +147,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
+      };
+    case CONSTANTS.SET_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: {
+          ...state.notifications,
+          list: action.notifications,
+        },
       };
     default:
       return state;

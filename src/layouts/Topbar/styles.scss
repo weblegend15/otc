@@ -29,8 +29,12 @@
   }
 }
 
-.alert-notification {
-  font-size: 10px;
+.notifications:first-child {
+  border-top: none !important;
+}
+
+.notifications:last-child {
+  border-bottom: none !important;
 }
 
 .mobile-navbar {

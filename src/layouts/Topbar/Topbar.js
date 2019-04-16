@@ -4,6 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import ListGroup from 'react-bootstrap/ListGroup';
 import cx from 'classnames';
+import ReactHtmlParser from 'react-html-parser';
+import notificationConvertor from '../../utils/notification';
 import {
   Modal,
   Button,
@@ -14,6 +16,7 @@ import {
 } from '../../components';
 import logoIcon from '../../assets/icons/logo.svg';
 import toggleButton from '../../assets/icons/toggleButtonIcon.svg';
+import { getNotifications } from '../../screens/app/Services/firebase';
 
 class Topbar extends Component {
   constructor(props) {
@@ -21,6 +24,20 @@ class Topbar extends Component {
     this.state = {
       showNavbar: false,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    const { currentUser, setNotifications } = this.props;
+
+    if (currentUser !== prevProps.currentUser && !!currentUser) {
+      this.unsubscribe = getNotifications(currentUser._id, setNotifications);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   handleLogout = () => {
@@ -71,60 +88,42 @@ class Topbar extends Component {
     </Popover>
   );
 
-  renderAlertPopover = () => (
-    <Popover id="popover-alert" className="p-0">
-      <ListGroup className="list-group-flush" variant="flush">
-        <ListGroup.Item className="p-2 rounded-top">
-          <Link
-            to="/auth/signin"
-            className="w-100 text-secondary alert-notification d-flex p-2"
-          >
-            <Icon
-              name="check"
-              size="2x"
-              className="text-primary mx-2 d-flex align-items-center"
-            />
-            <p className="m-0 pl-2 pr-4">
-              Your vouch in <b>Crypto OTC Group</b> has been{' '}
-              <span className="text-primary">accepted.</span>
-            </p>
-          </Link>
-        </ListGroup.Item>
-        <ListGroup.Item className="p-2">
-          <Link
-            to="/app/setting"
-            className="w-100 text-secondary alert-notification d-flex p-2"
-          >
-            <Icon
-              name="check"
-              size="2x"
-              className="text-primary mx-2 d-flex align-items-center"
-            />
-            <p className="m-0 pl-2 pr-4">
-              Your vouch in <b>Crypto OTC Group</b> has been{' '}
-              <span className="text-primary">accepted.</span>
-            </p>
-          </Link>
-        </ListGroup.Item>
-        <ListGroup.Item className="p-2 rounded-bottom">
-          <Link
-            to="/auth/signin"
-            className="w-100 text-secondary alert-notification d-flex p-2"
-          >
-            <Icon
-              name="check"
-              size="2x"
-              className="text-primary mx-2 d-flex align-items-center"
-            />
-            <p className="m-0 pl-2 pr-4">
-              Your request to join to Crypto OTC Group has been{' '}
-              <span className="text-danger">denied.</span>
-            </p>
-          </Link>
-        </ListGroup.Item>
-      </ListGroup>
-    </Popover>
-  );
+  renderNotification = notification => {
+    const htmlNotification = notificationConvertor(
+      notification.payload,
+      notification.type,
+    );
+
+    return (
+      <ListGroup.Item
+        className="p-2 border notifications border-left-0 border-right-0"
+        key={notification.id}
+      >
+        <div
+          className="w-100 text-secondary p-sm d-flex p-2"
+          key={notification.id}
+        >
+          <Icon
+            name="check"
+            size="2x"
+            className="text-primary mx-2 d-flex align-items-center"
+          />
+          <p className="m-0 pl-2 pr-4">{ReactHtmlParser(htmlNotification)}</p>
+        </div>
+      </ListGroup.Item>
+    );
+  };
+
+  renderAlertPopover = () => {
+    const {
+      notifications: { list },
+    } = this.props;
+    return (
+      <Popover id="popover-alert" className="p-0 border-0 shadow-lg">
+        {list.map(this.renderNotification)}
+      </Popover>
+    );
+  };
 
   renderAuthNav = () => {
     const { selectedGroupId } = this.props;
