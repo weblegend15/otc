@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FormSection } from 'redux-form';
 import SignupOne from './SignupOne';
 import SignupTwo from './SignupTwo';
+import TwoFactorAuth from './TwoFactorAuth';
 
 class Signup extends Component {
   constructor(props) {
@@ -12,21 +13,28 @@ class Signup extends Component {
   }
 
   handleNext = () => {
-    this.setState({ currentStep: 2 });
+    const { currentStep } = this.state;
+    this.setState({ currentStep: currentStep + 1 });
   };
 
   render() {
     const { currentStep } = this.state;
 
-    return currentStep === 1 ? (
-      <FormSection name="stepOne">
-        <SignupOne onNext={this.handleNext} />
-      </FormSection>
-    ) : (
-      <FormSection name="stepTwo">
-        <SignupTwo />
-      </FormSection>
-    );
+    if (currentStep === 1) {
+      return (
+        <FormSection name="stepOne">
+          <SignupOne onNext={this.handleNext} />
+        </FormSection>
+      );
+    }
+    if (currentStep === 2) {
+      return (
+        <FormSection name="stepTwo">
+          <SignupTwo onNext={this.handleNext} />
+        </FormSection>
+      );
+    }
+    return <TwoFactorAuth />;
   }
 }
 

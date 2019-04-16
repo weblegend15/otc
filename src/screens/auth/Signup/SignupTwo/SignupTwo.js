@@ -37,25 +37,9 @@ class SignupTwo extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const {
-      signupRequest,
-      signupFormValues: { stepOne, stepTwo },
-    } = this.props;
-
-    const signupData = {
-      email: stepOne.email,
-      password: stepOne.password,
-      firstName: stepOne.firstName,
-      lastName: stepOne.lastName,
-      phone: stepTwo.phone,
-      country: stepTwo.country,
-      state: stepTwo.state,
-      city: stepTwo.city,
-      address1: stepTwo.address1 || '',
-      address2: stepTwo.address2 || '',
-    };
-
-    signupRequest(signupData);
+    const { onNext, generateTwoFARequest } = this.props;
+    onNext();
+    generateTwoFARequest();
   };
 
   handleRecaptcha = value => {
