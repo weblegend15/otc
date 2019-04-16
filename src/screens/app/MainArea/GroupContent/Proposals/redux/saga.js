@@ -49,16 +49,18 @@ function* createProposal(action) {
     const { groupId } = action.payload;
     const { offerId } = action.payload;
     const requestData = action.payload.proposalData;
+    const { twoFACode } = action.payload;
     const data = yield call(
       request,
       `/groups/${groupId}/offers/${offerId}/proposals`,
       'POST',
       requestData,
       true,
+      twoFACode,
     );
 
     yield put(createProposalSuccess(data));
-    yield put(toggleModal('viewOfferModal'));
+    yield put(toggleModal('twoFAModal'));
     notify('success', 'Proposal sent!');
   } catch (err) {
     notify('error', err.message);

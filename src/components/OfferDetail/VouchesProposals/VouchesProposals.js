@@ -44,7 +44,7 @@ export default class VouchesProposals extends Component {
           {vouches.map((item, idx) => (
             <Row
               key={item._id}
-              className={`border-default-color mx-0 py-2 px-4 ${
+              className={`border-default-color mx-0 py-3 px-4 ${
                 idx === vouches.length - 1 ? '' : 'border-bottom'
               }`}
             >
@@ -88,7 +88,7 @@ export default class VouchesProposals extends Component {
           {proposals.map((item, idx) => (
             <Row
               key={item._id}
-              className={`mx-0 border-default-color px-4 py-2 d-flex align-items-center ${
+              className={`mx-0 border-default-color px-4 py-3 d-flex align-items-center ${
                 idx === proposals.length - 1 ? '' : 'border-bottom'
               }`}
             >
