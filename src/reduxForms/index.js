@@ -4,6 +4,7 @@ import NewOfferModalForm from './NewOfferModalForm';
 import EditGroupForm from './EditGroupForm';
 import ProposalForm from './ProposalForm';
 import PersonalDataForm from './PersonalDataForm';
+import ConfirmPasswordForm from './ConfirmPasswordForm';
 
 export {
   JoinGroupModalForm,
@@ -12,4 +13,5 @@ export {
   EditGroupForm,
   ProposalForm,
   PersonalDataForm,
+  ConfirmPasswordForm,
 };
