@@ -107,3 +107,9 @@ export const listMembersSuccess = data => ({
 export const listMembersError = () => ({
   type: CONSTANTS.LIST_MEMBERS_ERROR,
 });
+
+// set notification actions
+export const setNotifications = notifications => ({
+  type: CONSTANTS.SET_NOTIFICATIONS,
+  notifications,
+});
