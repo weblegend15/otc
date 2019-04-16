@@ -91,8 +91,14 @@ export default class NewGroupModal extends Component {
     const {
       endOfferRequest,
       data: { offerData },
+      toggleModal,
     } = this.props;
-    endOfferRequest({ groupId: offerData.group, offerId: offerData._id });
+
+    toggleModal('viewOfferModal');
+    toggleModal('twoFAModal', {
+      submitAction: endOfferRequest,
+      actionPayload: { groupId: offerData.group, offerId: offerData._id },
+    });
   };
 
   handleLeaveFeedback = () => {

@@ -91,6 +91,7 @@ function* updateGroupOffer(action) {
   try {
     const { groupId } = action.payload;
     const { offerId } = action.payload;
+    const { twoFACode } = action.payload;
     const requestData = action.payload.offerData;
     const data = yield call(
       request,
@@ -98,9 +99,11 @@ function* updateGroupOffer(action) {
       'PUT',
       requestData,
       true,
+      twoFACode,
     );
 
     yield put(updateOfferSuccess(data));
+    yield put(toggleModal('twoFAModal'));
   } catch (err) {
     notify('error', err.message);
     yield put(updateOfferError());
@@ -133,20 +136,21 @@ function* endGroupOffer(action) {
   try {
     const { groupId } = action.payload;
     const { offerId } = action.payload;
+    const { twoFACode } = action.payload;
     const data = yield call(
       request,
       `/groups/${groupId}/offers/${offerId}/end`,
       'PUT',
       {},
       true,
+      twoFACode,
     );
 
     yield put(endOfferSuccess(data));
-    yield put(toggleModal('viewOfferModal'));
+    yield put(toggleModal('twoFAModal'));
   } catch (err) {
     notify('error', err.message);
     yield put(endOfferError());
-    yield put(toggleModal('viewOfferModal'));
   }
 }
 

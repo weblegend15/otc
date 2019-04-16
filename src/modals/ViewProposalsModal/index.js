@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import ViewProposalsModal from './ViewProposalsModal';
 import './ViewProposalsModal.scss';
 
+import toggleModal from '../redux/actions';
+
 import {
   acceptProposalRequest,
   rejectProposalRequest,
@@ -16,6 +18,7 @@ ViewProposalsModal.propTypes = {
   acceptProposalLoading: PropTypes.bool.isRequired,
   rejectProposalLoading: PropTypes.bool.isRequired,
   modalData: PropTypes.object.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -29,6 +32,7 @@ const mapDispatchToProps = {
   acceptProposalRequest,
   rejectProposalRequest,
   getProposalsRequest,
+  toggleModal,
 };
 
 export default connect(

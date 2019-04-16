@@ -114,20 +114,21 @@ function* acceptProposal(action) {
     const { groupId } = action.payload;
     const { offerId } = action.payload;
     const { proposalId } = action.payload;
+    const { twoFACode } = action.payload;
     const data = yield call(
       request,
       `/groups/${groupId}/offers/${offerId}/proposals/${proposalId}/accept`,
       'PUT',
       {},
       true,
+      twoFACode,
     );
 
     yield put(acceptProposalSuccess(data));
-    yield put(toggleModal('viewProposalsModal'));
+    yield put(toggleModal('twoFAModal'));
   } catch (err) {
     notify('error', err.message);
     yield put(acceptProposalError());
-    yield put(toggleModal('viewProposalsModal'));
   }
 }
 
@@ -136,20 +137,21 @@ function* rejectProposal(action) {
     const { groupId } = action.payload;
     const { offerId } = action.payload;
     const { proposalId } = action.payload;
+    const { twoFACode } = action.payload;
     const data = yield call(
       request,
       `/groups/${groupId}/offers/${offerId}/proposals/${proposalId}/reject`,
       'PUT',
       {},
       true,
+      twoFACode,
     );
 
     yield put(rejectProposalSuccess(data));
-    yield put(toggleModal('viewProposalsModal'));
+    yield put(toggleModal('twoFAModal'));
   } catch (err) {
     notify('error', err.message);
     yield put(rejectProposalError());
-    yield put(toggleModal('viewProposalsModal'));
   }
 }
 

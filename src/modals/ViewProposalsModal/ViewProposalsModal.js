@@ -45,6 +45,7 @@ export default class ViewProposalsModal extends Component {
       rejectProposalRequest,
       modalData: { offerId, groupId },
       proposals: { list },
+      toggleModal,
     } = this.props;
     const { selectedProposal } = this.state;
 
@@ -54,23 +55,31 @@ export default class ViewProposalsModal extends Component {
       const selectedProposalData = list.find(
         item => item._id === selectedProposalId,
       );
+      toggleModal('viewProposalsModal');
       switch (actionType) {
         case 'accept':
-          acceptProposalRequest({
-            groupId,
-            offerId,
-            proposalId: selectedProposalId,
-            proposalData: {
-              have: selectedProposalData.have,
-              want: selectedProposalData.want,
+          toggleModal('twoFAModal', {
+            submitAction: acceptProposalRequest,
+            actionPayload: {
+              groupId,
+              offerId,
+              proposalId: selectedProposalId,
+              proposalData: {
+                have: selectedProposalData.have,
+                want: selectedProposalData.want,
+              },
             },
           });
+
           break;
         case 'reject':
-          rejectProposalRequest({
-            groupId,
-            offerId,
-            proposalId: selectedProposalId,
+          toggleModal('twoFAModal', {
+            submitAction: rejectProposalRequest,
+            actionPayload: {
+              groupId,
+              offerId,
+              proposalId: selectedProposalId,
+            },
           });
           break;
 
