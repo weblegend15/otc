@@ -83,16 +83,20 @@ export default class OfferCard extends Component {
   };
 
   renderPastOfferFooter = () => {
+    const { offerData } = this.props;
+
     return (
       <Card.Footer className="py-3 border-0 d-flex align-items-center justify-content-between">
         <p>Performed trade on platform</p>
-        <Button
-          className="btn-large font-weight-bold text-uppercase"
-          variant="outline-primary"
-          onClick={this.handleLeaveReview}
-        >
-          Leave a review
-        </Button>
+        {!offerData.feedbackToProposal && (
+          <Button
+            className="btn-large font-weight-bold text-uppercase"
+            variant="outline-primary"
+            onClick={this.handleLeaveReview}
+          >
+            Leave a review
+          </Button>
+        )}
       </Card.Footer>
     );
   };
