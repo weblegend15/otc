@@ -23,7 +23,7 @@ export default () => {
         <NavLink className="pb-3 px-1 font-weight-semibold" to="/app/profile">
           Profile
         </NavLink>
-        <NavLink className="pb-3 px-1 font-weight-semibold" to="/app/setting">
+        <NavLink className="pb-3 px-1 font-weight-semibold" to="/app/settings">
           Settings
         </NavLink>
       </Nav>

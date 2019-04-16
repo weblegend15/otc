@@ -219,6 +219,17 @@ button.btn-lg {
   margin-bottom: 0;
 }
 
+.custom-nav {
+  a {
+    border-bottom: 3px solid transparent;
+    opacity: 0.5;
+    &.active {
+      border-bottom-color: $primary;
+      opacity: 1;
+    }
+  }
+}
+
 @include media-breakpoint-between(xs, sm) {
   .groups-list-container,
   .group-admin-area-applications,

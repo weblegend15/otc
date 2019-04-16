@@ -3,7 +3,7 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 import { Row, Col, Container } from '../../components';
 import { GroupsList, GroupProfile, GroupAdmin } from './Groups';
-import { UserProfile, Offers } from './Users';
+import { UserProfile, Offers, UserSettings } from './Users';
 
 import { Sidebar, MobileSidebar, GroupAdminNav } from '../../layouts';
 import MainArea from './MainArea';
@@ -16,6 +16,7 @@ class AppModule extends Component {
       <Switch>
         <Route path={`${match.url}/home`} component={GroupsList} />
         <Route path={`${match.url}/profile`} component={UserProfile} />
+        <Route path={`${match.url}/settings`} component={UserSettings} />
         <Route path={`${match.url}/offers/:offerType`} component={Offers} />
         <Route
           path={`${match.url}/groups/:groupId/admin`}
