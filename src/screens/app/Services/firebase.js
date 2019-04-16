@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import { firestore } from '../../../configureStore';
-import { FIRST_MESSAGE_TEXT } from '../../../config';
+import { FIRST_MESSAGE_TEXT, NOTIFICATION_COUNT } from '../../../config';
 import request from '../../../utils/apiRequest';
 
 const firebaseAuth = token => {
@@ -10,6 +10,27 @@ const firebaseAuth = token => {
     .signInWithCustomToken(token)
     .catch(error => {
       return error;
+    });
+};
+
+const getNotifications = (id, action) => {
+  return firestore
+    .collection('users')
+    .doc(id)
+    .collection('notifications')
+    .orderBy('timestamp', 'desc')
+    .limit(NOTIFICATION_COUNT)
+    .onSnapshot(notifications => {
+      const notifies = [];
+      if (!notifications.empty) {
+        notifications.forEach(notification => {
+          notifies.push({
+            id: notification.id,
+            ...notification.data(),
+          });
+        });
+        action(notifies);
+      }
     });
 };
 
@@ -128,4 +149,4 @@ const getMessagesService = (
     });
 };
 
-export { firebaseAuth, getMessagesService, getNewMessage };
+export { firebaseAuth, getNotifications, getMessagesService, getNewMessage };

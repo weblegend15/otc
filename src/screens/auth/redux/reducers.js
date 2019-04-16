@@ -151,7 +151,6 @@ export default (state = initialState, action) => {
         ...state,
         error: action.error,
       };
-
     case CONSTANTS.GENERATE_TWO_FA_REQUEST:
       return {
         ...state,

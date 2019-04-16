@@ -29,8 +29,23 @@
   }
 }
 
-.alert-notification {
-  font-size: 10px;
+.notifications {
+  &:first-child {
+    border-top: none !important;
+  }
+  &::last-child {
+    border-bottom: none !important;
+  }
+}
+
+.is-notification {
+  position: absolute;
+  margin-left: -12px;
+  margin-top: -2px;
+}
+
+.mobile-auth-nav-header {
+  height: 140px;
 }
 
 .mobile-navbar {
