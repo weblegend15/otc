@@ -40,7 +40,7 @@ export default class PersonalDataForm extends Component {
 
     return (
       <Form className="personal-data-form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="personal-data-section m-4">
+        <div className="personal-data-section m-0 m-md-4">
           <Field
             className="my-4"
             component={Input}
@@ -118,7 +118,7 @@ export default class PersonalDataForm extends Component {
             <Field component={Input} type="text" name="address2" />
           </div>
         </div>
-        <div className="p-4 personal-data-form-footer border-top border-default-color">
+        <div className="px-2 py-4 p-md-4 personal-data-form-footer profile-settings-footer border-top border-default-color">
           <Button
             className="btn-block font-weight-bold p-lg btn-large text-uppercase"
             disabled={loading}

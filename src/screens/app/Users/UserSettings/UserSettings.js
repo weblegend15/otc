@@ -15,37 +15,37 @@ class UserSettings extends Component {
       match: { url },
     } = this.props;
     return (
-      <Nav className="pl-4 mt-4 w-100 custom-nav d-flex justify-content-start flex-row align-items-center border-bottom border-default-color">
+      <Nav className="pl-2 pl-md-4 mt-2 mt-md-4 w-100 custom-nav d-flex flex-row align-items-center border-bottom border-default-color">
         <NavLink
-          className="pt-3 pb-4 mr-4 h4-title font-black"
+          className="pt-1 pt-md-3 pb-3 pb-md-4 mr-2 mr-md-4 h4-title font-black"
           activeClassName="active font-weight-bold"
           to={`${url}/personal-data`}
         >
           Personal Data
         </NavLink>
         <NavLink
-          className="pt-3 pb-4 mx-4 h4-title font-black"
+          className="pt-1 pt-md-3 pb-3 pb-md-4 mx-2 mx-md-4 h4-title font-black"
           activeClassName="active font-weight-bold"
           to={`${url}/kyc`}
         >
           KYC
         </NavLink>
         <NavLink
-          className="pt-3 pb-4 mx-4 h4-title font-black"
+          className="pt-1 pt-md-3 pb-3 pb-md-4 mx-2 mx-md-4 h4-title font-black"
           activeClassName="active font-weight-bold"
           to={`${url}/security`}
         >
           Security
         </NavLink>
         <NavLink
-          className="pt-3 pb-4 mx-4 h4-title font-black"
+          className="pt-1 pt-md-3 pb-3 pb-md-4 mx-2 mx-md-4 h4-title font-black"
           activeClassName="active font-weight-bold"
           to={`${url}/notifications`}
         >
           Notifications
         </NavLink>
         <NavLink
-          className="pt-3 pb-4 mx-4 h4-title font-black"
+          className="pt-1 pt-md-3 pb-3 pb-md-4 mx-2 mx-md-4 h4-title font-black"
           activeClassName="active font-weight-bold"
           to={`${url}/billing`}
         >
@@ -75,9 +75,11 @@ class UserSettings extends Component {
         <Row className="groups-list-title mx-2 d-none d-md-block">
           <h3 className="mr-auto font-weight-semibold">User Settings</h3>
         </Row>
-        <Card className="user-settings-container pt-3 pt-md-0 px-0 border-0">
+        <Card className="user-settings-container px-2 pt-3 pt-md-0 px-md-0 border-0">
           {this.renderHeaderTabs()}
-          {this.renderRoutes()}
+          <div className="user-settings-container-content">
+            {this.renderRoutes()}
+          </div>
         </Card>
       </div>
     );
