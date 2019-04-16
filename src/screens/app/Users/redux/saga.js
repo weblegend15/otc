@@ -8,6 +8,8 @@ import {
   joinGroupError,
   getMyOffersSuccess,
   getMyOffersError,
+  updateProfileSuccess,
+  updateProfileError,
 } from './actions';
 
 import toggleModal from '../../../../modals/redux/actions';
@@ -75,8 +77,21 @@ function* getMyOffers(action) {
   }
 }
 
+function* updateProfile(action) {
+  try {
+    const requestData = action.payload;
+    const data = yield call(request, '/profile', 'PUT', requestData, true);
+
+    yield put(updateProfileSuccess(data));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(updateProfileError());
+  }
+}
+
 export default function* userSaga() {
   yield takeLatest(CONSTANTS.GET_PROFILE_REQUEST, getProfile);
   yield takeLatest(CONSTANTS.JOIN_GROUP_REQUEST, joinGroup);
   yield takeLatest(CONSTANTS.GET_MY_OFFERS_REQUEST, getMyOffers);
+  yield takeLatest(CONSTANTS.UPDATE_PROFILE_REQUEST, updateProfile);
 }

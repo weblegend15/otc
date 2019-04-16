@@ -100,6 +100,33 @@ export default (state = initialState, action) => {
           total: state.myOffers.total - 1,
         },
       };
+
+    case CONSTANTS.UPDATE_PROFILE_REQUEST:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          loading: true,
+        },
+      };
+    case CONSTANTS.UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          data: action.payload.data,
+          loading: false,
+        },
+      };
+    case CONSTANTS.UPDATE_PROFILE_ERROR:
+      return {
+        ...state,
+        profile: {
+          ...state.profile,
+          data: {},
+          loading: false,
+        },
+      };
     default:
       return state;
   }
