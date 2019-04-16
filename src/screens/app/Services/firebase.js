@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import { firestore } from '../../../configureStore';
-import { FIRST_MESSAGE_TEXT } from '../../../config';
+import { FIRST_MESSAGE_TEXT, NOTIFICATION_COUNT } from '../../../config';
 import request from '../../../utils/apiRequest';
 
 const firebaseAuth = token => {
@@ -19,7 +19,7 @@ const getNotifications = (id, action) => {
     .doc(id)
     .collection('notifications')
     .orderBy('timestamp', 'desc')
-    .limit(4)
+    .limit(NOTIFICATION_COUNT)
     .onSnapshot(notifications => {
       const notifies = [];
       if (!notifications.empty) {

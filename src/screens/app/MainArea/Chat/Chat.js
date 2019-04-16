@@ -194,7 +194,7 @@ class Chat extends Component {
                   <p className="font-weight-semibold h4-title">
                     {msg.offer.offeredBy.firstName}
                   </p>
-                  <Card className="p-2 mt-2">
+                  <Card className="mt-2 pt-3">
                     <OfferDetail data={msg.offer} type="messageType" />
                   </Card>
                 </div>

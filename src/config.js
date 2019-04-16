@@ -47,6 +47,8 @@ export const PROPOSAL_STATUS_CLASS = {
   pending: 'dark',
 };
 
+export const NOTIFICATION_COUNT = 5;
+
 export const NOTIFICATION_TYPE = {
   GROUP: {
     ACTIVE: 'GROUP_ACTIVE',

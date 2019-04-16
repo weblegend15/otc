@@ -19,6 +19,13 @@ const initialState = {
     loading: false,
   },
   error: '',
+
+  twoFAData: {
+    loading: false,
+    data: {},
+  },
+
+  isConfirmTwoFA: false,
 };
 
 export default (state = initialState, action) => {
@@ -155,6 +162,48 @@ export default (state = initialState, action) => {
           ...state.notifications,
           list: action.notifications,
         },
+      };
+    case CONSTANTS.GENERATE_TWO_FA_REQUEST:
+      return {
+        ...state,
+        twoFAData: {
+          ...state.twoFAData,
+          loading: true,
+        },
+      };
+    case CONSTANTS.GENERATE_TWO_FA_SUCCESS:
+      return {
+        ...state,
+        twoFAData: {
+          ...state.twoFAData,
+          data: action.payload,
+          loading: false,
+        },
+      };
+    case CONSTANTS.GENERATE_TWO_FA_ERROR:
+      return {
+        ...state,
+        twoFAData: {
+          ...state.twoFAData,
+          data: {},
+          loading: false,
+        },
+      };
+
+    case CONSTANTS.CONFIRM_TWO_FA_REQUEST:
+      return {
+        ...state,
+        isConfirmTwoFA: true,
+      };
+    case CONSTANTS.CONFIRM_TWO_FA_SUCCESS:
+      return {
+        ...state,
+        isConfirmTwoFA: false,
+      };
+    case CONSTANTS.CONFIRM_TWO_FA_ERROR:
+      return {
+        ...state,
+        isConfirmTwoFA: false,
       };
     default:
       return state;

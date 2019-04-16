@@ -4,7 +4,7 @@ import { getFormSyncErrors, getFormValues, change } from 'redux-form';
 
 import SignupTwo from './SignupTwo';
 
-import { signupRequest } from '../../redux/actions';
+import { signupRequest, generateTwoFARequest } from '../../redux/actions';
 
 SignupTwo.propTypes = {
   signupFormValues: PropTypes.object,
@@ -12,6 +12,7 @@ SignupTwo.propTypes = {
   loading: PropTypes.bool,
   signupRequest: PropTypes.func.isRequired,
   selectState: PropTypes.func.isRequired,
+  generateTwoFARequest: PropTypes.func.isRequired,
 };
 
 SignupTwo.defaultProps = {
@@ -29,6 +30,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   signupRequest,
   selectState: value => change('signupForm', 'stepTwo.state', value),
+  generateTwoFARequest,
 };
 
 export default connect(
