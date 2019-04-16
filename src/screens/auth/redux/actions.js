@@ -99,12 +99,6 @@ export const confirmPasswordError = error => ({
   error,
 });
 
-// set notification actions
-export const setNotifications = notifications => ({
-  type: CONSTANTS.SET_NOTIFICATIONS,
-  notifications,
-});
-
 // two factor authentication key generator
 export const generateTwoFARequest = () => ({
   type: CONSTANTS.GENERATE_TWO_FA_REQUEST,

@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import Topbar from './Topbar';
 
 import './styles.scss';
-
-import { signout, setNotifications } from '../../screens/auth/redux/actions';
+import { setNotifications } from '../../screens/app/Groups/redux/actions';
+import { signout } from '../../screens/auth/redux/actions';
 
 Topbar.propTypes = {
   currentUser: PropTypes.object,
   signout: PropTypes.func,
-  setNotifications: PropTypes.func,
   selectedGroupId: PropTypes.string.isRequired,
+  setNotifications: PropTypes.func,
 };
 
 Topbar.defaultProps = {
@@ -19,8 +19,8 @@ Topbar.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+  notifications: state.app.group.notifications,
   selectedGroupId: state.app.main.selectedGroupId,
-  notifications: state.auth.notifications,
 });
 
 const mapDispatchToProps = {

@@ -78,6 +78,10 @@ export default (payload, type) => {
       return `You <span class="text-primary">rejected</span> the proposal from <b>${
         payload.user.firstName
       }</b> in <b>${payload.offer.have} to ${payload.offer.want}`;
+    case NOTIFICATION_TYPE.PROPOSAL.FEEDBACK:
+      return `You <span class="text-primary">received</span> the feedback from <b>${
+        payload.user.firstName
+      }</b> in <b>${payload.offer.have} to ${payload.offer.want}`;
     case NOTIFICATION_TYPE.VOUCH.RECEIVED:
       return `You <span class="text-primary">recieved</span> the vouch from <b>${
         payload.user.firstName

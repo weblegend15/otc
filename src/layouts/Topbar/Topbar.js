@@ -27,10 +27,9 @@ class Topbar extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidMount() {
     const { currentUser, setNotifications } = this.props;
-
-    if (currentUser !== prevProps.currentUser && !!currentUser) {
+    if (currentUser) {
       this.unsubscribe = getNotifications(currentUser._id, setNotifications);
     }
   }

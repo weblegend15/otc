@@ -14,10 +14,6 @@ const initialState = {
     email: '',
     state: false,
   },
-  notifications: {
-    list: [],
-    loading: false,
-  },
   error: '',
 
   twoFAData: {
@@ -154,14 +150,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
-      };
-    case CONSTANTS.SET_NOTIFICATIONS:
-      return {
-        ...state,
-        notifications: {
-          ...state.notifications,
-          list: action.notifications,
-        },
       };
     case CONSTANTS.GENERATE_TWO_FA_REQUEST:
       return {
