@@ -9,6 +9,16 @@
       color: $black;
     }
   }
+
+  .profile-settings-footer {
+    button {
+      max-width: 370px;
+      width: 100%;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
 }
 
 @include media-breakpoint-between(xs, sm) {
