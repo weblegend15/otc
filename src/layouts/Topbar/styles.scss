@@ -29,12 +29,23 @@
   }
 }
 
-.notifications:first-child {
-  border-top: none !important;
+.notifications {
+  &:first-child {
+    border-top: none !important;
+  }
+  &::last-child {
+    border-bottom: none !important;
+  }
 }
 
-.notifications:last-child {
-  border-bottom: none !important;
+.is-notification {
+  position: absolute;
+  margin-left: -12px;
+  margin-top: -2px;
+}
+
+.mobile-auth-nav-header {
+  height: 140px;
 }
 
 .mobile-navbar {

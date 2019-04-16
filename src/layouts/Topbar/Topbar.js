@@ -16,6 +16,7 @@ import {
 } from '../../components';
 import logoIcon from '../../assets/icons/logo.svg';
 import toggleButton from '../../assets/icons/toggleButtonIcon.svg';
+import Sidebar from '../Sidebar';
 import { getNotifications } from '../../screens/app/Services/firebase';
 
 class Topbar extends Component {
@@ -43,6 +44,7 @@ class Topbar extends Component {
   handleLogout = () => {
     const { signout } = this.props;
     signout();
+    this.hideMobileNavbar();
   };
 
   displayMobileNavbar = () => {
@@ -126,7 +128,7 @@ class Topbar extends Component {
   };
 
   renderAuthNav = () => {
-    const { selectedGroupId } = this.props;
+    const { selectedGroupId, notifications } = this.props;
 
     return (
       <Navbar.Collapse
@@ -160,6 +162,12 @@ class Topbar extends Component {
                 className="navbar-icon-buttons"
               >
                 <Icon name="bell-o" size="lg" className="text-white" />
+                {notifications.list && notifications.list.length && (
+                  <Icon
+                    name="circle"
+                    className="text-primary p-sm is-notification"
+                  />
+                )}
               </Button>
             </OverlayTrigger>
 
@@ -243,12 +251,76 @@ class Topbar extends Component {
     );
   };
 
-  renderNoAuthMobileNav = showNavbar => {
+  renderAuthMobileNav = showNavbar => {
+    const { notifications } = this.props;
+
     return (
       <Modal
         show={showNavbar}
         onHide={this.hideMobileNavbar}
         size="sm"
+        centered={false}
+        dialogClassName="mobile-navbar mr-0 mt-0"
+        aria-labelledby="navbar-modal-styling-title"
+      >
+        <Modal.Header className="bg-secondary rounded-0 mobile-auth-nav-header d-flex justify-content-center">
+          <ButtonToolbar className="d-flex justify-content-between w-100">
+            <OverlayTrigger
+              trigger="click"
+              delay={2}
+              placement="bottom"
+              overlay={this.renderAlertPopover()}
+            >
+              <Button
+                variant="btn-outline-link"
+                className="navbar-icon-buttons"
+              >
+                <Icon name="bell-o" size="lg" className="text-white" />
+                {notifications.list && notifications.list.length && (
+                  <Icon
+                    name="circle"
+                    className="text-primary p-sm is-notification"
+                  />
+                )}
+              </Button>
+            </OverlayTrigger>
+
+            <OverlayTrigger
+              trigger="click"
+              delay={2}
+              placement="bottom"
+              overlay={this.renderMessagePopover()}
+            >
+              <Button
+                variant="btn-outline-link"
+                className="mx-2 navbar-icon-buttons"
+              >
+                <Icon name="envelope-o" size="lg" className="text-white" />
+              </Button>
+            </OverlayTrigger>
+
+            <Button
+              onClick={this.handleLogout}
+              variant="btn-outline-link"
+              className="mx-2 navbar-icon-buttons"
+            >
+              <Icon name="sign-out" size="lg" className="text-white" />
+            </Button>
+          </ButtonToolbar>
+        </Modal.Header>
+        <Modal.Body className="p-0">
+          <Sidebar authMobileBar />
+        </Modal.Body>
+      </Modal>
+    );
+  };
+
+  renderNoAuthMobileNav = showNavbar => {
+    return (
+      <Modal
+        show={showNavbar}
+        onHide={this.hideMobileNavbar}
+        size="lg"
         centered={false}
         dialogClassName="mobile-navbar mr-0 mt-0"
         aria-labelledby="navbar-modal-styling-title"
@@ -336,11 +408,13 @@ class Topbar extends Component {
         <Button
           className="d-md-none"
           variant="btn-outlint-light"
-          onClick={() => this.displayMobileNavbar()}
+          onClick={this.displayMobileNavbar}
         >
           <img src={toggleButton} alt="toggle-button" />
         </Button>
-        {!currentUser && showNavbar && this.renderNoAuthMobileNav(showNavbar)}
+        {!currentUser
+          ? this.renderNoAuthMobileNav(showNavbar)
+          : this.renderAuthMobileNav(showNavbar)}
         {!currentUser ? this.renderNoAuthNav(pathname) : this.renderAuthNav()}
       </Navbar>
     );
