@@ -40,6 +40,7 @@ export default class Offers extends Component {
       groupId: selectedGroupId,
       actionType:
         offerData.counterpart === currentUser._id &&
+        !offerData.feedbackToOffer &&
         offerData.status === 'ENDED'
           ? 'feedbackByCounterpart'
           : '',
