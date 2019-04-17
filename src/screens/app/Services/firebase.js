@@ -93,7 +93,10 @@ const getNewMessage = (id, groupId, action) => {
         }
 
         return Promise.all(promises).then(newMessage => {
-          action(newMessage);
+          if (!newMessage[0]) {
+            newMessage.push(FIRST_MESSAGE_TEXT);
+          }
+          action(newMessage.filter(Boolean));
         });
       }
     });
@@ -147,8 +150,8 @@ const getMessagesService = (
         }
         const chats = allMsgs.reverse().filter(Boolean);
         action(chats);
-        if (scrollEvent !== null) {
-          scrollEvent(allMsgs[allMsgs.length - 1].id);
+        if (scrollEvent !== null && chats.length > 1) {
+          scrollEvent(chats[chats.length - 1].id);
         }
       });
     });
