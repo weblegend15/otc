@@ -23,7 +23,7 @@ export default class PeopleRequestVouch extends Component {
 
   renderTableHeader = () => {
     return (
-      <Row className="mx-0 pt-3 pb-2 px-4 border-bottom border-default-color">
+      <Row className="mx-0 pt-3 pb-2 px-4 border-bottom border-default-color table-header">
         <Col className="p-0 p-sm font-weight-semibold opacity-5">DATE</Col>
         <Col className="p-0 p-sm font-weight-semibold opacity-5">USER</Col>
         <Col className="p-0 p-sm font-weight-semibold opacity-5">HAS</Col>

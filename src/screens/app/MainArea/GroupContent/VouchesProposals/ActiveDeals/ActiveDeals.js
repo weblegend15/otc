@@ -27,7 +27,7 @@ export default class ActiveDeals extends Component {
 
   renderTableHeader = () => {
     return (
-      <Row className="mx-0 border-bottom border-default-color py-3">
+      <Row className="mx-0 border-bottom border-default-color py-3 table-header">
         <Col className="p-sm font-weight-semibold opacity-5">DATE</Col>
         <Col className="p-sm font-weight-semibold opacity-5">HAS</Col>
         <Col className="p-sm font-weight-semibold opacity-5">WANTS</Col>

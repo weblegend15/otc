@@ -1,4 +1,7 @@
 @import '../../../styles/variables';
+@import '~bootstrap/scss/mixins/_breakpoints';
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
 
 .my-group-selector {
   label {
@@ -9,5 +12,19 @@
   select {
     min-width: 300px;
     height: 38px;
+  }
+}
+
+@include media-breakpoint-between(xs, sm) {
+  .main-area {
+    background: none;
+    box-shadow: none;
+  }
+  .table-header {
+    display: none;
+  }
+
+  .group-content-header {
+    border: none !important;
   }
 }

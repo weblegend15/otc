@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Offers from './Offers';
+
+import './Offers.scss';
+
 import { getOffersRequest } from '../redux/actions';
 import toggleModal from '../../../../../modals/redux/actions';
 

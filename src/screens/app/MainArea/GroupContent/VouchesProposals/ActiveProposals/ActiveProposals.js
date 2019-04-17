@@ -31,7 +31,7 @@ export default class ActiveProposals extends Component {
 
   renderTableHeader = () => {
     return (
-      <Row className="m-0 pt-3 pb-2 px-4 font-weight-semibold p-sm border-bottom border-default-color">
+      <Row className="m-0 pt-3 pb-2 px-4 font-weight-semibold p-sm border-bottom border-default-color table-header">
         <Col className="opacity-5">POSTED</Col>
         <Col md={3} className="opacity-5">
           USER
