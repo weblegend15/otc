@@ -44,3 +44,16 @@ export const deleteMyOffer = data => ({
   type: CONSTANTS.DELETE_MY_OFFER,
   payload: data,
 });
+
+// udpate user profile
+export const updateProfileRequest = data => ({
+  type: CONSTANTS.UPDATE_PROFILE_REQUEST,
+  payload: data,
+});
+export const updateProfileSuccess = data => ({
+  type: CONSTANTS.UPDATE_PROFILE_SUCCESS,
+  payload: data,
+});
+export const updateProfileError = () => ({
+  type: CONSTANTS.UPDATE_PROFILE_ERROR,
+});

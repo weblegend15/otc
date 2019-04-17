@@ -28,7 +28,12 @@ class Sidebar extends Component {
   };
 
   render() {
-    const { currentUser, className, authMobileBar } = this.props;
+    const {
+      currentUser,
+      className,
+      authMobileBar,
+      selectedGroupId,
+    } = this.props;
 
     return (
       <Card
@@ -79,7 +84,11 @@ class Sidebar extends Component {
             </Row>
           </ListGroupItem>
           <ListGroupItem className="px-5 py-4">
-            {this.renderSidebarLink('/app/my-groups', 'users', 'My Groups')}
+            {this.renderSidebarLink(
+              `/app/my-groups/${selectedGroupId || 'none'}`,
+              'users',
+              'My Groups',
+            )}
           </ListGroupItem>
           <ListGroupItem className="px-5 py-4">
             {this.renderSidebarLink('/app/settings', 'cog', 'Settings')}

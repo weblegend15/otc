@@ -123,3 +123,7 @@ export const confirmTwoFASuccess = data => ({
 export const confirmTwoFAError = () => ({
   type: CONSTANTS.CONFIRM_TWO_FA_ERROR,
 });
+
+export const disableTwoFAReqeust = () => ({
+  type: CONSTANTS.DISABLE_TWO_FA_REQUEST,
+});

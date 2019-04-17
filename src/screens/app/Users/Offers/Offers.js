@@ -68,7 +68,9 @@ export default class Offers extends Component {
 
     if (!list.length) {
       return (
-        <div className="h3-title font-weight-semibold text-center">No data</div>
+        <div className="h3-title font-weight-semibold text-center my-5">
+          No data
+        </div>
       );
     }
 

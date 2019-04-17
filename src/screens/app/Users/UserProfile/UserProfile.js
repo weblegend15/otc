@@ -80,7 +80,7 @@ class Profile extends Component {
             User Profile
           </h3>
           <Link
-            to="/app/setting"
+            to="/app/settings"
             className="edit-button btn btn-primary px-5 font-weight-bold h4-title"
           >
             EDIT
