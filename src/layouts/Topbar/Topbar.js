@@ -64,7 +64,7 @@ class Topbar extends Component {
           </Link>
         </ListGroup.Item>
         <ListGroup.Item className="pl-4">
-          <Link to="/app/setting" className="w-100 text-secondary">
+          <Link to="/app/settings" className="w-100 text-secondary">
             <Icon name="cog" size="lg" className="text-black mr-3" />
             Settings
           </Link>

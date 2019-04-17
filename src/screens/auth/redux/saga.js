@@ -20,6 +20,8 @@ import {
   confirmTwoFAError,
 } from './actions';
 
+import toggleModal from '../../../modals/redux/actions';
+
 import { history } from '../../../configureStore';
 import request from '../../../utils/apiRequest';
 import notify from '../../../utils/notify';
@@ -141,10 +143,11 @@ function* generateTwoFA() {
 function* confirmTwoFA(action) {
   try {
     const requestData = {
-      token: action.payload,
+      token: action.payload.token,
     };
-    const data = yield call(request, '/profile/2fa', 'PUT', requestData, false);
+    const data = yield call(request, '/profile/2fa', 'PUT', requestData, true);
     yield put(confirmTwoFASuccess(data));
+    yield put(toggleModal('addTwoFAModal'));
   } catch (err) {
     notify('error', err.message);
     yield put(confirmTwoFAError());

@@ -187,11 +187,24 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isConfirmTwoFA: false,
+        currentUser: {
+          ...state.currentUser,
+          is2faEnabled: true,
+        },
       };
     case CONSTANTS.CONFIRM_TWO_FA_ERROR:
       return {
         ...state,
         isConfirmTwoFA: false,
+      };
+
+    case CONSTANTS.DISABLE_TWO_FA_REQUEST:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          is2faEnabled: false,
+        },
       };
     default:
       return state;

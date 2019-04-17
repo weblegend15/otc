@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import QRCode from 'qrcode.react';
-
+import cx from 'classnames';
 import LoadingContainer from '../LoadingContainer';
 import Button from '../Button';
 import Card from '../Card';
@@ -29,10 +29,12 @@ export default class TwoFACard extends Component {
   };
 
   render() {
-    const { loading, data, proceeding } = this.props;
+    const { loading, data, proceeding, className } = this.props;
     const { currentAction } = this.state;
     return (
-      <Card className="sign-up-form border-0 m-auto text-center">
+      <Card
+        className={cx('sign-up-form border-0 m-auto text-center', className)}
+      >
         <Card.Body>
           <LoadingContainer loading={loading}>
             <div className="mt-4 mb-5">

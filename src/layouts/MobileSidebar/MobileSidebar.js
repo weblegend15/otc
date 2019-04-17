@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav } from '../../components';
 
-export default () => {
+export default ({ selectedGroupId }) => {
   return (
     <Navbar
       variant="dark"
@@ -14,16 +14,22 @@ export default () => {
         <NavLink className="pb-3 px-1 font-weight-semibold" to="/app/home">
           Home
         </NavLink>
-        <NavLink className="pb-3 px-1 font-weight-semibold" to="/app/groups">
+        <NavLink
+          className="pb-3 px-1 font-weight-semibold"
+          to={`/app/my-groups/${selectedGroupId || 'none'}`}
+        >
           My Groups
         </NavLink>
-        <NavLink className="pb-3 px-1 font-weight-semibold" to="/app/offers">
+        <NavLink
+          className="pb-3 px-1 font-weight-semibold"
+          to="/app/offers/current"
+        >
           My Offers
         </NavLink>
         <NavLink className="pb-3 px-1 font-weight-semibold" to="/app/profile">
           Profile
         </NavLink>
-        <NavLink className="pb-3 px-1 font-weight-semibold" to="/app/setting">
+        <NavLink className="pb-3 px-1 font-weight-semibold" to="/app/settings">
           Settings
         </NavLink>
       </Nav>
