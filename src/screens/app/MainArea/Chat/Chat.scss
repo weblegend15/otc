@@ -23,6 +23,13 @@
   position: relative;
   height: 500px;
   overflow: scroll;
+  .image-message {
+    display: grid;
+    img {
+      max-width: 350px;
+      min-width: 200px;
+    }
+  }
 }
 
 .inputWrapper {
