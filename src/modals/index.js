@@ -17,6 +17,7 @@ import ViewProposalsModal from './ViewProposalsModal';
 import LeaveFeedbackModal from './LeaveFeedbackModal';
 import ViewVouchModal from './ViewVouchModal';
 import TwoFAModal from './TwoFAModal';
+import AddTwoFAModal from './AddTwoFAModal';
 
 const Modals = {
   newGroupModal: NewGroupModal,
@@ -33,6 +34,7 @@ const Modals = {
   leaveFeedbackModal: LeaveFeedbackModal,
   viewVouchModal: ViewVouchModal,
   twoFAModal: TwoFAModal,
+  addTwoFAModal: AddTwoFAModal,
 };
 
 const ModalContainer = ({ type, ...rest }) => {
