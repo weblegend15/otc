@@ -1,0 +1,80 @@
+@import '../../../../../styles/variables';
+@import '~bootstrap/scss/mixins/_breakpoints';
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+
+.group-offers {
+  .table-row {
+    .table-column {
+      width: 40%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      & > div {
+        flex: 1;
+      }
+      .has-wants {
+        &-label {
+          display: none;
+        }
+      }
+    }
+    .table-column + .table-column + .table-column {
+      width: 20%;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+@include media-breakpoint-between(xs, sm) {
+  .group-offers {
+    .table-row {
+      background: $white;
+      box-shadow: 0px 0px 10px $border-color;
+      border-radius: $border-radius-lg;
+      border: none !important;
+
+      flex-direction: column;
+
+      .table-column {
+        width: 100%;
+        padding: 20px 10px;
+
+        &:first-child {
+          flex-direction: row-reverse;
+          .p-sm {
+            text-align: right;
+          }
+        }
+        &.has-wants {
+          padding: 0;
+          border-top: 1px solid $border-color;
+          border-bottom: 1px solid $border-color;
+          text-align: center;
+          background: #f5f5f5;
+          div {
+            padding: 16px;
+            &:first-child {
+              border-right: 1px solid $border-color;
+            }
+          }
+          p {
+            font-weight: 600;
+          }
+        }
+        .has-wants-label {
+          display: block;
+          font-size: 12px;
+          opacity: 0.5;
+          margin-bottom: 6px;
+          text-transform: uppercase;
+        }
+      }
+      .table-column + .table-column + .table-column {
+        width: 100%;
+        padding: 20px 10px;
+      }
+    }
+  }
+}

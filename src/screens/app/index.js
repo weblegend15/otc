@@ -5,7 +5,12 @@ import { Row, Col, Container } from '../../components';
 import { GroupsList, GroupProfile, GroupAdmin } from './Groups';
 import { UserProfile, Offers, UserSettings } from './Users';
 
-import { Sidebar, MobileSidebar, GroupAdminNav } from '../../layouts';
+import {
+  Sidebar,
+  MobileSidebar,
+  GroupAdminNav,
+  MainAreaMobileNav,
+} from '../../layouts';
 import MainArea from './MainArea';
 import ModalContainer from '../../modals';
 
@@ -46,11 +51,14 @@ class AppModule extends Component {
     } = this.props;
 
     return (
-      <Container className="mw-100 p-0 p-md-4">
+      <Container className="mw-100 p-0 p-md-2 p-lg-4">
         <ModalContainer />
-        {!pathname.includes('/admin') ? <MobileSidebar /> : <GroupAdminNav />}
 
-        <Row className="mx-md-4 m-0 mb-4">
+        {!!pathname.includes('/admin') && <GroupAdminNav />}
+        {!!pathname.includes('/my-groups') && <MainAreaMobileNav />}
+        {!!pathname.includes('/home') && <MobileSidebar />}
+
+        <Row className="mx-md-2 m-0 mb-4 mx-lg-4">
           {this.renderSidebar()}
           <Col className="p-0 m-md-0">{this.renderAppRoutes()}</Col>
         </Row>

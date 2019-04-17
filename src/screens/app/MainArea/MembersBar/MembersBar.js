@@ -35,10 +35,8 @@ export default class MembersBar extends Component {
   };
 
   renderMemberList = list => {
-    const {
-      match: { url },
-      selectedGroupMemberId,
-    } = this.props;
+    const { baseUrl, selectedGroupMemberId } = this.props;
+
     if (!list.length) {
       return (
         <div className="font-weight-semibold text-center p-5 h3-title">
@@ -53,7 +51,7 @@ export default class MembersBar extends Component {
           <ListGroup.Item
             key={_id}
             as={Link}
-            to={`${url}/member/${_id}`}
+            to={`${baseUrl}/member/${_id}`}
             onClick={() => this.handleClick(_id)}
             active={_id === selectedGroupMemberId}
           >

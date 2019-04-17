@@ -49,14 +49,12 @@ export default class Offers extends Component {
 
   renderTableHeader = () => {
     return (
-      <Row className="border-bottom border-default-color py-3 m-0 px-4">
+      <Row className="border-bottom border-default-color py-3 m-0 px-4 table-header">
         <Col className="font-weight-semibold p-0 opacity-5 p-sm">DATE</Col>
         <Col className="font-weight-semibold p-0 opacity-5 p-sm">USER</Col>
         <Col className="font-weight-semibold p-0 opacity-5 p-sm">HAS</Col>
         <Col className="font-weight-semibold p-0 opacity-5 p-sm">WANTS</Col>
-        <Col className="font-weight-semibold p-0 opacity-5 p-sm" md={3}>
-          DETAILS
-        </Col>
+        <Col className="font-weight-semibold p-0 opacity-5 p-sm">DETAILS</Col>
       </Row>
     );
   };
@@ -78,39 +76,45 @@ export default class Offers extends Component {
     return list.map(item => {
       const member = findElement(membersList, item.offeredBy);
       return (
-        <Row
+        <div
           key={item._id}
-          className="border-bottom border-default-color p-4 m-0 d-flex align-items-center"
+          className="border-bottom border-default-color p-0 p-md-4 mx-2 mb-4 m-md-0 d-flex align-items-center table-row"
         >
-          <Col className="p-0">
+          <div className="table-column">
             <Timestamp className="p-sm" timestamp={item.createdAt} />
-          </Col>
-          <Col className="p-0">
             <GeneralAvatar
               data={{
                 ...member,
                 location: `${member.city}, ${member.country}`,
               }}
             />
-          </Col>
-          <Col className="font-weight-semibold p-0">{item.have}</Col>
-          <Col className="font-weight-semibold p-0">{item.want}</Col>
-          <Col md={3} className="d-flex justify-content-between p-0">
+          </div>
+          <div className="table-column  has-wants">
+            <div>
+              <p className="has-wants-label">has</p>
+              <p className="font-weight-semibold p-0">{item.have}</p>
+            </div>
+            <div>
+              <p className="has-wants-label">wants</p>
+              <p className="font-weight-semibold p-0">{item.want}</p>
+            </div>
+          </div>
+          <div className="table-column">
             <Button
-              className="text-uppercase font-weight-bold px-5"
+              className="text-uppercase font-weight-bold px-5 btn-regular"
               onClick={() => this.handleViewClick(item)}
             >
               View
             </Button>
             {item.note && (
-              <OverlayTrigger overlay={popoverFocus}>
+              <OverlayTrigger overlay={popoverFocus} placement="bottom">
                 <Button className="p-0" variant="outline-link">
                   <Icon name="edit" className="text-primary h4-title" />
                 </Button>
               </OverlayTrigger>
             )}
-          </Col>
-        </Row>
+          </div>
+        </div>
       );
     });
   };
@@ -121,7 +125,7 @@ export default class Offers extends Component {
     } = this.props;
 
     return (
-      <div className="group-offers pt-4">
+      <div className="group-offers pt-0 pt-md-4">
         {this.renderTableHeader()}
         <LoadingContainer loading={loading}>
           {this.renderTableBody()}

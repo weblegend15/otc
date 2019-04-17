@@ -18,27 +18,29 @@ class GroupContent extends Component {
     } = this.props;
     return (
       <Nav className="w-100 d-flex justify-content-around flex-row align-items-center">
-        <NavLink
-          className="px-1 py-3 p-lg"
-          activeClassName="active font-weight-bold"
-          to={`${url}/chat`}
-        >
-          Chat
-        </NavLink>
-        <NavLink
-          className="px-1 py-3 mx-4 p-lg"
-          activeClassName="active font-weight-bold"
-          to={`${url}/offers`}
-        >
-          All Offers
-        </NavLink>
-        <NavLink
-          className="px-1 py-3 mx-4 p-lg"
-          activeClassName="active font-weight-bold"
-          to={`${url}/vouches-proposals`}
-        >
-          Vouches/Proposals
-        </NavLink>
+        <div className="d-none d-md-block">
+          <NavLink
+            className="py-3 p-lg"
+            activeClassName="active font-weight-bold"
+            to={`${url}/chat`}
+          >
+            Chat
+          </NavLink>
+          <NavLink
+            className="py-3 mx-4 p-lg"
+            activeClassName="active font-weight-bold"
+            to={`${url}/offers`}
+          >
+            All Offers
+          </NavLink>
+          <NavLink
+            className="py-3 mx-4 p-lg"
+            activeClassName="active font-weight-bold"
+            to={`${url}/vouches-proposals`}
+          >
+            Vouches/Proposals
+          </NavLink>
+        </div>
         <Button
           onClick={this.handleClickNewOffer}
           variant="outline-primary"
@@ -52,7 +54,7 @@ class GroupContent extends Component {
 
   renderHeader = () => {
     return (
-      <div className="border-bottom border-default-color pl-3 pr-4 pt-3">
+      <div className="group-content-header border-bottom border-default-color pl-3 pr-4 pt-3">
         <div className="mb-5 p-sm d-flex flex-row align-items-center">
           <p className="text-uppercase opacity-5 mr-3">message from admin</p>
           <Icon className="text-primary" name="arrow-right" />

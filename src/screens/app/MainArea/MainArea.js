@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
-import { history } from '../../../configureStore';
-import {
-  Card,
-  LoadingContainer,
-  Form,
-  Icon,
-  Button,
-} from '../../../components';
+import { Card, Icon, Button } from '../../../components';
 
 import MembersBar from './MembersBar';
 import GroupContent from './GroupContent';
 import MemberContent from './MemberContent';
-
-import { getMyActiveGroups } from '../../../utils/permission';
+import GroupSelector from './GroupSelector';
 
 class MainArea extends Component {
   constructor(props) {
@@ -32,34 +24,12 @@ class MainArea extends Component {
     refreshFirebaseTokenRequest();
   }
 
-  handleSelectGroup = groupId => {
-    const {
-      selectActiveGroup,
-      selectGroupMember,
-      setResetMessages,
-    } = this.props;
-    selectActiveGroup(groupId.target.value);
-    history.push(`/app/my-groups/${groupId.target.value}`);
-    selectGroupMember('');
-    setResetMessages();
-  };
-
   handleHamburgerClick = () => {
     const { isCollapsed } = this.state;
     this.setState({ isCollapsed: !isCollapsed });
   };
 
   renderHeader = () => {
-    const {
-      groups: { list },
-    } = this.props;
-
-    const myActiveGroups = getMyActiveGroups(list);
-
-    if (!myActiveGroups.length) {
-      return <div>You are not a member in any group!</div>;
-    }
-
     return (
       <div className="d-flex flex-row align-items-center justify-content-between">
         <Button
@@ -69,22 +39,7 @@ class MainArea extends Component {
         >
           <Icon name="bars" size="2x" />
         </Button>
-        <Form.Group
-          className="d-flex flex-row my-group-selector"
-          controlId="activeGroupSelect"
-          onChange={this.handleSelectGroup}
-        >
-          <Form.Label className="m-0 d-flex align-items-center text-unset p-lg">
-            Select group:{' '}
-          </Form.Label>
-          <Form.Control as="select" className="h4-title font-weight-semibold">
-            {myActiveGroups.map(item => (
-              <option key={item._id} value={item._id}>
-                {item.name}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
+        <GroupSelector />
       </div>
     );
   };
@@ -105,26 +60,25 @@ class MainArea extends Component {
 
   render() {
     const {
-      groups: { loading },
+      match: { url },
     } = this.props;
-
     const { isCollapsed } = this.state;
 
     return (
-      <LoadingContainer loading={loading}>
-        <Card className="p-0 d-flex flex-row border-0 overflow-hidden">
-          <MembersBar
-            className={isCollapsed ? 'collapsed' : 'expanded'}
-            {...this.props}
-          />
-          <div className="d-flex flex-column p-0 w-100 border-left border-default-color">
-            <div className="border-bottom py-3 pl-3 pr-4 border-default-color">
-              {this.renderHeader()}
-            </div>
-            {this.renderRoutes()}
+      <Card className="p-0 d-flex flex-row border-0 overflow-hidden main-area">
+        <MembersBar
+          className={`d-none d-md-block ${
+            isCollapsed ? 'collapsed' : 'expanded'
+          }`}
+          baseUrl={url}
+        />
+        <div className="d-flex flex-column p-0 w-100 border-left border-default-color">
+          <div className="border-bottom py-3 pl-3 pr-4 border-default-color d-none d-md-block">
+            {this.renderHeader()}
           </div>
-        </Card>
-      </LoadingContainer>
+          {this.renderRoutes()}
+        </div>
+      </Card>
     );
   }
 }
