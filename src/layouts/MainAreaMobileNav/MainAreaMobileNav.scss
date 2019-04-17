@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+@import '~bootstrap/scss/mixins/_breakpoints';
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+
+.main-area-nav {
+  .my-group-selector {
+    width: -webkit-fill-available;
+    margin: 0 10px 20px;
+    label {
+      display: none !important;
+    }
+    #activeGroupSelect {
+      background: $secondary;
+      color: $white;
+      font-size: 14px;
+      border-color: rgba(196, 196, 196, 0.5);
+      // width: 100%;
+    }
+  }
+  .navbar-nav {
+    a {
+      color: $white;
+      opacity: 0.5;
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+}
