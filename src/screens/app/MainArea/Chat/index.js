@@ -5,6 +5,7 @@ import {
   messageStore,
   addNewMessage,
   getMoreMessages,
+  getNewOffer,
   sendFileMessageReqeust,
 } from './redux/actions';
 import Chat from './Chat';
@@ -18,12 +19,14 @@ Chat.propTypes = {
   messageStore: PropTypes.func.isRequired,
   getMoreMessages: PropTypes.func.isRequired,
   addNewMessage: PropTypes.func.isRequired,
+  getNewOffer: PropTypes.func.isRequired,
 };
 
 const matStateToProps = state => ({
   messageList: state.app.chats.messageList,
   selectedGroupId: state.app.main.selectedGroupId,
   members: state.app.main.members,
+  newOffer: state.app.chats.newOffer,
 });
 
 const mapDispatchToProps = {
@@ -31,6 +34,7 @@ const mapDispatchToProps = {
   getMoreMessages,
   addNewMessage,
   messageStore,
+  getNewOffer,
   sendFileMessageReqeust,
 };
 

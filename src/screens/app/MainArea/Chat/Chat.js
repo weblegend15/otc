@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import debounce from 'lodash/debounce';
@@ -10,11 +11,14 @@ import {
   PureAvatar,
   Icon,
   Card,
-  OfferDetail,
   Form,
   Timestamp,
 } from '../../../../components';
-import { getMessagesService, getNewMessage } from '../../Services/firebase';
+import {
+  getMessagesService,
+  getNewMessage,
+  getCurrentOffer,
+} from '../../Services/firebase';
 import { MSG_COUNT_LIMIT } from '../../../../config';
 import { findByField } from '../../../../utils/filterObject';
 
@@ -29,7 +33,19 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    const { chatId, selectedGroupId, messageStore, addNewMessage } = this.props;
+    const {
+      chatId,
+      selectedGroupId,
+      messageStore,
+      addNewMessage,
+      getNewOffer,
+    } = this.props;
+
+    this.offerUnsbscribe = getCurrentOffer(
+      chatId,
+      selectedGroupId,
+      getNewOffer,
+    );
 
     getMessagesService(
       parseInt(moment().format('x'), 10),
@@ -41,7 +57,6 @@ class Chat extends Component {
     );
 
     this.unsubscribe = getNewMessage(chatId, selectedGroupId, addNewMessage);
-
     document
       .getElementById('message-container')
       .addEventListener('scroll', debounce(this.handleScroll, 500));
@@ -60,6 +75,10 @@ class Chat extends Component {
   componentWillUnmount() {
     if (this.unsubscribe) {
       this.unsubscribe();
+    }
+
+    if (this.offerUnsbscribe) {
+      this.offerUnsbscribe();
     }
 
     document
@@ -132,11 +151,10 @@ class Chat extends Component {
 
     if (file) {
       sendFileMessageReqeust(selectedGroupId, chatId, message, file, file.name);
-      this.setState({ file: null });
     } else {
       sendMessageRequest(message, selectedGroupId, chatId);
     }
-    this.setState({ message: '', sent: true });
+    this.setState({ message: '', sent: true, file: null });
   };
 
   diffDay = (current, prev) => {
@@ -156,10 +174,10 @@ class Chat extends Component {
   renderFile = (filetype, filename, msg) => {
     const types = ['bmp', 'jpg', 'jpeg', 'png', 'gif'];
     return types.indexOf(filetype) > -1 ? (
-      <Fragment>
+      <div className="image-message">
         <b className="pt-2">{filename}</b>
-        <img src={msg.url} className="w-100" alt="file-message" />
-      </Fragment>
+        <img src={msg.url} className="image-message" alt="file-message" />
+      </div>
     ) : (
       <Card className="p-3 d-inline-flex">
         <Card.Body className="d-flex align-items-center">
@@ -170,44 +188,6 @@ class Chat extends Component {
           <p>{filename}</p>
         </Card.Footer>
       </Card>
-    );
-  };
-
-  renderOffer = (msg, diffDay) => {
-    return (
-      <Element name={msg.id} key={msg.id}>
-        {msg.type === 'first_message' || !msg.offer ? (
-          <p className="text-center my-4">{msg.text}</p>
-        ) : (
-          <Fragment>
-            {diffDay > 0 && (
-              <Timestamp
-                className="opacity-5 w-100 my-3 border-bottom pl-3 p-sm"
-                timestamp={msg.created_at}
-                format="dddd, MMMM DD, YYYY"
-              />
-            )}
-            <div className="d-flex justify-content-between p-3">
-              <div className="d-flex">
-                <PureAvatar />
-                <div className="d-flex flex-column message-user-info align-items-start">
-                  <p className="font-weight-semibold h4-title">
-                    {msg.offer.offeredBy.firstName}
-                  </p>
-                  <Card className="mt-2 pt-3">
-                    <OfferDetail data={msg.offer} type="messageType" />
-                  </Card>
-                </div>
-              </div>
-              <Timestamp
-                className="opacity-5"
-                timestamp={msg.created_at}
-                format="LT"
-              />
-            </div>
-          </Fragment>
-        )}
-      </Element>
     );
   };
 
@@ -273,16 +253,38 @@ class Chat extends Component {
       diffDay = 1;
     }
 
-    return msg.type !== 'OFFER'
-      ? this.renderMessage(msg, diffDay)
-      : this.renderOffer(msg, diffDay);
+    return msg.type !== 'OFFER' && this.renderMessage(msg, diffDay);
+  };
+
+  renderOffer = () => {
+    const {
+      newOffer: { offer },
+    } = this.props;
+
+    return (
+      <div className="border-bottom px-3 py-4 h4-title d-flex align-items-center justify-content-between">
+        {offer && (
+          <div className="d-none d-md-block">
+            <Icon name="star" size="lg" className="text-primary pr-3" />
+            <span className="font-weight-semibold">
+              {offer.offeredBy.firstName} {offer.offeredBy.lastName}{' '}
+            </span>
+            just posted: {'"'}
+            <strong>{offer.want}</strong> {'"'} -{' '}
+            <Link to="offers" className="text-info">
+              CLICK TO VIEW OFFER
+            </Link>
+          </div>
+        )}
+      </div>
+    );
   };
 
   renderMessages = () => {
     const { messageList } = this.props;
-
     return (
       <LoadingContainer loading={messageList.loading}>
+        {this.renderOffer()}
         <Element className="element message-box p-1" id="message-container">
           {messageList.chats.map(this.renderChats)}
         </Element>

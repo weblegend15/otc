@@ -34,6 +34,31 @@ const getNotifications = (id, action) => {
     });
 };
 
+const getCurrentOffer = (id, groupId, action) => {
+  return firestore
+    .collection('chats')
+    .doc(id)
+    .collection('alerts')
+    .orderBy('created_at', 'desc')
+    .limit(1)
+    .onSnapshot(offers => {
+      const newOffer = [];
+      if (!offers.empty) {
+        offers.forEach(offer => {
+          newOffer.push({ id: offer.id, ...offer.data() });
+        });
+        request(
+          `/groups/${groupId}/offers/${newOffer[0].extra.id}`,
+          'GET',
+          null,
+          true,
+        ).then(recentOffer => {
+          action({ id: newOffer[0].id, ...newOffer[0], offer: recentOffer });
+        });
+      }
+    });
+};
+
 const getNewMessage = (id, groupId, action) => {
   const storageRef = firebase.storage().ref();
 
@@ -56,24 +81,14 @@ const getNewMessage = (id, groupId, action) => {
             if (!msg.extra) {
               return msg;
             }
-            if (msg.type === 'OFFER') {
-              const offer = request(
-                `/groups/${groupId}/offers/${msg.extra.id}`,
-                'GET',
-                null,
-                true,
-              );
-
-              return offer.then(newOffer => {
-                return { id: msg.id, ...msg, offer: newOffer };
-              });
+            if (msg.type !== 'OFFER') {
+              return storageRef
+                .child(msg.extra.file.uuid)
+                .getDownloadURL()
+                .then(url => {
+                  return { id: msg.id, ...msg, url };
+                });
             }
-            return storageRef
-              .child(msg.extra.file.uuid)
-              .getDownloadURL()
-              .then(url => {
-                return { id: msg.id, ...msg, url };
-              });
           });
         }
 
@@ -115,24 +130,14 @@ const getMessagesService = (
           if (!message.extra) {
             return message;
           }
-          if (message.type === 'OFFER') {
-            const offer = request(
-              `/groups/${selectedGroupId}/offers/${message.extra.id}`,
-              'GET',
-              null,
-              true,
-            );
-
-            return offer.then(newOffer => {
-              return { id: message.id, ...message, offer: newOffer };
-            });
+          if (message.type !== 'OFFER') {
+            return storageRef
+              .child(message.extra.file.uuid)
+              .getDownloadURL()
+              .then(url => {
+                return { id: message.id, ...message, url };
+              });
           }
-          return storageRef
-            .child(message.extra.file.uuid)
-            .getDownloadURL()
-            .then(url => {
-              return { id: message.id, ...message, url };
-            });
         });
       }
 
@@ -140,7 +145,7 @@ const getMessagesService = (
         if (allMsgs.length !== limit) {
           allMsgs.push(FIRST_MESSAGE_TEXT);
         }
-        const chats = allMsgs.reverse();
+        const chats = allMsgs.reverse().filter(Boolean);
         action(chats);
         if (scrollEvent !== null) {
           scrollEvent(allMsgs[allMsgs.length - 1].id);
@@ -149,4 +154,10 @@ const getMessagesService = (
     });
 };
 
-export { firebaseAuth, getNotifications, getMessagesService, getNewMessage };
+export {
+  firebaseAuth,
+  getNotifications,
+  getMessagesService,
+  getNewMessage,
+  getCurrentOffer,
+};
