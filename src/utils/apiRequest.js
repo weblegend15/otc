@@ -18,6 +18,7 @@ async function request(
   data = {},
   isToken = false,
   twoFACode,
+  isFormData = false,
 ) {
   return new Promise((resolve, reject) => {
     let qs = '';
@@ -26,7 +27,7 @@ async function request(
     if (['GET', 'DELETE'].indexOf(method) > -1) {
       qs = `?${queryString.stringify(data, { arrayFormat: 'bracket' })}`;
     } else {
-      body = JSON.stringify(data);
+      body = isFormData ? data : JSON.stringify(data);
     }
 
     const requestUrl = `${baseUrl}${endpoint}${qs}`;
@@ -36,7 +37,9 @@ async function request(
       body,
     };
 
-    options.headers['Content-Type'] = 'application/json';
+    if (!isFormData) {
+      options.headers['Content-Type'] = 'application/json';
+    }
 
     if (isToken) {
       options.headers.Authorization = `Bearer ${store.getState().auth.token}`;

@@ -42,6 +42,7 @@ function* sendFileMessage(action) {
       'POST',
       formData,
       true,
+      null,
       true,
     );
   } catch (err) {

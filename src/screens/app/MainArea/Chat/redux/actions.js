@@ -55,3 +55,8 @@ export const sendFileMessageError = error => ({
   type: CONSTANTS.SEND_FILE_MESSAGE_ERROR,
   error,
 });
+
+export const getNewOffer = data => ({
+  type: CONSTANTS.GET_NEW_OFFER,
+  payload: data,
+});

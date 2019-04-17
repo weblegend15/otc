@@ -5,6 +5,8 @@ const initialState = {
     chats: [],
     loading: false,
   },
+  newOffer: {},
+  loading: false,
 };
 
 export default (state = initialState, action) => {
@@ -50,6 +52,11 @@ export default (state = initialState, action) => {
           ...state.messageList,
           chats: action.payload.concat(state.messageList.chats),
         },
+      };
+    case CONSTANTS.GET_NEW_OFFER:
+      return {
+        ...state,
+        newOffer: action.payload,
       };
     default:
       return state;
