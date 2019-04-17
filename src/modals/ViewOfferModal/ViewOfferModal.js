@@ -60,6 +60,7 @@ export default class NewGroupModal extends Component {
     const {
       createProposalRequest,
       data: { offerData },
+      toggleModal,
     } = this.props;
 
     const proposalData = {
@@ -67,10 +68,14 @@ export default class NewGroupModal extends Component {
       want: values.want,
     };
 
-    createProposalRequest({
-      proposalData,
-      offerId: offerData._id,
-      groupId: offerData.group,
+    toggleModal('viewOfferModal');
+    toggleModal('twoFAModal', {
+      submitAction: createProposalRequest,
+      actionPayload: {
+        proposalData,
+        offerId: offerData._id,
+        groupId: offerData.group,
+      },
     });
   };
 
@@ -86,8 +91,14 @@ export default class NewGroupModal extends Component {
     const {
       endOfferRequest,
       data: { offerData },
+      toggleModal,
     } = this.props;
-    endOfferRequest({ groupId: offerData.group, offerId: offerData._id });
+
+    toggleModal('viewOfferModal');
+    toggleModal('twoFAModal', {
+      submitAction: endOfferRequest,
+      actionPayload: { groupId: offerData.group, offerId: offerData._id },
+    });
   };
 
   handleLeaveFeedback = () => {
@@ -101,12 +112,13 @@ export default class NewGroupModal extends Component {
 
   renderModalFooter = (isMyOffer, myProposal) => {
     const {
-      data: { actionType },
+      data: { actionType, offerData },
       groupOffer: { loading },
     } = this.props;
     const { isTrade } = this.state;
 
     if (
+      offerData.status !== 'ENDED' &&
       actionType !== 'feedbackByCounterpart' &&
       !isMyOffer &&
       !myProposal &&
@@ -120,44 +132,45 @@ export default class NewGroupModal extends Component {
         </ModalFooter>
       );
     }
-    if (actionType === 'delete') {
-      return (
-        <ModalFooter>
-          <Button
-            className="btn-block"
-            variant="dark"
-            onClick={this.handleDeleteOffer}
-            disabled={loading}
-          >
-            {loading ? 'Deleting...' : 'Delete Offer'}
-          </Button>
-        </ModalFooter>
-      );
+
+    switch (actionType) {
+      case 'delete':
+        return (
+          <ModalFooter>
+            <Button
+              className="btn-block"
+              variant="dark"
+              onClick={this.handleDeleteOffer}
+              disabled={loading}
+            >
+              {loading ? 'Deleting...' : 'Delete Offer'}
+            </Button>
+          </ModalFooter>
+        );
+      case 'end':
+        return (
+          <ModalFooter>
+            <Button
+              className="btn-block"
+              variant="dark"
+              onClick={this.handleEndOffer}
+              disabled={loading}
+            >
+              {loading ? 'Ending...' : 'End Offer'}
+            </Button>
+          </ModalFooter>
+        );
+      case 'feedbackByCounterpart':
+        return (
+          <ModalFooter>
+            <Button className="btn-block" onClick={this.handleLeaveFeedback}>
+              Leave Feedback
+            </Button>
+          </ModalFooter>
+        );
+      default:
+        return null;
     }
-    if (actionType === 'end') {
-      return (
-        <ModalFooter>
-          <Button
-            className="btn-block"
-            variant="dark"
-            onClick={this.handleEndOffer}
-            disabled={loading}
-          >
-            {loading ? 'Ending...' : 'End Offer'}
-          </Button>
-        </ModalFooter>
-      );
-    }
-    if (actionType === 'feedbackByCounterpart') {
-      return (
-        <ModalFooter>
-          <Button className="btn-block" onClick={this.handleLeaveFeedback}>
-            Leave Feedback
-          </Button>
-        </ModalFooter>
-      );
-    }
-    return null;
   };
 
   render() {

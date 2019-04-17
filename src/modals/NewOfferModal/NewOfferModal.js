@@ -8,20 +8,26 @@ export default class NewOfferModal extends Component {
     const {
       createOfferRequest,
       data: { groupId },
+      toggleModal,
     } = this.props;
     const offerData = {
       have: values.have,
       want: values.want,
-      note: values.note,
+      note: values.note || '',
     };
-    createOfferRequest({ offerData, groupId });
+
+    toggleModal('newOfferModal');
+    toggleModal('twoFAModal', {
+      submitAction: createOfferRequest,
+      actionPayload: { offerData, groupId },
+    });
   };
 
   render() {
-    const { createOfferRequest, ...rest } = this.props;
+    const { show, onHide } = this.props;
 
     return (
-      <Modal {...rest}>
+      <Modal show={show} onHide={onHide}>
         <ModalHeader closeButton title="Add Offer" />
         <NewOfferModalForm onSubmit={this.handleSubmit} />
       </Modal>

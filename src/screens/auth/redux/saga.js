@@ -14,6 +14,10 @@ import {
   forgotPasswordSuccess,
   forgotPasswordError,
   confirmPasswordError,
+  generateTwoFASuccess,
+  generateTwoFAError,
+  confirmTwoFASuccess,
+  confirmTwoFAError,
 } from './actions';
 
 import { history } from '../../../configureStore';
@@ -124,6 +128,29 @@ function* confirmPassword(action) {
   }
 }
 
+function* generateTwoFA() {
+  try {
+    const data = yield call(request, '/auth/generate-2fa', 'GET', null, false);
+    yield put(generateTwoFASuccess(data));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(generateTwoFAError());
+  }
+}
+
+function* confirmTwoFA(action) {
+  try {
+    const requestData = {
+      token: action.payload,
+    };
+    const data = yield call(request, '/profile/2fa', 'PUT', requestData, false);
+    yield put(confirmTwoFASuccess(data));
+  } catch (err) {
+    notify('error', err.message);
+    yield put(confirmTwoFAError());
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(CONSTANTS.SIGNUP_REQUEST, signup);
   yield takeLatest(CONSTANTS.SIGNIN_REQUEST, signin);
@@ -131,4 +158,6 @@ export default function* authSaga() {
   yield takeLatest(CONSTANTS.VERIFY_EMAIL_REQUEST, verifyEmail);
   yield takeLatest(CONSTANTS.FORGOT_PASSWORD_REQUEST, forgotPassword);
   yield takeLatest(CONSTANTS.CONFIRM_PASSWORD_REQUEST, confirmPassword);
+  yield takeLatest(CONSTANTS.GENERATE_TWO_FA_REQUEST, generateTwoFA);
+  yield takeLatest(CONSTANTS.CONFIRM_TWO_FA_REQUEST, confirmTwoFA);
 }

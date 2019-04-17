@@ -4,7 +4,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   GeneralAvatar,
   Col,
   Row,
@@ -19,7 +18,7 @@ export default class RequestVouchModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedMember: {},
+      selectedMember: '',
     };
   }
 
@@ -31,29 +30,16 @@ export default class RequestVouchModal extends Component {
     getVouchesRequest({ offerId, groupId });
   }
 
-  handleRequestSend = () => {
+  handleSendRequest = memberId => {
     const {
       createVouchRequest,
       modalData: { offerId, groupId },
     } = this.props;
-    const { selectedMember } = this.state;
-    const selectedMemberId = Object.keys(selectedMember)[0];
-
-    if (Object.values(selectedMember)[0] && selectedMemberId) {
-      createVouchRequest({
-        groupId,
-        offerId,
-        vouchData: { requestedTo: selectedMemberId },
-      });
-    }
-  };
-
-  handleMemberSelect = memberId => {
-    const { selectedMember } = this.state;
-    this.setState({
-      selectedMember: {
-        [memberId]: !selectedMember[memberId],
-      },
+    this.setState({ selectedMember: memberId });
+    createVouchRequest({
+      groupId,
+      offerId,
+      vouchData: { requestedTo: memberId },
     });
   };
 
@@ -61,38 +47,37 @@ export default class RequestVouchModal extends Component {
     const {
       activeMembers: { list: membersList },
       vouches: { list: vouchesList, loading: vouchesLoading },
+      vouch: { loading },
     } = this.props;
     const { selectedMember } = this.state;
+
+    if (!membersList.length) {
+      return (
+        <div className="py-4 h4-title font-weight-semibold text-center">
+          No member
+        </div>
+      );
+    }
 
     return (
       <LoadingContainer loading={vouchesLoading}>
         <div className="members-list">
           {membersList.map((member, idx) => {
             const requestedMember = vouchesList.find(
-              vouch => vouch.requestedTo === member._id,
+              vouch => vouch.requestedTo._id === member._id,
             );
             const vouchStatus = requestedMember && requestedMember.status;
             const vouchStatusClass = vouchStatus
               ? OFFER_STATUS_CLASS[vouchStatus.toLowerCase()]
               : '';
             const rowClass = cx(
-              'mx-0 py-3 px-4 border-default-color d-flex align-items-center',
-              {
-                active: selectedMember[member._id],
-                'border-bottom': idx !== membersList.length - 1,
-                vouched: vouchStatus,
-              },
+              'mx-0 py-3 px-4  border-default-color d-flex align-items-center',
+              { 'border-bottom': idx !== membersList.length - 1 },
             );
 
             return (
-              <Row
-                key={member._id}
-                className={rowClass}
-                onClick={() =>
-                  this.handleMemberSelect(!vouchStatus ? member._id : null)
-                }
-              >
-                <Col>
+              <Row key={member._id} className={rowClass}>
+                <Col className="p-0">
                   <GeneralAvatar
                     data={{
                       firstName: member.firstName,
@@ -100,8 +85,21 @@ export default class RequestVouchModal extends Component {
                     }}
                   />
                 </Col>
-                <Col className={`text-right text-${vouchStatusClass}`}>
+                <Col
+                  className={`text-right font-weight-bold p-0 text-${vouchStatusClass}`}
+                >
                   {vouchStatus}
+                  {!vouchStatus && (
+                    <Button
+                      className="btn-regular font-weight-bold px-4"
+                      onClick={() => this.handleSendRequest(member._id)}
+                      disabled={loading && selectedMember === member._id}
+                    >
+                      {loading && selectedMember === member._id
+                        ? 'SENDING...'
+                        : 'SEND'}
+                    </Button>
+                  )}
                 </Col>
               </Row>
             );
@@ -112,11 +110,7 @@ export default class RequestVouchModal extends Component {
   };
 
   render() {
-    const {
-      show,
-      onHide,
-      vouch: { loading },
-    } = this.props;
+    const { show, onHide } = this.props;
 
     return (
       <Modal className="request-vouch-modal" show={show} onHide={onHide}>
@@ -130,15 +124,6 @@ export default class RequestVouchModal extends Component {
           </div>
           {this.renderMembersList()}
         </ModalBody>
-        <ModalFooter>
-          <Button
-            disabled={loading}
-            className="btn-block"
-            onClick={this.handleRequestSend}
-          >
-            {loading ? 'Sending...' : 'Send'}
-          </Button>
-        </ModalFooter>
       </Modal>
     );
   }

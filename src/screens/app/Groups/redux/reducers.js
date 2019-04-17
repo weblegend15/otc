@@ -16,6 +16,10 @@ const initialState = {
     list: [],
     total: 0,
   },
+  notifications: {
+    list: [],
+    loading: false,
+  },
 };
 
 export default (state = initialState, action) => {
@@ -78,6 +82,15 @@ export default (state = initialState, action) => {
           ...state.group,
           loading: false,
           data: {},
+        },
+      };
+
+    case CONSTANTS.SET_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: {
+          ...state.notifications,
+          list: action.notifications,
         },
       };
 

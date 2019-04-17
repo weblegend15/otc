@@ -8,6 +8,7 @@ import {
   LoadingContainer,
 } from '../../../../components';
 import { PAGE_LIMIT } from '../../../../config';
+import { getNotifications } from '../../Services/firebase';
 
 import GroupCard from './GroupCard';
 
@@ -20,7 +21,9 @@ class GroupsList extends Component {
   }
 
   componentDidMount() {
+    const { currentUser, setNotifications } = this.props;
     this.getGroups();
+    this.unsubscribe = getNotifications(currentUser._id, setNotifications);
   }
 
   getGroups(currentPage) {

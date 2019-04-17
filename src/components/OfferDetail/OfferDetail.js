@@ -55,7 +55,7 @@ export default ({ data, proposals, vouches, className, type, isMyOffer }) => {
           <p className="m-0 text-uppercase opacity-5 p-sm">
             Comments from seller
           </p>
-          <p className="m-0 p-sm">{data.note}</p>
+          <p className="m-0 p-sm">{data.note ? data.note : 'No comment'}</p>
         </Row>
       )}
       {type !== 'activeDeal' && (

@@ -31,8 +31,7 @@ export default ({ handleSubmit, onSubmit, proceeding }) => {
           as="textarea"
           rows="3"
           name="note"
-          label="Notes"
-          validate={[required]}
+          label="Notes(optional)"
         />
       </div>
       <div className="modal-footer">
